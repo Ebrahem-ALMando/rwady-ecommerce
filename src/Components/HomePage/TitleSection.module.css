@@ -1,0 +1,26 @@
+.titleSection {
+    margin-top: 2rem;
+
+    padding: 20px 50px;
+    display: flex;
+    justify-content: space-between; /* يجعل العناصر متباعدة ولكن ليست على الأطراف */
+    align-items: center;
+    width: 90%; /* تقليل عرض القسم حتى لا يمتد على كامل الصفحة */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #0741AD;
+}
+
+.viewAll {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    color: #0741AD;
+    font-weight: bold;
+}

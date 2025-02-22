@@ -1,0 +1,49 @@
+.mainDiv {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 10vh;
+    background-color: #0741ad;
+    padding: 0 20px;
+    flex-wrap: wrap;
+}
+
+.centerContent {
+    display: flex;
+    align-items:center;
+    gap: 10px;
+    margin: auto;
+}
+
+.title {
+    color: white;
+    font-size: 1.25rem;
+    margin: 0;
+}
+
+.startShopBTN {
+    background-color: white;
+    color: #0741ad;
+    padding: 0 20px;
+    height: 6vh;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+
+}
+@media (max-width: 768px) {
+    .mainDiv {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+    }
+
+    .centerContent {
+        margin: 10px 0;
+    }
+
+    .startShopBTN {
+        width: 100%;
+        text-align: center;
+    }
+}

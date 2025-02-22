@@ -1,0 +1,25 @@
+.languageDiv {
+    margin-right: 1rem;
+    width: 130px;
+    background-color: #eeeff2;
+    height: 53px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+
+}
+.language {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius:10px;
+    font-weight: bold;
+    background-color: #eeeff2;
+    color: black;
+    cursor: pointer;
+}
+
