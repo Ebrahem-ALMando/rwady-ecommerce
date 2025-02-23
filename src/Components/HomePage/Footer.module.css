@@ -1,0 +1,61 @@
+.footer {
+    background-color: #0a62a3;
+    color: white;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 2rem;
+    text-align: center;
+}
+
+.contactInfo, .links, .socialLinks, .downloadLinks {
+    flex: 1;
+    margin: 1rem;
+}
+
+.contactInfo p, .links p, .socialLinks p, .downloadLinks p {
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.links li {
+    margin: 0.5rem 0;
+}
+
+.socialIcons i {
+    font-size: 1.5rem;
+    margin: 0.5rem;
+    cursor: pointer;
+}
+
+.downloadButtons button {
+    margin: 0.5rem;
+    padding: 0.7rem 1.5rem;
+    background-color: #fff;
+    color: #0a62a3;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.footerBottom {
+    width: 100%;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+    .footer {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .contactInfo, .links, .socialLinks, .downloadLinks {
+        text-align: center;
+    }
+}

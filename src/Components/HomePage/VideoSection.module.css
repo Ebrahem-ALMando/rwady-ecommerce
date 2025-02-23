@@ -1,0 +1,63 @@
+/*
+.vidioBody{
+    position: relative;
+    width: 100%;
+    height: 30vh;
+}
+
+
+@media screen and (min-width: 320px) and (max-width: 1246px) {
+    .vidioBody{
+        margin: 3rem auto -2rem auto;
+    }
+}
+
+@media screen and (min-width: 419px) and (max-width: 476px) {
+
+    .vidioBody{
+        margin: 3rem auto -5rem auto;
+    }
+}
+@media screen and (min-width: 476px) and (max-width: 514px) {
+
+    .vidioBody{
+        margin: 3rem auto -5rem auto;
+    }
+}
+*/
+.vidioBody {
+    position: relative;
+    width: 100vw;
+    height: 40vh;
+}
+
+@media screen and (max-width: 1246px) {
+    .vidioBody {
+        margin: 3rem auto -2rem auto;
+    }
+}
+
+@media screen and (max-width: 476px) {
+    .vidioBody {
+        margin: 3rem auto -5rem auto;
+    }
+}
+
+.vidioBody {
+    position: relative;
+    width: 100vw; /* جعل العرض يمتد على كامل الشاشة */
+    height: 40vh; /* تحديد الارتفاع ليكون 40% من ارتفاع الشاشة */
+    object-fit: cover; /* يجعل الصورة تغطي الحاوية بالكامل بدون تشويه */
+}
+
+@media screen and (max-width: 1246px) {
+    .vidioBody {
+        margin: 3rem auto -2rem auto;
+    }
+}
+
+@media screen and (max-width: 476px) {
+    .vidioBody {
+        margin: 3rem auto -5rem auto;
+    }
+}
