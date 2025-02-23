@@ -2,6 +2,9 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "../styles/globals.css";
 
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 import Navbar from "@/Components/Header/Navbar";
 
 const geistSans = Geist({
@@ -21,17 +24,18 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-    <head>
+      <html lang="en">
+      <head>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
-    </head>
-    <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      </head>
+      <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased rtl`} 
 
-    >
-    <Navbar/>
-    {children}
+
+      >
+      <Navbar/>
+      {children}
       </body>
-    </html>
+      </html>
   );
 }

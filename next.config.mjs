@@ -1,9 +1,13 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+    reactStrictMode: true,
+    webpack: (config) => {
+        config.resolve.fallback = {
+            fs: false,
+            path: false,
+        };
+        return config;
+    },
+};
 
-// const nextConfig = {
-//     experimental: {
-//         typedRoutes: true,
-//     },
-// };
 export default nextConfig;
