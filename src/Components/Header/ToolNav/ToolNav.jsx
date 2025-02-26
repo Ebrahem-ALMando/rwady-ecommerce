@@ -6,6 +6,7 @@ import TopIcon from "@/Components/Header/ToolNav/Icons/TopIcon";
 import Language from "@/Components/Header/ToolNav/Language/Language";
 import SearchBar from "@/Components/Header/ToolNav/SearchBar/SearchBar";
 import DownloadAppWithLogo from "@/Components/Header/ToolNav/DownloadAppWithLogo/DownloadWithLogo";
+import MainNavigation from "@/Components/Header/MainNavigation/MainNavigation";
 
 const ToolNav=()=>{
     return(
@@ -77,11 +78,16 @@ const ToolNav=()=>{
 
                        }
                    />
+                   <Language/>
                </div>
-               <Language/>
-               <SearchBar/>
-               <DownloadAppWithLogo/>
+
+              <div className={styles.otherTool}>
+                  <SearchBar/>
+                  <DownloadAppWithLogo/>
+              </div>
+
            </div>
+
         </div>
     )
 }

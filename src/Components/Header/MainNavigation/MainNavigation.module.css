@@ -1,0 +1,137 @@
+.mainDiv {
+    width: 100%;
+    padding: 10px;
+    position: relative;
+}
+.contDiv {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    width: 90%;
+    padding: 10px;
+    position: relative;
+}
+
+.selectDiv {
+    width: 38%;
+    height: 8vh;
+    margin-right: 2rem;
+    display: flex;
+    align-items: center;
+    z-index: 2;
+    .menuSelect{
+        position: absolute;
+        right: 70px;
+        cursor: pointer;
+        z-index: 1000;
+    }
+}
+
+.select {
+    width: 100%;
+    min-width: 200px;
+    margin-right: 1rem;
+    font-size: 1rem;
+    text-align: center;
+    color: #0741ad;
+
+}
+.select[placeholder] {
+    color: #0741ad;
+}
+
+.navItems {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    transition: all 0.3s ease;
+}
+
+.navItem {
+    color: black;
+    margin: 0 0.5rem;
+    padding: 10px;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+}
+.navItem:hover {
+    color: #686875;
+}
+.menuToggle {
+    display: none;
+}
+@media (max-width: 1100px)
+{
+
+    .mainDiv {
+        padding: 0px;
+        margin-top: 12rem;
+        position: relative;
+    }
+}
+@media (max-width: 800px) {
+    .mainDiv {
+        padding: 0px;
+        margin: 0px;
+    }
+    .contDiv {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .selectDiv {
+        width: 100%;
+        margin-right: 0;
+        margin-top: 80px;
+        .menuSelect{
+            right: 20px;
+        }
+    }
+    .navItems {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100vh;
+        width: 50%;
+        min-width: 250px;
+        flex-direction: column;
+        background-color: #fff;
+        padding: 20px;
+        box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+        z-index: 1000;
+        align-items: flex-start;
+    }
+    .navItems.active {
+        right: 0;
+    }
+    .navItem {
+        margin: 5px 0;
+        padding: 15px;
+        width: 100%;
+    }
+    .navItem:first-child {
+        margin:30px 0 5px 0;
+    }
+    .menuToggle {
+        display: block;
+        position: fixed;
+        top: 10px;
+        right: 20px;
+        background: white;
+        border-radius: 10px;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        z-index: 1001;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        transition: transform 0.3s ease-in-out;
+    }
+    .select {
+        min-width: unset;
+        width: 100%;
+        margin: 0px;
+    }
+
+}
+
+

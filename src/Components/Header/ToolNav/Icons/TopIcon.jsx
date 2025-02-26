@@ -1,15 +1,15 @@
-import {FaBell} from "react-icons/fa";
-import React from "react";
 
+import React from "react";
+import styles from './TopIcon.module.css'
 const TopIcon=(props)=>{
     return (
-        <div style={
+        <div className={''} style={
             {
                 cursor:'pointer',
                 height:'50px',
                 borderRadius:'12px',
                 width:'50px',
-                backgroundColor: props.isSelect ? '#0741ad' : '#eeeff2', // استخدام الشرط بشكل صحيح
+                backgroundColor: props.isSelect ? '#0741ad' : '#eeeff2',
                 padding:'13px',
                 margin:' 0 0.5rem',
 

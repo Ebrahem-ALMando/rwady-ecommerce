@@ -5,12 +5,11 @@
     justify-content: center;
     text-align: center;
     padding: 20px;
-
 }
 
 .logoContainer {
     width: 100%;
-    max-width: 350px;
+    max-width: 380px;
 }
 
 .downloadButton {
@@ -38,4 +37,17 @@
 .iconContainer {
     display: flex;
     align-items: center;
+}
+@media (max-width: 1100px)
+{
+    .mainDiv {
+        margin-top: -3rem;
+    }
+}
+@media (max-width: 700px){
+    .logoContainer {
+        margin-top: 4rem;
+        width: 100%;
+        max-width: 250px;
+    }
 }

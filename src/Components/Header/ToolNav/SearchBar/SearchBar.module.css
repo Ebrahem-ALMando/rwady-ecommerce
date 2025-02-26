@@ -1,6 +1,6 @@
 .mainDiv{
     height: 53px;
-    width: 45%;
+    width: 100%;
     background-color: #ffffff;
     margin:0 3rem 0 0 ;
 }
@@ -31,4 +31,19 @@
     font-size: 50px;
 
 }
-
+@media (max-width: 700px){
+    .mainDiv{
+        height: 53px;
+        width: 100%;
+        background-color: #ffffff;
+        margin:0 0 0 0 ;
+        z-index: 100;
+    }
+    .SearchInput{
+        height: 50px;
+        width: 100%;
+        border-radius: 10px;
+        background-color:#eeeff2;
+        padding: 7px;
+    }
+}

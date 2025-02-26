@@ -2,6 +2,7 @@
 import dynamic from "next/dynamic";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import React from "react";
 
 const Slider = dynamic(() => import("react-slick"), { ssr: false });
 const slides = [
@@ -25,14 +26,16 @@ const slides = [
     },
 ];
 
-const CustomPrevArrow = (props) => (
-    <button {...props} className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 text-white bg-blue-600 p-2 rounded-full">
+const CustomPrevArrow = ({ currentSlide,slideCount, ...props }) => (
+    <button {...props}
+            className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 text-white bg-blue-600 p-2 rounded-full">
         ❮
     </button>
 );
 
-const CustomNextArrow = (props) => (
-    <button {...props} className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 text-white bg-blue-600 p-2 rounded-full">
+const CustomNextArrow = ({ currentSlide,slideCount, ...props }) => (
+    <button {...props}
+            className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 text-white bg-blue-600 p-2 rounded-full">
         ❯
     </button>
 );

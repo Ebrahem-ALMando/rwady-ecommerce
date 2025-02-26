@@ -24,3 +24,11 @@
     color: #0741AD;
     font-weight: bold;
 }
+
+@media screen and (max-width: 800px) {
+   .titleSection{
+       margin: auto;
+       padding: 20px 20px;
+       width: 100%;
+   }
+}

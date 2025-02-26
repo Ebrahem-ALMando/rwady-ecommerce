@@ -18,6 +18,20 @@ const products = [
         available: "متاح قسط 500 شهريًا",
         brand: "براند Brshka",
         logo: "/logo.png",
+    },
+    {
+        id: 2,
+        title: "ستانلي كوب H2.0 بمقبض وماصة 30 اونصة | غطاء دوار ثلاثي",
+        images: [
+            "/images/img_1.png",
+            "/images/img_1.png",
+            "/images/img_1.png",
+        ], // ✅ الآن لدينا أكثر من صورة للسلايدر
+        price: "20,258 IQD",
+        oldPrice: "22,258 IQD",
+        available: "متاح قسط 500 شهريًا",
+        brand: "براند Brshka",
+        logo: "/logo.png",
     }
 ];
 
@@ -33,18 +47,17 @@ const settings = {
 
 };
 
-const ProductCardSlider = () => {
+const ProductCardSlider = (props) => {
     return (
         <div
             style={{
-                width:'380px',
+
                 height:'auto',
                 direction:'rtl'
-
             }}
-            className="p-6 flex justify-center">
+            className="p-6 ">
             <div
-                className="w-80 bg-white shadow-lg rounded-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow relative">
+                className=" w-80 bg-white shadow-lg rounded-lg overflow-hidden border border-gray-200 hover:shadow-xl transition-shadow relative">
                 <div
                     className="absolute top-2 left-0 bg-red-500 text-white px-2 py-1 rounded text-xs font-bold">
                     وفر 250 الف
@@ -57,7 +70,7 @@ const ProductCardSlider = () => {
 
                 <div className="relative w-full h-60">
                     <Slider {...settings}>
-                        {products[0].images.map((image, index) => (
+                        {props.product.images.map((image, index) => (
                             <img key={index} src={image} alt={`Product Image ${index + 1}`}
                                  className="w-full h-full object-cover"/>
                         ))}
@@ -80,10 +93,10 @@ const ProductCardSlider = () => {
                 </div>
                 <div className="p-4 mt-10">
                     <div className="flex justify-between items-center mb-2 mt-10 ">
-                        <span className="text-sm text-gray-500">{products[0].brand}</span>
-                        <img src={products[0].logo} alt="logo" className="h-10"/>
+                        <span className="text-sm text-gray-500">{props.product.brand}</span>
+                        <img src={props.product.logo} alt="logo" className="h-10"/>
                     </div>
-                    <h3 className="text-blue-900 text-md font-bold mb-2">{products[0].title}</h3>
+                    <h3 className="text-blue-900 text-md font-bold mb-2">{props.product.title}</h3>
 
                     <p
                         style={{
@@ -92,16 +105,16 @@ const ProductCardSlider = () => {
                         }}
                         className="text-red-600 text-lg font-bold"
                     >
-                        {products[0].price}
+                        {props.product.price}
                         <del
                             className="text-blue-700 text-sm mx-2"
                                             >
-                            {products[0].oldPrice}
+                            {props.product.oldPrice}
                         </del>
                     </p>
 
 
-                    <p className="text-sm text-gray-600 mt-1">{products[0].available}</p>
+                    <p className="text-sm text-gray-600 mt-1">{props.product.available}</p>
                     <div className="flex items-center space-x-2 text-gray-600 mt-3">
                         <span>+2</span>
                     </div>

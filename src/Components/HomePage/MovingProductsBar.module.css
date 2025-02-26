@@ -1,0 +1,20 @@
+.mainDiv {
+    margin: 1rem auto 7rem auto;
+    width: 95%;
+    height: 30vh;
+}
+
+@media screen and (max-width: 1248px) {
+    .mainDiv {
+        margin-top: 3rem;
+
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .mainDiv {
+        width: 100%;
+        margin:8rem 0 0 0 ;
+        overflow: hidden;
+    }
+}
