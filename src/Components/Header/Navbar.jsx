@@ -1,19 +1,16 @@
 
-import TitleNav from "@/Components/Header/TitleNav/TitleNav";
+import TitleNav from "@/components/Header/TitleNav/TitleNav";
 
-import ToolNav from "@/Components/Header/ToolNav/ToolNav";
-import Language from "@/Components/Header/ToolNav/Language/Language";
-import MainNavigation from "@/Components/Header/MainNavigation/MainNavigation";
-import styles from './Navbar.module.css/'
+import ToolNav from "@/components/Header/ToolNav/ToolNav";
+
+import MainNavigation from "@/components/Header/MainNavigation/MainNavigation";
+
 const Navbar=()=>{
     return(
         <div >
             <TitleNav/>
-
                 <ToolNav/>
                 <MainNavigation/>
-
-
         </div>
     )
 }

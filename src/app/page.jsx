@@ -1,14 +1,14 @@
 
-import Carousel from "@/Components/HomePage/Carousel";
-import TitleSection from "@/Components/HomePage/TitleSection";
-import CategoriesCarousel from "@/Components/HomePage/CategoriesCarousel";
-import ProductSlider from "@/Components/HomePage/ProductSlider";
-import VideoSection from "@/Components/HomePage/VideoSection";
-import MovingProductsBar from "@/Components/HomePage/MovingProductsBar";
-import ProductsCategoryCard from "@/Components/HomePage/ProductsCategoryCard";
-import CircleCartCarousel from "@/Components/HomePage/CategoriesCarousel";
+import Carousel from "@/components/HomePage/Carousel";
+import TitleSection from "@/components/HomePage/TitleSection";
+import CategoriesCarousel from "@/components/HomePage/CategoriesCarousel";
+import ProductSlider from "@/components/HomePage/ProductSlider";
+import VideoSection from "@/components/HomePage/VideoSection";
+import MovingProductsBar from "@/components/HomePage/MovingProductsBar";
+import ProductsCategoryCard from "@/components/HomePage/ProductsCategoryCard";
+import CircleCartCarousel from "@/components/HomePage/CategoriesCarousel";
 import {Brands,category} from "@/Data/data";
-import Footer from "@/Components/HomePage/Footer";
+import Footer from "@/components/HomePage/Footer";
 
 
 export default function Home() {

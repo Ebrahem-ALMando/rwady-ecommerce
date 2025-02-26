@@ -1,12 +1,12 @@
 "use client"
 import styles from './ToolNav.module.css'
 
-import TopIcon from "@/Components/Header/ToolNav/Icons/TopIcon";
+import TopIcon from "@/components/Header/ToolNav/Icons/TopIcon";
 
-import Language from "@/Components/Header/ToolNav/Language/Language";
-import SearchBar from "@/Components/Header/ToolNav/SearchBar/SearchBar";
-import DownloadAppWithLogo from "@/Components/Header/ToolNav/DownloadAppWithLogo/DownloadWithLogo";
-import MainNavigation from "@/Components/Header/MainNavigation/MainNavigation";
+import Language from "@/components/Header/ToolNav/Language/Language";
+import SearchBar from "@/components/Header/ToolNav/SearchBar/SearchBar";
+import DownloadAppWithLogo from "@/components/Header/ToolNav/DownloadAppWithLogo/DownloadWithLogo";
+import MainNavigation from "@/components/Header/MainNavigation/MainNavigation";
 
 const ToolNav=()=>{
     return(
