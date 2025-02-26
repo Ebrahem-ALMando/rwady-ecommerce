@@ -1,6 +1,6 @@
 "use client";
 import dynamic from "next/dynamic";
-import ProductCardSlider from "@/components/HomePage/ProductCardSlider";
+import ProductCardSlider from "@/Components/HomePage/ProductCardSlider";
 import React, { useEffect } from "react"; // ✅ تم تصحيحه
 import "./ProductSlider.module.css";
 

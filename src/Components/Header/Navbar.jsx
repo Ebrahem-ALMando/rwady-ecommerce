@@ -1,9 +1,9 @@
 
-import TitleNav from "@/components/Header/TitleNav/TitleNav";
+import TitleNav from "@/Components/Header/TitleNav/TitleNav";
 
-import ToolNav from "@/components/Header/ToolNav/ToolNav";
+import ToolNav from "@/Components/Header/ToolNav/ToolNav";
 
-import MainNavigation from "@/components/Header/MainNavigation/MainNavigation";
+import MainNavigation from "@/Components/Header/MainNavigation/MainNavigation";
 
 const Navbar=()=>{
     return(
