@@ -1,35 +1,32 @@
 "use client";
 import dynamic from "next/dynamic";
-import React from "react";
+import React, {useState} from "react";
+import CustomArrows from "@/Components/HomePage/CustomArrow";
 const Slider = dynamic(() => import("react-slick"), {ssr: false});
-
-
-const CustomPrevArrow = ({ currentSlide,slideCount, ...props }) => (
-    <button {...props}
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 text-white bg-blue-600 p-2 rounded-full">
-        ❮
-    </button>
-);
-
-const CustomNextArrow = ({ currentSlide,slideCount, ...props }) => (
-    <button {...props}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 text-white bg-blue-600 p-2 rounded-full">
-        ❯
-    </button>
-);
-
-
 const CircleCartCarousel = (props) => {
+    const [activeArrow, setActiveArrow] = useState(null);
+    const handleArrowClick = (type) => {
+        setActiveArrow(type);
+    };
     const settings = {
-        dots: true,
+        dots: false,
         infinite: true,
         speed: 500,
         slidesToShow: 5, // عرض 5 صور في الشاشات الكبيرة
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 3000,
-        prevArrow: <CustomPrevArrow/>,
-        nextArrow: <CustomNextArrow/>,
+        prevArrow: <CustomArrows
+            type="prev"
+            activeArrow={activeArrow}
+            onArrowClick={handleArrowClick}
+
+        />,
+        nextArrow: <CustomArrows
+            type={"next"}
+            activeArrow={activeArrow}
+            onArrowClick={handleArrowClick}
+        />,
         responsive: [
             {
                 breakpoint: 1286,
@@ -63,12 +60,13 @@ const CircleCartCarousel = (props) => {
         <div
 
             style={{
-                margin: 'auto auto 10rem auto',
+                margin: 'auto auto 2rem auto',
                 width: '95%',
-                height: props.isCategory ? '25vh' : '45vh',
+                height: 'auto',
                 background: props.bgColor,
                 borderRadius: props.borderRadius,
-                paddingTop: props.isCategory ? 0 : '2rem'
+                padding: props.isCategory ? 0 : '4rem 1rem 4rem 1rem'
+
 
             }}>
             <Slider {...settings}>

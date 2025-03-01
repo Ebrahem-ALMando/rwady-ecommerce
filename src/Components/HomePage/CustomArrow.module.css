@@ -1,0 +1,23 @@
+.customButton{
+    background-color: #6a6e83;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+.prev{
+    left: -20px;
+}
+.next{
+right: -20px;
+}
+.active{
+    background-color: #0741ad;
+}
+@media screen and (max-width: 888px) {
+    .prev{
+        left: 10px;
+    }
+    .next{
+        right: 10px;
+    }
+}

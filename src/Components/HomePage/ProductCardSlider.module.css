@@ -1,0 +1,228 @@
+.card{
+    direction: rtl;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Equivalent to shadow-lg */
+    border-radius: 0.5rem; /* Equivalent to rounded-lg */
+    border: 1px solid #e5e7eb; /* Equivalent to border-gray-200 */
+    transition: box-shadow 0.3s ease; /* Equivalent to transition-shadow */
+    position: relative;
+    width: 21rem;
+}
+.card:hover {
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+}
+.bestSeller{
+    background: #0741ad;
+    padding: 7px;
+    border-radius: 18px;
+    width: 83px;
+    text-align: center;
+    right: -5px;
+    margin-top: 7px;
+    font-size: 12px;
+    z-index: 50;
+}
+.saveSeller{
+    background: #dc2926;
+    padding: 7px;
+    border-radius: 18px;
+    width: 83px;
+    text-align: center;
+    left: -5px;
+    margin-top: 7px;
+    font-size: 12px;
+    z-index: 50;
+
+}
+.productImgDiv {
+    width: 100%;
+    height: 310px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 7px;
+
+}
+
+.productImg {
+    width: 90%;
+    max-height: 100%;
+    object-fit: cover;
+}
+.iconImage{
+    display: flex;
+    justify-content: space-around;
+    width: auto;
+    background: #FFFFFF;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+    transition: box-shadow 0.3s ease;
+    padding: 10px;
+    color:  #0741ad;
+}
+.iconImage:hover {
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+}
+.slickDots {
+    display: flex !important;
+    justify-content: center;
+    gap: 10px;
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    list-style: none;
+    padding: 0;
+}
+
+.slickDot {
+    width: 11px !important;
+    height: 11px !important;
+    border-radius: 50%;
+    background-color: #bec8d9;
+    transition: background-color 0.3s ease, width 0.3s ease, height 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+}
+.slickDot button {
+    width: 11px !important;
+    height: 11px !important;
+    background: transparent !important;
+    border: none !important;
+    cursor: pointer;
+    position: absolute;
+    right: 10px !important;
+    border-radius: 50%;
+    opacity: 0;
+}
+.slickActive {
+    width: 11px !important;
+    height: 11px !important;
+    border-radius: 50%;
+    background-color: #0741ad;
+    transition: background-color 0.3s ease, width 0.3s ease, height 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+}
+.slickActive button{
+    width: 11px !important;
+    height: 11px !important;
+    background: transparent !important;
+    border: none !important;
+    cursor: pointer;
+    position: absolute;
+    right: 10px !important;
+    border-radius: 50%;
+    opacity: 0;
+}
+.infoCard{
+    padding: 16px;
+    background-color: #f7f7f7;
+    width: 90%;
+    margin:6rem  auto 1.5rem auto ;
+    border-radius: 10px;
+
+}
+.brand{
+    color: #0741AD;
+    font-size: 18px;
+    font-weight: 400;
+}
+.title{
+    color: #0741AD;
+    font-weight: 600;
+    font-size: 18px;
+    text-align: right;
+}
+.price{
+    margin-top: 0.7rem;
+    color: #FF3B30;
+    text-align: right;
+    font-size: 18px;
+    font-weight: 500;
+    direction: ltr;
+}
+.oldPrice{
+    color: #0741AD;
+    font-size: 16px;
+    font-weight: 400;
+    margin-left: 0.8rem;
+}
+.availableIcon{
+    margin-left: 0.1rem;
+    width: 18px;
+}
+.available{
+    margin-top: 0.8rem;
+    margin-right: -0.4rem;
+
+    color: #FF9C00;
+    font-size: 13.3px;
+    font-weight: 500;
+    width: 350px;
+    display: flex;
+    align-items: center;
+}
+.colorButtons{
+    display: flex;
+    gap: 7px;
+    margin-top: 0.8rem;
+}
+.colorButton{
+    width: 15px;
+    height: 15px;
+    border-radius: 60%;
+}
+.outherDetails{
+    display: inline-flex;
+        justify-content: space-between;
+        width: 100%;
+
+}
+.remainingIcon{
+    margin-left: 0.1rem;
+    width: 18px;
+}
+.remaining{
+    margin-top: 0.8rem;
+    margin-right: -0.4rem;
+    color: #0741AD;
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+}
+.time {
+    position: relative;
+    right: 7px;
+    background-color: #0741AD;
+    width: 140px;
+    height: 35px;
+    border-radius: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.timeText {
+    margin-right: -0.4rem;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+}
+
+.timeIcon {
+    margin-top: 0.5rem;
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    margin-right: 5px;
+}
+

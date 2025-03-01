@@ -1,13 +1,10 @@
 .titleSection {
-    margin-top: 2rem;
-
     padding: 20px 50px;
     display: flex;
     justify-content: space-between; /* يجعل العناصر متباعدة ولكن ليست على الأطراف */
     align-items: center;
     width: 90%; /* تقليل عرض القسم حتى لا يمتد على كامل الصفحة */
-    margin-left: auto;
-    margin-right: auto;
+    margin: 4rem auto 2rem;
 }
 
 .title {
@@ -27,7 +24,7 @@
 
 @media screen and (max-width: 800px) {
    .titleSection{
-       margin: auto;
+       margin: 3rem auto 1rem auto;
        padding: 20px 20px;
        width: 100%;
    }

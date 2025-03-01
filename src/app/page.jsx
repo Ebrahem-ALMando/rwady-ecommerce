@@ -9,16 +9,12 @@ import ProductsCategoryCard from "@/Components/HomePage/ProductsCategoryCard";
 import CircleCartCarousel from "@/Components/HomePage/CategoriesCarousel";
 import {Brands,category} from "@/Data/data";
 import Footer from "@/Components/HomePage/Footer";
-
-
+import Navbar from "@/Components/Header/Navbar";
 export default function Home() {
   return (
-
     <>
-
-
-
-     <Carousel/>
+          <Navbar/>
+        <Carousel/>
         <TitleSection title="الاقسام" />
         <CircleCartCarousel
             data={category}
@@ -37,14 +33,12 @@ export default function Home() {
         <TitleSection title="منتجات نسائية" />
         <ProductSlider/>
         <TitleSection title="الماركات" />
-       <CircleCartCarousel
+        <CircleCartCarousel
            data={Brands}
            borderRadius={'10px'}
            bgColor={"#0741ad"}
-       />
+        />
         <Footer/>
     </>
-
-
   );
 }

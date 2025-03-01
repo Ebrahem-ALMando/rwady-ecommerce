@@ -44,7 +44,8 @@ const products = [
 export default function MovingProductsBar()
 {
     const settings = {
-    dots: true,
+    arrows:false,
+    dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 4,
@@ -61,10 +62,9 @@ export default function MovingProductsBar()
 };
     return (
         <div
-            style={{ width: '95%', height: '30vh'}}
+
            className={styles.mainDiv}
         >
-
 
             <Slider  {...settings}>
                 {

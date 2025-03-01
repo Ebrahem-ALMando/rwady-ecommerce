@@ -5,11 +5,13 @@
     justify-content: center;
     text-align: center;
     padding: 20px;
+
 }
 
 .logoContainer {
     width: 100%;
     max-width: 380px;
+
 }
 
 .downloadButton {
@@ -45,6 +47,9 @@
     }
 }
 @media (max-width: 700px){
+    .mainDiv {
+        margin-bottom: 1rem;
+    }
     .logoContainer {
         margin-top: 4rem;
         width: 100%;

@@ -1,79 +1,122 @@
 "use client";
 import dynamic from "next/dynamic";
 import ProductCardSlider from "@/Components/HomePage/ProductCardSlider";
-import React, { useEffect } from "react"; // ✅ تم تصحيحه
+import React, { useState } from "react"; // ✅ تم تصحيحه
 import "./ProductSlider.module.css";
+import CustomArrows from "./CustomArrow";
 
+import stylesArrow from "./CustomArrow.module.css";
 const Slider = dynamic(() => import("react-slick"), { ssr: false });
 
 const products = [
     {
         id: 1,
-        title: "ستانلي كوب H2.0 بمقبض وماصة 30 اونصة | غطاء دوار ثلاثي",
-        images: ["/images/img_1.png", "/images/img_1.png", "/images/img_1.png"],
+        isDiscount: true,
+        isFavorite:true,
+        title: "زولاي كيتشن مسند ادوات مائدة من السيليكون - خالي من البيسفينول",
+        images: ["/images/p2.png", "/images/p2.png", "/images/p2.png"],
         price: "20,258 IQD",
         oldPrice: "22,258 IQD",
-        available: "متاح قسط 500 شهريًا",
-        brand: "براند 2Brshka",
-        logo: "/logo.png",
+        available: "اشتري بالاقساط 5000 د.ع / شهر لمدة 10 اشهر",
+        brand: "PHILIPS",
+        colors:[
+            '#E41E1E',
+            '#008CFF',
+            '#07AD5D',
+            '#FEAF3F',
+        ],
+        remaining:'باقى 9 وحدات متبقية',
+        time:'143H : 60 M : 55 S'
     },
     {
         id: 2,
-        title: "ستانلي كوب H2.0 بمقبض وماصة 30 اونصة | غطاء دوار ثلاثي",
-        images: ["/images/img_1.png", "/images/img_1.png", "/images/img_1.png"],
+        isDiscount: false,
+        isFavorite:false,
+        title: "زولاي كيتشن مسند ادوات مائدة من السيليكون - خالي من البيسفينول",
+        images: [
+            "/images/p1.png",
+            "/images/p1.png",
+            "/images/p1.png",],
         price: "20,258 IQD",
         oldPrice: "22,258 IQD",
-        available: "متاح قسط 500 شهريًا",
-        brand: "براند1 Brshka",
-        logo: "/logo.png",
+        available: "اشتري بالاقساط 5000 د.ع / شهر لمدة 10 اشهر",
+        brand: "PHILIPS",
+        colors:[
+            '#E41E1E',
+            '#008CFF',
+            '#07AD5D',
+            '#FEAF3F',
+        ],
+        remaining:'باقى 9 وحدات متبقية',
+        time:'143H : 60 M : 55 S'
     },
     {
         id: 2,
-        title: "ستانلي كوب H2.0 بمقبض وماصة 30 اونصة | غطاء دوار ثلاثي",
+        isDiscount: false,
+        isFavorite:true,
+        title: "زولاي كيتشن مسند ادوات مائدة من السيليكون - خالي من البيسفينول",
         images: ["/images/img_1.png", "/images/img_1.png", "/images/img_1.png"],
         price: "20,258 IQD",
         oldPrice: "22,258 IQD",
-        available: "متاح قسط 500 شهريًا",
-        brand: "براند3s3 Brshka",
-        logo: "/logo.png",
+        available: "اشتري بالاقساط 5000 د.ع / شهر لمدة 10 اشهر",
+        brand: "PHILIPS",
+        colors:[
+            '#E41E1E',
+            '#008CFF',
+            '#07AD5D',
+            '#FEAF3F',
+        ],
+        remaining:'باقى 9 وحدات متبقية',
+        time:'143H : 60 M : 55 S'
     },
     {
         id: 2,
-        title: "ستانلي كوب H2.0 بمقبض وماصة 30 اونصة | غطاء دوار ثلاثي",
+        isDiscount: true,
+        isFavorite:false,
+        title: "زولاي كيتشن مسند ادوات مائدة من السيليكون - خالي من البيسفينول",
         images: ["/images/img_1.png", "/images/img_1.png", "/images/img_1.png"],
         price: "20,258 IQD",
         oldPrice: "22,258 IQD",
-        available: "متاح قسط 500 شهريًا",
-        brand: "براند4 Brshka",
-        logo: "/logo.png",
+        available: "اشتري بالاقساط 5000 د.ع / شهر لمدة 10 اشهر",
+        brand: "PHILIPS",
+        colors:[
+            '#E41E1E',
+            '#008CFF',
+            '#07AD5D',
+            '#FEAF3F',
+        ],
+        remaining:'باقى 9 وحدات متبقية',
+        time:'143H : 60 M : 55 S'
     }
 ];
 
-const CustomPrevArrow = ({ currentSlide,slideCount, ...props }) => (
-    <button {...props}
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 text-white bg-blue-600 p-2 rounded-full">
-        ❮
-    </button>
-);
 
-const CustomNextArrow = ({ currentSlide,slideCount, ...props }) => (
-    <button {...props}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 text-white bg-blue-600 p-2 rounded-full">
-        ❯
-    </button>
-);
 
 const ProductSlider = () => {
+
+    const [activeArrow, setActiveArrow] = useState(null);
+    const handleArrowClick = (type) => {
+        setActiveArrow(type);
+    };
     const settings = {
-        dots: true,
+        dots: false,
         infinite: true,
         speed: 500,
         slidesToShow: 4,
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 3000,
-        prevArrow: <CustomPrevArrow />,
-        nextArrow: <CustomNextArrow />,
+        prevArrow: <CustomArrows
+            type="prev"
+            activeArrow={activeArrow}
+            onArrowClick={handleArrowClick}
+
+            />,
+        nextArrow: <CustomArrows
+            type={"next"}
+            activeArrow={activeArrow}
+            onArrowClick={handleArrowClick}
+          />,
         responsive: [
             { breakpoint: 1286, settings: { slidesToShow: 3 } },
             { breakpoint: 1095, settings: { slidesToShow: 2 } },
@@ -83,7 +126,7 @@ const ProductSlider = () => {
 
 
     return (
-        <div style={{ margin: 'auto auto 10rem auto', width: '95%' }}>
+        <div style={{ margin: 'auto auto 3rem auto', width: '95%' }}>
             <Slider {...settings}>
                 {products.map((slide, index) => (
                     <ProductCardSlider key={index} product={slide} />

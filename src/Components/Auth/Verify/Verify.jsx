@@ -1,14 +1,16 @@
 'use client';
 import { useState, useEffect, Suspense } from 'react';
-import { useSearchParams } from 'next/navigation';
+import {useRouter, useSearchParams} from 'next/navigation';
 import { motion } from 'framer-motion';
 
+
 const Verify = (props) => {
+    const router = useRouter();
     const [otp, setOtp] = useState(['', '', '', '']);
     const [timeLeft, setTimeLeft] = useState(60);
     const [isResending, setIsResending] = useState(false);
-  /*  const searchParams = useSearchParams();
-    const phone = searchParams.get('phone');*/
+    const searchParams = useSearchParams();
+    const phone = searchParams.get('phone');
 
     useEffect(() => {
         const timer = timeLeft > 0 && setInterval(() => {
@@ -32,6 +34,7 @@ const Verify = (props) => {
 
     const handleResend = async () => {
         setIsResending(true);
+
     /*    try {
             await fetch('/api/resend-otp', {
                 method: 'POST',
@@ -47,6 +50,7 @@ const Verify = (props) => {
     return (
         <Suspense fallback={<div>Loading...</div>}>
             <motion.div
+                dir={"ltr"}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 className="min-h-screen bg-gradient-to-br from-blue-50 to-white flex items-center justify-center p-4"
@@ -58,7 +62,7 @@ const Verify = (props) => {
 
                     <p className="text-right text-gray-600 mb-8 font-arabic">
                         قم بإدخال رمز التفعيل الخاص بك الذي وصلك للتو من خلالنا على رقم جوالك
-                        <span className="font-bold text-black"> +{/*{phone}*/} </span>
+                        <span className="font-bold text-black"> +{phone} </span>
                     </p>
 
                     <div className="flex justify-center gap-3 mb-8">
@@ -94,6 +98,9 @@ const Verify = (props) => {
                         )}
                     </div>
                     <button
+                        onClick={()=>{
+                            router.push(`/`);
+                        }}
                         className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg
                         font-arabic text-xl transition-all mb-4"
                     >
