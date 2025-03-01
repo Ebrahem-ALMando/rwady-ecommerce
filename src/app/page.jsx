@@ -10,9 +10,11 @@ import CircleCartCarousel from "@/Components/HomePage/CategoriesCarousel";
 import {Brands,category} from "@/Data/data";
 import Footer from "@/Components/HomePage/Footer";
 import Navbar from "@/Components/Header/Navbar";
+import ScrollToTop from "@/Components/ScrollToTop";
 export default function Home() {
   return (
     <>
+          <ScrollToTop />
           <Navbar/>
         <Carousel/>
         <TitleSection title="الاقسام" />

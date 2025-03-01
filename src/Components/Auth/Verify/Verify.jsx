@@ -9,8 +9,8 @@ const Verify = (props) => {
     const [otp, setOtp] = useState(['', '', '', '']);
     const [timeLeft, setTimeLeft] = useState(60);
     const [isResending, setIsResending] = useState(false);
-    const searchParams = useSearchParams();
-    const phone = searchParams.get('phone');
+    // const searchParams = useSearchParams();
+    // const phone = searchParams.get('phone');
 
     useEffect(() => {
         const timer = timeLeft > 0 && setInterval(() => {
@@ -62,7 +62,7 @@ const Verify = (props) => {
 
                     <p className="text-right text-gray-600 mb-8 font-arabic">
                         قم بإدخال رمز التفعيل الخاص بك الذي وصلك للتو من خلالنا على رقم جوالك
-                        <span className="font-bold text-black"> +{phone} </span>
+                        <span className="font-bold text-black"> + 9999999999{/*{phone}*/} </span>
                     </p>
 
                     <div className="flex justify-center gap-3 mb-8">
