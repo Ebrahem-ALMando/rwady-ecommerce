@@ -14,7 +14,7 @@ const settings = {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 1500,
     appendDots: dots => (
         <ul className={styles.slickDots}>

@@ -1,0 +1,24 @@
+.completeProfile{
+    width: 100%;
+}
+
+.buttonAction{
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+}
+.buttonAction button{
+    font-size: 14px;
+    font-weight: 400;
+    width: 76px;
+    height: 45px;
+    border-radius: 5px;
+}
+.buttonAction button:first-child{
+    color: #fff;
+    background-color: #0741ad;
+}
+.buttonAction button:last-child{
+    background-color: #f2f2f2;
+    color: #6A6E83;
+}

@@ -1,6 +1,7 @@
 
 import React from "react";
 import styles from './TopIcon.module.css'
+import Link from "next/link";
 const TopIcon=(props)=>{
     return (
         <div className={''} style={
@@ -18,7 +19,9 @@ const TopIcon=(props)=>{
             <div style={{position: 'relative', display: 'inline-block'
 
             }}>
-                {props.element}
+              <Link href={props.link??"/"}>
+                  {props.element}
+              </Link>
                 {props.count > 0 && (
                     <span style={{
                         position: 'absolute',

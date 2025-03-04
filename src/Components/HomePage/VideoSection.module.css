@@ -82,7 +82,10 @@
     height: 60vh;
     background-color: rgba(0, 0, 0, 0.7);
     object-fit: cover;
+    overflow: hidden;
+
 }
+
 
 .playButton {
     position: absolute;

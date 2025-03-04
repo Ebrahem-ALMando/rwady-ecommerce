@@ -5,6 +5,7 @@ import {PiInstagramLogoFill, PiWhatsappLogo} from "react-icons/pi";
 import {RiTwitterXLine} from "react-icons/ri";
 import {HiOutlineMail} from "react-icons/hi";
 import {MdOutlinePhoneInTalk} from "react-icons/md";
+import Link from "next/link";
 const Footer = () => {
     return (
         <footer className={styles.footer}>
@@ -31,10 +32,16 @@ const Footer = () => {
             <div className={styles.links}>
                 <p>الصفحات</p>
                 <ul>
-                    <li>من نحن</li>
+                    <Link href={"/about-us"}>
+                        <li>من نحن</li>
+                    </Link>
                     <li>اتصل بنا</li>
+                    <Link href={"/terms-and-conditions"}>
                     <li>سياسة الخصوصية</li>
+                    </Link>
+                    <Link href={"/return-policy"}>
                     <li>سياسة الاستبدال والاسترجاع</li>
+                    </Link>
                 </ul>
             </div>
             <div className={styles.contactInfo}>

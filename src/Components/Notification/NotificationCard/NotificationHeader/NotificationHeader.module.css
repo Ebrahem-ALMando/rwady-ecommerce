@@ -1,0 +1,17 @@
+.welcome{
+    display: flex;
+    justify-content: space-between;
+    margin: 1.5em auto 0.5em auto;
+}
+.welcomeText{
+    display: flex;
+    gap: 10px;
+    color: #0741AD;
+    font-size: 18px;
+    font-weight: 600;
+}
+.time{
+    color: #6A6E83;
+    font-size: 14px;
+    font-weight: 400;
+}

@@ -1,0 +1,22 @@
+.container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.items{
+    width: 90%;
+    padding: 20px;
+}
+.title{
+    color: #0741ad;
+    font-weight: 600;
+    font-size: 23px;
+}
+.content{
+    color: #1E1E1E;
+    font-weight: 600;
+    font-size: 17px;
+    text-wrap: wrap;
+    text-align: right;
+    line-height: 40px;
+}

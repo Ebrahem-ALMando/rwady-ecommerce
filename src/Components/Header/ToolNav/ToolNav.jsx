@@ -41,6 +41,7 @@ const ToolNav=()=>{
                        // element={   <MdFavoriteBorder  size={24} />}
                    />
                    <TopIcon
+                       link={"./shopping-cart"}
                        count={6}
                        element={
                            <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -62,6 +63,7 @@ const ToolNav=()=>{
                        }
                    />
                    <TopIcon
+                       link={"./notification"}
                        count={7}
                        element={
                            <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">

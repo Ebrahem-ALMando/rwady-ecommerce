@@ -1,0 +1,20 @@
+.row{
+    margin: 0.5rem 0 0.5rem 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.title{
+    font-size: 16px;
+    font-weight: 400;
+    color: #666666;
+}
+.value{
+    direction: ltr;
+    font-size: 16px;
+    font-weight: 500;
+}
+.star{
+    color: #F55157;
+    margin-right: 0.4rem;
+}

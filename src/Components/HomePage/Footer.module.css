@@ -85,9 +85,9 @@
 }
 .footerLine {
     width: 90%;
-    margin: 10px auto; /* يتمحور في المنتصف أفقيًا */
+    margin: 10px auto;
     border: none;
-    border-top: 2px solid #ccc; /* سمك الخط ولونه */
+    border-top: 2px solid #ccc;
 }
 
 
