@@ -1,0 +1,80 @@
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem auto;
+    font-size: 16px;
+    text-align: right;
+
+}
+.headerRow {
+    font-size: 17px;
+    font-weight: 400;
+    color:#0641AD;
+}
+
+.headerCell {
+    padding: 12px 15px 1.3rem 15px;
+}
+.oddRow{
+    background-color: #ffffff;
+
+}
+.bodyRow{
+    font-size: 16px;
+    font-weight: 400;
+
+}
+.evenRow{
+    background-color: #f2f5fb;
+}
+.bodyRow td:nth-of-type(1){
+    direction: ltr;
+    font-weight: 500;
+}
+.bodyRow td:nth-of-type(4){
+    color: #0641AD;
+    direction: ltr;
+    font-weight: 500;
+}
+.bodyCell {
+    padding: 15px;
+}
+.status{
+    padding:5px;
+    border-radius: 5px;
+    width:80px;
+    text-align: center;
+}
+.inProgress{
+   background-color:#FF7A001F;
+   color:#FF7A00;
+}
+.success{
+    background-color:#1DA04C1F;
+    color:#00AF6C;
+}
+.failed{
+    background-color:#F551571A;
+    color:#F55157;
+}
+.rejected{
+    background-color:#F551571A;
+    color:#F55157;
+}
+.bodyCell button{
+    background-color: #0B65BA1A;
+    color: #417AC8;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-radius: 8px;
+}
+@media (max-width: 720px) {
+    .table {
+        width: 100%;
+        min-width: 600px;
+    }
+}

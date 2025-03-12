@@ -84,12 +84,12 @@ const ShoppingCart=()=>{
                     </h2>
                     {Carts.map((Cart, index) => (
                         <div key={index} className={styles.productCard}>
-                        <div className={styles.productImg}>
+                                <div className={styles.productImg}>
                             <img src="./images/Shopping/img.png"
 
                                  alt=""/>
-                        </div>
-                        <div className={styles.productItem}>
+                         </div>
+                         <div className={styles.productItem}>
                             <h4 className={styles.title}>
                                 {Cart.title}
                             </h4>

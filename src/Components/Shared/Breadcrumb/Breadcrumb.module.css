@@ -1,0 +1,39 @@
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 1rem auto;
+}
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #6A6E83;
+    width: 100%;
+    max-width: 1300px;
+    padding: 10px 20px;
+}
+
+.link {
+    font-size: 20px;
+    font-weight: 400;
+    text-decoration: none;
+    color: #0741AD;
+    transition: color 0.3s ease-in-out;
+}
+
+.link:hover {
+    color: #1450ff;
+}
+
+.separator {
+    color: #0741AD;
+}
+
+.current {
+    color: #666666;
+    font-weight: 400;
+}

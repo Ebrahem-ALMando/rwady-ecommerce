@@ -1,0 +1,224 @@
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1002;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.profileContainer {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    width: 90%;
+    max-width: 500px;
+    animation: slideUp 0.5s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.title {
+    color: #0741AD;
+    font-size: 25px;
+    margin-bottom: 0;
+    text-align: right;
+    font-weight: 600;
+}
+
+.closeIcon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.closeIcon:hover {
+    background: rgba(7, 65, 173, 0.1);
+    transform: rotate(90deg);
+}
+
+.closeIcon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.inputWrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+.inputLabel {
+    display: block;
+    color: #424242;
+    font-size: 15px;
+    font-weight: 400;
+    margin-bottom: 0.1rem;
+}
+.countryCode {
+    position: absolute;
+    left: 15px;
+    width: 55px;
+    height: 65%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #F2F2F2;
+    color: #0641AD;
+    font-size: 1rem;
+    font-weight: bold;
+    pointer-events: none;
+    padding: 10px ;
+    border-radius: 7px;
+    direction: ltr;
+}
+
+.textInput {
+    width: 100%;
+    padding: 0.8rem 0.8rem 0.8rem 65px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 400;
+    transition: all 0.3s ease;
+    color: #0641AD;
+    text-align: right;
+}
+
+.textInput:focus {
+    outline: none;
+    border-color: #4299e1;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2);
+}
+
+.locationGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+}
+
+.selectWrapper {
+    position: relative;
+}
+.selectInput {
+    color: #0641AD;
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    background: #ffffff;
+    font-size: 1rem;
+    appearance: none;
+    cursor: pointer;
+
+}
+
+.selectWrapper::after {
+    content: "";
+    position: absolute;
+    left: 20px;
+    top: 63%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.99977 13.9995C9.41644 13.9995 8.83311 13.7745 8.39144 13.3329L2.95811 7.89954C2.71644 7.65788 2.71644 7.25788 2.95811 7.01621C3.19977 6.77454 3.59977 6.77454 3.84144 7.01621L9.27477 12.4495C9.67477 12.8495 10.3248 12.8495 10.7248 12.4495L16.1581 7.01621C16.3998 6.77454 16.7998 6.77454 17.0414 7.01621C17.2831 7.25788 17.2831 7.65788 17.0414 7.89954L11.6081 13.3329C11.1664 13.7745 10.5831 13.9995 9.99977 13.9995Z" fill="%236A6E83"/></svg>');
+    background-size: cover;
+    pointer-events: none;
+}
+
+.selectInput:focus {
+    border-color: #4299e1;
+}
+
+.buttonGroup {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    margin-top: 2rem;
+}
+
+.cancelButton {
+    width: 30%;
+    background: #0741AD1A;
+    color: #0641AD;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.saveButton {
+    width: 70%;
+    background: #0641AD;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cancelButton:hover {
+    background: rgba(197, 48, 48, 0.8);
+    color: white;
+    transform: translateY(-1px);
+}
+
+.saveButton:hover {
+    background: #1c84e6;
+    transform: translateY(-1px);
+}
+
+.openButton {
+    background: #4299e1;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.openButton:hover {
+    background: #3182ce;
+    transform: translateY(-1px);
+}
+

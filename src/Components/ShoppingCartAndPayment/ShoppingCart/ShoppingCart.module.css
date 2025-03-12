@@ -47,6 +47,7 @@
     margin: 0 0.5rem;
     width: 21%;
     height: 25vh;
+    min-width: 150px;
 
     display: flex;
     align-items: center;
@@ -76,6 +77,8 @@
     font-weight: 400;
     color: #F55157;
     margin: 0.5rem auto;
+    direction: ltr;
+    text-align: end;
 }
 .actionButton{
     display: flex;

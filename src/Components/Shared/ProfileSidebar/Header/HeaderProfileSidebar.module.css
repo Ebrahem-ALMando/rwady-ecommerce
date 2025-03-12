@@ -1,0 +1,38 @@
+.headerProfileSidebar{
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    justify-content: start;
+    align-items: center;
+}
+.mainInfo p{
+    margin-bottom: 8px;
+}
+.mainInfo p:first-child{
+    color: #0741AD;
+    font-size: 18px;
+    font-weight: 400;
+}
+.mainInfo p:nth-child(2){
+    color: #6A6E83;
+    font-size: 14px;
+    font-weight: 400;
+}
+.mainInfo p:nth-child(3){
+    color: #0741AD;
+    font-size: 16px;
+    font-weight: 400;
+}
+.personalPhoto{
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+.location{
+    display: flex;
+    gap: 5px;
+    justify-content: start;
+}
+.location svg{
+    margin-top: 0.2rem;
+}

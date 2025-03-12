@@ -1,12 +1,7 @@
 "use client";
 import dynamic from "next/dynamic";
-import { Heart, ShoppingCart } from "lucide-react";
 import  styles from './ProductCardSlider.module.css'
-import React, {useEffect} from "react";
-
 const Slider = dynamic(() => import("react-slick"), { ssr: false });
-
-
 const settings = {
     arrows: false,
     dots: true,
@@ -26,15 +21,10 @@ const settings = {
         </ul>
     )
 };
-
-
 const ProductCardSlider = (props) => {
-
-
-
     return (
         <div
-            className="p-6 ">
+            className="p-2 ">
             <div
             className={styles.card}
             >
@@ -45,13 +35,10 @@ const ProductCardSlider = (props) => {
                     </div>
                     :null
                 }
-
-
                 <div
                     className={`absolute top-2 right-0  text-white    font-bold ${styles.bestSeller}`}>
                 الأكثر مبيعًا
                 </div>
-
                 <div className="relative w-full h-60">
                     <Slider {...settings}>
                         {props.product.images.map((image, index) => (
@@ -84,8 +71,6 @@ const ProductCardSlider = (props) => {
                                         strokeWidth="1"
                                     />
                                 </svg>
-
-
                             </button>
 
                         </div>
@@ -104,7 +89,6 @@ const ProductCardSlider = (props) => {
                                         fill="#0741AD"/>
                                 </svg>
                             </button>
-
                         </div>
                     </div>
 
@@ -112,10 +96,8 @@ const ProductCardSlider = (props) => {
                 <div className={styles.infoCard}>
                     <div className=" mb-2 ">
                         <span className={styles.brand}>{props.product.brand}</span>
-
                     </div>
                     <h3 className={styles.title}>{props.product.title}</h3>
-
                     <p
                         className={styles.price}
                     >
@@ -134,7 +116,6 @@ const ProductCardSlider = (props) => {
                             />
                         </span>
                         {props.product.available}
-
                     </p>
                     <div className={styles.colorButtons}>
                         {
@@ -174,7 +155,6 @@ const ProductCardSlider = (props) => {
                             </div>
                             : null
                         }
-
                     </div>
                 </div>
             </div>

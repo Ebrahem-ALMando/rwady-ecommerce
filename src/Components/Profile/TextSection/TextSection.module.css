@@ -1,0 +1,29 @@
+.textSection{
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+    justify-content: flex-start;
+    padding: 10px;
+
+}
+.textSection p:nth-child(1){
+    color:#6A6E83;
+    font-size: 15px;
+    font-weight: 400;
+}
+.textSection p:nth-child(2){
+    color:#0741ad;
+    font-size: 17px;
+    font-weight: 600;
+    text-align: end;
+    direction: ltr;
+}
+@media (max-width: 525px)
+{
+    .textSection
+    {
+            width: 100%;
+    }
+
+}

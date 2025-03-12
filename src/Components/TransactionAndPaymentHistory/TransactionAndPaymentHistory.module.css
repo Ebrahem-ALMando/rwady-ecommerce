@@ -1,0 +1,110 @@
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 20px;
+}
+
+.transactions {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 65%;
+    overflow-x: auto;
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+}
+.header h3{
+    font-size: 32px;
+    font-weight: 600;
+    color: #0741ad;
+    padding: 23px 18px;
+}
+
+.filterSection{
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    gap: 20px;
+    align-items: center;
+    margin-top: 1rem;
+
+}
+.inputLabel {
+    display: block;
+    color: #424242;
+    font-size: 15px;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+}
+.selectWrapper {
+    position: relative;
+
+}
+.filterSection .selectWrapper:nth-child(1){
+    width: 30%;
+    min-width: 180px;
+}
+.filterSection .selectWrapper:nth-child(2){
+    width: 43%;
+    min-width: 250px;
+}
+.selectInput {
+    color: #424242;
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    background: #ffffff;
+    font-size: 1rem;
+    appearance: none;
+    cursor: pointer;
+
+}
+.selectInput option{
+    text-align: center;
+}
+.selectWrapper::after {
+    content: "";
+    position: absolute;
+    left: 20px;
+    top: 70%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.99977 13.9995C9.41644 13.9995 8.83311 13.7745 8.39144 13.3329L2.95811 7.89954C2.71644 7.65788 2.71644 7.25788 2.95811 7.01621C3.19977 6.77454 3.59977 6.77454 3.84144 7.01621L9.27477 12.4495C9.67477 12.8495 10.3248 12.8495 10.7248 12.4495L16.1581 7.01621C16.3998 6.77454 16.7998 6.77454 17.0414 7.01621C17.2831 7.25788 17.2831 7.65788 17.0414 7.89954L11.6081 13.3329C11.1664 13.7745 10.5831 13.9995 9.99977 13.9995Z" fill="%236A6E83"/></svg>');
+    background-size: cover;
+    pointer-events: none;
+}
+
+.selectInput:focus {
+    border-color: #4299e1;
+}
+
+@media (max-width: 1120px) {
+    .container {
+        flex-direction: column;
+    }
+    .transactions, .sidebar {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
+@media (max-width: 740px)
+{
+    .filterSection,.header
+    {
+        width: 100%;
+        flex-direction: column;
+    }
+    .filterSection .selectWrapper:nth-child(1){
+        width: 100%;
+    }
+    .filterSection .selectWrapper:nth-child(2){
+        width: 100%;
+    }
+
+}

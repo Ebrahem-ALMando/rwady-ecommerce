@@ -1,6 +1,7 @@
 import styles from './PageContainer.module.css';
 import Line from "@/Components/Shared/Line/Line";
 import Section from "@/Components/Shared/PageContainer/Section";
+import FAQList from "@/Components/FAQList/FAQList";
 const PageContainer=(props)=>{
     return(
         <div className={styles.container}>
@@ -9,20 +10,24 @@ const PageContainer=(props)=>{
                     {props.title}
                 </h1>
                 <Line/>
-                <div className={styles.content}>
-                    <article>
-                        <p>
-                            {props.shortDescription}
-                        </p>
-                        {props.data?.map((item,index)=>(
-                            <Section
-                                key={index}
-                                title={item.title}
-                                description={item.description}
-                            />
-                        ))}
-                    </article>
-                </div>
+                {props.isFAQ ?
+                    <FAQList/>
+                    :
+                    <div className={styles.content}>
+                        <article>
+                            <p>
+                                {props.shortDescription}
+                            </p>
+                            {props.data?.map((item, index) => (
+                                <Section
+                                    key={index}
+                                    title={item.title}
+                                    description={item.description}
+                                />
+                            ))}
+                        </article>
+                    </div>
+                }
             </div>
         </div>
     )

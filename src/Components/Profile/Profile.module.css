@@ -1,0 +1,148 @@
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 20px;
+}
+
+.profileCard {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 65%;
+}
+
+.profileCard h3{
+    font-size: 32px;
+    font-weight: 600;
+    color: #0741ad;
+    padding: 23px 18px;
+
+}
+.mainInfo{
+    padding: 17px 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    /*gap: 15px;*/
+}
+.imgContainer{
+
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    justify-content: start;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.imgContainer p{
+    color: #6A6E83;
+    font-size: 14px;
+    font-weight: 400;
+
+}
+
+.imgAction{
+    width: 100%;
+    padding: 10px;
+}
+.imgAction button{
+    width: 100px;
+    height: 40px;
+    border-radius: 7px;
+    margin: 0.5rem 5px;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.imgAction button:nth-of-type(1)
+{
+    border: 2px solid #CCD3D9;
+    color: #0741AD;
+}
+.imgAction button:nth-of-type(2)
+{
+    border: none;
+    color: #DE1F1F;
+}
+.imgAction button:hover {
+    transform: translateY(-1px);
+}
+.imgAction button:active {
+    transform: translateY(1px) scale(0.98);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+.profileImage {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+.personalInfo{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.personalInfo p{
+    font-size: 24px;
+    font-weight: 600;
+    color: #0741ad;
+    padding: 10px 2px;
+}
+.personalInfo button{
+    border: 2px solid #CCD3D9;
+    font-size: 16px;
+    font-weight: 400;
+    color: #0741ad;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100px;
+    height: 40px;
+    border-radius: 7px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.personalInfo button:hover{
+    transform: translateY(-2px);
+}
+.info{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.profileEmail {
+    color: #007bff;
+    text-decoration: none;
+}
+.sidebar {
+    width: 22%;
+    min-width: 300px;
+}
+
+.sidebarLink {
+    display: block;
+    margin-bottom: 10px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+@media (max-width: 1050px) {
+    .container {
+        flex-direction: column;
+    }
+    .profileCard, .sidebar {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
+@media (max-width: 525px)
+{
+    .mainInfo {
+        padding: 0px;
+    }
+    .info{
+       flex-direction: column;
+    }
+
+
+}

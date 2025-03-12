@@ -1,0 +1,15 @@
+.container{
+    width: 99%;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0 0 10px;
+
+}
+.items{
+    width:96%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 5px;
+}
