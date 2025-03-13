@@ -40,7 +40,7 @@ const CustomPrevArrow = ({ currentSlide,slideCount, ...props }) => (
 
 const CustomNextArrow = ({currentSlide, slideCount, ...props}) => (
     <button {...props}
-            className={`absolute right-4 top-1/2 transform -translate-y-1/2 z-10 text-white  p-2
+            className={`absolute right-4 top-1/2 transform -translate-y-1/2 z-10 text-white
             ${styles.nextArrow} ${styles.arrow}`}>
         <svg width="11" height="12" viewBox="0 0 11 12" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path

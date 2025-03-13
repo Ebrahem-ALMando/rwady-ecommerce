@@ -1,0 +1,35 @@
+.row{
+    width: 97%;
+    margin: 0.1rem auto;
+    font-size: 17px;
+    font-weight: 400;
+    padding: 7px 0;
+    display: flex;
+    justify-content: space-between;
+}
+.formGroup {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.checkboxInput {
+    width: 18px;
+    height: 18px;
+    accent-color: #0741AD;
+    cursor: pointer;
+}
+
+.inputLabel {
+    color: #6A6E83;
+    font-size: 17px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+.checkboxInput:checked + .inputLabel {
+    color: #0741AD;
+}
+.quantity{
+    font-size: 15px;
+    color: #6A6E83;
+}

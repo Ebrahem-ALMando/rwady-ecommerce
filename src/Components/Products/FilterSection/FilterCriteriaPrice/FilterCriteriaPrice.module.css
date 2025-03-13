@@ -1,0 +1,30 @@
+.slider {
+    width: 100%;
+    height: 6px;
+    border-radius: 4px;
+}
+
+.track {
+    background-color: #d3d3d3; /* اللون الخلفية الفارغة */
+    height: 6px;
+    border-radius: 4px;
+}
+
+.range {
+    background-color: #0741AD; /* اللون الخلفية المعبأة */
+    height: 6px;
+    border-radius: 4px;
+}
+
+.thumb {
+    background-color: #0741AD; /* اللون الأساسي للدائرة */
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid #fff; /* حافة بيضاء حول الدائرة */
+    transition: background-color 0.2s ease-in-out;
+}
+
+.thumb:hover {
+    background-color: #1a65d6; /* تغيير اللون عند التمرير فوق الدائرة */
+}

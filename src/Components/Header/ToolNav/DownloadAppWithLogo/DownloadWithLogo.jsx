@@ -1,10 +1,12 @@
 import styles from './DownloadWithLogo.module.css';
 import Image from 'next/image';
+import Link from "next/link";
 
 const DownloadAppWithLogo = () => {
     return (
         <div className={styles.mainDiv}>
             <div className={styles.logoContainer}>
+            <Link href='./'>
                 <Image
                     src="/logo.png"
                     alt="Logo"
@@ -12,6 +14,7 @@ const DownloadAppWithLogo = () => {
                     width={200}
                     height={150}
                 />
+            </Link>
             </div>
             <button className={styles.downloadButton}>
     <span className={styles.iconContainer}>
