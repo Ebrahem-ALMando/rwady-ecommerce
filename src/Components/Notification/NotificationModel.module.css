@@ -3,7 +3,7 @@
     display: flex;
     justify-content: center;
     position: absolute;
-    z-index: 100;
+    z-index: -1;
     left: 65%;
     transform: translate(-50%, -50%);
     top: 60%;
@@ -12,11 +12,10 @@
 }
 
 .container.show {
+    z-index: 100;
     opacity: 1;
     transform: translate(-50%, -50%);
 }
-
-
 
 .items {
     width: 90%;
