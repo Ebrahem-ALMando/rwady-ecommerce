@@ -31,6 +31,27 @@
     position: relative;
 
 }
+.closeIcon {
+    background: white;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.closeIcon:hover {
+    background: white;
+    transform: rotate(90deg);
+}
+
+.closeIcon svg {
+    width: 24px;
+    height: 24px;
+}
 @media (max-width: 768px) {
     .mainDiv {
         flex-direction: column;

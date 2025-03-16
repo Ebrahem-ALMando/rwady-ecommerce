@@ -22,7 +22,7 @@ const TopIcon=(props)=>{
 
             }
         }
-             onClick={()=>props.setIsOpen(true)}
+             onClick={()=>props.setIsOpen(prev=>!prev)}
         >
 
             <div style={{position: 'relative', display: 'inline-block'
