@@ -8,31 +8,31 @@ const Slider = dynamic(() => import("react-slick"), { ssr: false });
 const products = [
     {
         id: 1,
-        image: "/images/(Products)/p1.jpeg",
+        image: "/images/Products/p1.jpeg",
         title: "كونير مكواة بخار محمولة للملابس - بخار كهربائي",
         price: "20,258 IQD",
     },
     {
         id: 2,
-        image: "/images/(Products)/p2.jpeg",
+        image: "/images/Products/p2.jpeg",
         title: "شاشة 24 بوصة فل HD مع تقنية حماية العين",
         price: "35,900 IQD",
     },
     {
         id: 3,
-        image: "/images/(Products)/p3.jpeg",
+        image: "/images/Products/p3.jpeg",
         title: "جاكيت شتوي فاخر بتصميم أنيق",
         price: "15,750 IQD",
     },
     {
         id: 4,
-        image: "/images/(Products)/p4.jpeg",
+        image: "/images/Products/p4.jpeg",
         title: "مجموعة حقائب سفر أنيقة مقاومة للماء",
         price: "42,500 IQD",
     },
     {
         id: 5,
-        image: "/images/(Products)/p1.jpeg",
+        image: "/images/Products/p1.jpeg",
         title: "سماعات لاسلكية بجودة صوت عالية",
         price: "18,900 IQD",
     },
