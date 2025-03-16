@@ -11,7 +11,7 @@ import NotificationModel from "@/Components/Notification/NotificationModel";
 import {useEffect, useRef, useState} from "react";
 
 const ToolNav=()=>{
-    const notificationRef = useRef(null); // Ref للـ NotificationModel
+    const notificationRef = useRef(null);
     const [isNotificationVisible, setNotificationVisible] = useState(false);
 
     useEffect(() => {
@@ -126,7 +126,6 @@ const ToolNav=()=>{
 
             </div>
             <div ref={notificationRef}>
-
                 <NotificationModel
                     isShow={isNotificationVisible}
                     onClose={() => setNotificationVisible(false)}

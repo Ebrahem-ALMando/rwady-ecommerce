@@ -32,7 +32,7 @@
 
 }
 .closeIcon {
-    background: white;
+    background: none;
     border: none;
     cursor: pointer;
     padding: 8px;
@@ -44,16 +44,21 @@
 }
 
 .closeIcon:hover {
-    background: white;
+    background: none;
     transform: rotate(90deg);
 }
 
 .closeIcon svg {
     width: 24px;
     height: 24px;
+
+}
+.closeIcon svg path{
+    fill: white;
 }
 @media (max-width: 768px) {
     .mainDiv {
+
         flex-direction: column;
         height: auto;
         padding: 10px;
@@ -66,5 +71,8 @@
     .startShopBTN {
         width: 100%;
         text-align: center;
+    }
+    .closeIcon{
+        display: none;
     }
 }
