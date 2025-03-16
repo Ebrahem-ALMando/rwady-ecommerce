@@ -47,7 +47,7 @@ export const profileButtons=[
             )
         ,
         text: "الاقساط",
-        link: "installments",
+        link: "#",
     },
     {
         icon:
@@ -66,7 +66,7 @@ export const profileButtons=[
             )
         ,
         text: "العناوين",
-        link: "address",
+        link: "#",
     },
     {
         icon:

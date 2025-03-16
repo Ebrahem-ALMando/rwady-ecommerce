@@ -125,30 +125,33 @@ const MainNavigation = () => {
 
                 </div>
 
-                <nav className={`${styles.navItems} ${isMenuOpen ? styles.active : ''}`}>
+                <nav className={`${styles.navItems} ${isMenuOpen ? styles.active : ''}`}
+                     onMouseEnter={()=>setIsOpenDropdown(true)}
+                     onMouseLeave={() => setIsOpenDropdown(false)}
+                >
+
                     <Link
-                        onMouseEnter={()=>setIsOpenDropdown(true)}
-                        onMouseLeave={() => setIsOpenDropdown(false)}
+
                         href="/#" className={styles.navItem}>الاقسام</Link>
                     <Link
-                        onMouseEnter={()=>setIsOpenDropdown(true)}
-                        onMouseLeave={() => setIsOpenDropdown(false)}
+                        // onMouseEnter={()=>setIsOpenDropdown(true)}
+                        // onMouseLeave={() => setIsOpenDropdown(false)}
                         href="/#" className={styles.navItem}> العروض/ التخفيضات</Link>
                     <Link
-                        onMouseEnter={()=>setIsOpenDropdown(true)}
-                        onMouseLeave={() => setIsOpenDropdown(false)}
+                        // onMouseEnter={()=>setIsOpenDropdown(true)}
+                        // onMouseLeave={() => setIsOpenDropdown(false)}
                         href="/#" className={styles.navItem}>الماركات</Link>
                     <Link
-                        onMouseEnter={()=>setIsOpenDropdown(true)}
-                        onMouseLeave={() => setIsOpenDropdown(false)}
+                        // onMouseEnter={()=>setIsOpenDropdown(true)}
+                        // onMouseLeave={() => setIsOpenDropdown(false)}
                         href="/#" className={styles.navItem}>المدونات</Link>
                     <Link
-                        onMouseEnter={()=>setIsOpenDropdown(true)}
-                        onMouseLeave={() => setIsOpenDropdown(false)}
+                        // onMouseEnter={()=>setIsOpenDropdown(true)}
+                        // onMouseLeave={() => setIsOpenDropdown(false)}
                         href="/#" className={styles.navItem}>اكثر مبيعا</Link>
                     <Link
-                        onMouseEnter={()=>setIsOpenDropdown(true)}
-                        onMouseLeave={() => setIsOpenDropdown(false)}
+                        // onMouseEnter={()=>setIsOpenDropdown(true)}
+                        // onMouseLeave={() => setIsOpenDropdown(false)}
                         href="/#" className={styles.navItem}>المميزة</Link>
                 </nav>
 

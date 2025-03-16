@@ -21,10 +21,9 @@
     /*transform: translateX(-50%);*/
     z-index: 100;
     height: 70vh;
-    overflow-y: auto;
+
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-
     opacity: 0;
     transform: translate(-50%, 20px);
     transition: opacity 0.4s ease, transform 0.4s ease;
@@ -42,34 +41,46 @@
 .sidebar{
     width: 25%;
     padding: 10px 3px;
+    overflow-y: hidden;
+}
+.sidebar:hover{
+    overflow-y: auto;
 }
 .categories{
-    width: 70%;
+    width: 73%;
     padding: 10px 3px;
     /*background: #ff0000;*/
     display: flex;
     gap: 5px;
 
 }
+
 .mainSection{
-    width: 50%;
+    width: 52%;
     padding: 10px 8px;
     border-left:1px solid #EDE9E6;
     border-right:1px solid #EDE9E6;
+    overflow-y: hidden;
     }
+.mainSection:hover{
+    overflow-y: auto;
+}
 .secondSection{
-    width: 50%;
+    width: 52%;
     padding: 10px 3px;
     display: flex;
     gap: 10px;
     flex-direction: column;
+    overflow-y: hidden;
+    height: auto;
+}
+.secondSection:hover{
     overflow-y: auto;
-    height: 100vh;
 }
 .subSectionOne,.subSectionTow{
-
     padding: 10px 3px;
     flex-wrap: wrap;
+
 }
 .subSectionTow{
     border-top:1px solid #EDE9E6;
