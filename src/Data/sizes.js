@@ -1,5 +1,4 @@
 export const sizes = [
-    { id: 1, title: "الكل", quantity: 100 },
     { id: 2, title: "S", quantity: 100 },
     { id: 3, title: "M", quantity: 150 },
     { id: 4, title: "L", quantity: 120 },

@@ -1,68 +1,61 @@
-"use client";
-import React, { useState } from "react";
-import { Range } from "react-range";
-import styles from "./FilterCriteriaPrice.module.css"; // استيراد الـ CSS Module
+"use client"
+import React, { useState } from 'react';
+import Slider from 'react-slider';
+import './FilterCriteriaPrice.css';
 
-const FilterCriteriaPrice = () => {
-    const [value, setValue] = useState([100, 300]);
+const MIN=0;
+const MAX=10000;
+const PriceSlider = () => {
+    const [values, setValues] = useState([MIN, MAX]);
+    const handleChange = (newValues) => setValues(newValues);
 
     return (
-        <div className="flex flex-col gap-2 w-full h-full max-w-md items-start justify-center">
-            <Range
-                className={styles.slider}
-                values={value}
-                onChange={setValue}
-                step={10}
-                min={0}
-                max={1000}
-                renderTrack={({ props, children }) => (
-                    <div
-                        {...props}
-                        className={`${styles.track}`}
-                        style={{ ...props.style, height: "6px", borderRadius: "4px" }}
-                    >
-                        {children}
-                    </div>
-                )}
-                renderThumb={({ props }) => (
-                    <div
-                        {...props}
-                        className={styles.thumb}
-                        style={{
-                            ...props.style,
-                            width: "16px",
-                            height: "16px",
-                            borderRadius: "50%",
-                            border: "2px solid #fff",
-                        }}
-                    />
-                )}
+        <div style={{ padding: '20px'}}>
+            <Slider
+                className={"slider"}
+                value={values}
+                onChange={handleChange}
+                min={MIN}
+                max={MAX}
             />
+            <div
+            style={{
+                display: 'flex',
+                gap: '10px',
+                width: '100%',
+                marginTop: '15px',
 
-            <div className="flex gap-2">
-                <input
-                    type="text"
-                    value={value[0]}
-                    readOnly
-                    className="border border-gray-400 rounded px-2 py-1 w-24"
-                    style={{ backgroundColor: "#f0f0f0", color: "#0741AD" }}
-                />
-                <span className="text-default-500 font-medium text-small">–</span>
-                <input
-                    type="text"
-                    value={value[1]}
-                    readOnly
-                    className="border border-gray-400 rounded px-2 py-1 w-24"
-                    style={{ backgroundColor: "#f0f0f0", color: "#0741AD" }}
-                />
+            }}
+            >
+                <div>
+                    <label
+                        className={"label-price"}
+                        htmlFor="minPrice">من</label>
+                    <input
+                        disabled={true}
+                        className={"input-price"}
+                        type="text"
+                        id="minPrice"
+                        value={`${values[0]} IQD`}
+                        onChange={(e) => handleChange([+e.target.value, values[1]])}
+                    />
+                </div>
+                <div>
+                    <label
+                        className={"label-price"}
+                        htmlFor="maxPrice">الى</label>
+                    <input
+                        disabled={true}
+                        className={"input-price"}
+                        type="text"
+                        id="maxPrice"
+                        value={`${values[1]} IQD`}
+                        onChange={(e) => handleChange([values[0], +e.target.value])}
+                    />
+                </div>
             </div>
-
-            {/* عرض النطاق المحدد */}
-            <p className="text-default-500 font-medium text-small">
-                Selected budget: {value[0]} – {value[1]}
-            </p>
         </div>
     );
 };
 
-export default FilterCriteriaPrice
+export default PriceSlider;

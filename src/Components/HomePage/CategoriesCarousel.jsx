@@ -76,7 +76,6 @@ const CircleCartCarousel = (props) => {
                                     key={index}
                                     >
 
-
                                 <div className="flex flex-col items-center justify-center focus:outline-none focus-visible:outline-none">
                                     <img
                                         src={slide.image}

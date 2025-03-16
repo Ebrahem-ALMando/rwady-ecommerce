@@ -1,0 +1,21 @@
+.categoryCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.categoryCard img {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: transform 0.3s ease-in-out;
+}
+.categoryCard:hover img {
+    transform: scale(1.05);
+}

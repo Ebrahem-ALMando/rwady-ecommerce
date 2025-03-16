@@ -2,8 +2,8 @@
 import styles from "./FilterSection.module.css";
 import Line from "@/Components/Shared/Line/Line";
 import {useState} from "react";
-import FilterCriteriaOneSelect
-    from "@/Components/Products/FilterSection/FilterCriteriaOneSelect/FilterCriteriaOneSelect";
+import FilterCriteriaSelect
+    from "@/Components/Products/FilterSection/FilterCriteriaSelect/FilterCriteriaSelect";
 
 
 
@@ -35,7 +35,9 @@ const FilterSection=(props)=>{
 
             <div className={styles.content}>
                 {props.children}
-                <p className={styles.showMore}>عرض المزيد</p>
+                {props.isMore ?
+                    <p className={styles.showMore}>عرض المزيد</p>
+                :''}
             </div>
 
 

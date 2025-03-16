@@ -1,0 +1,37 @@
+.container{
+    width: 100%;
+    display: flex;
+    margin: 0.8rem auto -1rem auto;
+    gap: 50px;
+    justify-content: center;
+}
+.imaContainer{
+    width: 45%;
+    display: flex;
+    justify-content: center;
+}
+.detailsContainer{
+    width: 45%;
+    border-radius: 12px;
+    margin-top: 0.2rem ;
+    background-color: #FFFFFF;
+}
+@media (max-width: 800px) {
+    .container{
+        flex-direction: column;
+        align-items: center;
+    }
+    .imaContainer{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    .detailsContainer{
+
+        width: 100%;
+        border-radius: 12px;
+        margin-top: 0.2rem ;
+        background-color: #FFFFFF;
+    }
+
+}

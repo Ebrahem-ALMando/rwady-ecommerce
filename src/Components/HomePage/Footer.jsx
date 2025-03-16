@@ -32,7 +32,7 @@ const Footer = () => {
             <div className={styles.links}>
                 <p>الصفحات</p>
                 <ul>
-                    <Link href={"/about-us"}>
+                    <Link href={"/#"}>
                         <li>من نحن</li>
                     </Link>
                     <li>اتصل بنا</li>

@@ -1,0 +1,139 @@
+
+.container {
+    display: flex;
+    flex-direction: row-reverse;
+    position: relative;
+    padding: 16px;
+    background: #f5f5f5;
+    border-radius: 12px;
+    max-width: 700px;
+    margin: 0;
+    gap: 20px;
+    width: 100% ;
+}
+
+.mainSwiper {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    background: #f5f5f5;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin: 0 !important;
+}
+
+
+/**/
+
+.thumbnailSwiper {
+    width: 120px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    margin-left: -5px;
+}
+
+
+.thumbnailSlide {
+    width: 100%;
+    height: 110px !important;
+    border-radius: 8px;
+    overflow: hidden;
+    opacity: 0.5;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 2px solid transparent;
+    margin-bottom: 5px;
+}
+
+.thumbnailSlide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.thumbnailSlide:hover {
+    opacity: 0.8;
+}
+
+.thumbnailSlide.active {
+    opacity: 1;
+    border-color: #0741AD;
+}
+
+.maximizeButton {
+    position: absolute;
+    bottom: 25px;
+    left: 25px;
+    background: #0741AD;
+    padding: 6px;
+    color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    z-index: 10;
+    transition: transform 0.2s ease;
+}
+
+.maximizeButton:hover {
+    transform: scale(1.1);
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    color: #007bff !important;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 16px;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    font-size: 20px !important;
+}
+.lightbox img{
+    max-height: 70% !important;
+    max-width: 70% !important;
+    width: 500px;
+}
+@media (max-width: 1071px) {
+    .container {
+        flex-direction: column;
+        gap: 15px;
+        padding: 10px;
+        height: max-content;
+    }
+
+    .mainSwiper {
+        width: 100%;
+        aspect-ratio: 1/1;
+        max-height: 500px;
+    }
+
+    .thumbnailSwiper {
+        width:100%;
+        height: auto;
+        flex-direction: row !important;
+        margin-left: 0;
+        gap: 8px;
+    }
+
+    .thumbnailSlide {
+        height: 80px !important;
+        flex: 1;
+    }
+
+    .maximizeButton {
+        left: 20px;
+        bottom: 140px;
+        padding: 5px;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .mainSwiper {
+        max-height: 400px;
+    }
+}

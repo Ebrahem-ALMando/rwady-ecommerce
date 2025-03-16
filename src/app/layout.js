@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import Navbar from "@/Components/Header/Navbar";
+import {color} from "framer-motion";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,20 +24,26 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-      <html >
+      <html  >
       <head>
           <title>RWADY</title>
           <link rel="stylesheet"
                 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+          <style>
+          .mainContainer{
 
+          }
+          </style>
       </head>
+
       <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased rtl`}
 
 
       >
-
-      {children}
+      {/*<div className={"mainContainer"}>*/}
+          {children}
+      {/*</div>*/}
       </body>
       </html>
   );

@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react';
 import Link from 'next/link';
 import Select from 'react-select';
 import styles from './MainNavigation.module.css'
+import DropdownMenu from "@/Components/Header/DropdownMenu/DropdownMenu";
 
 const options = [
     { value: '', label: 'كل المنتجات' },
@@ -13,6 +14,7 @@ const options = [
 
 const MainNavigation = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isOpenDropdown, setIsOpenDropdown] = useState(false);
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -37,6 +39,7 @@ const MainNavigation = () => {
 
     return (
         <div className={styles.mainDiv}>
+
             <div className={styles.contDiv}>
                 {/* زر القائمة المتنقلة */}
                 <button
@@ -123,14 +126,44 @@ const MainNavigation = () => {
                 </div>
 
                 <nav className={`${styles.navItems} ${isMenuOpen ? styles.active : ''}`}>
-                    <Link href="/categories" className={styles.navItem}>الاقسام</Link>
-                    <Link href="/offers" className={styles.navItem}> العروض/ التخفيضات</Link>
-                    <Link href="/brands" className={styles.navItem}>الماركات</Link>
-                    <Link href="/blogs" className={styles.navItem}>المدونات</Link>
-                    <Link href="/best-sellers" className={styles.navItem}>اكثر مبيعا</Link>
-                    <Link href="/featured" className={styles.navItem}>المميزة</Link>
+                    <Link
+                        onMouseEnter={()=>setIsOpenDropdown(true)}
+                        onMouseLeave={() => setIsOpenDropdown(false)}
+                        href="/#" className={styles.navItem}>الاقسام</Link>
+                    <Link
+                        onMouseEnter={()=>setIsOpenDropdown(true)}
+                        onMouseLeave={() => setIsOpenDropdown(false)}
+                        href="/#" className={styles.navItem}> العروض/ التخفيضات</Link>
+                    <Link
+                        onMouseEnter={()=>setIsOpenDropdown(true)}
+                        onMouseLeave={() => setIsOpenDropdown(false)}
+                        href="/#" className={styles.navItem}>الماركات</Link>
+                    <Link
+                        onMouseEnter={()=>setIsOpenDropdown(true)}
+                        onMouseLeave={() => setIsOpenDropdown(false)}
+                        href="/#" className={styles.navItem}>المدونات</Link>
+                    <Link
+                        onMouseEnter={()=>setIsOpenDropdown(true)}
+                        onMouseLeave={() => setIsOpenDropdown(false)}
+                        href="/#" className={styles.navItem}>اكثر مبيعا</Link>
+                    <Link
+                        onMouseEnter={()=>setIsOpenDropdown(true)}
+                        onMouseLeave={() => setIsOpenDropdown(false)}
+                        href="/#" className={styles.navItem}>المميزة</Link>
                 </nav>
+
             </div>
+            {isOpenDropdown ?
+                <div
+                    onMouseLeave={() => setIsOpenDropdown(false)}
+                    onMouseEnter={()=>setIsOpenDropdown(true)}
+                >
+                    <DropdownMenu
+                        isShow={isOpenDropdown}
+                    />
+                </div>
+                : ''
+            }
         </div>
     );
 };

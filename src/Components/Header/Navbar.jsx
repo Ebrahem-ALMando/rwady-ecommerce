@@ -4,6 +4,7 @@ import TitleNav from "@/Components/Header/TitleNav/TitleNav";
 import ToolNav from "@/Components/Header/ToolNav/ToolNav";
 
 import MainNavigation from "@/Components/Header/MainNavigation/MainNavigation";
+import NavWithHoverMenu from "@/Components/Header/NavWithHoverMenu";
 
 const Navbar=()=>{
     return(
@@ -11,6 +12,7 @@ const Navbar=()=>{
             <TitleNav/>
                 <ToolNav/>
                 <MainNavigation/>
+            {/*<NavWithHoverMenu/>*/}
         </div>
     )
 }

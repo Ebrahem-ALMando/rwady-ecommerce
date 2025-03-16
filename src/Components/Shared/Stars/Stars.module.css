@@ -1,0 +1,4 @@
+.starsContainer {
+    display: flex;
+    gap: 3px;
+}

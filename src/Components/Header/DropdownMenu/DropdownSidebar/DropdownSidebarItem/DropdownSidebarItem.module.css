@@ -1,0 +1,15 @@
+.rowItem{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:13px 10px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    border-radius:7px;
+}
+.rowItem:hover{
+    transform: translateY(-2px);
+    background: rgba(229, 235, 248, 0.5) !important;
+}

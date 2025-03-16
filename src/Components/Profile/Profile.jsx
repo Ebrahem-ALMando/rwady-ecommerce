@@ -5,6 +5,7 @@ import Line from "@/Components/Shared/Line/Line";
 import TextSection from "@/Components/Profile/TextSection/TextSection";
 import {useState} from "react";
 import EditProfileForm from "@/Components/Profile/EditProfileForm/EditProfileForm";
+import {Button} from "@heroui/react";
 
 const Profile = (props) => {
     const [isOpen, setIsOpen] = useState(false);

@@ -1,0 +1,53 @@
+.container {
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    z-index: 100;
+    left: 65%;
+    transform: translate(-50%, -50%);
+    top: 60%;
+    opacity: 0;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.container.show {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+}
+
+
+
+.items {
+    width: 90%;
+    height: auto;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.notification {
+    width: 90%;
+    margin-top: 10px;
+    padding-bottom: 30px;
+}
+.notification p{
+
+    color: #0641AD;
+}
+@media (max-width: 1100px) {
+    .container
+    {
+        top: 53.5%;
+        left: 30%;
+    }
+}
+@media (max-width: 770px) {
+    .container
+    {
+        top: 60%;
+        left: 50%;
+        width: 90%;
+    }
+}

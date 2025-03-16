@@ -13,20 +13,28 @@
     gap: 8px;
 }
 
-.checkboxInput {
+.input {
     width: 18px;
     height: 18px;
     accent-color: #0741AD;
     cursor: pointer;
 }
-
+.circle{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
 .inputLabel {
     color: #6A6E83;
     font-size: 17px;
     cursor: pointer;
     transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
-.checkboxInput:checked + .inputLabel {
+.input:checked + .inputLabel {
     color: #0741AD;
 }
 .quantity{

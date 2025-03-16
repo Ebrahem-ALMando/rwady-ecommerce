@@ -7,10 +7,29 @@ import Language from "@/Components/Header/ToolNav/Language/Language";
 import SearchBar from "@/Components/Header/ToolNav/SearchBar/SearchBar";
 import DownloadAppWithLogo from "@/Components/Header/ToolNav/DownloadAppWithLogo/DownloadWithLogo";
 import MainNavigation from "@/Components/Header/MainNavigation/MainNavigation";
+import NotificationModel from "@/Components/Notification/NotificationModel";
+import {useEffect, useRef, useState} from "react";
 
 const ToolNav=()=>{
+    const notificationRef = useRef(null);
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (notificationRef.current && !notificationRef.current.contains(event.target)) {
+                setIsOpen(false);
+            }
+        }
+
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
+    const [isOpen, setIsOpen]=useState(false);
     return(
-        <div className={styles.mainDiv}>
+        <div className={styles.mainDiv}
+            >
            <div className={styles.toolsDiv}>
                <div className={styles.iconDiv}>
                    <TopIcon
@@ -65,7 +84,8 @@ const ToolNav=()=>{
                        }
                    />
                    <TopIcon
-                       link={"./notification"}
+                       setIsOpen={setIsOpen}
+                       // link={"./notification"}
                        count={7}
                        element={
                            <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -89,6 +109,11 @@ const ToolNav=()=>{
                   <SearchBar/>
                   <DownloadAppWithLogo/>
               </div>
+               <div ref={notificationRef} >
+
+               <NotificationModel
+                    isShow={isOpen}/>
+               </div>
 
            </div>
 

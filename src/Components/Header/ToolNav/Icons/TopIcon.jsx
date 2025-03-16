@@ -4,7 +4,13 @@ import styles from './TopIcon.module.css'
 import Link from "next/link";
 const TopIcon=(props)=>{
     return (
+        <Link
+            href={props.link??"#"}
+            style={{height:'50px'}}
+
+        >
         <div className={''} style={
+
             {
                 cursor:'pointer',
                 height:'50px',
@@ -15,13 +21,16 @@ const TopIcon=(props)=>{
                 margin:' 0 0.5rem',
 
             }
-        }>
+        }
+             onClick={()=>props.setIsOpen(true)}
+        >
+
             <div style={{position: 'relative', display: 'inline-block'
 
             }}>
-              <Link href={props.link??"/"}>
+
                   {props.element}
-              </Link>
+
                 {props.count > 0 && (
                     <span style={{
                         position: 'absolute',
@@ -38,7 +47,9 @@ const TopIcon=(props)=>{
         </span>
                 )}
             </div>
+
         </div>
+</Link>
 
     )
 }

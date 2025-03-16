@@ -3,74 +3,89 @@ import FilterSection from "@/Components/Products/FilterSection/FilterSection";
 import Line from "@/Components/Shared/Line/Line";
 import {Brand} from "@/Data/Brand";
 import {categories} from "@/Data/categories";
-import FilterCriteriaOneSelect
-    from "@/Components/Products/FilterSection/FilterCriteriaOneSelect/FilterCriteriaOneSelect";
-import FilterCriteriaMultiSelect
-    from "@/Components/Products/FilterSection/FilterCriteriaMultiSelect/FilterCriteriaMultiSelect";
+import FilterCriteriaSelect
+    from "@/Components/Products/FilterSection/FilterCriteriaSelect/FilterCriteriaSelect";
 import {sizes} from "@/Data/sizes";
-import FilterCriteriaPrice from "@/Components/Products/FilterSection/FilterCriteriaPrice/FilterCriteriaPrice";
 import {colors} from "@/Data/Colors";
 import {favouriteProducts} from "@/Data/Favourite";
 import ProductCardSlider from "@/Components/Shared/ProductCardSlider/ProductCardSlider";
 import React from "react";
+import {ratingList} from "@/Data/Rating";
+import FilterCriteriaPrice from "@/Components/Products/FilterSection/FilterCriteriaPrice/FilterCriteriaPrice";
 const Products=props=>{
+    // const CategoryFilter = () => {
+    //     const [selectedCategory, setSelectedCategory] = useState(null);
+    //
+    //     const handleCategoryChange = (e) => {
+    //         setSelectedCategory(e.target.value); // تحديث الفئة المحددة
+    //     };
     return(
         <div className={styles.container}>
             <div className={styles.filterSidebar}>
                 <FilterSection
+                    isMore
                     title={"الفئة"}
 
                 >
                     {categories?.map((item, index) => (
-                        <FilterCriteriaOneSelect
+                        <FilterCriteriaSelect
                             key={index}
                             id={item.id}
-                            section={"categories"}
+                            section="categories"
                             title={item.title}
                             quantity={item.quantity}
+                            type="radio"
+                            // onChange={handleCategoryChange}
                         />
                     ))}
                 </FilterSection>
-
                 <Line/>
-
                 <FilterSection
+                    isMore
                     title={"الماركة"}
-
                 >
                     {Brand?.map((item, index) => (
-                        <FilterCriteriaOneSelect
+                        <FilterCriteriaSelect
                             key={index}
                             id={item.id}
                             section={"Brand"}
                             title={item.title}
                             quantity={item.quantity}
+                            type="checkbox"
                         />
                     ))}
                 </FilterSection>
                 <Line/>
                 <FilterSection
+                    isMore
                     title={"المقاس"}
-                    section={"Sizes"}
                 >
                     {sizes?.map((item, index) => (
-                        <FilterCriteriaMultiSelect
+                        <FilterCriteriaSelect
                             key={index}
                             id={item.id}
-                            section={props.section}
+                            section={"Sizes"}
                             title={item.title}
                             quantity={item.quantity}
+                            type="checkbox"
                         />
                     ))}
                 </FilterSection>
                 <Line/>
-
                 <FilterSection
+                    title={"السعر"}
+                    section={"price"}
+                >
+                    <FilterCriteriaPrice/>
+                </FilterSection>
+                <Line/>
+                <FilterSection
+                    isMore
                     title={"اللون"}
 
                 >
                     {colors?.map((item, index) => (
-                        <FilterCriteriaOneSelect
+                        <FilterCriteriaSelect
                             key={index}
                             id={item.id}
                             section={"Colors"}
@@ -78,30 +93,34 @@ const Products=props=>{
                             title={item.title}
                             color={item.color}
                             quantity={item.quantity}
+                            type="radio"
 
                         />
                     ))}
                 </FilterSection>
-                <Line/>
-                <FilterSection
-                    title={"التقييم"}
-                >
-                    {colors?.map((item, index) => (
-                        <FilterCriteriaOneSelect
-                            key={index}
-                            id={item.id}
-                            section={"Rating"}
-                            isRating
-                            color={item.color}
-                        />
-                    ))}
-                </FilterSection>
+                {/*<Line/>*/}
                 {/*<FilterSection*/}
-                {/*    title={"المقاس"}*/}
-                {/*    section={"Sizes"}*/}
+
+                {/*    title={"التقييم"}*/}
                 {/*>*/}
-                {/*   <FilterCriteriaPrice/>*/}
+                {/*    {ratingList?.map((item, index) => (*/}
+                {/*        <FilterCriteriaSelect*/}
+                {/*            key={index}*/}
+                {/*            id={item.id}*/}
+                {/*            section={"Rating"}*/}
+                {/*            isRating*/}
+                {/*            title={item.title}*/}
+                {/*            productRating={item.productRating}*/}
+                {/*            quantity={item.quantity}*/}
+                {/*            type="radio"*/}
+                {/*        />*/}
+                {/*    ))}*/}
                 {/*</FilterSection>*/}
+
+                <button className={styles.resetButton}>
+                    إعادة ضبط
+                </button>
+
             </div>
             <div className={styles.products}>
                 <div className={styles.header}>
