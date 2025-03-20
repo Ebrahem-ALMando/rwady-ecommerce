@@ -1,0 +1,30 @@
+.delete {
+    border-radius: 7px;
+    background-color: transparent;
+    border: 2px solid #bec8d9;
+    height: 40px;
+    margin: 0 0 0 0.2rem;
+    width: 85px;
+    color: #6a6e83;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    transition: background-color 0.3s ease-in-out, border 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.delete:hover {
+    background-color: #F551571A;
+    border: 2px solid #F55157;
+    color: #F55157;
+}
+.delete svg {
+    fill: #6a6e83;
+    stroke-width: 0;
+    stroke: none;
+    transition: fill 0.3s ease-in-out, stroke-width 0.3s ease-in-out, stroke 0.3s ease-in-out;
+}
+.delete:hover svg {
+    fill: #F55157;
+    stroke-width: 1px;
+    stroke: #F55157;
+}

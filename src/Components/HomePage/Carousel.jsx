@@ -2,27 +2,28 @@
 import dynamic from "next/dynamic";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import React from "react";
+import React, {useEffect} from "react";
 import styles from "./Carousel.module.css";
+import {ReflectAdapter as axios} from "next/dist/server/web/spec-extension/adapters/reflect";
 const Slider = dynamic(() => import("react-slick"), { ssr: false });
-const slides = [
+const staticSlides = [
     {
         id: 1,
         title: "اكتشف كل ما هو جديد",
         description: ".عـــــــــــــــــــــــروض على جميع المنتجات",
-        image: "/Home/slider1.png",
+        img: "/Home/slider1.png",
     },
     {
         id: 2,
         title: "اكتشف كل ما هو جديد",
         description: ".عـــــــــــــــــــــــروض على جميع المنتجات.",
-        image:"/Home/slider1.png",
+        img:"/Home/slider1.png",
     },
     {
         id: 3,
         title: "عروض لا تفوت",
         description: "!احصل على أفضل العروض اليوم",
-        image: "/Home/slider1.png",
+        img: "/Home/slider1.png",
     },
 ];
 
@@ -59,6 +60,26 @@ const styleAppendDots = {
 };
 
 const Carousel = () => {
+
+    const [slides,setSlides] = React.useState([]);
+    useEffect(() => {
+        setSlides(staticSlides)
+        // const fetchSlides = async () => {
+        //     try {
+        //         const response = await fetch("https://rawady.brainsoftsolutions.com/api/top-sliders");
+        //         if (!response.ok) {
+        //             throw new Error(`HTTP error! Status: ${response.status}`);
+        //         }
+        //         const data = await response.json();
+        //         setSlides(data.data)
+        //         // console.log(slides)
+        //     } catch (error) {
+        //         console.error("خطأ في جلب البيانات:", error);
+        //     }
+        // };
+        //
+        // fetchSlides();
+    }, []);
     const settings = {
         dots: true,
         infinite: true,
@@ -119,7 +140,7 @@ const Carousel = () => {
             <Slider {...settings}>
                 {slides.map((slide) => (
                     <div key={slide.id} className="relative">
-                        <img src={slide.image} alt={slide.title} className="w-full h-96 object-cover rounded-lg"/>
+                        <img src={slide.img} alt={slide.title} className="w-full h-96 object-cover rounded-lg"/>
                         <div
                             className={` absolute inset-0 bg-opacity-50 flex flex-col items-end justify-center text-white text-right p-8 ${styles.text}`}>
                             <h2 className="text-3xl font-bold">{slide.title}</h2>

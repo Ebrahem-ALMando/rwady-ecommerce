@@ -48,6 +48,7 @@ const Orders=props=>{
                 <Line/>
 
                 <Card
+                 visible
                 orderStatus={"تم التسليم"}
                 title={"بريتيجاردن بلوفر كاجوال كبير الحجم بقبة دائرية بدون طوق واكمام طويلة للنساء، بلوزة محبوكة مكتنزة"}
                 brand={"trendyol  ماركة  "}
@@ -55,6 +56,8 @@ const Orders=props=>{
                 />
 
                 <Card
+                    visible
+
                     orderStatus={"تم الالغاء"}
                     isCanceled
                     title={"بريتيجاردن بلوفر كاجوال كبير الحجم بقبة دائرية بدون طوق واكمام طويلة للنساء، بلوزة محبوكة مكتنزة"}
@@ -62,6 +65,8 @@ const Orders=props=>{
 
                 />
                 <Card
+                    visible
+
                     orderStatus={"تم التسليم"}
                     title={"بريتيجاردن بلوفر كاجوال كبير الحجم بقبة دائرية بدون طوق واكمام طويلة للنساء، بلوزة محبوكة مكتنزة"}
                     brand={"trendyol  ماركة  "}
@@ -69,6 +74,8 @@ const Orders=props=>{
                 />
 
                 <Card
+                    visible
+
                     orderStatus={"تم الالغاء"}
                     isCanceled
                     title={"بريتيجاردن بلوفر كاجوال كبير الحجم بقبة دائرية بدون طوق واكمام طويلة للنساء، بلوزة محبوكة مكتنزة"}

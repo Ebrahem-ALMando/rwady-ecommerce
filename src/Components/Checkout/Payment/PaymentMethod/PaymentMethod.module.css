@@ -1,0 +1,38 @@
+.paymentRow{
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    width: 100%;
+    margin: 0.8rem auto;
+}
+.radioInput{
+    width: 18px;
+    height: 18px;
+    accent-color: #0741AD;
+    cursor: pointer;
+}
+/*.radioInput:checked{*/
+/*    background-color: #0741AD;*/
+/*    border: #0741AD;*/
+/*}*/
+.details{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.details div:nth-of-type(1){
+    display: flex;
+    flex-direction: column;
+    gap:2px;
+}
+.details div:nth-of-type(1) h2{
+    font-size: 18px;
+    font-weight: 600;
+    color: #0741AD;
+}
+.details div:nth-of-type(1) p{
+    font-size: 16px;
+    font-weight: 400;
+    color: #6A6E83;
+}

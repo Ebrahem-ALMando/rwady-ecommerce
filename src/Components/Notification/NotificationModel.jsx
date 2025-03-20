@@ -32,7 +32,7 @@ const NotificationModel = (props) => {
                         isAnyDetails={true}
                     />
                     <Line />
-                    <Link href="./notification" className={styles.moreLink}>
+                    <Link href="/notification" className={styles.moreLink}>
                         عرض المزيد
                     </Link>
                 </div>

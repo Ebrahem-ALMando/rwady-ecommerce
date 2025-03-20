@@ -66,7 +66,7 @@ export const profileButtons=[
             )
         ,
         text: "العناوين",
-        link: "#",
+        link: "addresses-list",
     },
     {
         icon:

@@ -1,0 +1,55 @@
+.imageCard{
+    width: 45%;
+    display: flex;
+    gap: 15px;
+    margin: 0.5rem 0.58em;
+
+}
+.imageCard span{
+    position: absolute;
+    background-color: #E2E6ED;
+    padding: 5px;
+    border-radius: 4px;
+    color: #0741AD;
+    font-size: 13px;
+    font-weight: 400;
+    direction: ltr;
+    width: 40px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.image{
+    border: 1px solid #EEEEEE;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    width: 220px;
+    height: 120px;
+
+}
+.details{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.details h2{
+    font-size: 15px;
+    font-weight: 400;
+    color: #F55157;
+}
+.details h1{
+    font-size: 15px;
+    font-weight: 500;
+    color: #0741AD;
+}
+.details p{
+    font-size: 16px;
+    font-weight: 500;
+    color: #0741AD;
+}
+@media (max-width: 1160px) {
+    .imageCard{
+       width: 100%;
+    }
+}

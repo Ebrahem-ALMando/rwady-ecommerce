@@ -4,7 +4,10 @@
     justify-content: space-evenly;
     padding: 20px;
 }
-
+.sidebar {
+    width: 24%;
+    min-width: 300px;
+}
 .transactions {
     background-color: #fff;
     border-radius: 8px;

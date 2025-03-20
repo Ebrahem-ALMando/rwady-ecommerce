@@ -102,20 +102,23 @@ body {
 
 }
 
-/*.mainContainer {*/
-
-/*  min-height: 100vh;       !* تأكد من أن الـ container يغطي كامل ارتفاع الشاشة *!*/
-/*  width: 100%;             !* اجعل العرض 100% بحيث يتم ملء الشاشة بالكامل *!*/
-/*  overflow: hidden;        !* إخفاء أي محتوى يتجاوز الحدود *!*/
-/*  box-sizing: border-box;  !* للتأكد من أن الـ padding والـ margin لا يتجاوزوا حدود العنصر *!*/
-/*  padding: 0 20px;         !* مساحة صغيرة على الجوانب لتجنب الحواف الضيقة *!*/
-/*}*/
-
-/*@media (max-width: 1900px) {*/
+/*@media (min-width: 1537px) {*/
 /*  .mainContainer {*/
-/*    max-width: 1920px;      !* تحديد الحد الأقصى للعرض *!*/
-/*    width: 1000px;*/
-/*    margin: auto; !* الحفاظ على 100% من العرض *!*/
-/*    overflow-x: hidden;     !* إخفاء أي محتوى يتجاوز العرض في الاتجاه الأفقي *!*/
+/*    max-width:100%;*/
+/*    padding-right: 6rem;*/
+/*    padding-left: 6rem;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+
 /*  }*/
+/*  .child{*/
+/*    max-width:1636px;*/
+/*    padding-right: 6rem;*/
+/*    padding-left: 6rem;*/
+
+/*    }*/
+/*  }*/
+/*.child{*/
+/*  width: 100%;*/
+
 /*}*/

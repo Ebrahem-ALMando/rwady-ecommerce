@@ -115,10 +115,9 @@
     text-decoration: none;
 }
 .sidebar {
-    width: 22%;
+    width: 24%;
     min-width: 300px;
 }
-
 .sidebarLink {
     display: block;
     margin-bottom: 10px;

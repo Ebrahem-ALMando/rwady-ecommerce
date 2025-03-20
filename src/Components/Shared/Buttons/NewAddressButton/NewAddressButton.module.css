@@ -1,0 +1,14 @@
+.button{
+    padding: 10px;
+    height: 45px;
+    border-radius: 4px;
+    text-align: center;
+    background-color: #0741AD1A;
+    color: #0741AD;
+    width: 230px;
+    border: 1px solid #0741AD;
+    transition: all 0.3s ease-in-out;
+}
+.button:hover{
+    transform: translateY(-3px);
+}

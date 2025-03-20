@@ -1,0 +1,28 @@
+.edit {
+    border-radius: 7px;
+    background-color: transparent;
+    border: 2px solid #D6D6D6;
+    height: 40px;
+    margin: 0 0 0 0.2rem;
+    width: 85px;
+    color: #666666;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    transition: background-color 0.3s ease-in-out, border 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.edit:hover {
+    background-color: #0741AD1A;
+    border: 2px solid #0641AD;
+    color: #0641AD;
+}
+.edit path {
+    stroke-width: 1px;
+    transition: fill 0.3s ease-in-out, stroke-width 0.3s ease-in-out, stroke 0.3s ease-in-out;
+}
+.edit:hover path {
+    /*fill: #0641AD;*/
+    stroke-width: 1.5px;
+    stroke: #0641AD;
+}

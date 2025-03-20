@@ -14,7 +14,16 @@
 .productCard:hover {
     box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
 }
-
+.productCardState{
+    margin: 0rem auto;
+    border: none;
+    box-shadow: none;
+    width: 100%;
+    padding: 0;
+}
+.productCardState:hover {
+    box-shadow:none;
+}
 .productImg{
     margin: 0 0.5rem;
     width: 21%;
@@ -41,6 +50,10 @@
     align-items: start;
     min-height: 25vh;
     height: auto;
+}
+.productCardState .productItem{
+    width: 100%;
+    margin: 0rem auto;
 }
 .stateRow{
     display: flex;

@@ -1,9 +1,13 @@
+"use client";
 import styles from './TitleNav.module.css';
+import {useState} from "react";
 
 const TitleNav = ({ onClose }) => {
+    const [isVisible, setIsVisible] = useState(true);
+    if (!isVisible) return null;
     return (
         <div className={` ${styles.mainDiv}`}>
-            <button className={styles.closeIcon} onClick={onClose}>
+            <button className={styles.closeIcon} onClick={()=>{setIsVisible(false)}}>
                 <svg
                     width="24"
                     height="24"

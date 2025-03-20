@@ -1,8 +1,8 @@
 import styles from "./Line.module.css";
 import React from "react";
 
-const Line=()=> (
-    <hr className={styles.line}/>
+const Line=(props)=> (
+    <hr className={styles.line} style={props.styles}/>
 )
 export default Line
 

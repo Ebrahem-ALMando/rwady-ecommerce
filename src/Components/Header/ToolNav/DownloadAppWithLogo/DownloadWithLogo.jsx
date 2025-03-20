@@ -6,7 +6,7 @@ const DownloadAppWithLogo = () => {
     return (
         <div className={styles.mainDiv}>
             <div className={styles.logoContainer}>
-            <Link href='./'>
+            <Link href='/'>
                 <Image
                     src="/logo.png"
                     alt="Logo"

@@ -40,7 +40,7 @@ const ToolNav=()=>{
                 <div className={styles.toolsDiv}>
                     <div className={styles.iconDiv}>
                         <TopIcon
-                            link={"./profile"}
+                            link={"/profile"}
                             isSelect={true}
                             element={
                                 <svg width="24" height="25" viewBox="0 0 24 25" fill="none"
@@ -57,7 +57,7 @@ const ToolNav=()=>{
                         />
                         <TopIcon
 
-                            link={"./favourite"}
+                            link={"/favourite"}
                             count={5}
                             element={
                                 <svg width="24" height="25" viewBox="0 0 24 25" fill="none"
@@ -71,7 +71,7 @@ const ToolNav=()=>{
                             // element={   <MdFavoriteBorder  size={24} />}
                         />
                         <TopIcon
-                            link={"./shopping-cart"}
+                            link={"/shopping-cart"}
                             count={6}
                             element={
                                 <svg width="24" height="25" viewBox="0 0 24 25" fill="none"

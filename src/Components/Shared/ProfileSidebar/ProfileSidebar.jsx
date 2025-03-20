@@ -5,10 +5,13 @@ import {profileButtons} from "@/Data/ProfileButton";
 import ButtonTap from "@/Components/Shared/ProfileSidebar/ButtonTap/ButtonTap";
 import HeaderProfileSidebar from "@/Components/Shared/ProfileSidebar/Header/HeaderProfileSidebar";
 import Line from "@/Components/Shared/Line/Line";
+import {useEffect} from "react";
 const ProfileSidebar = (props) => {
     const pathname = usePathname()
-    const activeLink = pathname.split('/').pop()
-
+    const activeLink = pathname.split('/')[1];
+    useEffect(()=>{
+        console.log(activeLink)
+    },[activeLink])
     return(
         <div className={styles.profileSidebar}>
             <HeaderProfileSidebar/>

@@ -13,10 +13,10 @@ const Profile = (props) => {
     return (
         <div className={styles.container}>
 
-                <EditProfileForm
-                isOpen={isOpen}
-                setIsOpen={setIsOpen}
-                />
+            <EditProfileForm
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+            />
 
             <div className={styles.sidebar}>
                 <ProfileSidebar/>

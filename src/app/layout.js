@@ -42,8 +42,11 @@ export default function RootLayout({ children }) {
 
       >
       {/*<div className={"mainContainer"}>*/}
-          {children}
+      {/*    <div className={"child"}>*/}
+      {/*    </div>*/}
       {/*</div>*/}
+              {children}
+
       </body>
       </html>
   );
