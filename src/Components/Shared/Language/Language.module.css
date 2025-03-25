@@ -1,5 +1,5 @@
 .languageDiv {
-    margin-right: 1rem;
+    /*margin-right: 1rem;*/
     width: 130px;
     background-color: #eeeff2;
     height: 53px;
@@ -22,17 +22,24 @@
     color: black;
     cursor: pointer;
 }
-@media (max-width: 800px) {
-    .languageDiv{
-        min-width: 150px;
-        margin-right: 0.3rem;
-    }
-    @media (max-width: 470px){
-        .languageDiv
-        {
-            min-width: 80px;
-            z-index: 100;
-        }
+
+@media (max-width: 768px)
+{
+    .hideMobile{
+        display: none;
     }
 }
+/*@media (max-width: 800px) {*/
+/*    .languageDiv{*/
+/*        min-width: 150px;*/
+/*        margin-right: 0.3rem;*/
+/*    }*/
+/*    @media (max-width: 470px){*/
+/*        .languageDiv*/
+/*        {*/
+/*            min-width: 80px;*/
+/*            z-index: 100;*/
+/*        }*/
+/*    }*/
+/*}*/
 

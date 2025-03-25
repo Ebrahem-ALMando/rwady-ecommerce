@@ -2,7 +2,7 @@
 import styles from './Language.module.css'
 import React, { useState } from 'react';
 
-function Language() {
+function Language({hideMobile}) {
     const [isSelected, setIsSelected] = useState(0);
 
     const toggleLanguage = (val) => {
@@ -12,7 +12,7 @@ function Language() {
     return (
         <div
 
-            className={styles.languageDiv}
+            className={`${styles.languageDiv} ${hideMobile?styles.hideMobile:''}`}
         >
             <div
                 onClick={

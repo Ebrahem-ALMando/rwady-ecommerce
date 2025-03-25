@@ -11,12 +11,22 @@ import {Brands,category} from "@/Data/data";
 import Footer from "@/Components/HomePage/Footer";
 import Navbar from "@/Components/Header/Navbar";
 import ScrollToTop from "@/Components/ScrollToTop";
-export default function Home() {
+import FloatingDownloadButton from "@/Components/FloatingDownloadButton/FloatingDownloadButton";
+import {getCategories} from "@/api/services/listCategories";
+
+export default async function Home() {
+    // fetch('https://rawady.brainsoftsolutions.com/api/categories')
+    //     .then(res => res.json())  // تحويل الاستجابة إلى JSON
+    //     .then(data => console.log(data))  // التعامل مع البيانات المحوّلة
+    //     .catch(error => console.error('حدث خطأ:', error));  // التعامل مع الأخطاء
+
   return (
     <>
           <ScrollToTop />
           <Navbar/>
-        <Carousel/>
+        <Carousel
+
+        />
         <TitleSection title="الاقسام" />
         <CircleCartCarousel
             data={category}
@@ -41,6 +51,7 @@ export default function Home() {
            bgColor={"#0741ad"}
         />
         <Footer/>
+
     </>
   );
 }

@@ -1,10 +1,11 @@
 "use client";
+import useSWR from "swr";
 import dynamic from "next/dynamic";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import React, {useEffect} from "react";
 import styles from "./Carousel.module.css";
-import {ReflectAdapter as axios} from "next/dist/server/web/spec-extension/adapters/reflect";
+import {getTopSlider} from "@/api/services/topSlider";
+import {useEffect} from "react";
 const Slider = dynamic(() => import("react-slick"), { ssr: false });
 const staticSlides = [
     {
@@ -61,25 +62,10 @@ const styleAppendDots = {
 
 const Carousel = () => {
 
-    const [slides,setSlides] = React.useState([]);
-    useEffect(() => {
-        setSlides(staticSlides)
-        // const fetchSlides = async () => {
-        //     try {
-        //         const response = await fetch("https://rawady.brainsoftsolutions.com/api/top-sliders");
-        //         if (!response.ok) {
-        //             throw new Error(`HTTP error! Status: ${response.status}`);
-        //         }
-        //         const data = await response.json();
-        //         setSlides(data.data)
-        //         // console.log(slides)
-        //     } catch (error) {
-        //         console.error("خطأ في جلب البيانات:", error);
-        //     }
-        // };
-        //
-        // fetchSlides();
-    }, []);
+    // const {data:slider,error,isLoading}=useSWR("topSlider",getTopSlider)
+    //
+    // if (isLoading) return <p>جارٍ التحميل...</p>;
+    // if (error) return <p>حدث خطأ أثناء تحميل البيانات</p>;
     const settings = {
         dots: true,
         infinite: true,
@@ -130,17 +116,12 @@ const Carousel = () => {
     };
 
     return (
-        <div style={
-            {
-                width: '88%',
-                height: '50vh',
-
-            }
-        } className=" mx-auto mt-4 rtl">
+        <div
+         className={`${styles.container}  mx-auto mt-4 rtl`}>
             <Slider {...settings}>
-                {slides.map((slide) => (
+                {staticSlides?.map((slide) => (
                     <div key={slide.id} className="relative">
-                        <img src={slide.img} alt={slide.title} className="w-full h-96 object-cover rounded-lg"/>
+                        <img src={slide.img} alt={slide.title} className="w-full min-h-96 object-cover rounded-lg"/>
                         <div
                             className={` absolute inset-0 bg-opacity-50 flex flex-col items-end justify-center text-white text-right p-8 ${styles.text}`}>
                             <h2 className="text-3xl font-bold">{slide.title}</h2>

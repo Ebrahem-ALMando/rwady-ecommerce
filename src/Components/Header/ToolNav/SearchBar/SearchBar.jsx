@@ -1,8 +1,8 @@
 import styles from './SearchBar.module.css';
 import {CiSearch} from "react-icons/ci";
-const SearchBar =()=>{
+const SearchBar =(props)=>{
     return(
-        <div className={styles.mainDiv}>
+        <div className={`${styles.mainDiv} ${props.isScrolled?styles.scrolled:''}`}>
                <span
                    className={styles.SearchIcon}
                >

@@ -126,7 +126,7 @@ const ProductSlider = () => {
 
 
     return (
-        <div style={{ margin: 'auto auto 3rem auto', width: '95%' }}>
+        <div style={{ margin: 'auto auto 2rem auto', width: '95%' }}>
             <Slider {...settings}>
                 {products.map((slide, index) => (
                     <ProductCardSlider key={index} product={slide} />

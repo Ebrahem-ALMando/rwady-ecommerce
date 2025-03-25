@@ -1,3 +1,7 @@
+.container{
+    width: 83%;
+}
+
 .arrow {
     background-color: #FFFFFF29;
     padding: 20px 15px;
@@ -5,7 +9,7 @@
     transition: all 0.3s;
 }
 .prevArrow {
-    left: 60px;
+    left: 30px;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -15,7 +19,7 @@
 }
 
 .nextArrow {
-    right: 60px;
+    right: 30px;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -74,6 +78,9 @@
 
 }
 @media screen and (max-width: 650px) {
+    .container{
+        width: 93%;
+    }
     .text{
         margin-right: 20px;
     }

@@ -1,13 +1,20 @@
 "use client";
 import dynamic from "next/dynamic";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import CustomArrows from "@/Components/HomePage/CustomArrow";
+import useSWR from "swr";
+import {getCategories} from "@/api/services/listCategories";
 const Slider = dynamic(() => import("react-slick"), {ssr: false});
 const CircleCartCarousel = (props) => {
     const [activeArrow, setActiveArrow] = useState(null);
+    const {data:categories,error,isLoading} = useSWR("categoriesHome",getCategories);
+    if(error)return <p>حدث خطأ</p>
+    if(isLoading)return <p>جاري التحميل</p>
+
     const handleArrowClick = (type) => {
         setActiveArrow(type);
     };
+
     const settings = {
         dots: false,
         infinite: true,
@@ -58,27 +65,27 @@ const CircleCartCarousel = (props) => {
 
     return (
         <div
-
             style={{
                 margin: 'auto auto 2rem auto',
                 width: '95%',
                 height: 'auto',
                 background: props.bgColor,
                 borderRadius: props.borderRadius,
-                padding: props.isCategory ? 0 : '4rem 1rem 4rem 1rem'
+                padding: props.isCategory ? 0 : '2rem  1rem'
 
 
             }}>
             <Slider {...settings}>
-
+                {/*{categories?.map((slide,index) => (*/}
                     {props.data.map((slide,index) => (
-                                <div
+
+                <div
                                     key={index}
                                     >
 
                                 <div className="flex flex-col items-center justify-center focus:outline-none focus-visible:outline-none">
                                     <img
-                                        src={slide.image}
+                                        src={slide.logo}
                                         alt={slide.title}
                                         className="w-64 h-64 object-cover rounded-full border-4 border-transparent hover:border-blue-600"
                                     />

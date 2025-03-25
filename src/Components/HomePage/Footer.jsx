@@ -6,6 +6,7 @@ import {RiTwitterXLine} from "react-icons/ri";
 import {HiOutlineMail} from "react-icons/hi";
 import {MdOutlinePhoneInTalk} from "react-icons/md";
 import Link from "next/link";
+import FloatingDownloadButton from "@/Components/FloatingDownloadButton/FloatingDownloadButton";
 const Footer = () => {
     return (
         <footer className={styles.footer}>
@@ -253,6 +254,7 @@ const Footer = () => {
                     جميع الحقوق محفوظة ل RWADY
                 </p>
             </div>
+            <FloatingDownloadButton/>
         </footer>
     );
 };

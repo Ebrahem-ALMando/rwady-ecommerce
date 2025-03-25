@@ -1,10 +1,10 @@
 .titleSection {
     padding: 20px 50px;
     display: flex;
-    justify-content: space-between; /* يجعل العناصر متباعدة ولكن ليست على الأطراف */
+    justify-content: space-between;
     align-items: center;
-    width: 90%; /* تقليل عرض القسم حتى لا يمتد على كامل الصفحة */
-    margin: 4rem auto 2rem;
+    width: 90%;
+    margin: 2rem auto;
 }
 
 .title {

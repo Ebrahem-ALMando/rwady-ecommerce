@@ -73,10 +73,7 @@
     align-items: center;
 
 }
-.downloadButtons button {
 
-
-}
 
 .footerBottom {
     width: 100%;
@@ -118,5 +115,49 @@
     .downloadButtons{
        margin: auto;
 
+    }
+}
+@media screen and (max-width: 390px)
+{
+    .downloadButtons{
+     flex-direction: column;
+
+    }
+}
+@media screen and (max-width: 350px) {
+    .downloadSection {
+        flex-direction: column;
+        max-width: 90%;
+        width: 90%;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+    }
+
+    .downloadSection > * {
+        max-width: 100%;
+        width: 100%;
+        overflow: hidden;
+        box-sizing: border-box;
+    }
+
+    .description {
+        max-width: 100%;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        overflow: hidden;
+        text-align: center;
+    }
+
+    .logo {
+        width: 30%;
+        max-width: 150px;
+        margin-bottom: 3rem;
+        overflow: hidden;
+    }
+
+
+    html, body {
+        overflow-x: hidden;
     }
 }

@@ -1,35 +1,33 @@
 .mainDiv {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
-    height: 10vh;
+    height: 55px;
     background-color: #0741ad;
-    padding: 0 20px;
-    flex-wrap: wrap;
-}
+    padding: 0 10px;
 
+}
 .centerContent {
     display: flex;
-    align-items:center;
+    justify-content: center;
+    margin-right: 10%;
     gap: 10px;
-    margin: auto;
+    flex: 1;
 }
-
 .title {
     color: white;
     font-size: 1.25rem;
     margin: 0;
 }
-
 .startShopBTN {
     background-color: white;
     color: #0741ad;
     padding: 0 20px;
-    height: 6vh;
+    height: 45px;
     border-radius: 5px;
     cursor: pointer;
     position: relative;
-
+    margin-left: 8.6%;
 }
 .closeIcon {
     background: none;
@@ -58,21 +56,6 @@
 }
 @media (max-width: 768px) {
     .mainDiv {
-
-        flex-direction: column;
-        height: auto;
-        padding: 10px;
-    }
-
-    .centerContent {
-        margin: 10px 0;
-    }
-
-    .startShopBTN {
-        width: 100%;
-        text-align: center;
-    }
-    .closeIcon{
         display: none;
     }
 }

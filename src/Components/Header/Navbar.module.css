@@ -1,5 +1,5 @@
-.navItems{
-
-    height: 38vh;
-    background-color: white;
+.navbarContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }

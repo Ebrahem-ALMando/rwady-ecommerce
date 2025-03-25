@@ -1,56 +1,24 @@
-
 import React from "react";
-import styles from './TopIcon.module.css'
+import styles from "./TopIcon.module.css";
 import Link from "next/link";
-const TopIcon=(props)=>{
+
+const TopIcon = ({ link = "#", isSelect, setIsOpen, element, count = 0, isSearch, isDownload, showMobile }) => {
     return (
-        <Link
-            href={props.link??"#"}
-            style={{height:'50px'}}
-
-        >
-        <div className={''} style={
-
-            {
-                cursor:'pointer',
-                height:'50px',
-                borderRadius:'12px',
-                width:'50px',
-                backgroundColor: props.isSelect ? '#0741ad' : '#eeeff2',
-                padding:'13px',
-                margin:' 0 0.5rem',
-
-            }
-        }
-             onClick={()=>props.setIsOpen(prev=>!prev)}
-        >
-
-            <div style={{position: 'relative', display: 'inline-block'
-
-            }}>
-
-                  {props.element}
-
-                {props.count > 0 && (
-                    <span style={{
-                        position: 'absolute',
-                        top: '-12px',
-                        right: '-25px',
-                        backgroundColor: '#0741ad',
-                        color: 'white',
-                        borderRadius: '60%',
-                        padding: '3px 9px',
-                        fontSize: '13px',
-                        fontWeight:'bold'
-                    }}>
-          {props.count}
-        </span>
-                )}
+        <Link href={link} className={`${styles.link} ${showMobile ? styles.showMobile : ""}`}>
+            <div
+                className={`${styles.topIcon} 
+                ${isSelect ? styles.selected : ""} 
+                ${showMobile ? styles.showMobile : ""} 
+                ${isSearch ? styles.search : ""}`}
+                onClick={setIsOpen ? () => setIsOpen(prev => !prev) : undefined}
+            >
+                <div className={`${styles.iconWrapper} ${isDownload ? styles.download : ""}`}>
+                    {element}
+                    {Number(count) > 0 && <span className={styles.badge}>{count}</span>}
+                </div>
             </div>
+        </Link>
+    );
+};
 
-        </div>
-</Link>
-
-    )
-}
-export default TopIcon
+export default TopIcon;
