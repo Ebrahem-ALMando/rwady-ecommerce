@@ -75,6 +75,7 @@
     background-color: rgba(0, 0, 0, 0.42);
     position: absolute;
     z-index: 5;
+    max-width: 1523px;
 }
 .videoContainer {
     position: relative;

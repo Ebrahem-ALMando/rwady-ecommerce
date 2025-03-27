@@ -1,0 +1,41 @@
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    gap: 1rem;
+    padding: 1rem;
+    text-align: center;
+}
+
+.icon {
+    font-size: 3rem;
+    color: #ef4444;
+}
+
+.title {
+    color: #ef4444;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.message {
+    color: #6b7280;
+    font-size: 1rem;
+}
+
+.button {
+    background-color: #ef4444;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.button:hover {
+    background-color: #dc2626;
+}

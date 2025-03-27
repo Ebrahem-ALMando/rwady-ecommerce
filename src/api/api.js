@@ -1,17 +1,13 @@
 import axios from "axios";
-const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
-let testUrl='https://masbar-backend.ahmed-albakor.com/api/'
+import ApiConfig from "@/api/apiConfig";
+const baseUrl = ApiConfig.API_BASE_URL;
 
 const api = axios.create({
-    baseURL: baseUrl,
+    baseURL:baseUrl,
     headers: { "Content-Type": "application/json" },
     timeout: 10000,
 });
-const apiTest = axios.create({
-    baseURL: testUrl,
-    headers: { "Content-Type": "application/json" },
-    timeout: 10000,
-});
+
 const fetchAPI = async (endpoint, method = "GET", data = null, options = {}) => {
     try {
         const response = await api({

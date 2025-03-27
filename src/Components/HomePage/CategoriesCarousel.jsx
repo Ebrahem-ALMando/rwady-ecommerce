@@ -2,18 +2,26 @@
 import dynamic from "next/dynamic";
 import React, {useEffect, useState} from "react";
 import CustomArrows from "@/Components/HomePage/CustomArrow";
-import useSWR from "swr";
+import useSWR, {mutate} from "swr";
 import {getCategories} from "@/api/services/listCategories";
+
+import Loading from "@/Components/Shared/Loading/Loading";
+import Error from "@/Components/Shared/Error/Error";
 const Slider = dynamic(() => import("react-slick"), {ssr: false});
 const CircleCartCarousel = (props) => {
     const [activeArrow, setActiveArrow] = useState(null);
-    const {data:categories,error,isLoading} = useSWR("categoriesHome",getCategories);
-    if(error)return <p>حدث خطأ</p>
-    if(isLoading)return <p>جاري التحميل</p>
+    const {data:categories,error,isLoading, mutate} = useSWR("categoriesHome",getCategories);
+    if (error) return <Error
+        onRetry={() => mutate(undefined, { revalidate: true })}
+    />
+    if(isLoading)return <Loading/>
+    const categoriesData = categories?.data || [];
 
     const handleArrowClick = (type) => {
         setActiveArrow(type);
     };
+
+
 
     const settings = {
         dots: false,
@@ -77,7 +85,7 @@ const CircleCartCarousel = (props) => {
             }}>
             <Slider {...settings}>
                 {/*{categories?.map((slide,index) => (*/}
-                    {props.data.map((slide,index) => (
+                    {categoriesData.map((slide,index) => (
 
                 <div
                                     key={index}

@@ -41,11 +41,12 @@ export default function RootLayout({ children }) {
 
 
       >
-      {/*<div className={"mainContainer"}>*/}
-      {/*    <div className={"child"}>*/}
-      {/*    </div>*/}
-      {/*</div>*/}
+      <div className={"mainContainer"}>
+          <div className={"child"}>
               {children}
+          </div>
+      </div>
+
 
       </body>
       </html>
