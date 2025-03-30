@@ -1,19 +1,22 @@
 "use client";
 import dynamic from "next/dynamic";
-import {useState} from "react";
+import { useState, useEffect } from "react";
 import CustomArrows from "@/Components/Shared/CustomArrow/CustomArrow";
-import {sliderSettings} from "@/Components/Shared/SliderComponents/CircleCartCarousel/sliderSettings";
+import { sliderSettings } from "@/Components/Shared/SliderComponents/CircleCartCarousel/sliderSettings";
 import Loading from "@/Components/Shared/Loading/Loading";
 import Error from "@/Components/Shared/Error/Error";
 import useSWR from "swr";
 
+const Slider = dynamic(() => import("react-slick"), { ssr: false });
 
-const Slider = dynamic(() => import("react-slick"), {ssr: false});
 const CircleCartCarousel = (props) => {
     const [activeArrow, setActiveArrow] = useState(null);
+    const [isDataFresh, setIsDataFresh] = useState(false); // للتحقق مما إذا كانت البيانات محدثة
+
     const handleArrowClick = (type) => {
         setActiveArrow(type);
     };
+
     const settings = {
         ...sliderSettings,
         prevArrow: <CustomArrows
@@ -22,11 +25,12 @@ const CircleCartCarousel = (props) => {
             onArrowClick={handleArrowClick}
         />,
         nextArrow: <CustomArrows
-            type={"next"}
+            type="next"
             activeArrow={activeArrow}
             onArrowClick={handleArrowClick}
         />,
     };
+
     const { data, error, isLoading, mutate } = useSWR(
         props.keyData,
         props.getData,
@@ -35,22 +39,35 @@ const CircleCartCarousel = (props) => {
             revalidateOnMount: false,
         }
     );
+
     const hasError = error || (!data?.data?.length && props.initialError);
 
+
     if (isLoading) return <Loading />;
-    if (hasError)
+
+
+    if (hasError) {
         return (
             <Error
-                onRetry={() =>
-                    mutate(undefined, {
-                        revalidate: true,
-                    })
-                }
+                onRetry={() => {
+                    mutate(undefined, { revalidate: true });
+                }}
             />
         );
+    }
+
+
+    useEffect(() => {
+        if (!isDataFresh) {
+            mutate(props.getData, { revalidate: true });
+            setIsDataFresh(true);
+        }
+    }, [isDataFresh, mutate, props.getData]);
+
 
     const Data = data?.data || [];
-    const dataList=   props.data?   props.data:Data
+    const dataList = props.data ? props.data : Data;
+
     return (
         <div
             style={{
@@ -60,14 +77,10 @@ const CircleCartCarousel = (props) => {
                 background: props.bgColor,
                 borderRadius: props.borderRadius,
                 padding: props.isCategory ? 0 : '2rem  1rem'
-
             }}>
             <Slider {...settings}>
-
-                {dataList.map((slide,index) => (
-                    <div
-                        key={index}
-                    >
+                {dataList.map((slide, index) => (
+                    <div key={index}>
                         <div className="flex flex-col items-center justify-center focus:outline-none focus-visible:outline-none">
                             <img
                                 loading={"lazy"}
