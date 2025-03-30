@@ -1,7 +1,8 @@
 import styles from './PaymentMethod.module.css'
 import {CashIcon, CreditCardIcon} from "@/utils/Icons";
+import Image from "next/image";
 
-const PaymentMethod=props=>{
+const PaymentMethod=({item})=>{
     return(
         <div className={styles.paymentRow}>
             <input
@@ -10,22 +11,28 @@ const PaymentMethod=props=>{
             value={""}//
             className={styles.radioInput}
             // checked={props.isChecked}
-             id={props.id}
+             id={item.id}
             />
 
             <div className={styles.details}>
-                <label htmlFor={props.id} className={"cursor-pointer"}>
+                <label htmlFor={item.id} className={"cursor-pointer"}>
                     <div>
                         <h2>
-                            {props.name}
+                            {item.name}
                         </h2>
                         <p>
-                            {props.description}
+                            {item.description??"تتوفر خدمة الدفع بالأقساط الشهرية"}
                         </p>
                     </div>
                 </label>
                 <div>
-                    {props.icon}
+                    <Image
+                        src={item.ImageFullPath||"/img_1.png"}
+                        alt={item.name}
+                        width={30}
+                        height={30}
+                    />
+                    {/*{props.icon}*/}
                 </div>
 
             </div>

@@ -1,8 +1,57 @@
+// "use server"
 import styles from "./OrderSummary.module.css";
 import RowTextWithNumber from "@/Components/ShoppingCartAndPayment/ShoppingCart/RowTextWithNumber";
 import React from "react";
 
+import axios from "axios";
+import {data} from "framer-motion/m";
+
 const OrderSummary=props=>{
+    // const testPostRequest = async () => {
+    //     try {
+    //         const response = await fetch("https://rawady.brainsoftsolutions.com/api/checkcoupon", {
+    //             method: "POST",
+    //             headers: {
+    //                 "Content-Type": "application/json"
+    //             },
+    //             body: JSON.stringify({ code: "rrf" })
+    //         });
+    //
+    //         const data = await response.json();
+    //         console.log("Response:", data);
+    //     } catch (error) {
+    //         console.error("Error:", error);
+    //     }
+    // };
+    //
+    // const test = async () => {
+    //     const formData = new FormData();
+    //     formData.append("nameCategoryData", "صنف جديد");
+    //     formData.append("descriptionCategoryData", "test");
+    //    await  axios
+    //         .post("https://dentalcareteam.org/Creativity-Platform/api/store/category/data", formData)
+    //         .then((response) => {
+    //             console.log("Response:", response.data);
+    //         })
+    //         .catch((error) => {
+    //             console.error("Error:", error);
+    //         });
+    // };
+    // const handleCouponCheck = async () => {
+    //     const couponCode = "rrf";
+    //
+    //     try {
+    //         const result = await checkCoupon(couponCode);
+    //
+    //         if (result?.isValid) {
+    //             console.log("✅ الكوبون صالح، الخصم:", result.discount);
+    //         } else {
+    //             console.log("❌ الكوبون غير صالح");
+    //         }
+    //     } catch (error) {
+    //         console.error("خطأ في التحقق من الكوبون:", error.message);
+    //     }
+    // };
     return (
         <div
             style={props.style}
@@ -52,7 +101,9 @@ const OrderSummary=props=>{
                         d="M13.775 7.10859C14.019 6.86451 14.019 6.46878 13.775 6.2247C13.5309 5.98063 13.1351 5.98063 12.8911 6.2247L6.2244 12.8914C5.98032 13.1354 5.98032 13.5312 6.2244 13.7753C6.46848 14.0193 6.8642 14.0193 7.10828 13.7753L13.775 7.10859Z"
                         fill="#F55157"/>
                 </svg>
-                <button className={styles.buttonInput}>إضافة</button>
+                <button className={styles.buttonInput}
+                // onClick={handleCouponCheck}
+                >إضافة</button>
             </div>
 
             <RowTextWithNumber

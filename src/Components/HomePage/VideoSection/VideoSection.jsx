@@ -2,6 +2,11 @@
 import styles from './VideoSection.module.css';
 import React, { useState } from 'react';
 import ReactPlayer from 'react-player';
+import useSWR from "swr";
+import Loading from "@/Components/Shared/Loading/Loading";
+import Error from "@/Components/Shared/Error/Error";
+import {getSettings} from "@/api/services/settings";
+import ApiConfig from "@/api/apiConfig";
 
 const VideoSection=(props)=>{
 
@@ -16,6 +21,34 @@ const VideoSection=(props)=>{
             setIsModalOpen(false);
         };
 
+    const { data, error, isLoading, mutate } = useSWR(
+        "VideoSection",
+         getSettings,
+
+    );
+    const hasError = error;
+
+    if (isLoading) return <Loading />;
+    if (hasError)
+        return (
+            <Error
+                onRetry={() =>
+                    mutate(undefined, {
+                        revalidate: true,
+                    })
+                }
+            />
+        );
+
+    const Data = data?.data.settings || {};
+    let promo_video_url=null
+    let poster_video_url=null
+
+    if(Data.id){
+        poster_video_url =`${ApiConfig.IMAGE_BASE_URL}${Data.poster_video_url}`
+        promo_video_url =`${ApiConfig.IMAGE_BASE_URL}${Data.promo_video_url}`
+    }
+
         return (
             <div className={styles.container}>
 
@@ -23,16 +56,6 @@ const VideoSection=(props)=>{
 
                         <div className={styles.overlay}></div>
                 <div className={styles.videoContainer}>
-                    {/*<ReactPlayer*/}
-                    {/*    url="/images/VideoCover.jpeg"*/}
-                    {/*    type="img/jpeg"*/}
-                    {/*    width="100%"*/}
-                    {/*    height="60vh"*/}
-                    {/*    playing={false}*/}
-                    {/*    controls={false}*/}
-                    {/*    loop={true}*/}
-                    {/*    muted={true}*/}
-                    {/*/>*/}
                     <div style={{position: "relative", width: "100%", height: "60vh"}}>
                         {!isPlaying ? (
                             <div
@@ -43,13 +66,13 @@ const VideoSection=(props)=>{
                                     width: "100%",
                                     height: "100%",
                                     cursor: "pointer",
-                                    background: `url('/images/VideoCover.jpeg') center/cover no-repeat`,
+                                    background: `url(${poster_video_url}) center/cover no-repeat`,
                                 }}
                                 onClick={() => setIsPlaying(true)}
                             />
                         ) : (
                             <ReactPlayer
-                                url="/videos/sample.mp4"
+                                url={promo_video_url}
                                 width="100%"
                                 height="100%"
                                 playing={true}
@@ -79,9 +102,7 @@ const VideoSection=(props)=>{
                                 &times;
                             </button>
                             <ReactPlayer
-                                // url="./Paralax.m4v"  // استبدل برابط الفيديو الخاص بك
-
-                                url={"https://youtu.be/lxRAj1Gijic?si=QxYq9OktXyOoKant"}
+                                url={promo_video_url}
                                 width="100%"
                                 height="80vh"
                                 controls={true}
@@ -94,15 +115,6 @@ const VideoSection=(props)=>{
         );
 
 
-//     return(
-// /*<video id="vidioB" className={` ${styles.vidioBody}   `}
-//
-//        autoPlay={true} loop={true} muted>
-//     <source src={props.src} type="video/mp4" />
-// </video>*/
-//         // <img src="/bigzone4.jpg" alt="وصف الصورة" className={styles.vidioBody}/>
-//         //
-//
-//         )
+
 }
 export default VideoSection

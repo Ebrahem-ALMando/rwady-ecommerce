@@ -25,9 +25,9 @@ const settings = {
 const ProductCardSlider = (props) => {
     return (
 
-            <div
-                className="p-2 ">
-                <Link href={"/product-details"}>
+        <div
+            className="p-2 ">
+            <Link href={"/product-details"}>
                 <div
                     className={styles.card}
                 >
@@ -161,8 +161,8 @@ const ProductCardSlider = (props) => {
                         </div>
                     </div>
                 </div>
-                </Link>
-            </div>
+            </Link>
+        </div>
 
     );
 };

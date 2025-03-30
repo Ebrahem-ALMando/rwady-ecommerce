@@ -8,10 +8,17 @@ import FilterCriteriaSelect
 import {sizes} from "@/Data/sizes";
 import {colors} from "@/Data/Colors";
 import {favouriteProducts} from "@/Data/Favourite";
-import ProductCardSlider from "@/Components/Shared/ProductCardSlider/ProductCardSlider";
-import React from "react";
+import ProductCardSlider from "@/Components/Shared/SliderComponents/ProductCardSlider/ProductCardSlider";
+import React, {Suspense} from "react";
 import {ratingList} from "@/Data/Rating";
 import FilterCriteriaPrice from "@/Components/Products/FilterSection/FilterCriteriaPrice/FilterCriteriaPrice";
+import Error from "@/Components/Shared/Error/Error";
+import {getSizes} from "@/api/services/sizes";
+import Loading from "@/Components/Shared/Loading/Loading";
+import {FooterData} from "@/Components/Footer/Footer";
+import {SizesData} from "@/Components/Products/FilterSectionData/SizesData";
+import {ColorsData} from "@/Components/Products/FilterSectionData/ColorsData";
+import {getColors} from "@/api/services/colors";
 const Products=props=>{
     // const CategoryFilter = () => {
     //     const [selectedCategory, setSelectedCategory] = useState(null);
@@ -19,6 +26,9 @@ const Products=props=>{
     //     const handleCategoryChange = (e) => {
     //         setSelectedCategory(e.target.value); // تحديث الفئة المحددة
     //     };
+    const dataPromiseSize=getSizes()
+    const dataPromiseColor=getColors()
+
     return(
         <div className={styles.container}>
             <div className={styles.filterSidebar}>
@@ -56,21 +66,11 @@ const Products=props=>{
                     ))}
                 </FilterSection>
                 <Line/>
-                <FilterSection
-                    isMore
-                    title={"المقاس"}
-                >
-                    {sizes?.map((item, index) => (
-                        <FilterCriteriaSelect
-                            key={index}
-                            id={item.id}
-                            section={"Sizes"}
-                            title={item.title}
-                            quantity={item.quantity}
-                            type="checkbox"
-                        />
-                    ))}
-                </FilterSection>
+                <Suspense fallback={<Loading />} >
+                    <SizesData
+                        dataPromise={dataPromiseSize}
+                    />
+                </Suspense>
                 <Line/>
                 <FilterSection
                     title={"السعر"}
@@ -79,25 +79,12 @@ const Products=props=>{
                     <FilterCriteriaPrice/>
                 </FilterSection>
                 <Line/>
-                <FilterSection
-                    isMore
-                    title={"اللون"}
+                <Suspense fallback={<Loading />} >
+                    <ColorsData
+                        dataPromise={dataPromiseColor}
+                    />
+                </Suspense>
 
-                >
-                    {colors?.map((item, index) => (
-                        <FilterCriteriaSelect
-                            key={index}
-                            id={item.id}
-                            section={"Colors"}
-                            isColor
-                            title={item.title}
-                            color={item.color}
-                            quantity={item.quantity}
-                            type="radio"
-
-                        />
-                    ))}
-                </FilterSection>
                 {/*<Line/>*/}
                 {/*<FilterSection*/}
 
@@ -165,3 +152,7 @@ const Products=props=>{
     )
 }
 export default Products
+
+
+
+

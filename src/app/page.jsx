@@ -1,24 +1,23 @@
 
-import Carousel from "@/Components/HomePage/Carousel";
-import TitleSection from "@/Components/HomePage/TitleSection";
-import CategoriesCarousel from "@/Components/HomePage/CategoriesCarousel";
-import ProductSlider from "@/Components/HomePage/ProductSlider";
-import VideoSection from "@/Components/HomePage/VideoSection";
-import MovingProductsBar from "@/Components/HomePage/MovingProductsBar";
-import ProductsCategoryCard from "@/Components/HomePage/ProductsCategoryCard";
-import CircleCartCarousel from "@/Components/HomePage/CategoriesCarousel";
-import {Brands,category} from "@/Data/data";
-import Footer from "@/Components/HomePage/Footer";
+import Carousel from "@/Components/Shared/SliderComponents/Carousel/Carousel";
+import TitleSection from "@/Components/Shared/TitleSection/TitleSection";
+
+
+import VideoSection from "@/Components/HomePage/VideoSection/VideoSection";
+import MovingProductsBar from "@/Components/HomePage/MovingProductsBar/MovingProductsBar";
+import ProductsCategoryCard from "@/Components/HomePage/ProductsCategoryCard/ProductsCategoryCard";
+import CircleCartCarousel from "@/Components/HomePage/CategoriesCarousel/CategoriesCarousel";
+
+import Footer from "@/Components/Footer/Footer";
 import Navbar from "@/Components/Header/Navbar";
 import ScrollToTop from "@/Components/ScrollToTop";
-import FloatingDownloadButton from "@/Components/FloatingDownloadButton/FloatingDownloadButton";
-import {getCategories} from "@/api/services/listCategories";
+import CategoriesCarousel from "@/Components/HomePage/CategoriesCarousel/CategoriesCarousel";
+import BrandsCarousel from "@/Components/HomePage/BrandsCarousel/BrandsCarousel";
+import TopHomeCategory from "@/Components/HomePage/TopHomeCategory/TopHomeCategory";
+import ProductSlider from "@/Components/Shared/SliderComponents/ProductSlider/ProductSlider";
+
 
 export default async function Home() {
-    // fetch('https://rawady.brainsoftsolutions.com/api/categories')
-    //     .then(res => res.json())  // تحويل الاستجابة إلى JSON
-    //     .then(data => console.log(data))  // التعامل مع البيانات المحوّلة
-    //     .catch(error => console.error('حدث خطأ:', error));  // التعامل مع الأخطاء
 
   return (
     <>
@@ -28,11 +27,8 @@ export default async function Home() {
 
         />
         <TitleSection title="الاقسام" />
-        <CircleCartCarousel
-            data={category}
-            isCategory={true} />
-        <TitleSection title="الأدوات المنزلية" />
-        <ProductSlider/>
+        <CategoriesCarousel/>
+        <TopHomeCategory/>
         <TitleSection title="الأكثر مبيعا" />
         <ProductSlider/>
         <VideoSection src={"/Paralax.m4v"}/>
@@ -45,11 +41,8 @@ export default async function Home() {
         <TitleSection title="منتجات نسائية" />
         <ProductSlider/>
         <TitleSection title="الماركات" />
-        <CircleCartCarousel
-           data={Brands}
-           borderRadius={'10px'}
-           bgColor={"#0741ad"}
-        />
+        <BrandsCarousel/>
+
         <Footer/>
 
     </>

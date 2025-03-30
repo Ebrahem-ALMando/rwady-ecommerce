@@ -2,6 +2,7 @@
 import styles from "./FAQItem.module.css";
 import Line from "@/Components/Shared/Line/Line";
 import {useState} from "react";
+import {downArrow, upArrow} from "@/utils/Icons";
 
 
 const FAQItem=({faqs})=>{
@@ -14,26 +15,21 @@ const FAQItem=({faqs})=>{
                 aria-expanded={isOpen}
             >
                 <h2>
-                    {faqs.title}
+                    {faqs.question}
                 </h2>
                 <span className={styles.icon}>
                     {isOpen ?
-                        <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M17 14.5L12 10.5L7 14.5" stroke="#28303F" strokeWidth="1.5" strokeLinecap="round"
-                                  strokeLinejoin="round"/>
-                        </svg>
+                        <>{downArrow}</>
                         :
-                        <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M17 14.5L12 10.5L7 14.5" stroke="#28303F" strokeWidth="1.5" strokeLinecap="round"
-                                  strokeLinejoin="round"/>
-                        </svg>}
+                      <>{upArrow}</>
+                    }
                 </span>
             </button>
 
             <div className={styles.content}>
                 <Line/>
                 <p className={styles.text}>
-                    {faqs.content}
+                    {faqs.answer}
                 </p>
             </div>
         </div>

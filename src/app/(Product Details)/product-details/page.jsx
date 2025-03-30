@@ -1,9 +1,9 @@
 import Navbar from "@/Components/Header/Navbar";
 import Products from "@/Components/Products/Products";
-import Footer from "@/Components/HomePage/Footer";
+import Footer from "@/Components/Footer/Footer";
 import ProductDetails from "@/Components/ProductDetails/ProductDetails";
-import TitleSection from "@/Components/HomePage/TitleSection";
-import ProductSlider from "@/Components/HomePage/ProductSlider";
+import TitleSection from "@/Components/Shared/TitleSection/TitleSection";
+
 import Breadcrumb from "@/Components/Shared/Breadcrumb/Breadcrumb";
 
 
@@ -21,7 +21,7 @@ const ProductDetailsPage=props=>{
                 currentPage="تفاصيل المنتج" />
             <ProductDetails/>
             <TitleSection title="منتجات مشابهة" />
-            <ProductSlider/>
+            {/*<ProductSlider/>*/}
             <Footer/>
         </>
     )

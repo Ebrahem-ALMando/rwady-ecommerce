@@ -1,15 +1,22 @@
-import {fetchAPI} from "@/api/api";
+import { fetchAPI } from "@/api/api";
+import ApiConfig from "@/api/apiConfig";
 
-export const getTopSlider=async ()=>{
-    return await fetchAPI("top-sliders")
-}
-// export async function getProducts(options = {}) {
-//     const res = await fetchAPI("/products", "GET", null, {
-//         ...options,
-//         next: { revalidate: 60, tags: ["products"] },
-//     });
-//
-//     if (!res.ok) throw new Error("Failed to fetch products");
-//
-//     return res.json();
-// }
+
+export const getTopSlider = async () => {
+    const endPointKey="top-sliders"
+
+    try {
+
+        const ListTopSlider = await fetchAPI(endPointKey, "GET", null, {
+            next: {
+                revalidate:ApiConfig.revalidateTime,
+                tags: [endPointKey],
+
+            },
+        });
+        return ListTopSlider??[];
+    } catch (error) {
+        console.error(`Failed to fetch ${endPointKey}:`, error.message);
+        throw new Error(`Failed to fetch ${endPointKey}`);
+    }
+};

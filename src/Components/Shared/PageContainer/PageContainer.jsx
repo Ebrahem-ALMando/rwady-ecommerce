@@ -11,7 +11,9 @@ const PageContainer=(props)=>{
                 </h1>
                 <Line/>
                 {props.isFAQ ?
-                    <FAQList/>
+                    <FAQList
+                    faqs={props.faqs}
+                    />
                     :
                     <div className={styles.content}>
                         <article>
@@ -21,7 +23,7 @@ const PageContainer=(props)=>{
                             {props.data?.map((item, index) => (
                                 <Section
                                     key={index}
-                                    title={item.title}
+                                    // title={item.title}
                                     description={item.description}
                                 />
                             ))}

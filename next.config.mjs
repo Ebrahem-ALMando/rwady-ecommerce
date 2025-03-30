@@ -8,6 +8,9 @@ const nextConfig = {
         };
         return config;
     },
+        images: {
+            domains: ['rawady.brainsoftsolutions.com'],
+        }
 };
 
 export default nextConfig;

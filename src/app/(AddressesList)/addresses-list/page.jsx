@@ -1,6 +1,6 @@
 import Navbar from "@/Components/Header/Navbar";
 import Profile from "@/Components/Profile/Profile";
-import Footer from "@/Components/HomePage/Footer";
+import Footer from "@/Components/Footer/Footer";
 import AddressesList from "@/Components/AddressesList/AddressesList";
 
 

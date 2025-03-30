@@ -1,0 +1,36 @@
+{
+  "user_id": 123,
+  "address_id": 67,
+  "payment_method_id": 2,
+  "total_price": 2250,
+  "discount": 250,
+  "final_total": 2000,
+  "order_date": "2025-03-30",
+  "order_status": "pending",
+  "shipments": [
+    {
+      "shipment_id": 1,
+      "shipment_status": "processing",
+      "products": [
+        {
+          "product_id": 101,
+          "quantity": 1
+        },
+        {
+          "product_id": 102,
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "shipment_id": 2,
+      "shipment_status": "pending",
+      "products": [
+        {
+          "product_id": 103,
+          "quantity": 1
+        }
+      ]
+    }
+  ]
+}

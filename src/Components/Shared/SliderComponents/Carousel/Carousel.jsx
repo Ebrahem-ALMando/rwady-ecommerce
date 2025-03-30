@@ -4,8 +4,11 @@ import dynamic from "next/dynamic";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import styles from "./Carousel.module.css";
-import {getTopSlider} from "@/api/services/topSlider";
+
 import {useEffect} from "react";
+import Loading from "@/Components/Shared/Loading/Loading";
+import Error from "@/Components/Shared/Error/Error";
+import {getTopSlider} from "@/api/services/topSlider";
 const Slider = dynamic(() => import("react-slick"), { ssr: false });
 const staticSlides = [
     {
@@ -62,10 +65,6 @@ const styleAppendDots = {
 
 const Carousel = () => {
 
-    // const {data:slider,error,isLoading}=useSWR("topSlider",getTopSlider)
-    //
-    // if (isLoading) return <p>جارٍ التحميل...</p>;
-    // if (error) return <p>حدث خطأ أثناء تحميل البيانات</p>;
     const settings = {
         dots: true,
         infinite: true,
@@ -115,11 +114,35 @@ const Carousel = () => {
         )
     };
 
+
+
+    const { data, error, isLoading, mutate } = useSWR(
+        "top-slider",
+        getTopSlider,
+
+    );
+
+    const hasError = error;
+
+    if (isLoading) return <Loading />;
+    if (hasError)
+        return (
+            <Error
+                onRetry={() =>
+                    mutate(undefined, {
+                        revalidate: true,
+                    })
+                }
+            />
+        );
+
+    const Data = data?.data || [];
+    const dataTemp=Data.length>0?Data:staticSlides
     return (
         <div
          className={`${styles.container}  mx-auto mt-4 rtl`}>
             <Slider {...settings}>
-                {staticSlides?.map((slide) => (
+                {dataTemp?.map((slide) => (
                     <div key={slide.id} className="relative">
                         <img src={slide.img} alt={slide.title} className="w-full min-h-96 object-cover rounded-lg"/>
                         <div

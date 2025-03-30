@@ -27,7 +27,8 @@
     border-radius: 5px;
     cursor: pointer;
     position: relative;
-    margin-left: 8.6%;
+    margin-left: 5.6%;
+    width: fit-content;
 }
 .closeIcon {
     background: none;

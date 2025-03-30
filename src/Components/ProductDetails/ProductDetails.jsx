@@ -1,8 +1,8 @@
 import ProductImages from "@/Components/ProductDetails/ProductImages/ProductImages";
 import styles from './ProductDetails.module.css'
 import DetailsCard from "@/Components/ProductDetails/DetailsCard/DetailsCard";
-import TitleSection from "@/Components/HomePage/TitleSection";
-import ProductSlider from "@/Components/HomePage/ProductSlider";
+import TitleSection from "@/Components/Shared/TitleSection/TitleSection";
+
 const ProductDetails=props=>{
     const images = [
         { original: "/images/Products/p5.jpeg", thumbnail: "/images/Products/p5.jpeg" },

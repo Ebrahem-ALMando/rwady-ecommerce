@@ -1,5 +1,5 @@
 import React from "react";
-import stylesArrow from "@/Components/HomePage/CustomArrow.module.css";
+import stylesArrow from "@/Components/Shared/CustomArrow/CustomArrow.module.css";
 
 const CustomArrows = ({ currentSlide,slideCount, ...props }) => {
     const { type, activeArrow, onArrowClick } = props;

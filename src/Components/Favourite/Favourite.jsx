@@ -1,5 +1,5 @@
 import styles from './Favourite.module.css';
-import ProductCardSlider from "@/Components/Shared/ProductCardSlider/ProductCardSlider";
+import ProductCardSlider from "@/Components/Shared/SliderComponents/ProductCardSlider/ProductCardSlider";
 import React from "react";
 import {favouriteProducts} from "@/Data/Favourite";
 const Favourite=(props)=>{

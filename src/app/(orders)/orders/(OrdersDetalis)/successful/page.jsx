@@ -1,5 +1,5 @@
 import Navbar from "@/Components/Header/Navbar";
-import Footer from "@/Components/HomePage/Footer";
+import Footer from "@/Components/Footer/Footer";
 import OrderDetailsSuccessful from "@/Components/Orders/OrdersDetails/OrderDetailsSuccessful/OrderDetailsSuccessful";
 
 

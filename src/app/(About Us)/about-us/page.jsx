@@ -1,6 +1,6 @@
 import PageContainer from "@/Components/Shared/PageContainer/PageContainer";
 import Navbar from "@/Components/Header/Navbar";
-import Footer from "@/Components/HomePage/Footer";
+import Footer from "@/Components/Footer/Footer";
 import {AboutUs, shortDescription} from "@/Data/AboutUs";
 
 const AboutUsPage=(props)=>{

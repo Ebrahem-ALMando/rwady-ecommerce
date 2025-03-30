@@ -1,6 +1,6 @@
 import Navbar from "@/Components/Header/Navbar";
 import Breadcrumb from "@/Components/Shared/Breadcrumb/Breadcrumb";
-import Footer from "@/Components/HomePage/Footer";
+import Footer from "@/Components/Footer/Footer";
 import Favourite from "@/Components/Favourite/Favourite";
 
 const FavouritePage=(props)=>{
