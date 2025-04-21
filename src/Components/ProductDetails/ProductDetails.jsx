@@ -1,29 +1,46 @@
-import ProductImages from "@/Components/ProductDetails/ProductImages/ProductImages";
+"use client"
 import styles from './ProductDetails.module.css'
+import Loading from "@/Components/Shared/Loading/Loading";
+import Error from "@/Components/Shared/Error/Error";
+import React from "react";
+import useSWR from "swr";
+import EmptyState from "@/Components/Shared/EmptyState/EmptyState";
+import ProductImages from "@/Components/ProductDetails/ProductImages/ProductImages";
 import DetailsCard from "@/Components/ProductDetails/DetailsCard/DetailsCard";
-import TitleSection from "@/Components/Shared/TitleSection/TitleSection";
+import { motion } from "framer-motion";
+import {products} from "@/Data/products";
 
-const ProductDetails=props=>{
-    const images = [
-        { original: "/images/Products/p5.jpeg", thumbnail: "/images/Products/p5.jpeg" },
-        { original: "/images/Shopping/img.png", thumbnail: "/images/Shopping/img.png" },
-        { original: "/images/Shopping/img.png", thumbnail: "/images/Shopping/img.png" },
-        { original: "/images/Shopping/img.png", thumbnail: "/images/Shopping/img.png" },
-        { original: "/images/Shopping/img.png", thumbnail: "/images/Shopping/img.png" },
-        { original: "/images/Shopping/img.png", thumbnail: "/images/Shopping/img.png" },
-    ];
-    return(
-        <div className={styles.container}>
+const ProductDetails = ({ id, initialData, initialError, getData, keyData }) => {
+    const { data, error, isLoading, mutate } =
+        useSWR(keyData, () => getData(id), {
+            fallbackData: initialData,
+            revalidateOnMount: false,
+            revalidateOnFocus: true,
+        });
+
+    if (isLoading && !data) return <Loading />;
+    if (initialError || error) return <Error onRetry={() => mutate(undefined, { revalidate: true })} />;
+
+    const product = data
+
+    if (!product || !product.id) return <EmptyState message="لم يتم العثور على المنتج" />;
+
+
+    return (
+        <motion.div
+            className={styles.container}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+        >
             <div className={styles.imaContainer}>
-                <ProductImages images={images}/>
+                <ProductImages images={products[0].photos} />
             </div>
             <div className={styles.detailsContainer}>
-                <DetailsCard/>
+                <DetailsCard product={product} />
             </div>
+        </motion.div>
+    );
+};
 
-
-        </div>
-    )
-
-}
-export default ProductDetails
+export default ProductDetails;

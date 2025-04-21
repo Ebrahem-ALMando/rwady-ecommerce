@@ -1,17 +1,18 @@
 import styles from "./NotificationHeader.module.css";
 import Icon from "@/Components/Notification/Icon";
 
-const NotificationHeader = (props) => {
+const NotificationHeader = ({ title = "", time = "" }) => {
     return (
         <div className={styles.welcome}>
             <p className={styles.welcomeText}>
-                <Icon/>
-                {props.title}
+                <Icon />
+                {title}
             </p>
             <p className={styles.time}>
-                {props.time}
+                {time}
             </p>
         </div>
-    )
-}
+    );
+};
+
 export default NotificationHeader;

@@ -53,7 +53,7 @@
     flex-wrap: wrap;
     gap: 5px;
     margin-top: 2rem;
-    overflow-x: hidden;
+    /*overflow-x: hidden;*/
 }
 .resetButton {
     margin: 15px auto;

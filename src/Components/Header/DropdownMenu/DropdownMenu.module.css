@@ -15,56 +15,53 @@
     gap: 10px;
     padding: 15px;
     background: #f7f7f7;
-    position: absolute;
-    bottom: -68.5vh;
-    left: 50%;
-    /*transform: translateX(-50%);*/
-    z-index: 100;
-    height: 70vh;
+    /*position: absolute;*/
+    /*top: 80%;*/
+    /*left: 50%;*/
+    /*transform: translateX(-50%) translateY(20px);*/
+    /*z-index: 100;*/
+    height: auto;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    opacity: 0;
-    transform: translate(-50%, 20px);
+    /*box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);*/
+    /*opacity: 0;*/
+    /*pointer-events: none;*/
     transition: opacity 0.4s ease, transform 0.4s ease;
 }
-.container.show {
-    opacity: 1;
-    transform: translate(-50%, 0);
-}
-.hide {
-    opacity: 0;
-    transform: translate(-50%, 20px);
-}
 
+/*.container.show {*/
+/*    opacity: 1;*/
+/*    pointer-events: auto;*/
+/*    transform: translateX(-50%) translateY(0);*/
+/*}*/
 
-.sidebar{
+.sidebar {
     width: 25%;
     padding: 10px 3px;
     overflow-y: hidden;
 }
-.sidebar:hover{
+.sidebar:hover {
     overflow-y: auto;
 }
-.categories{
+
+.categories {
     width: 73%;
     padding: 10px 3px;
-    /*background: #ff0000;*/
     display: flex;
     gap: 5px;
-
 }
 
-.mainSection{
-    width: 52%;
+.mainSection {
+    width: 100%;
     padding: 10px 8px;
-    border-left:1px solid #EDE9E6;
-    border-right:1px solid #EDE9E6;
+    /*border-left: 1px solid #EDE9E6;*/
+    /*border-right: 2px solid #EDE9E6;*/
     overflow-y: hidden;
-    }
-.mainSection:hover{
+}
+.mainSection:hover {
     overflow-y: auto;
 }
-.secondSection{
+
+.secondSection {
     width: 52%;
     padding: 10px 3px;
     display: flex;
@@ -73,44 +70,41 @@
     overflow-y: hidden;
     height: auto;
 }
-.secondSection:hover{
+.secondSection:hover {
     overflow-y: auto;
 }
-.subSectionOne,.subSectionTow{
+
+.subSectionOne,
+.subSectionTow {
     padding: 10px 3px;
     flex-wrap: wrap;
+}
 
+.subSectionTow {
+    border-top: 1px solid #EDE9E6;
 }
-.subSectionTow{
-    border-top:1px solid #EDE9E6;
-}
-@media (max-width: 800px)
-{
-    .container{
+
+@media (max-width: 800px) {
+    .container {
         flex-direction: column;
-        display: none;
+
     }
-    .categories{
+    .categories {
         width: 100%;
     }
-    .sidebar{
-        position: absolute;
-        top: 0;
-        right: 0%;
-        width: 50%;
+    .sidebar {
+        width: 98%;
         background-color: #eeeff2;
-        z-index: 1000;
     }
-
 }
-@media (max-width: 600px)
-{
-    .categories{
+
+@media (max-width: 600px) {
+    .categories {
         flex-direction: column;
     }
-    .mainSection,.secondSection{
+    .mainSection,
+    .secondSection {
         width: 100%;
         height: max-content;
     }
-
 }

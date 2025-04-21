@@ -5,6 +5,14 @@
     flex-direction: column;
     gap: 10px;
 }
+/*.brand {*/
+/*    background-color: #0741AD; */
+/*    color: white;            */
+/*    padding: 0.5rem 1rem;*/
+/*    border-radius: 0.75rem;*/
+/*    font-weight: bold;*/
+/*}*/
+
 .brand{
     background-color: #1EB6E4;
     font-weight: 500;
@@ -15,6 +23,7 @@
     text-align: center;
     color: white;
     direction: ltr;
+
 }
 .title{
 
@@ -43,6 +52,7 @@
     display: flex;
     gap: 25px;
     align-items: center;
+
 }
 .discount p:nth-of-type(1){
     padding: 9px;
@@ -215,6 +225,37 @@
     border:2px solid #0741AD;
     color: #0741AD;
 }
+.outOfStock {
+    color: red;
+    font-weight: bold;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #ffe5e5;
+    border-radius: 8px;
+}
+.favBtn {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.6rem 1rem;
+    border-radius: 10px;
+    font-weight: 600;
+    color: #0741AD;
+    background-color: #f0f4ff;
+    border: 1px solid #0741AD20;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.favBtn:hover {
+    background-color: #e8f0ff;
+}
+
+.favBtn.active {
+    color: #E41E1E;
+    background-color: #ffecec;
+    border-color: #E41E1E50;
+}
+
 @media (max-width: 1070px) {
 .actionDetails{
     flex-direction: column;

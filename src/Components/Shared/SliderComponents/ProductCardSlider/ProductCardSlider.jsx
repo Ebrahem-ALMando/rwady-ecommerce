@@ -2,52 +2,95 @@
 import dynamic from "next/dynamic";
 import  styles from './ProductCardSlider.module.css'
 import Link from "next/link";
+import React, {useEffect, useState} from "react";
+import {sliderSetting} from "@/Components/Shared/SliderComponents/ProductCardSlider/config";
+import {formatDuration} from "@/utils/formatDuration";
+import Image from "next/image";
+
+import { motion } from 'framer-motion';
+import {PaletteIcon} from "lucide-react";
+import {products} from "@/Data/products";
+import useFavourites from "@/hooks/useFavourites";
+
+
 const Slider = dynamic(() => import("react-slick"), { ssr: false });
 const settings = {
-    arrows: false,
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: false,
-    autoplaySpeed: 1500,
+  ...sliderSetting,
     appendDots: dots => (
         <ul className={styles.slickDots}>
             {dots.map((dot, index) => (
-                <li key={index} className={dot.props.className.includes("slick-active") ? styles.slickActive : styles.slickDot}>
-                    {dot}
-                </li>
+                React.cloneElement(dot, {
+                    key: index,
+                    className: `${dot.props.className} ${
+                        dot.props.className.includes("slick-active") ? styles.slickActive : styles.slickDot
+                    }`
+                })
+
             ))}
         </ul>
     )
 };
 const ProductCardSlider = (props) => {
-    return (
 
+    const {product} = props;
+    const [time, setTime] = useState(formatDuration(product.discount_start, product.discount_end));
+    const { favourites,toggle, isFavourite, mutateFavourites} = useFavourites();
+    const [liked, setLiked] = useState(false);
+
+    useEffect(() => {
+
+        let start=product.discount_start
+        let end=product.discount_end
+
+        const timerId = setInterval(() => {
+            setTime(formatDuration(start, end));
+        }, 1000);
+
+        return () => clearInterval(timerId);
+
+    }, [time]);
+
+    useEffect(() => {
+        setLiked(isFavourite(product.id));
+    }, [favourites, product.id]);
+    const handleToggle = async () => {
+        setLiked(prev => !prev);
+        await toggle(product.id);
+        await mutateFavourites();
+    };
+    // const handleToggle = async () => {
+    //     setLiked((prev) => !prev);
+    //     console.log(product.id)
+    //     await toggle(product.id);
+    //     console.log(isFavourite(product.id),"new");
+    //     mutateFavourites(undefined,{revalidate:true});
+    // };
+    return (
         <div
             className="p-2 ">
-            <Link href={"/product-details"}>
                 <div
                     className={styles.card}
                 >
-                    {props.product.isDiscount ?
+                    {product.isDiscountVaild ?
                         <div
                             className={` absolute top-2 left-0  text-white  font-bold ${styles.saveSeller}`}>
                             وفر 250 الف
                         </div>
                         : null
                     }
-                    <div
-                        className={`absolute top-2 right-0  text-white    font-bold ${styles.bestSeller}`}>
-                        الأكثر مبيعًا
-                    </div>
+                    {product.isBestSelling &&
+                        <div
+                            className={`absolute top-2 right-0  text-white    font-bold ${styles.bestSeller}`}>
+                            الأكثر مبيعًا
+                        </div>
+                    }
+
                     <div className="relative w-full h-60">
                         <Slider {...settings}>
-                            {props.product.images.map((image, index) => (
+                            {products[0].photos?.map((image, index) => (
                                 <div key={index}>
                                     <div className={styles.productImgDiv}>
-                                        <img src={image} alt={`Product Image ${index + 1}`}
+                                        <img src={image.url} alt={`Product Image ${index + 1}`}
                                              className={styles.productImg}/>
                                     </div>
                                 </div>
@@ -64,17 +107,46 @@ const ProductCardSlider = (props) => {
                                 <p>
                                     (50)
                                 </p>
-                                <button className="">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path
+                                <motion.button
+                                    onClick={handleToggle}
+                                    whileTap={{scale: 1.2}}
+                                    transition={{type: "spring", stiffness: 300}}
+                                >
+                                    <motion.svg
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        animate={
+                                            liked
+                                                ? {
+                                                    scale: [1, 1.2, 1],
+                                                }
+                                                : {
+                                                    scale: 1,
+                                                }
+                                        }
+                                        transition={
+                                            liked
+                                                ? {
+                                                    duration: 1,
+                                                    repeat: Infinity,
+                                                    repeatType: "loop",
+                                                    ease: "easeInOut",
+                                                }
+                                                : {duration: 0.2}
+                                        }
+                                    >
+                                        <motion.path
                                             d="M16.44 3.1001C14.63 3.1001 13.01 3.9801 12 5.3301C10.99 3.9801 9.37 3.1001 7.56 3.1001C4.49 3.1001 2 5.6001 2 8.6901C2 9.8801 2.19 10.9801 2.52 12.0001C4.1 17.0001 8.97 19.9901 11.38 20.8101C11.72 20.9301 12.28 20.9301 12.62 20.8101C15.03 19.9901 19.9 17.0001 21.48 12.0001C21.81 10.9801 22 9.8801 22 8.6901C22 5.6001 19.51 3.1001 16.44 3.1001Z"
-                                            fill={props.product.isFavorite ? '#E41E1E' : 'none'}
-                                            stroke={props.product.isFavorite ? '' : '#0741AD'}
+                                            fill={liked ? "#E41E1E" : "none"}
+                                            stroke={liked ? "#E41E1E" : "#0741AD"}
                                             strokeWidth="1"
                                         />
-                                    </svg>
-                                </button>
+                                    </motion.svg>
+                                </motion.button>
+
 
                             </div>
                             <div className={styles.iconImage}>
@@ -96,72 +168,97 @@ const ProductCardSlider = (props) => {
                         </div>
 
                     </div>
-                    <div className={styles.infoCard}>
-                        <div className=" mb-2 ">
-                            <span className={styles.brand}>{props.product.brand}</span>
-                        </div>
-                        <h3 className={styles.title}>{props.product.title}</h3>
-                        <p
-                            className={styles.price}
-                        >
-                            {props.product.price}
-                            <del
-                                className={styles.oldPrice}
+                    <Link href={`/products/${product.id}/${product.name}`}>
+                        <div className={styles.infoCard}>
+                            <div className=" mb-2 ">
+                                <span className={styles.brand}>{product.brand.name}</span>
+                            </div>
+                            <h3 className={styles.title}>{product.name}</h3>
+                            <p
+                                className={styles.price}
                             >
-                                {props.product.oldPrice}
-                            </del>
-                        </p>
-                        <p className={styles.available}>
+                                {product.finalPrice}
+                                - IQD
+                                <del
+                                    className={styles.oldPrice}
+                                >
+                                    {product.price}
+                                    - IQD
+                                </del>
+                            </p>
+                            <p className={styles.available}>
                         <span className={styles.availableIcon}>
                             <img
                                 src={'images/img_6.png'}
                                 alt={''}
                             />
                         </span>
-                            {props.product.available}
-                        </p>
-                        <div className={styles.colorButtons}>
-                            {
-                                props.product.colors.map((color, index) => (
-                                    <button
-                                        key={index}
-                                        style={{
-                                            background: color
+                                اشتري بالاقساط 5000 د.ع / شهر لمدة 10 اشهر
+                                {/*{props.product.available}*/}
+                            </p>
+                            <div className={styles.colorButtons}>
+                                {Array.isArray(product.colors) && product.colors.length > 0 ? (
+                                    product.colors.map((item, index) => (
+                                        <button
+                                            key={index}
+                                            style={{background: item.code}}
+                                            className={styles.colorButton}
+                                            aria-label={`لون ${item.name}`}
+                                        />
+                                    ))
+                                ) : (
+                                    <motion.div
+                                        initial={{scale: 0.5, opacity: 0, rotate: -10}}
+                                        animate={{scale: 1, opacity: 1, rotate: 0}}
+                                        transition={{
+                                            duration: 0.5,
+                                            ease: [0.175, 0.885, 0.32, 1.275], // bounce out
                                         }}
-                                        className={styles.colorButton}>
+                                        className="mt-2  mb-2 text-blue-600 w-100 font-semibold flex items-center justify-center gap-2 text-sm bg-blue-50 rounded-md py-1 px-3 shadow-md"
+                                    >
+                                        <PaletteIcon className="w-5 h-5 animate-bounce text-blue-500 "/>
+                                        لا يوجد ألوان متوفرة لهذا المنتج !
+                                    </motion.div>
 
-                                    </button>
-                                ))
-                            }
-                        </div>
-                        <div className={styles.outherDetails}>
-                            <p className={styles.remaining}>
+
+                                )}
+                            </div>
+
+
+                            <div className={styles.outherDetails}>
+                                <p className={styles.remaining}>
                         <span className={styles.remainingIcon}>
                             <img
                                 src={'images/img_7.png'}
                                 alt={''}
                             />
                         </span>
-                                {props.product.remaining}
-                            </p>
-                            {props.product.isDiscount ?
-                                <div className={styles.time}>
-                                    <p className={styles.timeText}>
+
+                                    باقي:&nbsp;{product.quantity}&nbsp;وحدات متبقية
+                                </p>
+                                {
+                                    <div className={styles.time}>
+                                        <p className={styles.timeText}>
                         <span className={styles.timeIcon}>
-                            <img
-                                src={'images/img_8.png'}
-                                alt={''}
+                            <Image
+                                width={25}
+                                height={25}
+                                src={'/images/img_8.png'}
+                                alt={'time'}
                             />
+
                         </span>
-                                        {props.product.time}
-                                    </p>
-                                </div>
-                                : null
-                            }
+                                            {time}
+                                            {/*{props.product.time}*/}
+                                        </p>
+                                    </div>
+
+                                }
+                            </div>
                         </div>
-                    </div>
+                    </Link>
                 </div>
-            </Link>
+
         </div>
 
     );

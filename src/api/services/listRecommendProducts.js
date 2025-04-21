@@ -2,6 +2,7 @@ import { fetchAPI } from "@/api/api";
 import ApiConfig from "@/api/apiConfig";
 
 export const getRecommendProducts = async () => {
+    "use server"
     const endPointKey="list-recommend-products"
     try {
         const recommendProducts = await fetchAPI(endPointKey, "GET", null, {

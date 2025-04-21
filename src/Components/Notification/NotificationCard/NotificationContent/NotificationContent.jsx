@@ -1,29 +1,28 @@
 import styles from "./NotificationContent.module.css";
 import Link from "next/link";
 
-const NotificationContent=(props)=>{
-    return(
-        <>
-            <p
-                style={{
-                    color:props.color
-                }}
-                className={styles.notificationText}>
-                {props.text}
-                {
-                    props.isAnyDetails?
-                    <span>
-                         ,
-                 <Link href="#" className="underline underline-offset-4">
-                      تفاصيل الطلب
-                 </Link>
+const NotificationContent = ({ color, text, isAnyDetails }) => {
+    return (
+        <p
+            className={styles.notificationText}
+            style={{ color: color || "#333" }}
+            aria-label="محتوى الإشعار"
+        >
+            {text}
+            {isAnyDetails && (
+                <>
+                    ،{" "}
+                    <Link
+                        href="#"
+                        className="underline underline-offset-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+                        aria-label="تفاصيل الطلب"
+                    >
+                        تفاصيل الطلب
+                    </Link>
+                </>
+            )}
+        </p>
+    );
+};
 
-                    </span>
-                    :null
-                }
-
-            </p>
-        </>
-    )
-}
-export default NotificationContent
+export default NotificationContent;

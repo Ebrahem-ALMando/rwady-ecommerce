@@ -8,9 +8,25 @@ const nextConfig = {
         };
         return config;
     },
-        images: {
-            domains: ['rawady.brainsoftsolutions.com'],
-        }
+    images: {
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'rawady.brainsoftsolutions.com',
+                port: '',
+                pathname: '/**',
+            },
+        ],
+    },
+
+    // async rewrites() {
+    //     return [
+    //         {
+    //             source: '/api/:path*',
+    //             destination: 'https://rawady.brainsoftsolutions.com/api/:path*',
+    //         },
+    //     ];
+    // },
 };
 
 export default nextConfig;

@@ -15,32 +15,56 @@ import CategoriesCarousel from "@/Components/HomePage/CategoriesCarousel/Categor
 import BrandsCarousel from "@/Components/HomePage/BrandsCarousel/BrandsCarousel";
 import TopHomeCategory from "@/Components/HomePage/TopHomeCategory/TopHomeCategory";
 import ProductSlider from "@/Components/Shared/SliderComponents/ProductSlider/ProductSlider";
+import OffersList from "@/Components/HomePage/OffersList/OffersList";
+import HomeCategoryWithProducts from "@/Components/HomePage/HomeCategoryWithProducts/HomeCategoryWithProducts";
+import MovingProductsBarSlider from "@/Components/HomePage/MovingProductsBarSlider/MovingProductsBarSlider";
+import RecentlyAddedProducts from "@/Components/HomePage/RecentlyAddedProducts/RecentlyAddedProducts";
+import TopSellingProducts from "@/Components/HomePage/TopSellingProducts/TopSellingProducts";
+import GroupsCarousel from "@/Components/HomePage/GroupsCarousel/GroupsCarousel";
+import FullScreenLoader from "@/Components/Shared/FullScreenLoader/FullScreenLoader";
 
 
 export default async function Home() {
 
   return (
     <>
-          <ScrollToTop />
-          <Navbar/>
-        <Carousel
+          <FullScreenLoader duration={1800} />
 
-        />
-        <TitleSection title="الاقسام" />
+
+          <ScrollToTop />
+
+          <Navbar/>
+        <Carousel/>
+
+
+        <TitleSection initTitle="الاقسام" />
         <CategoriesCarousel/>
         <TopHomeCategory/>
-        <TitleSection title="الأكثر مبيعا" />
-        <ProductSlider/>
+        {/*<TitleSection initTitle="الأكثر مبيعا" />*/}
+        {/*<ProductSlider/>*/}
+        <TopSellingProducts/>
         <VideoSection src={"/Paralax.m4v"}/>
-        <MovingProductsBar/>
-        <TitleSection title="احدث العروض" />
-        <ProductSlider/>
+        <MovingProductsBarSlider/>
+        {/*<MovingProductsBar/>*/}
+        {/*<TitleSection initTitle="احدث العروض" />*/}
+        {/*<ProductSlider/>*/}
+
+        <OffersList/>
         <ProductsCategoryCard/>
-        <TitleSection title="ملابس نسائية" />
+        <TitleSection initTitle="المجموعات" />
+        <GroupsCarousel/>
+        <TitleSection
+            initLink={"/products"}
+            initTitle="ملابس نسائية" />
         <ProductSlider/>
-        <TitleSection title="منتجات نسائية" />
+        <TitleSection
+            initLink={"/products"}
+            initTitle="منتجات نسائية" />
         <ProductSlider/>
-        <TitleSection title="الماركات" />
+
+        <HomeCategoryWithProducts/>
+        <RecentlyAddedProducts/>
+        <TitleSection initTitle="الماركات" />
         <BrandsCarousel/>
 
         <Footer/>

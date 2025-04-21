@@ -2,12 +2,18 @@
 import styles from "./OrderSummary.module.css";
 import RowTextWithNumber from "@/Components/ShoppingCartAndPayment/ShoppingCart/RowTextWithNumber";
 import React from "react";
+import Cookies from 'js-cookie';
 
-import axios from "axios";
 import {data} from "framer-motion/m";
+import axios from "axios";
+import {checkCoupon} from "@/api/services/checkCoupon";
 
 const OrderSummary=props=>{
+
     // const testPostRequest = async () => {
+    //     const d=new FormData();
+    //
+    //     d.append('code',"sss");
     //     try {
     //         const response = await fetch("https://rawady.brainsoftsolutions.com/api/checkcoupon", {
     //             method: "POST",
@@ -24,34 +30,101 @@ const OrderSummary=props=>{
     //     }
     // };
     //
-    // const test = async () => {
-    //     const formData = new FormData();
-    //     formData.append("nameCategoryData", "صنف جديد");
-    //     formData.append("descriptionCategoryData", "test");
-    //    await  axios
-    //         .post("https://dentalcareteam.org/Creativity-Platform/api/store/category/data", formData)
-    //         .then((response) => {
-    //             console.log("Response:", response.data);
-    //         })
-    //         .catch((error) => {
-    //             console.error("Error:", error);
-    //         });
-    // };
-    // const handleCouponCheck = async () => {
-    //     const couponCode = "rrf";
-    //
-    //     try {
-    //         const result = await checkCoupon(couponCode);
-    //
-    //         if (result?.isValid) {
-    //             console.log("✅ الكوبون صالح، الخصم:", result.discount);
-    //         } else {
-    //             console.log("❌ الكوبون غير صالح");
-    //         }
-    //     } catch (error) {
-    //         console.error("خطأ في التحقق من الكوبون:", error.message);
-    //     }
-    // };
+
+    const testPostCRequest = async () => {
+        const d=new FormData();
+
+        d.append('phone',"012764891135");
+
+        try {
+            const response = await axios.post("https://rawady.brainsoftsolutions.com/api/client-login",
+                d).then((response)=>{
+                console.log(response)
+            }
+                // .catch((error)=>{
+                //     console.log(error);
+                // }
+
+            )
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    };
+    const test = async () => {
+        const formData = new FormData();
+        formData.append("nameCategoryData", "صنف جديد");
+        formData.append("descriptionCategoryData", "test");
+        axios.defaults.withXSRFToken=true
+       await  axios
+            .post("https://dentalcareteam.org/Creativity-Platform/api/store/category/data", formData)
+            .then((response) => {
+                console.log("Response:", response.data);
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+            });
+    };
+
+
+
+
+
+    const testLocal = async () => {
+        try {
+            // 1. جلب الكوكي
+            await axios.get("http://127.0.0.1:8000/sanctum/csrf-cookie", {
+                withCredentials: true,
+            });
+
+            // 2. البيانات
+            const formData = new FormData();
+            formData.append("user_id", "1");
+            formData.append("name", "update");
+            formData.append("description", "update");
+            formData.append("note", "update");
+            axios({
+                method: "post",
+                url: "http://127.0.0.1:8000/api/category",
+                data: formData,
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+                withCredentials: true,
+                withXSRFToken:true
+            }).then((res)=>{
+                console.log("Response:", res);
+            }).catch((e)=>{
+                console.error("Error:", e);
+            })
+            // 3. إرسال الطلب (بدون X-XSRF-TOKEN يدوي!)
+            // const response = await axios.post("http://127.0.0.1:8000/api/category", formData, {
+            //     withCredentials: true,
+            // });
+
+            console.log("✅ Success:", response.data);
+        } catch (error) {
+            console.error("❌ Error:", error.response?.data || error.message);
+        }
+    };
+
+    const t=()=>{
+        let fData = new FormData();
+        fData.append("name", "ebrahem" + " " + "Div" + "(WEV)");
+        fData.append("email", "test");
+        fData.append("phone_number", "5454");
+        fData.append("subject", "From Code ");
+
+        axios({
+            method: "post",
+            url: "https://api.eilmalriyada.com/api/message",
+            data: fData,
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+            withCredentials: true,
+        })
+    }
+
     return (
         <div
             style={props.style}
@@ -102,7 +175,7 @@ const OrderSummary=props=>{
                         fill="#F55157"/>
                 </svg>
                 <button className={styles.buttonInput}
-                // onClick={handleCouponCheck}
+                // formAction={testPostCRequest}
                 >إضافة</button>
             </div>
 

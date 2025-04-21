@@ -1,17 +1,14 @@
 import React from "react";
-import stylesArrow from "@/Components/Shared/CustomArrow/CustomArrow.module.css";
+import stylesArrow from "@/Components/Shared/SliderComponents/CustomArrow/CustomArrow.module.css";
 
-const CustomArrows = ({ currentSlide,slideCount, ...props }) => {
-    const { type, activeArrow, onArrowClick } = props;
-
+const CustomArrows = ({ type, activeArrow, onArrowClick, onClick }) => {
     const handleClick = (event) => {
-        props.onClick?.(event);
-        onArrowClick(type);
+        onClick?.(event);
+        onArrowClick?.(type);
     };
 
     return (
         <button
-            {...props}
             onClick={handleClick}
             className={`absolute top-[45%] transform -translate-y-[55%] z-10 text-white 
                 ${stylesArrow.customButton} ${type === "prev" ? stylesArrow.prev : stylesArrow.next} 

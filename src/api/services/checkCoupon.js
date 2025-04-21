@@ -2,7 +2,7 @@ import { fetchAPI } from "@/api/api";
 import ApiConfig from "@/api/apiConfig";
 
 export const checkCoupon = async (couponCode) => {
-    "use server"
+    // "use server"
     const endPointKey = "checkcoupon";
 
     try {

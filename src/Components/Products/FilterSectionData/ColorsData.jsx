@@ -2,6 +2,8 @@ import Error from "@/Components/Shared/Error/Error";
 import FilterSection from "@/Components/Products/FilterSection/FilterSection";
 import FilterCriteriaSelect from "@/Components/Products/FilterSection/FilterCriteriaSelect/FilterCriteriaSelect";
 import React from "react";
+import {color} from "framer-motion";
+import {colors} from "@/Data/Colors";
 
 
 export async function ColorsData({dataPromise}) {
@@ -17,7 +19,7 @@ export async function ColorsData({dataPromise}) {
             error = err.message;
         }
     }
-    await getData()
+    // await getData()
 
     if (error) {
         isError = true
@@ -37,7 +39,8 @@ export async function ColorsData({dataPromise}) {
                         title={"اللون"}
 
                     >
-                        {listColorsData?.map((item, index) => (
+                        {/*{listColorsData?.map((item, index) => (*/}
+                        {colors?.map((item, index) => (
                             <FilterCriteriaSelect
                                 key={index}
                                 id={item.id}

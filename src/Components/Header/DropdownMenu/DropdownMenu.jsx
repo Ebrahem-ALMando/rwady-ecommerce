@@ -1,52 +1,116 @@
-import styles from './DropdownMenu.module.css'
+'use client';
+import styles from './DropdownMenu.module.css';
 import DropdownSidebar from "@/Components/Header/DropdownMenu/DropdownSidebar/DropdownSidebar";
 import CategoryItems from "@/Components/Header/DropdownMenu/CategoryItems/CategoryItems";
-import {dropdownCategories, subCategories} from "@/Data/DropdownCategories";
-const DropdownMenu=(props)=>{
+import React, { useEffect, useState, memo } from "react";
+import useSWR from "swr";
+import Error from "@/Components/Shared/Error/Error";
+import Loading from "@/Components/Shared/Loading/Loading";
+import { getSubCategory } from "@/api/services/listCategoryChildren";
+import EmptyState from "@/Components/Shared/EmptyState/EmptyState";
 
-    return(
+const DropdownMenu = ({ isShow, initialData, initialError, getData, keyData, arSection }) => {
+    const { data, error, isLoading, mutate } = useSWR(keyData, getData, {
+        fallbackData: initialData,
+        revalidateOnMount: false,
+        revalidateOnFocus: true,
+    });
+
+    const [selectedCategoryId, setSelectedCategoryId] = useState(null);
+
+    useEffect(() => {
+        if (keyData === "categories" && Array.isArray(data?.data) && data.data.length > 0) {
+            setSelectedCategoryId(data.data[0].id);
+        }
+    }, [keyData, data]);
+
+    const {
+        data: subCategoryData,
+        error: errorSC,
+        isLoading: isLoadingSC,
+    } = useSWR(
+        selectedCategoryId ? `sub_categories_${selectedCategoryId}` : null,
+        () => selectedCategoryId ? getSubCategory(selectedCategoryId) : Promise.resolve([]),
+        { revalidateOnFocus: true }
+    );
+
+    if (isLoading && !data) return <Loading />;
+    if (initialError || error) return <Error onRetry={() => mutate(undefined,{revalidate:true})} />;
+
+    const dataList = Array.isArray(data)
+        ? data
+        : Array.isArray(data?.data)
+            ? data.data
+            : [];
+
+    return (
         <>
-            <div className={styles.mask}>
+            {dataList.length===0?
 
-            </div>
-            <div className={`${styles.container} ${props.isShow ? styles.show : styles.hide}`}>
-                <div className={styles.sidebar}>
-                    <DropdownSidebar
-                        data={dropdownCategories}
-                    />
+                <EmptyState message={` لا توجد ${arSection} لعرضها حالياً`} />
+            :
+
+                <div
+                    className={styles.container}
+                    role="region"
+                    aria-label={`${keyData}`}
+                    aria-labelledby={`dropdown-${keyData}`}
+                >
+                    {keyData === "categories" && (
+                        <div className={styles.sidebar}>
+                            <DropdownSidebar
+                                arSection={arSection}
+                                data={dataList}
+                                onSelect={(id) => setSelectedCategoryId(id)}
+                            />
+                        </div>
+                    )}
+
+                    <div className={styles.categories}>
+                        <div className={styles.mainSection}>
+                            {keyData === "categories" ? (
+                                isLoadingSC ? (
+                                    <Loading />
+                                ) : (
+                                              <CategoryItems
+                                                  title={"الاقسام الفرعية"}
+                                                  data={subCategoryData}
+                                              />
+
+                                )
+                            ) : (
+                                <CategoryItems
+                                    title={arSection}
+                                    data={dataList}
+                                />
+                            )}
+                        </div>
+                    </div>
                 </div>
 
-                <div className={styles.categories}>
-                    <div className={styles.mainSection}>
-                        <CategoryItems
-                            title={"جديد ملابس النساء"}
-                            data={subCategories}
-                        />
-
-                    </div>
-                    <div className={styles.secondSection}>
-                        <div className={styles.subSectionOne}>
-                            <CategoryItems
-                                title={"جديد ملابس سفلية"}
-                                data={subCategories}
-                            />
-                        </div>
-                        <div className={styles.subSectionTow}>
-                            <CategoryItems
-                                title={"جديد ملابس النساء"}
-                                data={subCategories}
-                            />
-                        </div>
-                        <div className={styles.subSectionTow}>
-                            <CategoryItems
-                                title={"جديد ملابس الاطفال"}
-                                data={subCategories}
-                            />
-                        </div>
-                    </div>
-                </div>
-            </div>
+            }
         </>
-    )
-}
-export default DropdownMenu
+
+    );
+};
+
+export default memo(DropdownMenu);
+
+
+// useEffect(() => {
+//     if (!selectedCategoryId || keyData !== "categories") return;
+//
+//     const fetchSubcategories = async () => {
+//
+//         try {
+//             console.log(selectedCategoryId)
+//             const response = await getSubCategory(selectedCategoryId);
+//             console.log(response)
+//             setSubcategories(response.data || []);
+//         } catch (error) {
+//             console.error("❌ فشل في تحميل التصنيفات الفرعية:", error.message);
+//         }
+//     };
+//
+//     fetchSubcategories();
+// }, [selectedCategoryId, keyData]);

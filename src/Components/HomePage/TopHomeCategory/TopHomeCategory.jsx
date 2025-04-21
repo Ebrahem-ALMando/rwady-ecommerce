@@ -20,14 +20,14 @@ const TopHomeCategory =async (props) => {
 
     return (
       <>
-          <TitleSection title="الأدوات المنزلية" />
-          <ProductSlider
-              index={0}
-              initialData={initialHomeCategoriesData}
-              initialError={initialError}
-              getData={getHomeCategory}
-              keyData={"topHomeCategories"}
-          />
+          {/*<TitleSection initTitle="الأدوات المنزلية" />*/}
+          {/*<ProductSlider*/}
+          {/*    index={0}*/}
+          {/*    initialData={initialHomeCategoriesData}*/}
+          {/*    initialError={initialError}*/}
+          {/*    getData={getHomeCategory}*/}
+          {/*    keyData={"topHomeCategories"}*/}
+          {/*/>*/}
       </>
     );
 };

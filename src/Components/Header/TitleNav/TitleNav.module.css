@@ -5,8 +5,9 @@
     height: 55px;
     background-color: #0741ad;
     padding: 0 10px;
-
+    will-change: opacity, transform;
 }
+
 .centerContent {
     display: flex;
     justify-content: center;
@@ -14,11 +15,13 @@
     gap: 10px;
     flex: 1;
 }
+
 .title {
     color: white;
     font-size: 1.25rem;
     margin: 0;
 }
+
 .startShopBTN {
     background-color: white;
     color: #0741ad;
@@ -29,32 +32,43 @@
     position: relative;
     margin-left: 5.6%;
     width: fit-content;
+    text-decoration: none;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
 }
+
+.startShopBTN:hover {
+    background-color: #e6e6e6;
+}
+
 .closeIcon {
     background: none;
     border: none;
     cursor: pointer;
     padding: 8px;
     border-radius: 50%;
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .closeIcon:hover {
-    background: none;
     transform: rotate(90deg);
 }
 
 .closeIcon svg {
     width: 24px;
     height: 24px;
-
 }
-.closeIcon svg path{
+
+.closeIcon svg path {
     fill: white;
 }
+
 @media (max-width: 768px) {
     .mainDiv {
         display: none;

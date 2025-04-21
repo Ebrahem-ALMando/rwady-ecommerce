@@ -4,6 +4,7 @@ import Line from "@/Components/Shared/Line/Line";
 import {useState} from "react";
 import FilterCriteriaSelect
     from "@/Components/Products/FilterSection/FilterCriteriaSelect/FilterCriteriaSelect";
+import {downArrow, upArrow} from "@/utils/Icons";
 
 
 
@@ -21,15 +22,9 @@ const FilterSection=(props)=>{
                 </h2>
                 <span className={styles.icon}>
                     {isOpen ?
-                        <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M17 14.5L12 10.5L7 14.5" stroke="#0741AD" strokeWidth="1.5" strokeLinecap="round"
-                                  strokeLinejoin="round"/>
-                        </svg>
+                        <>{downArrow}</>
                         :
-                        <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M17 14.5L12 10.5L7 14.5" stroke="#0741AD" strokeWidth="1.5" strokeLinecap="round"
-                                  strokeLinejoin="round"/>
-                        </svg>}
+                        <>{upArrow}</>}
                 </span>
             </button>
 

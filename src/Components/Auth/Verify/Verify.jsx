@@ -2,6 +2,11 @@
 import { useState, useEffect, Suspense } from 'react';
 import {useRouter, useSearchParams} from 'next/navigation';
 import { motion } from 'framer-motion';
+import {sendOtp} from "@/api/services/auth/sendOtp";
+import {toast} from "react-hot-toast";
+import {clientLogin} from "@/api/services/auth/clientLogin";
+import Cookies from "js-cookie";
+import {getTokenWithClient} from "@/utils/getTokenWithClient";
 
 
 const Verify = (props) => {
@@ -9,9 +14,10 @@ const Verify = (props) => {
     const [otp, setOtp] = useState(['', '', '', '']);
     const [timeLeft, setTimeLeft] = useState(60);
     const [isResending, setIsResending] = useState(false);
-    // const searchParams = useSearchParams();
-    // const phone = searchParams.get('phone');
-
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [serverOtp, setServerOtp] = useState(5555);
+    const searchParams = useSearchParams();
+    const phone = searchParams.get('phone');
     useEffect(() => {
         const timer = timeLeft > 0 && setInterval(() => {
             setTimeLeft(timeLeft - 1);
@@ -25,30 +31,98 @@ const Verify = (props) => {
             newOtp[index] = value;
             setOtp(newOtp);
 
-            // الانتقال التلقائي للحقل التالي
             if (value && index < 3) {
                 document.getElementById(`otp-${index + 1}`).focus();
             }
         }
     };
 
+
+    const token = getTokenWithClient()
+    useEffect(() => {
+        if (token) {
+            router.push('/');
+        }
+    }, [token]);
     const handleResend = async () => {
         setIsResending(true);
-
-    /*    try {
-            await fetch('/api/resend-otp', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ phone })
-            });
-            setTimeLeft(60);
+        try {
+            const response = await sendOtp(phone);
+            if (response.status_code === 200) {
+                toast.success("تم إرسال رمز التحقق بنجاح");
+                setTimeLeft(60);
+                setServerOtp(response.data.code);
+            } else {
+                toast.error("فشل في إرسال رمز التحقق");
+            }
+        } catch (e) {
+            console.error("Error while sending OTP:", e.message);
+            toast.error("حدث خطأ أثناء إرسال الكود");
         } finally {
             setIsResending(false);
-        }*/
+        }
+    };
+
+
+
+    const handleConfirm = async () => {
+        const code = otp.join("");
+        if (code.length !== 4) {
+            toast.error("الرجاء إدخال رمز مكون من 4 أرقام");
+            return;
+        }
+
+        if (code !== serverOtp?.toString()) {
+            toast.error("رمز التحقق غير صحيح");
+            return;
+        }
+
+        setIsSubmitting(true);
+        try {
+            const formData = new FormData();
+            formData.append("phone", phone);
+
+            const response = await clientLogin(formData);
+            console.log(response);
+
+            if (response.status_code === 200) {
+                toast.success("تم تسجيل الدخول بنجاح");
+
+                Cookies.remove("token");
+                Cookies.remove("user_id");
+
+                Cookies.set("token", response.data.api_token, {
+                    expires: 90,
+                    secure: true,
+                    sameSite: "Strict",
+                    path: "/",
+                });
+
+                Cookies.set("user_id", response.data.id, {
+                    expires: 90,
+                    secure: true,
+                    sameSite: "Strict",
+                    path: "/",
+                });
+
+                if (!response.data.name || !response.data.email) {
+                    router.push("/profile");
+                } else {
+                    router.push("/");
+                }
+            } else {
+                toast.error("فشل في تسجيل الدخول");
+            }
+        } catch (error) {
+            console.error("Login error:", error.message);
+            toast.error("فشل في العملية. حاول لاحقًا");
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
-        <Suspense fallback={<div>Loading...</div>}>
+
             <motion.div
                 dir={"ltr"}
                 initial={{ opacity: 0 }}
@@ -62,7 +136,7 @@ const Verify = (props) => {
 
                     <p className="text-right text-gray-600 mb-8 font-arabic">
                         قم بإدخال رمز التفعيل الخاص بك الذي وصلك للتو من خلالنا على رقم جوالك
-                        <span className="font-bold text-black"> + 9999999999{/*{phone}*/} </span>
+                        <span className="font-bold text-black"> {phone} </span>
                     </p>
 
                     <div className="flex justify-center gap-3 mb-8">
@@ -98,14 +172,14 @@ const Verify = (props) => {
                         )}
                     </div>
                     <button
-                        onClick={()=>{
-                            router.push(`/`);
-                        }}
+                        onClick={handleConfirm}
+                        disabled={isSubmitting || otp.some(d => d === '')}
                         className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg
-                        font-arabic text-xl transition-all mb-4"
+                            font-arabic text-xl transition-all mb-4 disabled:opacity-50"
                     >
-                        تأكيد
+                        {isSubmitting ? "جارٍ التحقق..." : "تأكيد"}
                     </button>
+
 
                     <div className={"text-right"}>
                         <p className={'text-gray-600'}>
@@ -117,7 +191,7 @@ const Verify = (props) => {
                     </div>
                 </div>
             </motion.div>
-        </Suspense>
+
     );
 }
 export default Verify;

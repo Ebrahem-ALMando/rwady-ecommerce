@@ -54,6 +54,7 @@
     transition: background-color 0.3s ease, width 0.3s ease;
     cursor: pointer;
     position: relative;
+
 }
 .slickBtn{
 
@@ -64,7 +65,7 @@
 }
 .slickActive {
     background-color: #007bff !important;
-    width: 35px !important; /* تكبير المستطيل عند التفعيل */
+    width: 35px !important;
 }
 
 @media screen and (max-width: 1286px) {

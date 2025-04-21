@@ -1,13 +1,19 @@
 'use client';
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import {useEffect, useState} from 'react';
+import {redirect, useRouter} from 'next/navigation';
 import { motion } from 'framer-motion';
 import styles from './SignIn.module.css'
+import {toast} from "react-hot-toast";
+import {sendOtp} from "@/api/services/auth/sendOtp";
+import {getTokenWithClient} from "@/utils/getTokenWithClient";
+
 const SignIn=(props)=> {
+
+
+
     const [phone, setPhone] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const router = useRouter();
-
 
     const containerVariants = {
         hidden: { opacity: 0 },
@@ -18,6 +24,14 @@ const SignIn=(props)=> {
         hidden: { y: 70, opacity: 0 },
         visible: { y: 0, opacity: 1 }
     };
+
+
+    const token = getTokenWithClient()
+    useEffect(() => {
+        if (token) {
+            router.push('/');
+        }
+    }, [token]);
     const handleSetPhone=(e) => {
         setPhone(e.target.value);
     }
@@ -26,34 +40,20 @@ const SignIn=(props)=> {
         setIsSubmitting(true);
 
         try {
-
-            setTimeout(()=>{
+            const response = await sendOtp(phone);
+            if (response.status_code===200) {
+                toast.success("تم إرسال رمز التحقق بنجاح");
                 router.push(`/verify?phone=${encodeURIComponent(phone)}`);
-            },2000)
-            // API REq ... After
-            /*           const response = await fetch('/api/send-otp', {
-                           method: 'POST',
-                           headers: { 'Content-Type': 'application/json' },
-                           body: JSON.stringify({ phone })
-                       });
-
-                       if (response.ok) {
-                           router.push(`/verify?phone=${encodeURIComponent(phone)}`);
-                       }*/
-        } catch (e){
-            // showError
-
+            } else {
+                toast.error("فشل في إرسال رمز التحقق");
+            }
+        } catch (e) {
+            console.error("Error while sending OTP:", e.message);
+            toast.error("حدث خطأ أثناء إرسال الكود");
+        } finally {
             setIsSubmitting(false);
         }
-        finally {
-            // showError
-           // setIsSubmitting(false);
-        }
-
-
-
     };
-
     return (
         <motion.div
             variants={containerVariants}
@@ -100,7 +100,7 @@ const SignIn=(props)=> {
                          focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all
                          text-black
                          "
-                                // pattern="^\d{20}$"
+                                pattern="^\d{8,15}$"
                                 required
                             />
 

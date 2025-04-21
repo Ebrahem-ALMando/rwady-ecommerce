@@ -1,10 +1,14 @@
 
 import Verify from "@/Components/Auth/Verify/Verify";
+import {Suspense} from "react";
+import Loading from "@/Components/Shared/Loading/Loading";
 
 const VerifyPage = (props) => {
     return(
         <>
-            <Verify/>
+        <Suspense fallback={<Loading/>}>
+        <Verify/>
+        </Suspense>
         </>
     )
 }

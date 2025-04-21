@@ -3,6 +3,16 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-
-
+    border-left: 2px solid #EDE9E6;
+    padding-left: 16px;
+}
+.title{
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+.title h1{
+    color: #0641AD;
+    font-weight: bold;
+    font-size: 23px;
 }

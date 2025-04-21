@@ -1,12 +1,14 @@
 .card{
     direction: rtl;
     background-color: white;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Equivalent to shadow-lg */
-    border-radius: 0.5rem; /* Equivalent to rounded-lg */
-    border: 1px solid #e5e7eb; /* Equivalent to border-gray-200 */
-    transition: box-shadow 0.3s ease; /* Equivalent to transition-shadow */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+    border: 1px solid #e5e7eb;
+    transition: box-shadow 0.3s ease;
     position: relative;
     width: 21rem;
+    height: auto;
+    min-height: 623px;
 }
 .card:hover {
     box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
@@ -127,6 +129,8 @@
     width: 90%;
     margin:6rem  auto 1.5rem auto ;
     border-radius: 10px;
+    height: auto;
+    min-height: 240px;
 
 }
 .brand{
@@ -180,9 +184,10 @@
     border-radius: 60%;
 }
 .outherDetails{
-    display: inline-flex;
+        display: inline-flex;
         justify-content: space-between;
         width: 100%;
+        align-items: center;
 
 }
 .remainingIcon{
@@ -210,6 +215,7 @@
 }
 
 .timeText {
+
     margin-right: -0.4rem;
     color: #ffffff;
     font-size: 12px;
@@ -224,5 +230,43 @@
     height: 30px;
     object-fit: cover;
     margin-right: 5px;
+}
+.colorButtons {
+    display: flex;
+    gap: 7px;
+    margin-top: 0.8rem;
+    align-items: center;
+}
+
+.colorButton {
+    width: 15px;
+    height: 15px;
+    border-radius: 60%;
+    transition: transform 0.3s ease;
+}
+
+.colorButton:hover {
+    transform: scale(1.2);
+}
+
+.noColors {
+    font-size: 13px;
+    color: #999;
+    background: #f1f1f1;
+    padding: 6px 12px;
+    border-radius: 9999px;
+    animation: fadeIn 0.4s ease-in-out;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 

@@ -4,13 +4,18 @@ import Line from "@/Components/Shared/Line/Line";
 import NotificationCard from "@/Components/Notification/NotificationCard/NotificationCard";
 import Link from "next/link";
 
-const NotificationModel = (props) => {
+const NotificationModel = ({ isShow, onClose }) => {
     return (
-        <div className={`${styles.container} ${props.isShow ? styles.show : ''}`}>
+        <div
+            role="dialog"
+            aria-modal="true"
+            aria-label="نافذة الإشعارات"
+            tabIndex={-1}
+            className={`${styles.container} ${isShow ? styles.show : ''}`}>
             <div className={styles.items}>
                 <button
                     className={styles.closeBtn}
-                    onClick={props.onClose}
+                    onClick={onClose}
                     aria-label="إغلاق الإشعارات"
                 >
                     &times;
@@ -19,17 +24,17 @@ const NotificationModel = (props) => {
                     <CompleteProfile />
                     <Line />
                     <NotificationCard
-                        title={"الطلبات"}
-                        time={"منذ ساعة"}
-                        text={"تم قبول طلبك بنجاح من خلال إدارة RWADY "}
-                        isAnyDetails={true}
+                        title="الطلبات"
+                        time="منذ ساعة"
+                        text="تم قبول طلبك بنجاح من خلال إدارة RWADY"
+                        isAnyDetails
                     />
                     <Line />
                     <NotificationCard
-                        title={"الطلبات"}
-                        time={"منذ ساعة"}
-                        text={"تم قبول طلبك بنجاح من خلال إدارة RWADY "}
-                        isAnyDetails={true}
+                        title="الطلبات"
+                        time="منذ ساعة"
+                        text="تم قبول طلبك بنجاح من خلال إدارة RWADY"
+                        isAnyDetails
                     />
                     <Line />
                     <Link href="/notification" className={styles.moreLink}>

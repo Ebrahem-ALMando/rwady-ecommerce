@@ -1,18 +1,13 @@
 import NotificationHeader from "@/Components/Notification/NotificationCard/NotificationHeader/NotificationHeader";
 import NotificationContent from "@/Components/Notification/NotificationCard/NotificationContent/NotificationContent";
-const NotificationCard=(props)=>{
-    return(
+
+const NotificationCard = ({ title, time, color, text, isAnyDetails = false }) => {
+    return (
         <>
-            <NotificationHeader
-                title={props.title}
-                time={props.time}
-            />
-            <NotificationContent
-                color={props.color}
-                text={props.text}
-                isAnyDetails={props.isAnyDetails}
-            />
+            <NotificationHeader title={title} time={time} />
+            <NotificationContent color={color} text={text} isAnyDetails={isAnyDetails} />
         </>
-    )
-}
-export default NotificationCard
+    );
+};
+
+export default NotificationCard;

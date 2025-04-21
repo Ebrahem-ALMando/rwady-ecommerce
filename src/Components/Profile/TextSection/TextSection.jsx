@@ -1,5 +1,5 @@
 import styles from './TextSection.module.css'
-
+import React from 'react'
 const TextSection=props=>{
     return(
         <div className={styles.textSection}>
@@ -17,4 +17,4 @@ const TextSection=props=>{
         </div>
     )
 }
-export default TextSection
+export default React.memo(TextSection);

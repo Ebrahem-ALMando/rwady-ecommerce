@@ -35,6 +35,7 @@ export async function Categories({dataPromise})
             getData={getCategories}
             keyData={"categoriesHome"}
             isCategory={true}
+            showName
         />
     )
 }

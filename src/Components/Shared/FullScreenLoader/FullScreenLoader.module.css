@@ -1,0 +1,89 @@
+/* FullScreenLoader.module.css */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(7, 65, 173, 0.08);
+    backdrop-filter: blur(10px);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    perspective: 1000px;
+}
+
+
+.loaderContainer {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin-bottom: 2rem;
+}
+
+.orbitalRing {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 2px solid rgba(7, 65, 173, 0.1);
+    border-radius: 50%;
+    animation: orbit 8s linear infinite;
+}
+
+@keyframes orbit {
+    from { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1.2); }
+    to { transform: rotate(360deg) scale(1); }
+}
+
+.spinner {
+    width: 100%;
+    height: 100%;
+    color: #0741AD;
+    filter: drop-shadow(0 0 8px rgba(7, 65, 173, 0.3));
+}
+
+.glowEffect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle, rgba(7,65,173,0.15) 0%, transparent 60%);
+    border-radius: 50%;
+}
+
+.text {
+    font-size: 1.4rem;
+    color: #0741AD;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 4px rgba(7,65,173,0.1);
+    position: relative;
+}
+
+.particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: #0741AD;
+    border-radius: 50%;
+    filter: blur(1px);
+    opacity: 0.4;
+}
+.emoji {
+    font-size: 3.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0741AD;
+    filter: drop-shadow(0 0 8px rgba(7, 65, 173, 0.3));
+    width: 100%;
+    height: 100%;
+}
