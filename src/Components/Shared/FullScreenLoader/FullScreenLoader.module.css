@@ -77,6 +77,16 @@
     filter: blur(1px);
     opacity: 0.4;
 }
+/*.emoji {*/
+/*    font-size: 3.5rem;*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
+/*    color: #0741AD;*/
+/*    filter: drop-shadow(0 0 8px rgba(7, 65, 173, 0.3));*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*}*/
 .emoji {
     font-size: 3.5rem;
     display: flex;
@@ -86,4 +96,18 @@
     filter: drop-shadow(0 0 8px rgba(7, 65, 173, 0.3));
     width: 100%;
     height: 100%;
+    animation: emojiRotate 1.8s linear infinite;
+    transform-origin: center;
+}
+
+@keyframes emojiRotate {
+    0% {
+        transform: scale(0.9) rotate(0deg);
+    }
+    50% {
+        transform: scale(1.2) rotate(180deg);
+    }
+    100% {
+        transform: scale(1) rotate(360deg);
+    }
 }

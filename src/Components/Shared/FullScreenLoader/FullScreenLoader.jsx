@@ -22,27 +22,32 @@ const FullScreenLoader = ({ duration = 2000 }) => {
                 >
                     <motion.div
                         className={styles.loaderContainer}
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        transition={{ type: "spring", stiffness: 120 }}
+                        initial={{scale: 0}}
+                        animate={{scale: 1}}
+                        transition={{type: "spring", stiffness: 120}}
                     >
-                        <div className={styles.orbitalRing} />
+                        <div className={styles.orbitalRing}/>
 
                         {/* رمز 🌀 متحرك داخل div */}
-                        <motion.div
-                            className={styles.emoji}
-                            initial={{ scale: 0 }}
-                            animate={{ rotate: 360,scale: [0, 1.2, 1] } }
 
-                            // transition={{ duration: 0.6, ease: "easeOut" }}
-                            transition={{
-                                repeat: Infinity,
-                                duration: 1.8,
-                                ease: "linear",
-                            }}
-                        >
+                        <div className={styles.emoji}>
                             🌀
-                        </motion.div>
+                        </div>
+
+                        {/*<motion.div*/}
+                        {/*    className={styles.emoji}*/}
+                        {/*    initial={{ scale: 0 }}*/}
+                        {/*    animate={{ rotate: 360,scale: [0, 1.2, 1] } }*/}
+
+                        {/*    // transition={{ duration: 0.6, ease: "easeOut" }}*/}
+                        {/*    transition={{*/}
+                        {/*        repeat: Infinity,*/}
+                        {/*        duration: 1.8,*/}
+                        {/*        ease: "linear",*/}
+                        {/*    }}*/}
+                        {/*>*/}
+                        {/*    🌀*/}
+                        {/*</motion.div>*/}
 
                         <motion.div
                             className={styles.glowEffect}

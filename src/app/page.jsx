@@ -29,8 +29,6 @@ export default async function Home() {
   return (
     <>
           <FullScreenLoader duration={1800} />
-
-
           <ScrollToTop />
 
           <Navbar/>
