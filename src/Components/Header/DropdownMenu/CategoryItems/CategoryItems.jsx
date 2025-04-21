@@ -10,7 +10,6 @@ const CategoryItems = ({ title, data = [], link }) => {
         : Array.isArray(data?.data)
             ? data.data
             : [];
-
     return (
         <section
             className={styles.container}

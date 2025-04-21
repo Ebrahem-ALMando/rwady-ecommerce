@@ -1,7 +1,7 @@
 'use client';
 
 import styles from './ProductCollections.module.css';
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import useSWR from 'swr';
 import Loading from '@/Components/Shared/Loading/Loading';
 import Error from '@/Components/Shared/Error/Error';
@@ -10,8 +10,22 @@ import PaginationWrapper from '@/Components/Shared/PaginationWrapper/PaginationW
 import {AnimatePresence,motion} from "framer-motion";
 import useFavourites from "@/hooks/useFavourites";
 import EmptyState from "@/Components/Shared/EmptyState/EmptyState";
+import {getTokenWithClient} from "@/utils/getTokenWithClient";
+import {useRouter} from "next/navigation";
 
 const ProductCollections = ({ initialData, initialError, getData, keyData }) => {
+
+    const isFavouriteSection = keyData === "favourites";
+    const router = useRouter();
+    if(isFavouriteSection){
+        const token = getTokenWithClient()
+        useEffect(() => {
+            if (!token) {
+                router.push('/sign-in');
+            }
+        }, [token]);
+    }
+
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 8;
     const {favouriteProducts }=useFavourites()
@@ -27,7 +41,7 @@ const ProductCollections = ({ initialData, initialError, getData, keyData }) => 
     if (initialError || error)
         return <Error onRetry={() => mutate(undefined, { revalidate: true })} />;
 
-    const isFavouriteSection = keyData === "favourites";
+
     let fullDataList = isFavouriteSection ? favouriteProducts : (
         Array.isArray(data)
             ? data

@@ -1,4 +1,4 @@
-import {notFound, redirect} from "next/navigation";
+import {notFound} from "next/navigation";
 import React, { Suspense } from "react";
 import Loading from "@/Components/Shared/Loading/Loading";
 import Navbar from "@/Components/Header/Navbar";
@@ -8,10 +8,7 @@ import {getRecentAddedProducts} from "@/api/services/listRecentAddedProducts";
 import {getTopSellingProducts} from "@/api/services/listTopSellingProducts";
 import {getOffers} from "@/api/services/listOffers";
 import {getRecommendProducts} from "@/api/services/listRecommendProducts";
-
 import ProductCollections from "@/Components/ProductCollections/ProductCollections";
-import {getFavouritesWithServer} from "@/api/services/getFavouritesWithServer";
-import {getTokenWithServer} from "@/utils/getTokenWithServer";
 
 
 export async function generateStaticParams() {
@@ -46,13 +43,7 @@ const DynamicProductCollectionPage = async ({ params }) => {
 
     const { collections } =await params;
 
-    if(collections==="favourites"){
-        const token=  await getTokenWithServer()
 
-        if (!token) {
-            redirect("/sign-in");
-        }
-    }
     const config = {
         "recently-added": {
             title: "المضافة حديثًا",

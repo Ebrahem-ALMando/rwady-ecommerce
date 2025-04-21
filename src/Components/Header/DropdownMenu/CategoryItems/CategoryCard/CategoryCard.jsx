@@ -2,10 +2,11 @@ import styles from './CategoryCard.module.css';
 import Link from "next/link";
 import Image from "next/image";
 import { memo } from "react";
+import SafeImage from "@/Components/Shared/SafeImage/SafeImage";
 
 const CategoryCard = ({
                           link = "#",
-                          logo = "/placeholder.jpg",
+                          logo = "/images/img_10.png",
                           title = "بدون اسم"
                       }) => {
     return (
@@ -16,8 +17,9 @@ const CategoryCard = ({
             prefetch={false}
         >
             <div className={styles.categoryCard}>
-                <Image
-                    src={logo || "/placeholder.jpg"}
+                <SafeImage
+                    fallback="/images/img_10.png"
+                    src={logo}
                     alt={`${title} Img`||"IMG"}
                     width={120}
                     height={120}
