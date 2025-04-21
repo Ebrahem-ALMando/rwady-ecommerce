@@ -1,13 +1,7 @@
-
 import Carousel from "@/Components/Shared/SliderComponents/Carousel/Carousel";
 import TitleSection from "@/Components/Shared/TitleSection/TitleSection";
-
-
 import VideoSection from "@/Components/HomePage/VideoSection/VideoSection";
-import MovingProductsBar from "@/Components/HomePage/MovingProductsBar/MovingProductsBar";
 import ProductsCategoryCard from "@/Components/HomePage/ProductsCategoryCard/ProductsCategoryCard";
-import CircleCartCarousel from "@/Components/HomePage/CategoriesCarousel/CategoriesCarousel";
-
 import Footer from "@/Components/Footer/Footer";
 import Navbar from "@/Components/Header/Navbar";
 import ScrollToTop from "@/Components/ScrollToTop";
@@ -16,7 +10,6 @@ import BrandsCarousel from "@/Components/HomePage/BrandsCarousel/BrandsCarousel"
 import TopHomeCategory from "@/Components/HomePage/TopHomeCategory/TopHomeCategory";
 import ProductSlider from "@/Components/Shared/SliderComponents/ProductSlider/ProductSlider";
 import OffersList from "@/Components/HomePage/OffersList/OffersList";
-import HomeCategoryWithProducts from "@/Components/HomePage/HomeCategoryWithProducts/HomeCategoryWithProducts";
 import MovingProductsBarSlider from "@/Components/HomePage/MovingProductsBarSlider/MovingProductsBarSlider";
 import RecentlyAddedProducts from "@/Components/HomePage/RecentlyAddedProducts/RecentlyAddedProducts";
 import TopSellingProducts from "@/Components/HomePage/TopSellingProducts/TopSellingProducts";
@@ -30,19 +23,22 @@ export default async function Home() {
     <>
           <FullScreenLoader duration={1800} />
           <ScrollToTop />
-
           <Navbar/>
         <Carousel/>
-
-
         <TitleSection initTitle="الاقسام" />
         <CategoriesCarousel/>
-        <TopHomeCategory/>
+        {/*<TopHomeCategory/>*/}
+
+
         {/*<TitleSection initTitle="الأكثر مبيعا" />*/}
         {/*<ProductSlider/>*/}
+
+
         <TopSellingProducts/>
         <VideoSection src={"/Paralax.m4v"}/>
         <MovingProductsBarSlider/>
+
+
         {/*<MovingProductsBar/>*/}
         {/*<TitleSection initTitle="احدث العروض" />*/}
         {/*<ProductSlider/>*/}
@@ -60,11 +56,11 @@ export default async function Home() {
             initTitle="منتجات نسائية" />
         <ProductSlider/>
 
-        <HomeCategoryWithProducts/>
+        {/*<HomeCategoryWithProducts/>*/}
+
         <RecentlyAddedProducts/>
         <TitleSection initTitle="الماركات" />
         <BrandsCarousel/>
-
         <Footer/>
 
     </>

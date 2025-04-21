@@ -119,7 +119,7 @@ const Carousel = () => {
                             <h2 className="text-3xl font-bold">{slide.title}</h2>
                             <p className={`blur-1 text-4xl my-2  ${styles.description}`}>{slide.description}</p>
                             <div className="w-full flex justify-end mr-20">
-                                <Link href={slide.link} >
+                                <Link href={slide.link||"#"} >
                                     <button
                                         className=" mt-4 mr-5  bg-white text-blue-600 px-6 py-2 rounded-lg  hover:bg-gray-400 w-auto ">
                                         أبدأ تسوق الان

@@ -54,12 +54,29 @@
 
 .text {
     font-size: 1.4rem;
-    color: #0741AD;
+    /*background: rgba(7, 65, 173, 0.05);*/
+    /*color: #d2cdcd;*/
+    color: #0641AD;
     font-weight: 600;
     letter-spacing: 0.5px;
     text-shadow: 0 2px 4px rgba(7,65,173,0.1);
     position: relative;
 }
+/*.text {*/
+/*    font-size: 1.4rem;*/
+/*    background: rgba(7, 65, 173, 0.05); !* خلفية شفافة بلون أزرق فاتح *!*/
+/*    color: #0741AD;*/
+/*    font-weight: 600;*/
+/*    letter-spacing: 0.5px;*/
+/*    text-shadow: 0 2px 4px rgba(7, 65, 173, 0.1);*/
+/*    position: relative;*/
+/*    padding: 1rem 1.5rem;*/
+/*    border-radius: 12px; !* حواف منحنية قليلاً *!*/
+/*    border: 1px solid rgba(7, 65, 173, 0.2); !* حافة خفيفة *!*/
+/*    backdrop-filter: blur(6px); !* تأثير بلور للخلفية *!*/
+/*    box-shadow: 0 4px 12px rgba(7, 65, 173, 0.08); !* ظل ناعم *!*/
+/*    transition: background 0.3s ease, box-shadow 0.3s ease;*/
+/*}*/
 
 .particles {
     position: absolute;
