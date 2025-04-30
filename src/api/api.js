@@ -11,7 +11,7 @@ const api = axios.create({
     headers: {
         "Content-Type": "multipart/form-data",
     },
-    timeout: 30000,
+    timeout: 10000,
 });
 api.interceptors.request.use((config) => {
     const lang = Cookies.get('language') || 'ar';
@@ -67,6 +67,9 @@ const fetchAPI = async (endpoint, method = "GET", data = null, options = {}) => 
             config.timeout = 60000;
         }
             const response = await api(config);
+        const startTime = Date.now();
+
+        console.log(`⏱️ API [${endpoint}] استغرقت: ${Date.now() - startTime} ms`);
 
             if (response.status >= 400) {
                 throw new Error(`Error: ${response.statusText} (${response.status})`);
