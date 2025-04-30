@@ -11,7 +11,7 @@ const api = axios.create({
     headers: {
         "Content-Type": "multipart/form-data",
     },
-    timeout: 10000,
+    timeout: 30000,
 });
 api.interceptors.request.use((config) => {
     const lang = Cookies.get('language') || 'ar';

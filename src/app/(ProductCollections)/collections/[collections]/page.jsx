@@ -39,36 +39,18 @@ export async function generateMetadata({ params }) {
 }
 
 const DynamicProductCollectionPage = async ({ params }) => {
-
-
-    const { collections } =await params;
-
+    const { collections } = params;
 
     const config = {
-        "recently-added": {
-            title: "المضافة حديثًا",
-            dataPromise: getRecentAddedProducts,
-        },
-        "top-selling": {
-            title: "الأكثر مبيعًا",
-            dataPromise: getTopSellingProducts,
-        },
-        "offers-list": {
-            title: "العروض والتخفيضات",
-            dataPromise: getOffers,
-        },
-        "recommend-list": {
-            title: "المقترحة لك",
-            dataPromise: getRecommendProducts,
-        },
-        "favourites": {
-            title: "المفضلة",
-
-        },
+        "recently-added": { title: "المضافة حديثًا", dataPromise: getRecentAddedProducts },
+        "top-selling": { title: "الأكثر مبيعًا", dataPromise: getTopSellingProducts },
+        "offers-list": { title: "العروض", dataPromise: getOffers },
+        "recommend-list": { title: "المقترحة", dataPromise: getRecommendProducts },
+        "favourites": { title: "المفضلة", dataPromise: null },
     };
 
     const section = config[collections];
-    if (!section) notFound();
+    if (!section) return notFound();
 
     return (
         <>
@@ -85,6 +67,7 @@ const DynamicProductCollectionPage = async ({ params }) => {
         </>
     );
 };
+
 
 export default DynamicProductCollectionPage;
 export async function ProductCollectionsData({ title,dataPromise, collection,  }) {

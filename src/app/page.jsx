@@ -23,9 +23,7 @@ export default async function Home() {
     <>
           <FullScreenLoader duration={1800} />
           <ScrollToTop />
-        <p>
-            Welcome
-        </p>
+
           <Navbar/>
         <Carousel/>
         <TitleSection initTitle="الاقسام" />

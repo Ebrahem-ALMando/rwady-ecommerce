@@ -66,25 +66,24 @@ export const metadata = {
 };
 
 
-export default  function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
     const supportedLanguages = ["ar", "en"];
-    const cookieLang = cookies().get("language")?.value;
+    const cookieStore = cookies();
+    const cookieLang = (await cookieStore.get("language"))?.value;
     const lang = supportedLanguages.includes(cookieLang) ? cookieLang : "ar";
     const dir = lang === "ar" ? "rtl" : "ltr";
 
-
     return (
-        <html lang={cookieLang} dir={dir}>
+        <html lang={lang} dir={dir}>
         <body className={`${geistSans.variable} ${geistMono.variable} ${ibmArabic.variable} antialiased`}>
-        <Toaster position="top-center" reverseOrder={false} duration={3000}/>
+        <Toaster position="top-center" reverseOrder={false} duration={3000} />
         <div className="mainContainer">
             <div className="child">
-
                 {children}
-
             </div>
         </div>
         </body>
         </html>
     );
 }
+

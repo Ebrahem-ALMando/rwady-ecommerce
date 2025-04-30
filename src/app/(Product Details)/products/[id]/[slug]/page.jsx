@@ -13,7 +13,9 @@ import EmptyState from "@/Components/Shared/EmptyState/EmptyState";
 
 export async function generateStaticParams() {
     try {
-        const products = await getProducts();
+        const response = await getProducts();
+        const products = response?.data || [];
+
         return products.map((product) => ({
             id: product.id.toString(),
             slug: slugify(product.name),
@@ -23,6 +25,7 @@ export async function generateStaticParams() {
         return [];
     }
 }
+
 
 export async function generateMetadata({ params }) {
     const { id } = await params;
