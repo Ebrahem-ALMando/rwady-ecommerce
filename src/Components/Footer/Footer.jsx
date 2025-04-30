@@ -21,7 +21,7 @@ import {
 import Link from "next/link";
 import FloatingDownloadButton from "@/Components/FloatingDownloadButton/FloatingDownloadButton";
 import Error from "@/Components/Shared/Error/Error";
-import { getSettings } from "@/api/services/settings";
+// import { getSettings } from "@/api/services/settings";
 import Image from "next/image";
 import Loading from "@/Components/Shared/Loading/Loading";
 import { Suspense } from "react";
@@ -112,12 +112,12 @@ const FooterData = async ({ dataPromise }) => {
 };
 
 const Footer = () => {
-    const dataPromise = getSettings();
+    // const dataPromise = getSettings();
 
     return (
         <footer className={styles.footer}>
             <Suspense fallback={<Loading />}>
-                <FooterData dataPromise={dataPromise} />
+                {/*<FooterData dataPromise={dataPromise} />*/}
             </Suspense>
             <hr className={styles.footerLine} />
             <div className={styles.footerBottom}>
