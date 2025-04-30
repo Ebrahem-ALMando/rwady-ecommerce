@@ -1,16 +1,21 @@
 import styles from './PaymentMethod.module.css'
 import {CashIcon, CreditCardIcon} from "@/utils/Icons";
 import Image from "next/image";
+import {useState} from "react";
 
-const PaymentMethod=({item})=>{
+const PaymentMethod=({item,handleChecked})=>{
+
+    const checked=()=>{
+        handleChecked(item.id,item.type)
+    }
     return(
         <div className={styles.paymentRow}>
             <input
             type={"radio"}
-            name={"radio-payment"}
+            name={`radio-payment`}
             value={""}//
             className={styles.radioInput}
-            // checked={props.isChecked}
+            onClick={checked}
              id={item.id}
             />
 

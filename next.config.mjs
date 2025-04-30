@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
+import nextI18NextConfig from './next-i18next.config.js';
+
 const nextConfig = {
     reactStrictMode: true,
+
     webpack: (config) => {
         config.resolve.fallback = {
             fs: false,
@@ -8,6 +11,7 @@ const nextConfig = {
         };
         return config;
     },
+
     images: {
         remotePatterns: [
             {
@@ -19,14 +23,8 @@ const nextConfig = {
         ],
     },
 
-    // async rewrites() {
-    //     return [
-    //         {
-    //             source: '/api/:path*',
-    //             destination: 'https://rawady.brainsoftsolutions.com/api/:path*',
-    //         },
-    //     ];
-    // },
+
+    i18n: nextI18NextConfig.i18n,
 };
 
 export default nextConfig;

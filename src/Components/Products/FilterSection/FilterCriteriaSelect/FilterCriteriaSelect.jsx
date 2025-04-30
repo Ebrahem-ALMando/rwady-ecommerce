@@ -1,8 +1,9 @@
+"use client"
 import styles from './FilterCriteriaSelect.module.css';
 import Stars from "@/Components/Shared/Stars/Stars";
 
 const FilterCriteriaSelect = (props) => {
-    const { id, section, title, quantity, isColor, color, isRating,productRating, type, onChange } = props;
+    const { id, section, title, quantity, isColor, color, isRating,productRating, type, onChange,selected } = props;
 
     return (
         <div className={styles.row}>
@@ -12,8 +13,10 @@ const FilterCriteriaSelect = (props) => {
                     name={section}
                     id={`${type}-${id}-${section}`}
                     className={styles.input}
-                    value={title}
-                    onChange={onChange}
+                    value={id}
+                    onChange={() => onChange(section, id)}
+                    checked={(selected || []).includes(id)}
+
                 />
                 <label htmlFor={`${type}-${id}-${section}`} className={styles.inputLabel}>
                     {isColor && color ? (

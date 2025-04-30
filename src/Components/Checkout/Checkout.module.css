@@ -28,6 +28,15 @@
     margin: 10px 30px;
     padding: 15px;
 }
+
+.newAddress{
+    background-color: #0641AD;
+    border-radius: 10px;
+    padding: 15px;
+    width: 100%;
+    color: white;
+    cursor: pointer;
+}
 @media (max-width: 1150px)
 {
     .items

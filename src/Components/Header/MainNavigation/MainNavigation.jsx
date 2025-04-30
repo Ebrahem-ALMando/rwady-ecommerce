@@ -1,17 +1,22 @@
+"use client";
 import Link from 'next/link';
 import styles from './MainNavigation.module.css';
 import DropdownMenu from "@/Components/Header/DropdownMenu/DropdownMenu";
 import Language from "@/Components/Shared/Language/Language";
 import DownloadAppWithLogo from "@/Components/Header/ToolNav/DownloadAppWithLogo/DownloadWithLogo";
 import { navLinks } from "@/Data/NavLinks";
+import { useTranslation } from "next-i18next";
+import "@/i18n";
 
 const MainNavigation = ({ isMenuOpen, isOpenDropdown, toggleMenu, setIsOpenDropdown }) => {
+    const { t } = useTranslation("common");
+
     return (
         <div className={styles.mainDiv}>
             <div className={styles.contDiv}>
                 <nav
                     role="navigation"
-                    aria-label="القائمة الرئيسية"
+                    aria-label={t("mainNav.label")}
                     className={`${styles.navItems} ${isMenuOpen ? styles.active : ''}`}
                     onMouseEnter={() => setIsOpenDropdown(true)}
                     onMouseLeave={() => setIsOpenDropdown(false)}
@@ -22,9 +27,10 @@ const MainNavigation = ({ isMenuOpen, isOpenDropdown, toggleMenu, setIsOpenDropd
                             href={link.href}
                             className={styles.navItem}
                         >
-                            {link.label}
+                            {t(`mainNav.links.${link.label}`)}
                         </Link>
                     ))}
+
 
                     <div className={styles.logoWithLang}>
                         <Language />
@@ -32,15 +38,6 @@ const MainNavigation = ({ isMenuOpen, isOpenDropdown, toggleMenu, setIsOpenDropd
                     </div>
                 </nav>
             </div>
-
-            {/*{isOpenDropdown && (*/}
-            {/*    <div*/}
-            {/*        onMouseEnter={() => setIsOpenDropdown(true)}*/}
-            {/*        onMouseLeave={() => setIsOpenDropdown(false)}*/}
-            {/*    >*/}
-            {/*        <DropdownMenu isShow={isOpenDropdown} />*/}
-            {/*    </div>*/}
-            {/*)}*/}
         </div>
     );
 };

@@ -6,15 +6,18 @@ const baseUrl = ApiConfig.API_BASE_URL;
 
 axios.defaults.withXSRFToken = true;
 const api = axios.create({
-    // baseURL:"/api/",
     baseURL:baseUrl,
-    // withCredentials: true,
     withXSRFToken: true,
     headers: {
         "Content-Type": "multipart/form-data",
     },
-    timeout: 10000,
+    timeout: 30000,
 });
+api.interceptors.request.use((config) => {
+    const lang = Cookies.get('language') || 'ar';
+    config.headers['Accept-Language'] = lang;
+    return config;
+}, (error) => Promise.reject(error));
 
 let serverAvailable = null;
 
@@ -42,17 +45,32 @@ const fetchAPI = async (endpoint, method = "GET", data = null, options = {}) => 
         // if (endpoint.startsWith("/")) {
         //     endpoint = endpoint.slice(1);
         // }
-        const response = await api({
-            url: endpoint,
-            method,
-            data,
-            ...options,
-        });
 
-        if (response.status >= 400) {
-            throw new Error(`Error: ${response.statusText} (${response.status})`);
+            const config = {
+                url: endpoint,
+                method,
+                data,
+                ...options,
+            };
+
+
+        if (data instanceof URLSearchParams) {
+            config.headers = {
+                ...config.headers,
+                "Content-Type": "application/x-www-form-urlencoded",
+            };
+        } else if (data instanceof FormData) {
+            config.headers = {
+                ...config.headers,
+                "Content-Type": "multipart/form-data",
+            };
+            config.timeout = 60000;
         }
+            const response = await api(config);
 
+            if (response.status >= 400) {
+                throw new Error(`Error: ${response.statusText} (${response.status})`);
+            }
 
         return response.data;
 

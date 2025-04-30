@@ -11,10 +11,12 @@ const RowTextWithNumber = props => {
                     fontWeight: props.weightTitle,
                 }}
             >
+
                 {props.title}
                 <span
                 className={styles.star}
                 >
+
                     {props.star}
                 </span>
             </p>
@@ -25,7 +27,10 @@ const RowTextWithNumber = props => {
                     fontSize: props.sizeValue,
                 }}
             >
-                {props.value}
+                {props.isNotValid?
+                    props.icon:props.value
+                }
+
             </p>
         </div>
     )

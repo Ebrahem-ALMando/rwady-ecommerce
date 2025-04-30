@@ -10,22 +10,31 @@ import {
 import Line from "@/Components/Shared/Line/Line";
 import DeleteButton from "@/Components/Shared/Buttons/DeleteButton/DeleteButton";
 import EditButton from "@/Components/Shared/Buttons/EditButton/EditButton";
+import useSWR from "swr";
+import { getProfile } from "@/api/services/auth/getProfile";
 
 const Address = (props) => {
+    const { data: profileData } = useSWR("profileData", getProfile);
+
     const {
         id,
         isDefault,
         headerType,
         onClick,
         addressData,
-        onDelete
+        onDelete,
+        onEdit,
+        onSetDefault,
     } = props;
 
-    // Extracted data from addressData
-    const userName = addressData?.full_name || "—";
+
+    const fullName = profileData ? profileData.data?.name : "—";
+    const userName = props.fullName || fullName || "—";
     const fullAddress = addressData?.address || "—";
     const phone = addressData?.phone || "—";
     const locitionName = addressData?.label || "عنوان";
+
+
 
     return (
         <div
@@ -34,8 +43,7 @@ const Address = (props) => {
         >
             <div className={styles.header}>
                 <div className={`${styles.locition} ${isDefault ? '' : styles.inActiveRect}`}>
-                    <span
-                        onClick={() => setAddressDefault(id)}>
+                    <span onClick={() => onSetDefault?.(addressData)}>
                         {FillLocitionIcon}
                         {locitionName}
                     </span>
@@ -44,10 +52,14 @@ const Address = (props) => {
                 <div className={styles.actionButton}>
                     {headerType === "form" ? (
                         <>
-                            <EditButton icon={EditIcon} />
+                            <EditButton
+                                icon={EditIcon}
+                                onClick={() => onEdit(addressData)}
+                            />
                             <DeleteButton
                                 onClick={() => onDelete(id)}
-                                icon={FillDeleteIcon} />
+                                icon={FillDeleteIcon}
+                            />
                         </>
                     ) : (
                         <button

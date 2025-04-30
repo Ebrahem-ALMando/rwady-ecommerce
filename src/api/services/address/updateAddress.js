@@ -1,13 +1,13 @@
 import { fetchAPI } from "@/api/api";
-import {getTokenWithServer} from "@/utils/getTokenWithServer";
+import {getTokenWithClient} from "@/utils/getTokenWithClient";
 
 
 export const updateAddress = async (formData) => {
-    "use server";
-    const endPointKey = "update-address";
+
+    const endPointKey = "edit-address";
     try {
 
-        const token = await getTokenWithServer()
+        const token = getTokenWithClient()
         if (!token) throw new Error("Token not found");
 
         const response = await fetchAPI(endPointKey, "POST", formData, {

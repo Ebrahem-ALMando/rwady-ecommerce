@@ -1,32 +1,46 @@
 "use client";
 import styles from './TitleNav.module.css';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { CloseIcon } from "@/utils/Icons";
+import { useTranslation } from "next-i18next";
+import '@/i18n';
 
 const TitleNav = () => {
+    const { t } = useTranslation("common");
     const [isVisible, setIsVisible] = useState(true);
 
     if (!isVisible) return null;
 
     return (
-        <div className={styles.mainDiv} role="region" aria-label="شريط العروض">
+        <div
+            className={styles.mainDiv}
+            role="region"
+            aria-label={t("navBar.promoRegion")}
+        >
             <button
                 className={styles.closeIcon}
                 onClick={() => setIsVisible(false)}
-                aria-label="إغلاق الشريط الإعلاني"
+                aria-label={t("navBar.close")}
             >
                 {CloseIcon}
             </button>
 
             <div className={styles.centerContent}>
-                <h4 className={styles.title} aria-label="عروض مميزة">
-                    عـــــــروض على جميع المنتجات
+                <h4
+                    className={`${styles.title} text-center font-arabic`}
+                    aria-label={t("navBar.title")}
+                >
+                    {t("navBar.title")}
                 </h4>
             </div>
 
-            <Link href={"/products"} passHref  className={styles.startShopBTN} aria-label="أبدأ تسوق الآن">
-                    أبدأ تسوق الآن
+            <Link
+                href="/products"
+                className={styles.startShopBTN}
+                aria-label={t("navBar.startShopping")}
+            >
+                {t("navBar.startShopping")}
             </Link>
         </div>
     );

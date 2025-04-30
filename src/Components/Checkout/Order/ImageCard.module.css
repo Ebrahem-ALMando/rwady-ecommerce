@@ -47,7 +47,11 @@
     font-size: 16px;
     font-weight: 500;
     color: #0741AD;
+    /*AR*/
+    direction:ltr;
+    text-align: end;
 }
+
 @media (max-width: 1160px) {
     .imageCard{
        width: 100%;

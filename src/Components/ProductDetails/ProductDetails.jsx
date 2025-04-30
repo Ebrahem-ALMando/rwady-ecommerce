@@ -25,7 +25,7 @@ const ProductDetails = ({ id, initialData, initialError, getData, keyData }) => 
 
     if (!product || !product.id) return <EmptyState message="لم يتم العثور على المنتج" />;
 
-
+    console.log(product)
     return (
         <motion.div
             className={styles.container}

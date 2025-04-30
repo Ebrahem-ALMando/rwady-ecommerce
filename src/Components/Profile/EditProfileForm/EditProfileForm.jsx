@@ -17,32 +17,29 @@ const EditProfileForm = (props) => {
         fullName: props.profileData?.name || '',
         email: props.profileData?.email || '',
         phone: props.profileData?.phone || '',
-        city: props.profileData?.city || '',
-        district: props.profileData?.district || '',
+        city: props.profileData?.city_id || '',
+        district: props.profileData?.district_id || '',
     });
+
 
     const [districts, setDistricts] = useState([]);
     const { data: citiesData, error, isLoading, mutate } = useSWR("cities", getCities);
 
     useEffect(() => {
-        if (props.profileData?.city && citiesData?.data?.length) {
-            const matchedCity = citiesData.data.find(city => city.title === props.profileData.city);
-            if (matchedCity) {
-                setFormData(prev => ({ ...prev, city: matchedCity.id }));
-                getDistricts(matchedCity.id)
-                    .then(res => {
-                        setDistricts(res.data);
-                        const matchedDistrict = res.data.find(d => d.title === props.profileData.district);
-                        if (matchedDistrict) {
-                            setFormData(prev => ({ ...prev, district: matchedDistrict.id }));
-                        }
-                    })
-                    .catch(() => toast.error("فشل في تحميل المناطق"));
-            }
+        if (props.profileData?.city_id) {
+            setFormData(prev => ({
+                ...prev,
+                city: props.profileData.city_id || '',
+                district: props.profileData.district_id || '',
+            }));
+
+            getDistricts(props.profileData.city_id)
+                .then(res => setDistricts(res.data))
+                .catch(() => toast.error("فشل في تحميل المناطق"));
         }
-    }, [props.profileData?.city, citiesData]);
-    // if (isLoading) return <Loading />;
-    // if (error) return <Error onRetry={() => mutate(undefined, { revalidate: true })} />;
+    }, [props.profileData?.city_id]);
+
+
 
     const cities = citiesData?.data || [];
 
@@ -70,14 +67,14 @@ const EditProfileForm = (props) => {
             toast.error("الرجاء إدخال بريد إلكتروني صالح");
             return false;
         }
-        if (!formData.city) {
-            toast.error("يرجى اختيار المدينة");
-            return false;
-        }
-        if (!formData.district) {
-            toast.error("يرجى اختيار المنطقة");
-            return false;
-        }
+        // if (!formData.city) {
+        //     toast.error("يرجى اختيار المدينة");
+        //     return false;
+        // }
+        // if (!formData.district) {
+        //     toast.error("يرجى اختيار المنطقة");
+        //     return false;
+        // }
         return true;
     };
 
@@ -159,7 +156,7 @@ const EditProfileForm = (props) => {
                             <label htmlFor="district" className={styles.inputLabel}>المنطقة / الدولة</label>
                             <select id="district" name="district" value={formData.district} onChange={handleChange} className={styles.selectInput}>
                                 <option value="" disabled hidden>اختر المنطقة</option>
-                                {districts.map(dist => (
+                                {districts?.map(dist => (
                                     <option key={dist.id} value={dist.id}>{dist.title}</option>
                                 ))}
                             </select>

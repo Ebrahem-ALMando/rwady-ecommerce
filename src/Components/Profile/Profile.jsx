@@ -31,7 +31,7 @@ const Profile = (props) => {
 
     );
 
-    const hasError = error || props.initialError;
+
     if (isLoading) return <Loading />;
 
 
@@ -45,8 +45,8 @@ const Profile = (props) => {
         );
     }
 
-    const Data = data?.data || [];
-    const dataList = props.data ? props.data : Data;
+    const dataList = data?.data || [];
+
 
     const handleImageClick = () => {
         fileInputRef.current?.click();
@@ -102,7 +102,7 @@ const Profile = (props) => {
                 <div className={styles.mainInfo}>
                     <div className={styles.imgContainer}>
                         <Image
-                            src={dataList?.profile_image || "/images/img_9.webp"}
+                            src={dataList?.img || "/images/img_9.webp"}
                             alt={`${dataList?.name || " صورة حساب المستخدم"}`}
                             width={200}
                             height={200}

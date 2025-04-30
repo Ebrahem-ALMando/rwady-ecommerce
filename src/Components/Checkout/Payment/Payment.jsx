@@ -10,12 +10,13 @@ import {getListPayments} from "@/api/services/listPayments";
 import useSWR from "swr";
 import Loading from "@/Components/Shared/Loading/Loading";
 
-const Payment= props=>{
+const Payment=({handleChecked})=>{
 
     const { data:listPaymentsData, error, isLoading, mutate } = useSWR(
         "list-payments",
         getListPayments
     );
+
 
     const hasError = error;
 
@@ -32,14 +33,15 @@ const Payment= props=>{
         );
 
     const Data = listPaymentsData?.data || [];
-    console.log(Data)
+
     return(
         <div className={styles.payment}>
             {
                 Data.map((item,index)=>(
-                    item.active&&
+                    // item.active&&
                         <div  key={index}>
                             <PaymentMethod
+                                handleChecked={handleChecked}
                                 item={item}
                                 id={`CreditCardIcon-${index}`}
 

@@ -1,13 +1,7 @@
-"use server";
-
-import { fetchAPI } from "@/api/api";
+"use server"
+import {fetchAPI} from "@/api/api";
 import ApiConfig from "@/api/apiConfig";
 
-/**
- * جلب قائمة المنتجات باستخدام فلاتر محددة
- * @param {Object} filters - الفلاتر المستخدمة (مثل: category_id، name، limit، ...إلخ)
- * @returns قائمة المنتجات أو خطأ
- */
 export const getProducts = async (filters = {}) => {
     const endPointKey = "products";
 
@@ -15,12 +9,26 @@ export const getProducts = async (filters = {}) => {
         const formData = new URLSearchParams();
 
         for (const key in filters) {
-            if (filters[key] !== undefined && filters[key] !== "") {
-                formData.append(key, filters[key]);
+            const value = filters[key];
+
+
+            if (Array.isArray(value)) {
+                value.forEach((item, index) => {
+                    formData.append(`${key}[${index}]`, item);
+                });
+            }
+
+            else if (value !== undefined && value !== "" && value !== null) {
+                formData.append(key, value);
             }
         }
 
+        console.log("🟦 formData sent:", formData.toString());
+
         const response = await fetchAPI(endPointKey, "POST", formData, {
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
             next: {
                 revalidate: ApiConfig.revalidateTime,
                 tags: [endPointKey],

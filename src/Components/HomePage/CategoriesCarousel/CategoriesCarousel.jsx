@@ -36,6 +36,7 @@ export async function Categories({dataPromise})
             keyData={"categoriesHome"}
             isCategory={true}
             showName
+            filterKey={"category_ids"}
         />
     )
 }

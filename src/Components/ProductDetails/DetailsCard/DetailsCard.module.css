@@ -232,28 +232,33 @@
     padding: 0.5rem 1rem;
     background-color: #ffe5e5;
     border-radius: 8px;
-}
-.favBtn {
+    min-width: max-content;
     display: flex;
     align-items: center;
-    gap: 0.4rem;
-    padding: 0.6rem 1rem;
-    border-radius: 10px;
-    font-weight: 600;
-    color: #0741AD;
-    background-color: #f0f4ff;
-    border: 1px solid #0741AD20;
+
+}
+.favBtn {
+    background-color: #f0f4ff !important;
     transition: background 0.3s ease, color 0.3s ease;
 }
 
 .favBtn:hover {
-    background-color: #e8f0ff;
+    background-color: #e8f0ff !important;
 }
 
 .favBtn.active {
-    color: #E41E1E;
-    background-color: #ffecec;
-    border-color: #E41E1E50;
+    color: #E41E1E !important;
+    background-color: #ffecec !important;
+    border-color: #E41E1E50 !important;
+}
+.disabled{
+    cursor: not-allowed;
+    background-color: #6A6E83 !important;
+
+}
+.addToCart{
+    color: #ffffff !important;
+    background-color: rgba(18, 30, 113, 0.8) !important;
 }
 
 @media (max-width: 1070px) {

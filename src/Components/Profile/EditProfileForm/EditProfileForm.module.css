@@ -222,3 +222,55 @@
     transform: translateY(-1px);
 }
 
+
+
+.switchLabel {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.switchInput {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.switchSlider {
+    position: relative;
+    width: 50px;
+    height: 26px;
+    background-color: #ccc;
+    border-radius: 34px;
+    transition: background-color 0.3s ease;
+}
+
+.switchSlider::before {
+    content: "";
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+.switchInput:checked + .switchSlider {
+    background-color: #0741AD;
+}
+
+.switchInput:checked + .switchSlider::before {
+    transform: translateX(24px);
+}
+
+.switchText {
+    font-size: 14px;
+    color: #0741AD;
+    font-weight: 600;
+}
+
+

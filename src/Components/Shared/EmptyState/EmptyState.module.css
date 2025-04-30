@@ -7,6 +7,7 @@
     border-radius: 2rem;
     margin: 2rem;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+    width: 85%;
 }
 
 .contentWrapper {
@@ -73,26 +74,26 @@
     overflow: hidden;
 }
 
-.text::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 200%;
-    height: 100%;
-    background: linear-gradient(
-            90deg,
-            transparent,
-            rgba(255,255,255,0.3),
-            transparent
-    );
-    animation: shine 3s infinite;
-}
+/*.text::before {*/
+/*    content: '';*/
+/*    position: absolute;*/
+/*    top: 0;*/
+/*    left: -100%;*/
+/*    width: 200%;*/
+/*    height: 100%;*/
+/*    background: linear-gradient(*/
+/*            90deg,*/
+/*            transparent,*/
+/*            rgba(255,255,255,0.3),*/
+/*            transparent*/
+/*    );*/
+/*    animation: shine 3s infinite;*/
+/*}*/
 
-@keyframes shine {
-    0% { left: -100%; }
-    100% { left: 100%; }
-}
+/*@keyframes shine {*/
+/*    0% { left: -100%; }*/
+/*    100% { left: 100%; }*/
+/*}*/
 
 /* الأشكال العائمة */
 .floatingCircle,
@@ -184,4 +185,7 @@
     0% { opacity: 0.4; transform: translate(-50%, -50%) scale(0.8); }
     50% { opacity: 0.2; transform: translate(-50%, -50%) scale(1.2); }
     100% { opacity: 0.4; transform: translate(-50%, -50%) scale(0.8); }
+}
+.newItem{
+    margin: 1.5rem auto;
 }

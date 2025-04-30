@@ -1,66 +1,86 @@
-.mainDiv{
+.mainDiv {
     height: 53px;
     width: 100%;
     background-color: #ffffff;
-    /*margin:0 3rem 0 0 ;*/
+    position: relative;
+    display: flex;
+    align-items: center;
 }
-.SearchInput{
+
+.SearchInput {
     height: 50px;
     width: 100%;
     border-radius: 10px;
-    background-color:#eeeff2;
-    padding: 7px;
+    background-color: #eeeff2;
+    padding: 7px 50px 7px 16px;
+    border: none;
+    font-size: 1rem;
+    direction: inherit;
 }
-.SearchInput[placeholder]{
+
+
+html[dir="rtl"] .SearchInput {
+    padding-right: 50px;
+    padding-left: 16px;
     text-align: right;
-    padding-right: 70px;
 }
-.SearchIcon{
-    position: relative;
-    height: 30px;
-    width: 30px;
+
+
+html[dir="ltr"] .SearchInput {
+    padding-left: 50px;
+    padding-right: 16px;
+    text-align: left;
 }
-.SearchIcon svg {
+
+.SearchIcon {
     position: absolute;
-    top: -4px;
-    right:10px;
+    top: 50%;
+    transform: translateY(-50%);
     background-color: #0741ad;
     color: white;
-    border-radius: 5px;
+    border-radius: 8px;
     height: 35px;
     width: 35px;
-    font-size: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
 }
-@media (max-width: 768px)
-{
-    .mainDiv{
+
+
+html[dir="rtl"] .SearchIcon {
+    right: 10px;
+}
+
+
+html[dir="ltr"] .SearchIcon {
+    left: 10px;
+}
+
+
+@media (max-width: 768px) {
+    .mainDiv {
         height: 40px;
         overflow: hidden;
         transition: height 0.3s ease-in-out;
     }
-    .SearchInput{
+
+    .SearchInput {
         height: 40px;
-        font-size: 17px;
-        border-radius:30px;
+        font-size: 16px;
+        border-radius: 30px;
         border: 1px solid #0741ad;
     }
-    .SearchIcon{
-        position: relative;
-        height: 25px;
-        width: 25px;
-    }
-    .SearchIcon svg {
-        position: absolute;
-        top: -5px;
-        right:30px;
+
+    .SearchIcon {
+        height: 30px;
+        width: 30px;
+        font-size: 18px;
         background-color: transparent;
-        color: #0641AD;
-        border-radius: 5px;
-        height: 32px;
-        width: 32px;
-        font-size: 50px;
+        color: #0741ad;
     }
-    .scrolled{
+
+    .scrolled {
         height: 0;
     }
 }

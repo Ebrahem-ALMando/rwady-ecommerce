@@ -1,0 +1,29 @@
+.box {
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 16px 20px;
+    background-color: #fafafa;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+
+.title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #0741ad;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 8px 0;
+    font-size: 14px;
+    color: #444;
+}
+
+.row strong {
+    margin-inline-start: auto;
+    font-weight: 600;
+    color: #222;
+}

@@ -9,6 +9,11 @@ import { toast } from "react-hot-toast";
 import Cookies from "js-cookie";
 import { logout } from "@/api/services/auth/logout";
 import {logoutIcon} from "@/utils/Icons";
+import useSWR from "swr";
+import {getProfile} from "@/api/services/auth/getProfile";
+import Loading from "@/Components/Shared/Loading/Loading";
+import Error from "@/Components/Shared/Error/Error";
+import React from "react";
 
 const ProfileSidebar = () => {
     const pathname = usePathname();
@@ -34,9 +39,31 @@ const ProfileSidebar = () => {
         }
     };
 
+    const { data, error, isLoading, mutate } = useSWR(
+        "profileData",
+        getProfile,
+    );
+
+
+    if (isLoading) return <Loading />;
+
+
+    if (error) {
+        return (
+            <Error
+                onRetry={() => {
+                    mutate(undefined, { revalidate: true });
+                }}
+            />
+        );
+    }
+
+    const dataList = data?.data || [];
     return (
         <div className={styles.profileSidebar}>
-            <HeaderProfileSidebar />
+            <HeaderProfileSidebar
+                data={dataList}
+            />
             <Line />
             {profileButtons.map((profileButton, index) => (
                 <ButtonTap

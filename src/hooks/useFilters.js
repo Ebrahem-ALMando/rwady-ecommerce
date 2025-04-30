@@ -19,7 +19,7 @@ const useFilters = () => {
     });
 
 
-    const toggleMultiValue = useCallback((key, value) => {
+    const toggleMultiValue = useCallback((key, value,setFilters) => {
         setFilters((prev) => {
             const current = prev[key] || [];
             const exists = current.includes(value);
@@ -29,12 +29,12 @@ const useFilters = () => {
     }, []);
 
 
-    const setSingleValue = useCallback((key, value) => {
+    const setSingleValue = useCallback((key, value,setFilters) => {
         setFilters((prev) => ({ ...prev, [key]: value }));
     }, []);
 
 
-    const setPriceRange = useCallback((min, max) => {
+    const setPriceRange = useCallback((min, max,setFilters) => {
         setFilters((prev) => ({
             ...prev,
             price_from: min,
@@ -43,8 +43,8 @@ const useFilters = () => {
     }, []);
 
 
-    const resetFilters = useCallback(() => {
-        console.log(filters)
+    const resetFilters = useCallback((setFilters) => {
+
         setFilters({
             category_ids: [],
             brand_ids: [],

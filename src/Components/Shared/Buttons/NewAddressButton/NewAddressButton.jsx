@@ -1,9 +1,11 @@
 import styles from './NewAddressButton.module.css';
 import React from "react";
 
-const NewAddressButton = (props) => {
+const NewAddressButton = ({onClick}) => {
     return (
-        <button className={styles.button}>
+        <button className={styles.button}
+        onClick={onClick}
+        >
             إضافة عنوان جديد
         </button>
     );

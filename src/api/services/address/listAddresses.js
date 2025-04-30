@@ -1,14 +1,14 @@
 import { fetchAPI } from "@/api/api";
 import ApiConfig from "@/api/apiConfig";
-import {getTokenWithServer} from "@/utils/getTokenWithServer";
+import {getTokenWithClient} from "@/utils/getTokenWithClient";
 
 
 export const listAddresses = async () => {
-    "use server";
+
     const endPointKey = "list-address";
     try {
 
-        const token = await getTokenWithServer()
+        const token = await getTokenWithClient()
         if (!token) throw new Error("Token not found");
 
         const response = await fetchAPI(endPointKey, "GET", null, {

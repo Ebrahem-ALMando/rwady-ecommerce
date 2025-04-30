@@ -63,6 +63,7 @@ const ProductCollections = ({ initialData, initialError, getData, keyData }) => 
                 {pagedData.length === 0 ? (
                     <EmptyState message="لا توجد منتجات لعرضها حالياً" />
                 ) : (
+                    typeof window !== "undefined" && (
                 <AnimatePresence mode="wait">
                     <motion.div
                         initial="hidden"
@@ -119,7 +120,7 @@ const ProductCollections = ({ initialData, initialError, getData, keyData }) => 
                         ))}
                     </motion.div>
                 </AnimatePresence>
-                    )
+                    ))
                 }
             </div>
 

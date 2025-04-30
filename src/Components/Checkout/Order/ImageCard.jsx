@@ -1,29 +1,35 @@
 import styles from './ImageCard.module.css'
 import Image from "next/image";
-const ImageCard=(props)=>{
-    const title ="   بريتيجاردن بلوفر كاجوال كبير الحجم بقبة دائرية بدون طوق واكمام طويلة للنساء، بلوزة محبوكة مكتنزة"
+import SafeImage from "@/Components/Shared/SafeImage/SafeImage";
+const ImageCard=({item})=>{
 
     return(
         <div className={styles.imageCard}>
-            <Image
+
+            <SafeImage
+                fallback="/images/Shopping/img.png"
                 className={styles.image}
-                src={"/images/Shopping/img.png"}
-                alt={"imageTitle"}
+                src={item.image}
+                alt={`${item.name} منتج `}
                 width={250}
                 height={180}
+                decoding={"async"}
             />
             <span>
-                x 1
+                x {item.quantity}
             </span>
             <div className={styles.details}>
                 <h2>
-                    trendyol ماركة
+                    {item.brand.name}
                 </h2>
-                <h1 title={title}>
-                    {title.length > 19 ? `${title.slice(0, 31)}...` : title}
+                <h1 title={item.name}>
+                    {item.name?.length > 19 ? `${item.name?.slice(0, 31)}...` : item.name}
                 </h1>
-                <p>
-                    50,000 IQD
+                <p >
+                    {item.finalPrice}
+                    {" "}
+                     IQD
+
                 </p>
             </div>
         </div>

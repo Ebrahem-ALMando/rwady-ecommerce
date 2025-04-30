@@ -11,6 +11,7 @@ const TopIcon = ({
                      isSearch = false,
                      isDownload = false,
                      showMobile = false,
+                     aria = "Top icon"
                  }) => {
     const handleClick = (e) => {
         if (setIsOpen) {
@@ -23,13 +24,13 @@ const TopIcon = ({
         <Link
             href={link}
             className={`${styles.link} ${showMobile ? styles.showMobile : ""}`}
-            aria-label="أيقونة تنقل علوية"
+            aria-label={aria}
         >
             <div
                 className={`${styles.topIcon} 
-                    ${isSelect ? styles.selected : ""} 
-                    ${showMobile ? styles.showMobile : ""} 
-                    ${isSearch ? styles.search : ""}`}
+          ${isSelect ? styles.selected : ""} 
+          ${showMobile ? styles.showMobile : ""} 
+          ${isSearch ? styles.search : ""}`}
                 onClick={handleClick}
                 role={setIsOpen ? "button" : undefined}
                 tabIndex={setIsOpen ? 0 : undefined}
@@ -40,9 +41,9 @@ const TopIcon = ({
                 <div className={`${styles.iconWrapper} ${isDownload ? styles.download : ""}`}>
                     {element}
                     {Number(count) > 0 && (
-                        <span className={styles.badge} aria-label={`عدد العناصر ${count}`}>
-                            {count}
-                        </span>
+                        <span className={styles.badge} aria-label={`Items count: ${count}`}>
+              {count}
+            </span>
                     )}
                 </div>
             </div>

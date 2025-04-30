@@ -7,29 +7,119 @@ import { motion } from "framer-motion";
 import useFavourites from "@/hooks/useFavourites";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
+import useCart from "@/hooks/useCart";
+import { checkAuthClient } from "@/utils/checkAuthClient";
+import { useRouter } from "next/navigation";
+import {sizes} from "@/Data/sizes";
+import CustomToast from "@/Components/Shared/CustomToast/CustomToast";
+import QuantityControl from "@/Components/ProductDetails/QuantityControl/QuantityControl";
+import {getDiscountPercentage} from "@/utils/ProductsProc";
+
 
 const DetailsCard = ({ product }) => {
-    const sizes = [
-        { title: "XXL", isAvailable: true },
-        { title: "XL", isAvailable: false },
-        { title: "L", isAvailable: true },
-        { title: "M", isAvailable: true },
-        { title: "S", isAvailable: false },
-    ];
+
     const { favourites, toggle, isFavourite, mutateFavourites } = useFavourites();
     const [liked, setLiked] = useState(false);
+    const [isAddToCart,setIsAddToCart] = useState(false);
+    const router = useRouter();
+
+    const { addItem,getItemQuantity,getIsItemExisting,removeItem ,updateQuantity,cart} = useCart();
+
+    const initialQty = getItemQuantity(product.id) || 1;
+
+
+    const [selectedQty, setSelectedQty] = useState(initialQty);
+
+
+    useEffect(() => {
+        const qty = getItemQuantity(product.id);
+
+        setSelectedQty(qty > 0 ? qty : 1);
+
+
+        setIsAddToCart(getIsItemExisting(product.id));
+
+    }, [cart, product.id]);
+
+    const handleQuantityChange = (newQty) => {
+        const numericQty = Number(newQty);
+        if (numericQty > 0 && numericQty <= product.quantity) {
+            setSelectedQty(numericQty);
+            if (getIsItemExisting(product.id)) {
+                updateQuantity(product.id, numericQty);
+            }
+        }
+    };
+
+    useEffect(() => {
+        if (selectedQty > 0&&cart.length>0) {
+            updateQuantity(product.id, selectedQty);
+        }
+    }, [selectedQty, product.id]);
+
     useEffect(() => {
         setLiked(isFavourite(product.id));
     }, [favourites, product.id]);
-    const handleToggle = async () => {
+
+    const checkIsLogin = () => {
+        if (!checkAuthClient()) {
+            toast.error("يرجى تسجيل الدخول لتنفيذ هذا الاجراء");
+            router.push("/sign-in");
+            return false;
+        }
+        return true;
+    };
+
+    const handleToggleFavourites = async () => {
+        if (!checkIsLogin()) return;
         setLiked(prev => !prev);
         await toggle(product.id);
         await mutateFavourites();
     };
-    const getDiscountPercentage = () => {
-        const discount = product.price - product.finalPrice;
-        return Math.round((discount / product.price) * 100);
-    };
+
+
+    const handleToggleCart = () => {
+        if (isAddToCart) {
+            removeItem(product.id);
+            toast.custom(
+                <CustomToast
+                    type="delete"
+                    title="تم الحذف من السلة"
+                    message={`تم إزالة ${product.name} بنجاح`}
+                />,
+                {
+                    position: 'bottom-left',
+                    duration: 2500,
+                }
+            );
+        } else {
+            addItem({
+                id: product.id,
+                name: product.name,
+                brand:product.brand,
+                price: Number(product.price),
+                finalPrice: Number(product.finalPrice),
+                isDiscountVaild:product.isDiscountVaild,
+                productQty:product.quantity,
+                shipping_setting: product.shipping_setting,
+                image: product.main_img,
+            }, selectedQty);
+            toast.custom(
+                <CustomToast
+                    type="success"
+                    title="تمت الإضافة بنجاح"
+                    message={`${product.name} الآن في سلة التسوق`}
+                />,
+                {
+                    position: 'bottom-left',
+                    duration: 2500,
+                }
+            );
+        }
+    }
+
+
+
 
     return (
         <div className={styles.detailsCard}>
@@ -41,9 +131,9 @@ const DetailsCard = ({ product }) => {
 
             <motion.div
                 className={styles.price}
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.4, ease: "easeOut" }}
+                initial={{scale: 0.9, opacity: 0}}
+                animate={{scale: 1, opacity: 1}}
+                transition={{duration: 0.4, ease: "easeOut"}}
             >
                 {product.price !== product.finalPrice && <del>{product.price} IQD</del>}
                 <p>{product.finalPrice} IQD</p>
@@ -52,12 +142,12 @@ const DetailsCard = ({ product }) => {
             {product.isDiscountVaild && (
                 <motion.div
                     className={styles.discount}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.2 }}
+                    initial={{opacity: 0}}
+                    animate={{opacity: 1}}
+                    transition={{delay: 0.2}}
                 >
                     <p>وفرت {Number(product.price - product.finalPrice).toFixed(0)} IQD</p>
-                    <p>خصم {getDiscountPercentage()}%</p>
+                    <p>خصم {getDiscountPercentage(product.price,product.finalPrice)}%</p>
                 </motion.div>
             )}
 
@@ -75,12 +165,12 @@ const DetailsCard = ({ product }) => {
                 {product.colors?.map((color) => (
                     <motion.button
                         key={color.id}
-                        style={{ backgroundColor: color.code }}
+                        style={{backgroundColor: color.code}}
                         className={styles.colorButton}
                         title={color.name}
                         aria-label={`لون ${color.name}`}
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.95 }}
+                        whileHover={{scale: 1.1}}
+                        whileTap={{scale: 0.95}}
                     />
                 ))}
             </div>
@@ -120,7 +210,7 @@ const DetailsCard = ({ product }) => {
 
             <div className={styles.actionDetails}>
                 <div className={styles.actionChild} aria-label="تقييم المنتج">
-                    <Stars rating={product.avgrate || 0} />
+                    <Stars rating={product.avgrate || 0}/>
                     <p>({product.avgrate || 0}) تقييمات</p>
                 </div>
                 <div className={styles.actionChild} aria-label="إضافة للمفضلة">
@@ -135,7 +225,7 @@ const DetailsCard = ({ product }) => {
 
             <div className={styles.payment} aria-label="معلومات الدفع بالتقسيط">
                 <span className={styles.availableIcon}>
-                    <img src={'/img.png'} alt='أيقونة الدفع' loading="lazy" />
+                    <img src={'/img.png'} alt='أيقونة الدفع' loading="lazy"/>
                 </span>
                 <div>
                     <p>ادفع 6 اقساط شهرية</p>
@@ -145,13 +235,18 @@ const DetailsCard = ({ product }) => {
 
             <div className={styles.actionButton}>
                 {product.quantity > 0 ? (
-                    <select aria-label="اختيار الكمية">
-                        {[...Array(Math.min(product.quantity, 10)).keys()].map((num) => (
-                            <option key={num + 1} value={num + 1}>
-                                {num + 1}
+                    <select
+                        aria-label="اختيار الكمية"
+                        value={selectedQty}
+                        onChange={(e) => handleQuantityChange(e.target.value)}
+                    >
+                        {Array.from({length: Math.min(product.quantity, 5)}, (_, i) => (
+                            <option key={i + 1} value={i + 1}>
+                                {i + 1}
                             </option>
                         ))}
                     </select>
+
                 ) : (
                     <motion.p
                         initial={{opacity: 0}}
@@ -163,37 +258,26 @@ const DetailsCard = ({ product }) => {
                     </motion.p>
                 )}
 
-                <button
-                    onClick={() => {
-                        toast.custom((t) => (
-                            <div
-                                style={{
-                                    background: "#0741AD",
-                                    color: "white",
-                                    padding: "12px 20px",
-                                    borderRadius: "12px",
-                                    boxShadow: "0 8px 30px rgba(0,0,0,0.15)",
-                                    fontSize: "1rem",
-                                    fontWeight: "500",
-                                    direction: "rtl",
-                                    display: "flex",
-                                    alignItems: "center",
-                                    gap: "0.5rem"
-                                }}
-                            >
-                                🛍️ قريبا سيتم تفعيل إضافة المنتج للسلة
-                            </div>
-                        ), {duration: 2500});
-                    }}
-                    className={styles.actionBtn}
+                <motion.button
+                    disabled={product.quantity <= 0 || !product.quantity}
+                    onClick={handleToggleCart}
+
+                    className={`${product.quantity <= 0 ? styles.disabled : null} ${isAddToCart?styles.addToCart:null}`}
                     aria-label="أضف المنتج للسلة"
                 >
-                    {shoppeIcon}
-                    أضف للسلة
-                </button>
+
+                    <span>
+                        {shoppeIcon}
+                    </span>
+
+                    {isAddToCart ? "حذف من السلة" : "أضف للسلة"}
+
+
+                </motion.button>
+
 
                 <motion.button
-                    onClick={handleToggle}
+                    onClick={handleToggleFavourites}
                     className={`${styles.favBtn} ${liked ? styles.active : ""}`}
                     whileTap={{scale: 0.9}}
                     transition={{type: "spring", stiffness: 300}}
@@ -238,7 +322,15 @@ const DetailsCard = ({ product }) => {
                         {liked ? "في المفضلة" : "أضف للمفضلة"}
                     </span>
                 </motion.button>
+
             </div>
+            {isAddToCart&&
+                <QuantityControl
+                    productQTU={product.quantity}
+                    quantity={selectedQty}
+                    onIncrement={() => setSelectedQty(prev => prev + 1)}
+                    onDecrement={() => setSelectedQty(prev => Math.max(1, prev - 1))}
+                />}
         </div>
     );
 };

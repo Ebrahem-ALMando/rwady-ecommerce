@@ -17,10 +17,12 @@ const DropdownMenu = ({ isShow, initialData, initialError, getData, keyData, arS
     });
 
     const [selectedCategoryId, setSelectedCategoryId] = useState(null);
+    const [selectedCategoryName, setSelectedCategoryName] = useState(null);
 
     useEffect(() => {
         if (keyData === "categories" && Array.isArray(data?.data) && data.data.length > 0) {
             setSelectedCategoryId(data.data[0].id);
+            setSelectedCategoryName(data.data[0].title);
         }
     }, [keyData, data]);
 
@@ -73,7 +75,8 @@ const DropdownMenu = ({ isShow, initialData, initialError, getData, keyData, arS
                                     <Loading />
                                 ) : (
                                               <CategoryItems
-                                                  title={"الاقسام الفرعية"}
+                                                  // title={"الاقسام الفرعية"}
+                                                  title={selectedCategoryName||"الاقسام الاخرى "}
                                                   data={subCategoryData}
                                               />
 

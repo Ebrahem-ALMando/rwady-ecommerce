@@ -1,6 +1,5 @@
 .mainDiv{
     width: 100%;
-
     background: #f7f7f7;
     display: flex;
     justify-content: center;
@@ -45,7 +44,7 @@
 
 .productImg{
     margin: 0 0.5rem;
-    width: 21%;
+    width: 23%;
     height: 25vh;
     min-width: 150px;
 
@@ -61,7 +60,7 @@
 }
 .productItem{
     margin: 0 0.5rem;
-    width: 57%;
+    width: 58%;
     height: 25vh;
 }
 
@@ -109,7 +108,7 @@
 
 .productDetails{
     margin: 0 0.5rem;
-    width: 19%;
+    width: 28%;
     height: 25vh;
     display: flex;
     flex-direction: column;
@@ -121,6 +120,7 @@
     font-size: 20px;
     font-weight: 500;
     color: #F55157;
+    direction: ltr;
 }
 .oldPrice{
     display: flex;
@@ -129,6 +129,7 @@
     font-size: 12px;
     font-weight: 400;
     color: #0641AD;
+
 }
 .discount{
     width: auto;
@@ -141,6 +142,9 @@
     padding: 0 4px;
     color: #F55157;
     font-weight: 500;
+}
+.discount ~ del{
+    direction: ltr;
 }
 .freeDelivery{
     display: flex;
@@ -156,6 +160,11 @@
     align-items: center;
     justify-content: center;
     color: #A8B1CE;
+
+
+}
+.quantityControl{
+
 }
 .select{
     width: 85px;

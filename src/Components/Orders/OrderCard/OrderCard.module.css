@@ -1,0 +1,70 @@
+.card {
+    border: 1px solid #e1e1e1;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background: #fafafa;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.info {
+    flex: 1;
+}
+
+.line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+    margin: 6px 0;
+    color: #333;
+}
+
+.status {
+    font-weight: 600;
+}
+
+.icon {
+    color: #555;
+}
+
+.actions {
+    margin-right: 16px;
+}
+
+.detailsBtn {
+    background-color: #0741ad;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.3s ease;
+}
+
+.detailsBtn:hover {
+    background-color: #052d7d;
+}
+
+.arrow {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.detailsBtn:hover .arrow {
+    transform: translateX(4px);
+}

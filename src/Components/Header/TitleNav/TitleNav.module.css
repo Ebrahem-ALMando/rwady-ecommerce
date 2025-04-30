@@ -6,8 +6,12 @@
     background-color: #0741ad;
     padding: 0 10px;
     will-change: opacity, transform;
+    direction: inherit;
 }
+.mainDiv:dir(ltr) {
+    flex-direction: row;
 
+}
 .centerContent {
     display: flex;
     justify-content: center;
@@ -15,7 +19,14 @@
     gap: 10px;
     flex: 1;
 }
-
+.mainDiv:dir(ltr) .centerContent {
+    margin-left: 10%;
+    margin-right: 0%;
+}
+.mainDiv:dir(ltr) .startShopBTN  {
+    margin-right: 5.6%;
+    margin-left: 0%;
+}
 .title {
     color: white;
     font-size: 1.25rem;

@@ -1,0 +1,37 @@
+.container
+{
+    width: 175px;
+    height: max-content;
+    padding: 15px 10px;
+    border-radius: 10px;
+    background-color: #F7F7F7;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+.container p{
+    font-size: 16px;
+    font-weight: 400;
+    color:#0741AD;
+    width: 100%;
+    text-align: center;
+}
+.container button{
+    background-color: #0741AD;
+    font-size: 16px;
+    font-weight: 400;
+    color:#FFF;
+    width: 130px;
+    padding: 5px;
+    border-radius: 7px;
+    text-align: center;
+}
+@media (max-width: 1286px){
+    .container
+    {
+        width: 100%;
+    }
+}

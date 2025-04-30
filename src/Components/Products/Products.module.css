@@ -127,6 +127,45 @@
 .resetButton.glow {
     animation: glow 1.5s infinite;
 }
+.sortWrapper {
+    position: relative;
+    width: 200px;
+}
+
+.sortButton {
+    width: 100%;
+    padding: 8px 12px;
+    background: #f9fafb;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-weight: 500;
+    text-align: right;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.icon {
+    width: 16px;
+    height: 16px;
+    color: #6b7280;
+}
+
+.dropdown {
+    position: absolute;
+    top: 110%;
+    right: 0;
+    z-index: 10;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 4px 0;
+    width: 100%;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+}
+
+
 @media (max-width: 1120px) {
     .container {
         flex-direction: column;

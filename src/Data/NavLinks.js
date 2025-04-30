@@ -1,8 +1,8 @@
 export const navLinks = [
-    { href: "/section/categories", label: "الاقسام" },
-    { href: "/collections/offers-list", label: "العروض/ التخفيضات" },
-    { href: "/section/brands", label: "الماركات" },
-    { href: "/section/groups", label: "المجموعات" },
-    { href: "/collections/top-selling", label: "اكثر مبيعا" },
-    { href: "/collections/recommend-list", label: "المميزة" }
+    { href: "/section/categories", label: "categories" },
+    { href: "/collections/offers-list", label: "offers" },
+    { href: "/section/brands", label: "brands" },
+    { href: "/section/groups", label: "groups" },
+    { href: "/collections/top-selling", label: "topSelling" },
+    { href: "/collections/recommend-list", label: "featured" }
 ];

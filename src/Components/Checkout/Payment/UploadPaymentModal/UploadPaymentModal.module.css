@@ -1,0 +1,124 @@
+.uploadTrigger {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    padding: 1rem 2rem;
+    background: #0068ff;
+    color: white;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+    border: none;
+    z-index: 1000;
+    box-shadow: 0 8px 24px rgba(0,104,255,0.3);
+}
+
+.pulseEffect {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50px;
+    background: rgba(255,255,255,0.2);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.6; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.5); }
+}
+
+.modalOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modalContent {
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+}
+
+.dropZone {
+    border: 3px dashed #e0e0e0;
+    border-radius: 15px;
+    padding: 3rem 1rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.dragging {
+    border-color: #00C48C;
+    background: rgba(0,196,140,0.05);
+}
+
+.loadingCircle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 4rem;
+    color: rgba(0,0,0,0.1);
+}
+
+.uploadIcon {
+    font-size: 3rem;
+    color: #0068ff;
+    margin-bottom: 1rem;
+}
+
+.previewContainer {
+    position: relative;
+    margin: 1rem auto;
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.previewContainer img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.successIcon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #00C48C;
+    font-size: 1.5rem;
+    background: white;
+    border-radius: 50%;
+    padding: 3px;
+}
+
+.fileInputLabel {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: #f0f4ff;
+    color: #0068ff;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.fileInputLabel:hover {
+    background: #e0eaff;
+}
+
+.fileInputLabel input {
+    display: none;
+}

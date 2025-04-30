@@ -131,3 +131,39 @@
 .completeProcess.glow {
     animation: glow 1.5s infinite;
 }
+.successToast, .errorToast {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+    background: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.successToast {
+    border-left: 4px solid #00C48C;
+}
+
+.errorToast {
+    border-left: 4px solid #FF647C;
+}
+
+.checkIcon {
+    color: #00C48C;
+    font-size: 1.5rem;
+}
+
+.errorIcon {
+    color: #FF647C;
+    font-size: 1.5rem;
+}
+
+.inputCoupon {
+    transition: all 0.3s ease;
+}
+
+.buttonInput:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}

@@ -4,6 +4,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Toaster } from "react-hot-toast";
 
+import {cookies} from "next/headers";
+
 const geistSans = Geist({
     variable: "--font-geist-sans",
     subsets: ["latin"],
@@ -64,13 +66,23 @@ export const metadata = {
 };
 
 
-export default function RootLayout({ children }) {
+export default  function RootLayout({ children }) {
+    const supportedLanguages = ["ar", "en"];
+    const cookieLang = cookies().get("language")?.value;
+    const lang = supportedLanguages.includes(cookieLang) ? cookieLang : "ar";
+    const dir = lang === "ar" ? "rtl" : "ltr";
+
+
     return (
-        <html lang="ar" dir="rtl">
+        <html lang={cookieLang} dir={dir}>
         <body className={`${geistSans.variable} ${geistMono.variable} ${ibmArabic.variable} antialiased`}>
-        <Toaster position="top-center" reverseOrder={false} duration={3000} />
+        <Toaster position="top-center" reverseOrder={false} duration={3000}/>
         <div className="mainContainer">
-            <div className="child">{children}</div>
+            <div className="child">
+
+                {children}
+
+            </div>
         </div>
         </body>
         </html>

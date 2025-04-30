@@ -10,6 +10,7 @@ import {downArrow, upArrow} from "@/utils/Icons";
 
 const FilterSection=(props)=>{
     const [isOpen, setIsOpen] = useState(true);
+
     return (
         <div className={`${styles.items} ${isOpen ? styles.open : ''}`}>
             <button

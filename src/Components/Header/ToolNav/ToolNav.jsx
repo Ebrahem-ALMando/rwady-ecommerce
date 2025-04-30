@@ -17,8 +17,11 @@ import { CiSearch } from "react-icons/ci";
 import Link from "next/link";
 import Image from "next/image";
 import React, { useEffect, useRef, useState, useCallback } from "react";
+import { useTranslation } from "next-i18next";
+import "@/i18n";
 
 const ToolNav = ({ toggleMenu, isScrolled }) => {
+    const { t } = useTranslation("common");
     const notificationRef = useRef(null);
     const [isNotificationVisible, setNotificationVisible] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -31,7 +34,8 @@ const ToolNav = ({ toggleMenu, isScrolled }) => {
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (!notificationRef.current) return;
-            if (!notificationRef.current.contains(event.target) && !event.target.closest(`.${styles.toolsDiv}`)) {
+            if (!notificationRef.current.contains(event.target) &&
+                !event.target.closest(`.${styles.toolsDiv}`)) {
                 setNotificationVisible(false);
             }
         };
@@ -51,26 +55,29 @@ const ToolNav = ({ toggleMenu, isScrolled }) => {
                             <button
                                 className={styles.menuToggle}
                                 onClick={handleToggleMenu}
-                                aria-label="تبديل القائمة الجانبية"
+                                aria-label={t("toolNav.toggleMenu")}
                             >
                                 {isMenuOpen ? CloseNavIcon : MenuNavIcon}
                             </button>
 
-                            <TopIcon link="/profile" isSelect element={ProfileIcon} />
-                            <TopIcon link="/collections/favourites" count={5} element={FavouriteIcon} />
-                            <TopIcon link="/shopping-cart" count={6} element={ShoppingCartIcon} />
-                            <TopIcon setIsOpen={() => setNotificationVisible(prev => !prev)} count={7} element={NotificationIcon} />
+                            <TopIcon link="/profile" isSelect element={ProfileIcon} aria={t("toolNav.profile")} />
+                            <TopIcon link="/collections/favourites" count={5} element={FavouriteIcon} aria={t("toolNav.favourites")} />
+                            <TopIcon link="/shopping-cart" count={6} element={ShoppingCartIcon} aria={t("toolNav.cart")} />
+                            <TopIcon setIsOpen={() => setNotificationVisible(prev => !prev)} count={7} element={NotificationIcon} aria={t("toolNav.notifications")} />
+
+
                             {isScrolled && (
-                                <TopIcon showMobile isSearch element={<CiSearch size={28} />} />
+                                <TopIcon showMobile isSearch element={<CiSearch size={28} />} aria={t("toolNav.search")} />
                             )}
+
                             <Language hideMobile />
                         </div>
 
                         <div className={styles.logo}>
-                            <Link href="/" aria-label="الانتقال إلى الصفحة الرئيسية">
+                            <Link href="/" aria-label={t("toolNav.homeLink")}>
                                 <Image
                                     src="/logo.png"
-                                    alt="شعار الموقع"
+                                    alt="Rwady Logo"
                                     width={256}
                                     height={66}
                                     priority
