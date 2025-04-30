@@ -26,45 +26,45 @@ export default async function Home() {
         <p>
             Welcome
         </p>
-        {/*  <Navbar/>*/}
-        {/*<Carousel/>*/}
-        {/*<TitleSection initTitle="الاقسام" />*/}
-        {/*<CategoriesCarousel/>*/}
-        {/*/!*<TopHomeCategory/>*!/*/}
+          <Navbar/>
+        <Carousel/>
+        <TitleSection initTitle="الاقسام" />
+        <CategoriesCarousel/>
+        {/*<TopHomeCategory/>*/}
 
 
-        {/*/!*<TitleSection initTitle="الأكثر مبيعا" />*!/*/}
-        {/*/!*<ProductSlider/>*!/*/}
-
-
-        {/*<TopSellingProducts/>*/}
-        {/*<VideoSection src={"/Paralax.m4v"}/>*/}
-        {/*<MovingProductsBarSlider/>*/}
-
-
-        {/*/!*<MovingProductsBar/>*!/*/}
-        {/*/!*<TitleSection initTitle="احدث العروض" />*!/*/}
-        {/*/!*<ProductSlider/>*!/*/}
-
-        {/*<OffersList/>*/}
-        {/*<ProductsCategoryCard/>*/}
-        {/*<TitleSection initTitle="المجموعات" />*/}
-        {/*<GroupsCarousel/>*/}
-        {/*<TitleSection*/}
-        {/*    initLink={"/products"}*/}
-        {/*    initTitle="ملابس نسائية" />*/}
-        {/*<ProductSlider/>*/}
-        {/*<TitleSection*/}
-        {/*    initLink={"/products"}*/}
-        {/*    initTitle="منتجات نسائية" />*/}
+        {/*<TitleSection initTitle="الأكثر مبيعا" />*/}
         {/*<ProductSlider/>*/}
 
-        {/*/!*<HomeCategoryWithProducts/>*!/*/}
 
-        {/*<RecentlyAddedProducts/>*/}
-        {/*<TitleSection initTitle="الماركات" />*/}
-        {/*<BrandsCarousel/>*/}
-        {/*<Footer/>*/}
+        <TopSellingProducts/>
+        <VideoSection src={"/Paralax.m4v"}/>
+        <MovingProductsBarSlider/>
+
+
+        {/*<MovingProductsBar/>*/}
+        {/*<TitleSection initTitle="احدث العروض" />*/}
+        {/*<ProductSlider/>*/}
+
+        <OffersList/>
+        <ProductsCategoryCard/>
+        <TitleSection initTitle="المجموعات" />
+        <GroupsCarousel/>
+        <TitleSection
+            initLink={"/products"}
+            initTitle="ملابس نسائية" />
+        <ProductSlider/>
+        <TitleSection
+            initLink={"/products"}
+            initTitle="منتجات نسائية" />
+        <ProductSlider/>
+
+        {/*<HomeCategoryWithProducts/>*/}
+
+        <RecentlyAddedProducts/>
+        <TitleSection initTitle="الماركات" />
+        <BrandsCarousel/>
+        <Footer/>
 
     </>
   );
