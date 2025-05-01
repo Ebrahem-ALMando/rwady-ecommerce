@@ -6,6 +6,7 @@ import useSWR from "swr";
 import Loading from "@/Components/Shared/Loading/Loading";
 import Error from "@/Components/Shared/Error/Error";
 import {toast} from "react-hot-toast";
+import {Carousel, CarouselContent, CarouselItem} from "@/Components/ui/carousel";
 
 
 const ProductsItem = ({data,isLoading,isError}) => {
@@ -46,6 +47,9 @@ const ProductsItem = ({data,isLoading,isError}) => {
 
     if(isLoading)return <Loading/>
     if(isError)return <Error/>
+    "use client"
+
+
 
 
 
@@ -54,12 +58,13 @@ const ProductsItem = ({data,isLoading,isError}) => {
       <>
           {data.length>0?
               (
-                <>
-                    {data?.map((slide, index) => (
-                        <ProductCardSlider key={index} product={slide}/>
-                    ))}
-                </>
-              ):
+                  <>
+                      {data?.map((slide, index) => (
+                          <ProductCardSlider key={index} product={slide}/>
+                      ))}
+
+                  </>
+              ) :
               <p>
                   لا توجد بيانات مطابقة
               </p>

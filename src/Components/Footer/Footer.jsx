@@ -1,3 +1,4 @@
+
 import styles from './Footer.module.css';
 import {
     FaFacebookSquare, FaSnapchatGhost, FaYoutube
@@ -23,23 +24,28 @@ import FloatingDownloadButton from "@/Components/FloatingDownloadButton/Floating
 import Error from "@/Components/Shared/Error/Error";
 import { getSettings } from "@/api/services/settings";
 import Image from "next/image";
-import Loading from "@/Components/Shared/Loading/Loading";
-import { Suspense } from "react";
-
 import { createTranslation } from "@/i18n/server";
 
-const FooterData = async ({ dataPromise }) => {
+const Footer = async () => {
     const { t, lang } = await createTranslation("common");
 
     let result;
     try {
-        result = await dataPromise;
+        result = await getSettings();
     } catch {
-        return <Error message={t("footer.reloadError")} />;
+        return (
+            <footer className={styles.footer}>
+                <Error message={t("footer.reloadError")} />
+            </footer>
+        );
     }
 
     if (!result?.data?.settings) {
-        return <Error message={t("footer.reloadError")} />;
+        return (
+            <footer className={styles.footer}>
+                <Error message={t("footer.reloadError")} />
+            </footer>
+        );
     }
 
     const settings = Array.isArray(result.data.settings)
@@ -47,7 +53,7 @@ const FooterData = async ({ dataPromise }) => {
         : result.data.settings;
 
     return (
-        <>
+        <footer className={styles.footer}>
             <div className={styles.socialLinks} aria-label={t("footer.socialLabel")}>
                 <p>{t("footer.followUs")}</p>
                 <div className={styles.socialIcons}>
@@ -107,18 +113,7 @@ const FooterData = async ({ dataPromise }) => {
                     </a>
                 </div>
             </div>
-        </>
-    );
-};
 
-const Footer = () => {
-    const dataPromise = getSettings();
-
-    return (
-        <footer className={styles.footer}>
-            <Suspense fallback={<Loading />}>
-                <FooterData dataPromise={dataPromise} />
-            </Suspense>
             <hr className={styles.footerLine} />
             <div className={styles.footerBottom}>
                 <p>جميع الحقوق محفوظة لـ RWADY</p>

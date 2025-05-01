@@ -1,18 +1,23 @@
-"use server"
 import { fetchAPI } from "@/api/api";
 import ApiConfig from "@/api/apiConfig";
 
-export const getRecentAddedProducts = async () => {
+let cachedSettings = null;
+export const getSettings = async () => {
+    const endPointKey="settings"
 
-    const endPointKey="list-recent-added-products"
+    if (cachedSettings) return cachedSettings;
     try {
-        const recommendProducts = await fetchAPI(endPointKey, "GET", null, {
+
+        const ListSettings = await fetchAPI(endPointKey, "GET", null, {
             next: {
                 revalidate:ApiConfig.revalidateTime,
                 tags: [endPointKey],
+
             },
         });
-        return recommendProducts??[];
+         cachedSettings = ListSettings;
+        return cachedSettings??[];
+
     } catch (error) {
         console.error(`Failed to fetch ${endPointKey}:`, error.message);
         throw new Error(`Failed to fetch ${endPointKey}`);

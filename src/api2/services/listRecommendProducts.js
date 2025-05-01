@@ -2,9 +2,14 @@
 import { fetchAPI } from "@/api/api";
 import ApiConfig from "@/api/apiConfig";
 
-export const getRecentAddedProducts = async () => {
 
-    const endPointKey="list-recent-added-products"
+let cachedData = null;
+
+export const getRecommendProducts = async () => {
+    if (cachedData) return cachedData;
+
+
+    const endPointKey="list-recommend-products"
     try {
         const recommendProducts = await fetchAPI(endPointKey, "GET", null, {
             next: {

@@ -4,7 +4,9 @@ import fs from "fs";
 import path from "path";
 
 export const createTranslation = async (namespace = "common") => {
-    const lang = cookies().get("language")?.value || "ar";
+    const cookieStore = await cookies();
+    const lang = cookieStore.get("language")?.value || "ar";
+
     const filePath = path.resolve(`./public/locales/${lang}/${namespace}.json`);
     const file = fs.readFileSync(filePath, "utf-8");
     const data = JSON.parse(file);

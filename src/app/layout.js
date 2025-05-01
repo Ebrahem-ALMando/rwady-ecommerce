@@ -60,7 +60,7 @@ export const metadata = {
         canonical: "https://rwady.com",
         languages: {
             "ar": "https://rwady.com",
-            "en": "https://rwady.com/en",
+            "en": "https://rwady.com/",
         },
     },
 };
@@ -68,7 +68,7 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
     const supportedLanguages = ["ar", "en"];
-    const cookieStore = cookies();
+    const cookieStore =await cookies();
     const cookieLang = (await cookieStore.get("language"))?.value;
     const lang = supportedLanguages.includes(cookieLang) ? cookieLang : "ar";
     const dir = lang === "ar" ? "rtl" : "ltr";

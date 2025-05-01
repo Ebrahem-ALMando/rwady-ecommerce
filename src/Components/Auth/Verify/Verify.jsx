@@ -21,14 +21,8 @@ const Verify = () => {
     const [isResending, setIsResending] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [serverOtp, setServerOtp] = useState(5555);
+    const [userData,setUserData] = useState({});
 
-    const token = getTokenWithClient();
-
-    useEffect(() => {
-        if (token) {
-            router.push('/');
-        }
-    }, [token]);
 
     useEffect(() => {
         const timer = timeLeft > 0 && setInterval(() => {
@@ -87,6 +81,8 @@ const Verify = () => {
             if (response.status_code === 200) {
                 toast.success(t("verify.loginSuccess"));
 
+                setUserData(response.data)
+
                 Cookies.set("token", response.data.api_token, {
                     expires: 90, secure: true, sameSite: "Strict", path: "/"
                 });
@@ -94,7 +90,7 @@ const Verify = () => {
                     expires: 90, secure: true, sameSite: "Strict", path: "/"
                 });
 
-                router.push(!response.data.name || !response.data.email ? "/profile" : "/");
+
             } else {
                 toast.error(t("verify.loginFailed"));
             }
@@ -106,6 +102,18 @@ const Verify = () => {
         }
     };
 
+    const token = getTokenWithClient();
+
+    useEffect(() => {
+        if (token) {
+            let url="/"
+            if(userData)
+            {
+                 url=!userData.name?"/profile" : "/"
+            }
+            router.push(url);
+        }
+    }, [token]);
     return (
         <motion.div
             initial={{ opacity: 0 }}
