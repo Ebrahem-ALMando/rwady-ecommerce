@@ -17,7 +17,7 @@ import GroupsCarousel from "@/Components/HomePage/GroupsCarousel/GroupsCarousel"
 import FullScreenLoader from "@/Components/Shared/FullScreenLoader/FullScreenLoader";
 
 
-export default async function Home() {
+export default  function Home() {
 
   return (
     <>
