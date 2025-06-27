@@ -5,14 +5,13 @@
     flex-direction: column;
     gap: 10px;
 }
-/*.brand {*/
-/*    background-color: #0741AD; */
-/*    color: white;            */
-/*    padding: 0.5rem 1rem;*/
-/*    border-radius: 0.75rem;*/
-/*    font-weight: bold;*/
-/*}*/
-
+.brandsWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    align-items: center;
+}
 .brand{
     background-color: #1EB6E4;
     font-weight: 500;
@@ -57,6 +56,7 @@
 .discount p:nth-of-type(1){
     padding: 9px;
     width: 130px;
+    min-width: max-content;
     font-size: 15px;
     font-weight: 500;
     background-color: #F55157;
@@ -66,7 +66,7 @@
 }
 .discount p:nth-of-type(2){
     padding: 8px;
-    width: 80px;
+    min-width: max-content;
     font-size: 13px;
     font-weight: 500;
     background-color:#F551571A;
@@ -74,20 +74,36 @@
     text-align: center;
     border-radius: 7px;
 }
-.textTitle{
+.textTitle {
     font-size: 16px;
     font-weight: 500;
     color: #0641AD;
+    margin-bottom: 0.5rem;
 }
-.descriptionText{
-    font-size: 15px;
-    font-weight: 400;
-    color: #6A6E83;
-}
-.more{
+.toggleButton {
+    background: none;
+    border: none;
+    color: #0641AD;
+    padding: 0;
+    max-width: max-content;
+    margin-top: 0.25rem;
+    cursor: pointer;
     font-size: 16px;
     font-weight: 400;
-    color: #0641AD;
+}
+
+.descriptionWrapper {
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    width: 95%;
+}
+
+.descriptionText {
+    font-size: 15px;
+    font-weight: 400;
+    color: #6A6E83 !important;
+    line-height: 1.8;
+    padding: 0.25rem 0;
 }
 .color{
     display: flex;
@@ -237,6 +253,12 @@
     align-items: center;
 
 }
+.notAvailable {
+    color: rgba(255, 0, 0, 0.7);
+
+    font-weight: 500;
+}
+
 .favBtn {
     background-color: #f0f4ff !important;
     transition: background 0.3s ease, color 0.3s ease;
@@ -260,7 +282,13 @@
     color: #ffffff !important;
     background-color: rgba(18, 30, 113, 0.8) !important;
 }
-
+.shop{
+    background: #DE1F1F !important;
+    width: 130px !important;
+}
+.shop:hover{
+    background: #b60909 !important;
+}
 @media (max-width: 1070px) {
 .actionDetails{
     flex-direction: column;
@@ -272,8 +300,8 @@
         align-items: start;
         gap: 10px;
     }
-    .actionButton button,.actionButton select{
-        width: 90%;
+    .actionButton button,.actionButton select,.shop{
+        width: 90% !important;
         margin: 0 auto;
     }
 }

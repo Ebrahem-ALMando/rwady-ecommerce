@@ -34,3 +34,13 @@
     outline: none;
     box-shadow: 0 0 0 1.5px rgba(7, 65, 173, 0.4);
 }
+.childrenList {
+
+    padding-top: 0.7rem;
+
+}
+.childrenList {
+    padding-inline-start: 1.5rem;
+    border-inline-start: 2px solid #ccc;
+    margin-top: 0.5rem;
+}

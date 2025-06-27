@@ -1,0 +1,89 @@
+.socialContainer {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e5e5;
+  width: 100%;
+  max-width: 500px;
+}
+
+.socialContainer h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: #0741ad;
+}
+
+.socialContainer p {
+  color: #555;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.contactMethods {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.contactCard {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 10px;
+  background: #fafafa;
+  border: 1px solid #ddd;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.contactCard:hover {
+  background: #f0f4ff;
+  transform: translateY(-2px);
+}
+
+.iconWrapper {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--method-color);
+  color: white;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.methodInfo h3 {
+  color: #1f2d3d;
+  font-size: 1rem;
+  margin-bottom: 0.2rem;
+}
+
+.methodInfo p {
+  color: #666;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.workingHours {
+  background: #f5f7fa;
+  padding: 1rem;
+  border-radius: 10px;
+  border: 1px solid #e1e1e1;
+}
+
+.workingHours h3 {
+  color: #0741ad;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.workingHours p {
+  color: #555;
+  font-size: 0.85rem;
+  margin: 0.3rem 0;
+}

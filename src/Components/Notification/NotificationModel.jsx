@@ -4,17 +4,17 @@ import CompleteProfile from "@/Components/Notification/Complete-Profile/Complete
 import Line from "@/Components/Shared/Line/Line";
 import NotificationCard from "@/Components/Notification/NotificationCard/NotificationCard";
 import Link from "next/link";
-import { useTranslation } from "next-i18next";
-import "@/i18n";
+import {useTranslations} from "next-intl";
+
 
 const NotificationModel = ({ isShow, onClose }) => {
-    const { t } = useTranslation("common");
+    const  t  = useTranslations("notification");
 
     return (
         <div
             role="dialog"
             aria-modal="true"
-            aria-label={t("notification.dialog")}
+            aria-label={t("dialog")}
             tabIndex={-1}
             className={`${styles.container} ${isShow ? styles.show : ''}`}
         >
@@ -22,7 +22,7 @@ const NotificationModel = ({ isShow, onClose }) => {
                 <button
                     className={styles.closeBtn}
                     onClick={onClose}
-                    aria-label={t("notification.close")}
+                    aria-label={t("close")}
                 >
                     &times;
                 </button>
@@ -32,23 +32,23 @@ const NotificationModel = ({ isShow, onClose }) => {
                     <Line />
 
                     <NotificationCard
-                        title={t("notification.ordersTitle")}
-                        time={t("notification.oneHourAgo")}
-                        text={t("notification.message")}
+                        title={t("ordersTitle")}
+                        time={t("oneHourAgo")}
+                        text={t("message")}
                         isAnyDetails
                     />
                     <Line />
 
                     <NotificationCard
-                        title={t("notification.ordersTitle")}
-                        time={t("notification.oneHourAgo")}
-                        text={t("notification.message")}
+                        title={t("ordersTitle")}
+                        time={t("oneHourAgo")}
+                        text={t("message")}
                         isAnyDetails
                     />
                     <Line />
 
                     <Link href="/notification" className={styles.moreLink}>
-                        {t("notification.showMore")}
+                        {t("showMore")}
                     </Link>
                 </div>
             </div>

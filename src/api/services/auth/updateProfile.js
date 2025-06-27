@@ -1,35 +1,20 @@
-
 import { fetchAPI } from "@/api/api";
 import ApiConfig from "@/api/apiConfig";
-import {getTokenWithClient} from "@/utils/getTokenWithClient";
-
-
-
 
 /**
- * @param {FormData} formData
- * @returns {Promise<any>}
+ * تحديث بيانات المستخدم
+ * @param {Object} data -  name, avatar, language
+ * @returns {Promise<{ error: boolean, data?: any, message?: string }>}
  */
-export const updateProfile = async (formData) => {
-    const endPointKey = "update-profile";
+export const updateProfile = async (data) => {
+    const endPointKey = "user/me";
 
-    try {
+    const res = await fetchAPI(endPointKey, "PUT", data, {
+        next: {
+            revalidate: ApiConfig.revalidateTime,
+            tags: [endPointKey],
+        },
+    });
 
-        const token = getTokenWithClient()
-        if (!token) throw new Error("Token not found");
-
-        const response = await fetchAPI(endPointKey, "POST", formData, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-            next: {
-                revalidate: ApiConfig.revalidateTime,
-                tags: [endPointKey],
-            },
-        });
-        return response;
-    } catch (error) {
-        console.error("Failed to update profile:", error.message);
-        throw error;
-    }
+    return res ?? [];
 };

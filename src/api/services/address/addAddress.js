@@ -1,23 +1,24 @@
 import { fetchAPI } from "@/api/api";
-import {getTokenWithClient} from "@/utils/getTokenWithClient";
+import ApiConfig from "@/api/apiConfig";
 
+/**
+ * تحديث بيانات المستخدم
+ * @param {Object} data -  name, avatar, language
+ * @returns {Promise<{ error: boolean, data?: any, message?: string }>}
+ */
 
-export const addAddress = async (formData) => {
+export const addAddress = async (data) => {
+    const endPointKey = "user/addresses";
 
-    const endPointKey = "add-address";
-    try {
-        const token = getTokenWithClient()
-        if (!token) throw new Error("Token not found");
+    const res = await fetchAPI(endPointKey, "POST", data, {
+        next: {
+            revalidate: ApiConfig.revalidateTime,
+            tags: [endPointKey],
+        },
+    });
 
-        const response = await fetchAPI(endPointKey, "POST", formData, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        });
-
-        return response;
-    } catch (error) {
-        console.error("Failed to add address:", error.message);
-        return null;
-    }
+    return res ?? [];
 };
+
+
+

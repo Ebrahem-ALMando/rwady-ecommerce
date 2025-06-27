@@ -2,11 +2,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FaPlus, FaMinus } from "react-icons/fa";
 import styles from './QuantityControl.module.css'
 import {FiShoppingCart} from "react-icons/fi";
-const QuantityControl = ({ quantity, onIncrement, onDecrement ,productQTU}) => {
+const QuantityControl = ({ quantity, onIncrement, onDecrement ,productQTU,className}) => {
     return (
-        <div className={styles.quantityWrapper}>
+        <div className={`${styles.quantityWrapper} ${className}`}>
             <motion.button
-
                 className={styles.controlButton}
                 onClick={onDecrement}
                 disabled={quantity <= 1}

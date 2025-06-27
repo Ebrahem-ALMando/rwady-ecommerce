@@ -1,100 +1,134 @@
 "use client";
-import dynamic from "next/dynamic";
+
 import ProductCardSlider from "@/Components/Shared/SliderComponents/ProductCardSlider/ProductCardSlider";
-import React, {useEffect, useState} from "react";
-import "./ProductSlider.module.css";
+import React, {useRef, useState} from "react";
 import CustomArrows from "@/Components/Shared/SliderComponents/CustomArrow/CustomArrow";
-import {products} from "@/Data/products";
-import {sliderSettings} from "@/Components/Shared/SliderComponents/ProductSlider/settings";
-import useSWR from "swr";
-import Loading from "@/Components/Shared/Loading/Loading";
-import Error from "@/Components/Shared/Error/Error";
+import { products } from "@/Data/products";
+import { sliderSettings } from "@/Components/Shared/SliderComponents/ProductSlider/settings";
+import ReloadWithError from "@/Components/Shared/ReloadWithError/ReloadWithError";
+import Slider from "react-slick";
+import { AnimatePresence, motion } from "framer-motion";
+import styles from "./ProductSlider.module.css";
+import {useLocale} from "next-intl";
 
+const groupItems = (items, size) => {
+    const groups = [];
+    for (let i = 0; i < items.length; i += size) {
+        groups.push(items.slice(i, i + size));
+    }
+    return groups;
+};
 
-const Slider = dynamic(() => import("react-slick"), { ssr: false });
-
-const ProductSlider = ({keyData,getData,initialData,initialError}) => {
+const ProductSlider = ({ initialData, initialError }) => {
     const [activeArrow, setActiveArrow] = useState(null);
+    const lang=useLocale()
     const handleArrowClick = (type) => {
         setActiveArrow(type);
     };
 
-    const { data, error, isLoading, mutate } =
-        useSWR(keyData, getData, {
-        fallbackData: initialData,
-        revalidateOnMount: false,
-        revalidateOnFocus: true,
-    });
+    if (initialError) return <ReloadWithError />;
 
-    if (isLoading && !data) return <Loading />;
-    if (initialError || error)
-        return <Error onRetry={() => mutate(undefined,{revalidate:true})} />;
-
-    const dataList = Array.isArray(data)
-        ? data
-        : Array.isArray(data?.data)
-            ? data.data
+    const dataList = Array.isArray(initialData)
+        ? initialData
+        : Array.isArray(initialData?.data)
+            ? initialData.data
             : [];
 
-        let tempData=dataList.length>0?dataList:products
-    // console.log(tempData)
-
+    const tempData = dataList.length > 0 ? dataList : products;
+    const [isDraggingInsideCard, setIsDraggingInsideCard] = useState(false);
 
     const settings = {
-
-
         ...sliderSettings,
-        prevArrow: <CustomArrows
-            type="prev"
-            activeArrow={activeArrow}
-            onArrowClick={handleArrowClick}
-
-        />,
-        nextArrow: <CustomArrows
-            type={"next"}
-            activeArrow={activeArrow}
-            onArrowClick={handleArrowClick}
-        />,
+        arrows: true,
+        infinite: false,
+        swipe: !isDraggingInsideCard,
+        draggable: !isDraggingInsideCard,
+        prevArrow: (
+            <CustomArrows
+                type="prev"
+                activeArrow={activeArrow}
+                onArrowClick={setActiveArrow}
+            />
+        ),
+        nextArrow: (
+            <CustomArrows
+                type="next"
+                activeArrow={activeArrow}
+                onArrowClick={setActiveArrow}
+            />
+        ),
     };
+
+    const containerVariants = {
+        hidden: {},
+        visible: {
+            transition: {
+                delayChildren: 0,
+                staggerChildren: 0.03,
+            },
+        },
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0.6, y: 20 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: { duration: 0.15, ease: "easeOut" },
+        },
+        exit: {
+            opacity: 0,
+            y: 20,
+            transition: { duration: 0.1, ease: "easeIn" },
+        },
+    };
+
+
     return (
-        <div style={{ margin: 'auto auto 2rem auto', width: '95%' }}>
-            <Slider {...settings}>
-                {tempData?.map((slide, index) => (
-                    <ProductCardSlider
-                        key={slide.id + '-' + index}
-                        product={slide} />
-                ))}
-            </Slider>
+        <div style={{ margin: "auto auto 2rem auto", width: "95%", paddingTop: "20px" }}>
+            <AnimatePresence>
+                <motion.div variants={containerVariants} initial="hidden" animate="visible">
+
+                    <div className={styles.desktopVersion}
+                    >
+                        <Slider
+                            {...settings}>
+                            {tempData
+                                .slice()
+                                .reverse()
+                                .slice(0, 16)
+                                .map((slide, index) => (
+                                    <motion.div key={slide.id + "-" + index} variants={itemVariants}>
+                                        <ProductCardSlider
+                                            product={slide}
+                                            lang={lang}
+                                            setIsDraggingInsideCard={setIsDraggingInsideCard}
+                                        />
+
+
+                                    </motion.div>
+                                ))}
+                        </Slider>
+                    </div>
+
+
+                    {/*<div className={styles.mobileVersion}>*/}
+                    {/*    <Slider {...settings}>*/}
+                    {/*        {groupItems(tempData.slice()*/}
+                    {/*            .reverse()*/}
+                    {/*            .slice(0, 16), 4).map((group, groupIndex) => (*/}
+                    {/*            <div key={"group-" + groupIndex} className={styles.mobileGrid}>*/}
+                    {/*                {group.map((product, index) => (*/}
+                    {/*                    <ProductCardSlider key={product.id + "-m-" + index} product={product} />*/}
+                    {/*                ))}*/}
+                    {/*            </div>*/}
+                    {/*        ))}*/}
+                    {/*    </Slider>*/}
+                    {/*</div>*/}
+                </motion.div>
+            </AnimatePresence>
         </div>
     );
 };
 
 export default ProductSlider;
-// const { data, error, isLoading, mutate } = useSWR(
-//     props.keyData,
-//     props.getData,
-//     {
-//         fallbackData: props.initialData,
-//         revalidateOnMount: false,
-//     }
-// );
-// const hasError = error || (props.initialError && (!data?.data?.data || data?.data?.data.length === 0));
-// // console.log("data",data?.data)
-// // console.log("INdata",props.initialData?.data)
-//
-// if (isLoading) return <Loading />;
-// if (hasError)
-//     return (
-//         <Error
-//             onRetry={() =>
-//                 mutate(undefined, {
-//                     revalidate: true,
-//                 })
-//             }
-//         />
-//     );
-// // console.log(data?.data[props.index])
-// const Data = data?.data[props.index] || {};
-// const productList = Data?.products || [];
-// console.log(productList)
-// // console.log(Data)

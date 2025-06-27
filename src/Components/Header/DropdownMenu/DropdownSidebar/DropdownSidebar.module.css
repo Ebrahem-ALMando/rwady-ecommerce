@@ -10,6 +10,7 @@
     display: flex;
     gap: 15px;
     align-items: center;
+    text-transform: capitalize;
 }
 .title h1{
     color: #0641AD;

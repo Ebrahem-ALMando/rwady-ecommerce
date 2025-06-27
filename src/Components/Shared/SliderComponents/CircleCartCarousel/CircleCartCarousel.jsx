@@ -1,39 +1,40 @@
 "use client";
-
-import dynamic from "next/dynamic";
-import { useState, useEffect } from "react";
+import React, { useState } from "react";
 import CustomArrows from "@/Components/Shared/SliderComponents/CustomArrow/CustomArrow";
 import { sliderSettings } from "@/Components/Shared/SliderComponents/CircleCartCarousel/sliderSettings";
-import Loading from "@/Components/Shared/Loading/Loading";
-import Error from "@/Components/Shared/Error/Error";
-import useSWR from "swr";
 import SafeImage from "@/Components/Shared/SafeImage/SafeImage";
 import styles from "./CircleCartCarousel.module.css";
 import Link from "next/link";
-const Slider = dynamic(() => import("react-slick"), { ssr: false });
+import Slider from "react-slick";
+import { motion, AnimatePresence } from "framer-motion";
+import ReloadWithError from "@/Components/Shared/ReloadWithError/ReloadWithError";
 
 const CircleCartCarousel = (props) => {
+    const { data = [], filterKey = "category_ids", initialError=false,showName,lang } = props;
     const [activeArrow, setActiveArrow] = useState(null);
-    const [isDataFresh, setIsDataFresh] = useState(false);
 
-    const { data, error, isLoading, mutate } = useSWR(
-        props.keyData,
-        props.getData,
-        {
-            fallbackData: { data: props.initialData.data },
-            revalidateOnMount: false,
+    const groupItems = (items, size) => {
+        const groups = [];
+        for (let i = 0; i < items.length; i += size) {
+            groups.push(items.slice(i, i + size));
         }
-    );
+        return groups;
+    };
 
-    const hasError = error || (!data?.data?.length && props.initialError);
-    const Data = data?.data || [];
-    const dataList = props.data ? props.data : Data;
 
-    const settings = {
+    const dataList =data || [];
+
+    const groups = groupItems(dataList, 6);
+    const hasData = groups.length > 0;
+    const isSingleGroup = hasData && groups.length === 1 && groups[0].length <= 6;
+
+
+     const settings = {
         ...sliderSettings,
-        infinite: dataList.length > 1,
-        initialSlide: dataList.length > 1 ? 1 : 0,
-        slidesToShow: Math.min(5, dataList.length),
+        infinite: !isSingleGroup && dataList.length > 6 ,
+        initialSlide: 0,
+        arrows:true,
+        slidesToShow: Math.min(6, dataList.length),
         prevArrow: (
             <CustomArrows type="prev" activeArrow={activeArrow} onArrowClick={setActiveArrow} />
         ),
@@ -42,58 +43,118 @@ const CircleCartCarousel = (props) => {
         ),
     };
 
-    useEffect(() => {
-        if (!isDataFresh) {
-            mutate(props.getData, { revalidate: true });
-            setIsDataFresh(true);
-        }
-    }, [isDataFresh, mutate, props.getData]);
+    if (initialError)
+    {return <ReloadWithError/>}
 
-    if (isLoading) return <Loading />;
-    if (hasError)
-        return <Error onRetry={() => mutate(undefined, { revalidate: true })} />;
+
+    const containerVariants = {
+        hidden: {},
+        visible: {
+            transition: {
+                delayChildren: 0,
+                staggerChildren: 0.06,
+            },
+        },
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0.6, y: 20 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: { duration: 0.2, ease: "easeOut" },
+        },
+        exit: {
+            opacity: 0,
+            y: 20,
+            transition: { duration: 0.15, ease: "easeIn" },
+        },
+    };
+
+
 
     return (
         <div
+            className={styles.main}
             style={{
                 margin: "auto auto 2rem auto",
                 width: "95%",
                 height: "auto",
-                background: props.bgColor || "linear-gradient(to bottom right, #f0f4ff, #ffffff)",
+                background:
+                    props.bgColor ||
+                    "linear-gradient(to bottom right, #f0f4ff, #ffffff)",
                 borderRadius: props.borderRadius || "16px",
                 padding: props.isCategory ? 0 : "2rem 1rem",
             }}
         >
-            <Slider {...settings}>
-                {dataList.map((slide, index) => {
-                    const filterKey = props.filterKey || "category_ids"; // يمكن تمريره كـ prop
-                    const filterId = slide.id;
+            <AnimatePresence>
+                <motion.div variants={containerVariants} initial="hidden" animate="visible">
+                   <div className={styles.mobileVersion}>
+                       <Slider {...settings}>
+                           {groups.map((group, groupIndex) => (
+                               <div key={groupIndex} className={styles.mobileGrid}>
+                                   {group.map((slide, index) => (
+                                       <motion.div
+                                           key={index}
+                                           variants={itemVariants}
+                                           className={styles.circleItem}
+                                       >
+                                           <div className={styles.imageWrapper}>
+                                               <Link href={`/products?${filterKey}=${slide.id}`} prefetch={false}>
+                                                   <SafeImage
+                                                       fallback="/images/fallbackCircle.png"
+                                                       decoding="async"
+                                                       width={200}
+                                                       height={200}
+                                                       src={slide?.image_url}
+                                                       offOnerror={true}
+                                                       alt={`${slide?.title?.[lang] || slide?.name?.[lang]} صورة`}
+                                                       className={styles.image}
+                                                   />
+                                               </Link>
+                                           </div>
+                                           {showName &&
+                                               <h3 className={styles.title}>{slide.title?.[lang] || slide.name?.[lang]}</h3>}
+                                       </motion.div>
+                                   ))}
+                               </div>
+                           ))
+                           }
+                       </Slider>
+                   </div>
 
-                    return (
-                        <div key={index}>
-                            <Link href={`/products?${filterKey}=${filterId}`} prefetch={false}>
-                                <div className={styles.circleItem}>
-                                    <div className={styles.imageWrapper}>
-                                        <SafeImage
-                                            fallback="/images/Brands/1.png"
-                                            decoding="async"
-                                            width={200}
-                                            height={200}
-                                            src={slide.logo || undefined}
-                                            alt={`${slide.title || slide.name} صورة`}
-                                            className={styles.image}
-                                        />
-                                    </div>
-                                    {props.showName && (
-                                        <h3 className={styles.title}>{slide.title || slide.name}</h3>
-                                    )}
-                                </div>
-                            </Link>
-                        </div>
-                    );
-                })}
-            </Slider>
-
+                    <div className={styles.desktopVersion}>
+                        <Slider {...settings}>
+                            {
+                                dataList.map((slide, index) => (
+                                        <motion.div
+                                            key={index}
+                                            variants={itemVariants}
+                                            className={styles.circleItem}
+                                        >
+                                            <div className={styles.imageWrapper}>
+                                                <Link href={`/products?${filterKey}=${slide.id}`} prefetch={false}>
+                                                    <SafeImage
+                                                        fallback="/images/fallbackCircle.png"
+                                                        decoding="async"
+                                                        width={200}
+                                                        height={200}
+                                                        src={slide?.image_url}
+                                                        offOnerror={true}
+                                                        alt={`${slide?.title?.[lang] || slide?.name?.[lang]} صورة`}
+                                                        className={styles.image}
+                                                    />
+                                                </Link>
+                                            </div>
+                                            {showName &&
+                                                <h3 className={styles.title}>{slide.title?.[lang] || slide.name?.[lang]}</h3>}
+                                        </motion.div>
+                                ))
+                            }
+                        </Slider>
+                    </div>
+                </motion.div>
+            </AnimatePresence>
         </div>
     );
 };

@@ -1,0 +1,108 @@
+.modal {
+    background-color: white;
+    padding: 20px;
+    width: 80%;
+    height: 80%;
+    max-width: 500px;
+    max-height: 600px;
+    border-radius: 8px;
+    position: relative;
+    overflow-y: auto;
+    animation: modalOpen 0.3s forwards;
+}
+
+@keyframes modalOpen {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.closeButton,
+.clearButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.title {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    flex-grow: 1;
+}
+
+.searchBox {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    position: relative;
+}
+
+.searchIcon {
+    position: absolute;
+    left: 15px;
+}
+
+.searchInput {
+    width: 100%;
+    padding-left: 40px; /* مكان الأيقونة */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.searchHistory {
+    margin-top: 20px;
+}
+
+.historyTitle {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.historyItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.deleteButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.showMoreButton {
+    display: block;
+    background: none;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.noResults {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.noResults img {
+    max-width: 100px;
+    margin-bottom: 10px;
+}

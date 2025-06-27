@@ -1,24 +1,20 @@
-import { fetchAPI } from "@/api/api";
-import {getTokenWithClient} from "@/utils/getTokenWithClient";
+import ApiConfig from "@/api/apiConfig";
+import {fetchAPI} from "@/api/api";
 
+/**
+ * @param {bigint} addressId
+ * @param {Object} data
+ * @returns {Promise<{ error: boolean, data?: any, message?: string }>}
+ */
+export const updateAddress = async (addressId,data) => {
 
-export const updateAddress = async (formData) => {
+    const endPointKey = `user/addresses/${addressId}`;
+    const res = await fetchAPI(endPointKey, "PUT", data, {
+        next: {
+            revalidate: ApiConfig.revalidateTime,
+            tags: [endPointKey],
+        },
+    });
 
-    const endPointKey = "edit-address";
-    try {
-
-        const token = getTokenWithClient()
-        if (!token) throw new Error("Token not found");
-
-        const response = await fetchAPI(endPointKey, "POST", formData, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        });
-
-        return response;
-    } catch (error) {
-        console.error("Failed to update address:", error.message);
-        return null;
-    }
+    return res ?? [];
 };

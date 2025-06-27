@@ -15,25 +15,31 @@
 .mainSwiper {
     width: 100%;
     height: auto;
+    max-height: 700px;
     border-radius: 12px;
     background: #f5f5f5;
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     margin: 0 !important;
+
 }
 
-
-/**/
 
 .thumbnailSwiper {
     width: 120px;
     height: auto;
+    max-height: 700px;
     display: flex;
     flex-direction: column;
     margin-left: -5px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #8dacdc #e6ecf3;
 }
 
-
+.thumbnailSwiper:hover {
+    overflow-y: scroll;
+}
 .thumbnailSlide {
     width: 100%;
     height: 110px !important;
@@ -44,6 +50,7 @@
     cursor: pointer;
     border: 2px solid transparent;
     margin-bottom: 5px;
+
 }
 
 .thumbnailSlide img {
@@ -61,11 +68,16 @@
     opacity: 1;
     border-color: #0741AD;
 }
-
+.max{
+    position: absolute;
+    background: #DE1F1F;
+    max-height: 700px;
+    height: 100%;
+}
 .maximizeButton {
     position: absolute;
-    bottom: 25px;
-    left: 25px;
+    bottom: 10px;
+
     background: #0741AD;
     padding: 6px;
     color: white;
@@ -73,6 +85,12 @@
     cursor: pointer;
     z-index: 10;
     transition: transform 0.2s ease;
+}
+:dir(ltr) .maximizeButton {
+    right: 25px;
+}
+:dir(rtl) .maximizeButton {
+    left: 25px;
 }
 
 .maximizeButton:hover {
@@ -110,24 +128,37 @@
         aspect-ratio: 1/1;
         max-height: 500px;
     }
-
+    .max{
+        position: static !important;
+    }
     .thumbnailSwiper {
         width:100%;
         height: auto;
         flex-direction: row !important;
         margin-left: 0;
         gap: 8px;
+        overflow-x: auto !important;
     }
-
+    .thumbnailSwiper:hover {
+        overflow-y: hidden;
+    }
     .thumbnailSlide {
-        height: 80px !important;
-        flex: 1;
-    }
+        height: auto;
+        width:25% !important;
 
+    }
+    .thumbnailSlide img {
+        width:100% !important;
+    }
     .maximizeButton {
-        left: 20px;
-        bottom: 140px;
+        bottom: 180px;
         padding: 5px;
+    }
+    :dir(ltr) .maximizeButton {
+        right: 20px;
+    }
+    :dir(rtl) .maximizeButton {
+        left: 20px;
     }
 }
 
@@ -137,3 +168,29 @@
         max-height: 400px;
     }
 }
+
+
+
+.thumbnailSwiper::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+.thumbnailSwiper::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #5b9df9, #2a71e0);
+    border-radius: 10px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    transition: background 0.3s ease;
+}
+
+.thumbnailSwiper::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #4a8be0, #1f5fc9);
+}
+
+.thumbnailSwiper::-webkit-scrollbar-track {
+    background: #f1f4f9;
+    border-radius: 10px;
+}
+
+
+

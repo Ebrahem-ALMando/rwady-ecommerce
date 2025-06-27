@@ -1,0 +1,241 @@
+{
+  "HomePage": {
+    "title": "مرحبًا بك في روادي!",
+    "about": "معلومات عنا"
+  },
+  "signin": {
+    "welcome": "مرحباً بك في",
+    "subtitle": "قم بتسجيل الدخول للمتابعة داخل Rwady",
+    "phone": "رقم الهاتف",
+    "phonePlaceholder": "أدخل رقم الهاتف",
+    "submit": "تسجيل الدخول",
+    "otpSent": "تم إرسال رمز التحقق بنجاح",
+    "otpFailed": "فشل في إرسال رمز التحقق",
+    "genericError": "حدث خطأ أثناء إرسال الكود",
+    "invalidPhone": "تنسيق رقم الهاتف غير صالح"
+  },
+  "verify": {
+    "title": "رمز التفعيل",
+    "instruction": "قم بإدخال رمز التفعيل الخاص بك الذي وصلك للتو على رقم جوالك",
+    "resendAfter": "يمكنك إعادة الإرسال بعد:",
+    "resend": "إعادة إرسال الرمز",
+    "sending": "جاري الإرسال...",
+    "confirm": "تأكيد",
+    "verifying": "جارٍ التحقق...",
+    "problem": "لديك مشكلة ما؟",
+    "support": "الاتصال بالدعم الفني",
+    "otpSent": "تم إرسال رمز التحقق بنجاح",
+    "otpFailed": "فشل في إرسال رمز التحقق",
+    "genericError": "حدث خطأ أثناء إرسال الكود",
+    "enter5Digits": "الرجاء إدخال رمز مكون من 5 أرقام",
+    "invalidCode": "رمز التحقق غير صحيح",
+    "loginSuccess": "تم تسجيل الدخول بنجاح",
+    "loginFailed": "فشل في تسجيل الدخول",
+    "loginError": "فشل في العملية. حاول لاحقًا",
+    "logoutSuccess": "تم تسجيل الخروج بنجاح",
+    "logoutFailed": "فشل في تسجيل الخروج",
+    "logoutError": "حدث خطأ أثناء تسجيل الخروج"
+  },
+
+  "navBar": {
+    "title": "عـــــــروض على جميع المنتجات",
+    "startShopping": "أبدأ تسوق الآن",
+    "close": "إغلاق الشريط الإعلاني",
+    "promoRegion": "شريط العروض"
+  },
+  "toolNav": {
+    "toggleMenu": "تبديل القائمة الجانبية",
+    "homeLink": "الانتقال إلى الصفحة الرئيسية",
+    "profile": "الملف الشخصي",
+    "favourites": "المفضلة",
+    "cart": "سلة المشتريات",
+    "notifications": "الإشعارات",
+    "search": "بحث",
+    "downloadApp": "تحميل التطبيق"
+  },
+    "Language": {
+      "select": "اختيار اللغة",
+      "changeTo": "تغيير اللغة إلى {lang}"
+    },
+  "searchBar": {
+    "label": "ابحث في الموقع",
+    "aria": "حقل البحث",
+    "placeholder": "ابحث عن منتج، ماركة، فئة...",
+    "details": "تفاصيل"
+},
+  "downloadApp": {
+    "button": "حمل التطبيق",
+    "aria": "تحميل تطبيق روادي",
+    "homeLabel": "العودة إلى الصفحة الرئيسية",
+    "logoAlt": "شعار موقع روادي"
+  },
+  "notification": {
+    "dialog": "نافذة الإشعارات",
+    "close": "إغلاق الإشعارات",
+    "ordersTitle": "الطلبات",
+    "oneHourAgo": "منذ ساعة",
+    "message": "تم قبول طلبك بنجاح من خلال إدارة RWADY",
+    "showMore": "عرض المزيد"
+  },
+  "mainNav": {
+    "label": "القائمة الرئيسية",
+    "links": {
+      "categories": "الأقسام",
+      "offers": "العروض / التخفيضات",
+      "brands": "الماركات",
+      "groups": "المجموعات",
+      "topSelling": "الأكثر مبيعاً",
+      "featured": "المميزة"
+    }
+  },
+  "footer": {
+    "description": "اكتشف كل ما تحتاجه من ملابس وأساسيات وإلكترونيات من أدوات منزلية بأفضل وأحسن الأنواع واحصل على كل ما هو جديد",
+    "contactInfo": "بيانات التواصل",
+    "followUs": "تابعنا عبر",
+    "pages": "الصفحات",
+    "about": "من نحن",
+    "contact": "اتصل بنا",
+    "privacy": "سياسة الخصوصية",
+    "returnPolicy": "سياسة الاستبدال والاسترجاع",
+    "shippingPolicy": "سياسة الشحن والتوصيل",
+    "faq": "الأسئلة الشائعة",
+    "downloadApp": "تحميل التطبيق",
+    "socialLabel": "روابط التواصل الاجتماعي",
+    "pagesLabel": "روابط صفحات الموقع",
+    "reloadError": "يرجى إعادة تحميل الصفحة",
+    "copyright": "جميع الحقوق محفوظة لـ RWADY"
+
+  },
+  "Profile": {
+    "title": "الملف الشخصي",
+    "maxImageSize": "الحد الأقصى لحجم الصورة هو 10 ميجا بايت",
+    "changeImage": "تغيير الصورة",
+    "removeImage": "إزالة الصورة",
+    "personalInfo": "المعلومات الشخصية",
+    "edit": "تعديل",
+    "fullName": "الاسم الكامل",
+    "phoneNumber": "رقم الجوال",
+    "errors": {
+      "imageTooLarge": "الرجاء اختيار صورة أقل من 10 ميغا",
+      "uploadError": "حدث خطأ أثناء رفع الصورة",
+      "updateFail": "فشل في تعديل الصورة",
+      "uploadSuccess": "تم تحديث الصورة بنجاح"
+    },
+    "imageRemovedSuccess": "تم إزالة الصورة الشخصية بنجاح",
+    "profileImageAlt": "{name} صورة حساب المستخدم"
+  },
+  "editProfile": {
+    "title": "تعديل المعلومات الشخصية",
+    "fullName": "الاسم الكامل",
+    "phone": "رقم الجوال",
+    "saveChanges": "حفظ التغييرات",
+    "cancel": "إلغاء",
+    "formError": "الرجاء إدخال الاسم الكامل (3 أحرف على الأقل)",
+    "successUpdate": "تم تحديث البيانات بنجاح",
+    "errorUpdate": "فشل في التحديث",
+    "unknownError": "حدث خطأ أثناء التحديث"
+  },
+  "Sidebar": {
+    "logout": "تسجيل الخروج",
+    "buttons": {
+      "profile": "الملف الشخصي",
+      "orders": "طلباتي",
+      "addresses": "العناوين",
+      "transactions": "الحركة المالية أو الدفعات"
+    },
+    "userImageAlt": "صورة المستخدم",
+    "defaultName": "اسم المستخدم",
+    "defaultEmail": "user@mail.com",
+    "defaultPhone": "00999999999"
+  },
+  "titleSection": {
+    "viewAll": "عرض الكل"
+  },
+  "Breadcrumb":
+  {
+    "home": "الرئيسية",
+  "all_products": "كل المنتجات",
+  "product_details": "تفاصيل المنتج"
+  },
+    "ProductDetails": {
+      "descriptionTitle": "وصف المنتج",
+      "showMore": "عرض المزيد",
+      "showLess": "عرض أقل",
+      "noDescription": "لا يوجد وصف متاح لهذا المنتج.",
+      "colors": "الألوان",
+      "color": "لون",
+      "remaining": "المتبقي",
+      "unit": "وحدة",
+      "sold": "تم شراءه",
+      "times": "مرة",
+      "rating": "تقييم المنتج",
+      "reviews": "تقييمات",
+      "addToFavourites": "أضف للمفضلة",
+      "shareProduct": "مشاركة المنتج",
+      "installmentInfo": "معلومات الدفع بالتقسيط",
+      "installmentPlan": "ادفع 6 أقساط شهرية",
+      "installmentMonthly": "متاح قسط 500 /شهرياً",
+      "youSaved": "وفرت {amount} IQD",
+      "discountPercentage": "خصم {percent}%",
+      "mediaAlt": "وسيط رقم {index}",
+      "imageAlt": "صورة رقم {index}",
+      "videoThumbnailAlt": "صورة مصغرة للفيديو {index}",
+      "notAvailable": "غير متاح",
+      "maximize": "تكبير الصورة"
+
+    },
+  "downSlider": {
+  "startShopping": "ابدأ التسوق الآن"
+  },
+  "Addresses": {
+    "myAddresses": "عناويني",
+    "newTitle": "إضافة عنوان جديد",
+    "editTitle": "تعديل العنوان",
+    "default": "افتراضي",
+    "defaultLabel": "عنوان",
+    "changeAddress": "تغيير العنوان",
+    "deleteSuccess": "تم حذف العنوان بنجاح",
+    "deleteFail": "فشل في حذف العنوان",
+    "setDefaultSuccess": "تم تعيين العنوان كافتراضي",
+    "setDefaultFail": "فشل في تعيين العنوان",
+    "errorOccurred": "حدث خطأ أثناء العملية",
+    "noAddress": "-",
+    "noPhone": "-",
+    "alreadyDefault": "هذا العنوان هو الافتراضي بالفعل",
+    "addSuccess": "تم إضافة العنوان",
+    "updateSuccess": "تم تعديل العنوان",
+    "submitFail": "فشل العملية",
+    "labelName": "اسم العنوان",
+    "placeholderName": "مثلاً: المنزل، العمل...",
+    "mapPlaceholder": "اختر موقعًا من الخريطة هنا",
+    "setDefaultLabel": "اجعل هذا العنوان افتراضيًا",
+    "enterName": "يرجى إدخال اسم العنوان",
+    "selectLocation": "يرجى تحديد موقع على الخريطة",
+    "save": "حفظ",
+    "cancel": "إلغاء"
+
+  },
+  "Buttons": {
+    "edit": "تعديل",
+    "delete": "حذف"
+  },
+  "products": {
+    "sort": {
+      "none": "بدون ترتيب",
+      "price_desc": "السعر من الأعلى",
+      "price_asc": "السعر من الأقل",
+      "name_asc": "الاسم من أ → ي",
+      "name_desc": "الاسم من ي → أ"
+    },
+    "sortBy": "ترتيب حسب:",
+    "clearFilter": "إلغاء الفلترة",
+    "categories": "الفئة",
+    "brands": "الماركات",
+    "showMore": "عرض المزيد",
+    "price": "السعر",
+    "priceFrom": "من",
+    "priceTo": "إلى"
+  }
+
+
+}

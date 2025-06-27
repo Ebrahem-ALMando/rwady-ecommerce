@@ -41,7 +41,12 @@
 .logo{
     display: none;
 }
-
+.hideOnMobile{
+    display: block;
+}
+.showOnMobile {
+    display: none;
+}
 @media (max-width: 1000px)
 {
     .center{
@@ -136,6 +141,12 @@
         display: block;
         height: max-content;
         padding: 0px 5px;
+    }
+    .hideOnMobile{
+        display: none !important;
+    }
+    .showOnMobile {
+        display: block !important;
     }
 }
 @media (max-width: 505px)

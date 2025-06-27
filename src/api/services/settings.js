@@ -1,22 +1,16 @@
 import { fetchAPI } from "@/api/api";
 import ApiConfig from "@/api/apiConfig";
-
+import {delay} from "@/utils/delay";
 
 export const getSettings = async () => {
-    const endPointKey="settings"
-    try {
+    const endPointKey = "settings";
 
-        const ListSettings = await fetchAPI(endPointKey, "GET", null, {
-            next: {
-                revalidate:ApiConfig.revalidateTime,
-                tags: [endPointKey],
-
-            },
-        });
-
-        return ListSettings??[];
-    } catch (error) {
-        console.error(`Failed to fetch ${endPointKey}:`, error.message);
-        throw new Error(`Failed to fetch ${endPointKey}`);
-    }
+    const res = await fetchAPI(endPointKey, "GET", null, {
+        next: {
+            revalidate: ApiConfig.revalidateTime,
+            tags: [endPointKey],
+        },
+    });
+    // await delay(3000)
+    return res?? {};
 };

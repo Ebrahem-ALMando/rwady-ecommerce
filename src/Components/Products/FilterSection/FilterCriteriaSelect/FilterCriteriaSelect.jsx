@@ -3,7 +3,8 @@ import styles from './FilterCriteriaSelect.module.css';
 import Stars from "@/Components/Shared/Stars/Stars";
 
 const FilterCriteriaSelect = (props) => {
-    const { id, section, title, quantity, isColor, color, isRating,productRating, type, onChange,selected } = props;
+    const { id, section, title, quantity, isColor, color, isRating,productRating, type, onChange,selected,disabled } = props;
+    console.log("selected:", selected, "id:", id);
 
     return (
         <div className={styles.row}>
@@ -15,20 +16,23 @@ const FilterCriteriaSelect = (props) => {
                     className={styles.input}
                     value={id}
                     onChange={() => onChange(section, id)}
-                    checked={(selected || []).includes(id)}
+                    checked={(selected || []).includes(String(id))}
+                    disabled={disabled}
 
                 />
                 <label htmlFor={`${type}-${id}-${section}`} className={styles.inputLabel}>
                     {isColor && color ? (
                         <span
-                            style={{ background: color }}
+                            style={{background: color}}
                             className={styles.circle}
+                            aria-label={`لون ${title}`}
                         />
+
                     ) : null}
                     {title}
                     {isRating ?
-                       <Stars
-                           title={title}
+                        <Stars
+                            title={title}
                            rating={productRating}
                             /> : ""}
                 </label>

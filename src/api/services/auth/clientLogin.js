@@ -1,24 +1,22 @@
 import { fetchAPI } from "@/api/api";
 
 /**
- * Login using mobile number and country code
- * @param {Object} formData - { mobile: "...", country_code: "..." }
- * @returns response object with token or error
+ * Login using mobile number
+ * @param {Object} formData - { phone: string, role?: string }
+ * @returns {Object} response - { error: boolean, data?: any, message?: string }
  */
 export const clientLogin = async (formData) => {
-    // "use server";
-    const endPointKey = "client-login";
+    const endPointKey = "auth/login";
 
-    try {
-        const response = await fetchAPI(endPointKey, "POST", formData, {
-            next: {
-                revalidate: 0,
-                tags: [endPointKey],
-            },
-        });
-        return response;
-    } catch (error) {
-        console.error(`Failed to login:`, error.message);
-        throw new Error("Login failed. Please try again.");
-    }
+    const res = await fetchAPI(endPointKey, "POST", {
+        phone: formData.phone,
+        role: formData.role || "customer",
+    }, {
+        next: {
+            revalidate: 0,
+            tags: [endPointKey],
+        },
+    });
+
+    return res ?? [];
 };

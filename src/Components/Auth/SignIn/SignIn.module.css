@@ -1,4 +1,15 @@
-
 .rwadyName{
  color: #0741ad;
+}
+
+.input {
+ text-align: start !important;
+
+}
+.input:hover{
+ text-align: start !important;
+}
+.input::placeholder {
+ text-align: center !important;
+ font-family: 'IBM Plex Sans Arabic', sans-serif;
 }

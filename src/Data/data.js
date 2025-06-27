@@ -1,5 +1,5 @@
 export const category = [
-    { id: 1, title: "ملابس سفلية", logo: "/images/img.png" },
+    { id: 1, title: "ملابس سفلية", logo: "/images/blur-placeholder.png" },
     { id: 2, title: "أحذية", logo: "/images/img_1.png" },
     { id: 3, title: "ملابس رجالية", logo: "/images/img_1.png" },
     { id: 4, title: "عنوان 4", logo: "/images/img_1.png"  },

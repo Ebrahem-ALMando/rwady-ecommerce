@@ -1,19 +1,20 @@
 .slick-dots {
-    display: flex !important; /* جعلها أفقية */
-    justify-content: center; /* توسيطها أفقياً */
-    gap: 10px; /* المسافة بين النقاط */
+    display: flex !important;
+    justify-content: center;
+    gap: 10px;
     position: absolute;
-    bottom: 10px; /* المسافة من الأسفل */
+    bottom: 10px;
     width: 100%;
     list-style: none;
     padding: 0;
+    z-index: 10;
 }
 
 .slick-dots li {
     width: 15px;
     height: 15px;
     border-radius: 50%;
-    background-color: #ccc; /* لون النقاط العادية */
+    background-color: #ccc;
     transition: background-color 0.3s ease, width 0.3s ease, height 0.3s ease;
     display: flex;
     justify-content: center;
@@ -21,14 +22,14 @@
     cursor: pointer;
 }
 
-/* إخفاء الأرقام داخل الأزرار */
+
 .slick-dots li button {
     display: none;
 }
 
-/* النقطة النشطة */
+
 .slick-dots .slick-active {
-    background-color: #007bff; /* لون النقطة النشطة */
-    width: 20px; /* تكبير النقطة النشطة */
+    background-color: #007bff;
+    width: 20px;
     height: 20px;
 }

@@ -10,8 +10,8 @@ export const profileButtons=[
       </svg>
     )
         ,
-        text:"الملف الشخصي",
-        link:"profile",
+        key: "profile",
+        link: "profile",
     },
     {   icon:
             (
@@ -29,7 +29,7 @@ export const profileButtons=[
 
             )
         ,
-        text: "طلباتي",
+        key: "orders",
         link: "orders",
     },
     // {
@@ -65,7 +65,7 @@ export const profileButtons=[
                 </svg>
             )
         ,
-        text: "العناوين",
+        key: "addresses",
         link: "addresses-list",
     },
     {
@@ -84,7 +84,7 @@ export const profileButtons=[
                 </svg>
             )
         ,
-        text: "الحركة المالية او الدفعات",
+        key: "transactions",
         link: "transaction-and-payment-history",
     }
 ]

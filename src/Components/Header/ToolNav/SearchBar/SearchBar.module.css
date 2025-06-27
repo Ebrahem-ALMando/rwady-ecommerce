@@ -2,13 +2,80 @@
     height: 53px;
     width: 100%;
     background-color: #ffffff;
-    position: relative;
+    position: relative; /* مهم لتموضع النتائج */
     display: flex;
     align-items: center;
+    flex-direction: column;
+    gap: 5px;
 }
 
+
+.searchArea {
+    position: absolute;
+    top: 101%;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background-color: #ffffff;
+    border: 1px solid #dcdcdc;
+    border-radius: 3px 3px 10px 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0.5rem 0;
+}
+
+
+.resultsList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.resultItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.resultItem:hover {
+    background-color: #f7f7f7;
+}
+
+.detailsButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 4px;
+    background: transparent;
+    color: #0741ad;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.3s ease-in-out;
+    border: 1px solid  #0741ad;
+    padding: 10px;
+    border-radius: 7px;
+    width: 100px;
+
+}
+
+.detailsButton:hover {
+    color: #ffffff;
+    background: #0741ad;
+    border-color: #ffffff;
+}
+
+
 .SearchInput {
-    height: 50px;
+    height: 80px;
     width: 100%;
     border-radius: 10px;
     background-color: #eeeff2;
@@ -17,7 +84,22 @@
     font-size: 1rem;
     direction: inherit;
 }
+.skeletonRow {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
 
+.nameSkeleton {
+    min-width: 400px;
+
+}
+.detailSkeleton {
+    min-width:100px;
+    margin-left: 1.5rem;
+}
 
 html[dir="rtl"] .SearchInput {
     padding-right: 50px;
@@ -46,6 +128,19 @@ html[dir="ltr"] .SearchInput {
     justify-content: center;
     pointer-events: none;
 }
+.productInfo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.productImage {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 1px solid #0a58ca;
+}
 
 
 html[dir="rtl"] .SearchIcon {
@@ -60,9 +155,12 @@ html[dir="ltr"] .SearchIcon {
 
 @media (max-width: 768px) {
     .mainDiv {
-        height: 40px;
+        max-height: 40px;
+        opacity: 1;
         overflow: hidden;
-        transition: height 0.3s ease-in-out;
+        transition:
+                max-height 0.3s ease-in-out,
+                opacity 0.2s ease-in-out 0.1s;
     }
 
     .SearchInput {
@@ -70,6 +168,7 @@ html[dir="ltr"] .SearchIcon {
         font-size: 16px;
         border-radius: 30px;
         border: 1px solid #0741ad;
+        transition: all 0.3s ease-in-out;
     }
 
     .SearchIcon {
@@ -78,9 +177,15 @@ html[dir="ltr"] .SearchIcon {
         font-size: 18px;
         background-color: transparent;
         color: #0741ad;
+        transition: all 0.3s ease-in-out;
     }
 
     .scrolled {
-        height: 0;
+        max-height: 0;
+        opacity: 0;
+        pointer-events: none;
+        transition:
+                max-height 0.1s ease-in-out
+
     }
 }

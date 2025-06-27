@@ -1,30 +1,29 @@
-
 import styles from './ButtonTap.module.css';
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const ButtonTap = (props) => {
+const ButtonTap = ({ link = "profile", icon, text, isLogout, isSelect, onClick }) => {
     const pathname = usePathname();
-    const href = `/${props.link ?? "profile"}`;
+    const href = `/${link}`;
     const isCurrent = pathname === href;
 
     const button = (
         <button
             type="button"
             className={`${styles.buttonTap} 
-                ${props.isSelect ? styles.buttonSelect : ''}
-                ${props.isLogout ? styles.buttonLogout : ''}`}
+                ${isSelect ? styles.buttonSelect : ''}
+                ${isLogout ? styles.buttonLogout : ''}`}
             onClick={(e) => {
-                if (props.isLogout) return props.onClick?.();
+                if (isLogout) return onClick?.();
                 if (isCurrent) return;
             }}
         >
-            {props.icon}
-            {props.text}
+            {icon}
+            {text}
         </button>
     );
 
-    return props.isLogout || isCurrent ? button : <Link href={href} replace>{button}</Link>;
+    return isLogout || isCurrent ? button : <Link href={href} replace>{button}</Link>;
 };
 
 export default ButtonTap;

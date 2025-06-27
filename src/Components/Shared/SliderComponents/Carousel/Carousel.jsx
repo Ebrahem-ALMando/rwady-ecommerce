@@ -1,28 +1,22 @@
 "use client";
-import useSWR from "swr";
-import dynamic from "next/dynamic";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import styles from "./Carousel.module.css";
-import Loading from "@/Components/Shared/Loading/Loading";
-import Error from "@/Components/Shared/Error/Error";
-import { getTopSlider } from "@/api/services/topSlider";
 import SafeImage from "@/Components/Shared/SafeImage/SafeImage";
 import Link from "next/link";
 import {
     customNextArrowIcon,
     customPrevArrowIcon,
-    sliderArrowShape,
 } from "@/utils/Icons";
 import {
     sliderSettings,
-    styleAppendDots,
 } from "@/Components/Shared/SliderComponents/Carousel/config";
 import { staticSlides } from "@/Data/topSlides";
 import React from "react";
-import Cookies from "js-cookie";
+import { motion, AnimatePresence } from "framer-motion";
 
-const Slider = dynamic(() => import("react-slick"), { ssr: false });
+import Slider from "react-slick";
+
 
 const CustomPrevArrow = (props) => (
     <button {...props} className={`${styles.prevArrow} ${styles.arrow}`}>
@@ -36,26 +30,9 @@ const CustomNextArrow = (props) => (
     </button>
 );
 
-const Carousel = () => {
-    const lang = Cookies.get('language') || 'ar';
-    const { data, error, isLoading, mutate } = useSWR(["top-slider",lang], getTopSlider, {
-        revalidateIfStale: false,
-    });
+const Carousel = ({ dataList = [],lang }) => {
 
-    if (isLoading) return <Loading />;
-    if (error)
-        return (
-            <Error
-                onRetry={() =>
-                    mutate(undefined, {
-                        revalidate: true,
-                    })
-                }
-            />
-        );
-
-    const Data = data?.data || [];
-    const rawData = Data.length > 0 ? Data : staticSlides;
+    const rawData = dataList.length > 0 ? dataList : staticSlides;
     const isSingleSlide = rawData.length === 1;
     const dataTemp = isSingleSlide ? [...rawData, ...rawData] : rawData;
 
@@ -65,63 +42,78 @@ const Carousel = () => {
         arrows: !isSingleSlide,
         prevArrow: <CustomPrevArrow />,
         nextArrow: <CustomNextArrow />,
-        appendDots: (dots) => (
+        appendDots: (dots) =>
             !isSingleSlide ? (
-                <div style={styleAppendDots}>
                     <ul className={styles.slickDots}>
-                        {sliderArrowShape}
                         <span className={styles.appendDotSpan}>
-          {dots.map((dot, index) => {
-              const isActive = dot.props.className.includes("slick-active");
-              return React.cloneElement(dot, {
-                  key: index,
-                  className: `${dot.props.className} ${styles.slickDot} ${
-                      isActive ? styles.slickActive : ""
-                  }`,
-              });
-          })}
-        </span>
+                              {dots.map((dot, index) => {
+                                  const isActive = dot.props.className.includes("slick-active");
+                                  return React.cloneElement(dot, {
+                                      key: index,
+                                      className: `${dot.props.className} ${styles.slickDot} ${
+                                          isActive ? styles.slickActive : ""
+                                      }`,
+                                  });
+              })}
+            </span>
                     </ul>
-                </div>
-            ) :  <ul style={{ display: "none" }} />
-        ),
 
+            ) : (
+                <ul style={{ display: "none" }} />
+            ),
         customPaging: (i) => <div className={styles.slickBtn} />,
     };
 
+
     return (
-        <div className={`${styles.container} mx-auto mt-4 rtl`}>
-            <Slider {...settings}>
-                {dataTemp.map((slide, index) => (
-                    <div key={index} className="relative">
-                        <SafeImage
-                            src={slide.img}
-                            fallback="/Home/slider1.png"
-                            alt={slide.title}
-                            width={2000}
-                            height={2000}
-                            className="w-full min-h-96 object-cover rounded-lg"
-                            decoding="async"
-                        />
-                        <div
-                            className={`absolute inset-0 bg-opacity-50 flex flex-col items-end justify-center text-white text-right p-8 ${styles.text}`}
-                        >
-                            <h2 className="text-3xl font-bold">{slide.title}</h2>
-                            <p className={`blur-1 text-4xl my-2 ${styles.description}`}>
-                                {slide.description}
-                            </p>
-                            <div className="w-full flex justify-end mr-20">
-                                <Link href={slide.link || "#"}>
-                                    <button className="mt-4 mr-5 bg-white text-blue-600 px-6 py-2 rounded-lg hover:bg-gray-400 w-auto">
-                                        أبدأ تسوق الان
-                                    </button>
-                                </Link>
+        <AnimatePresence>
+            <motion.div
+                initial={{ opacity: 0.8, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 30 }}
+                transition={{ duration: 0.4 }}
+                className={`${styles.container} mx-auto mt-4 mb-[-50px]`}
+            >
+                <div>
+                    <Slider {...settings}>
+                        {dataTemp.map((slide, index) => (
+                            <div key={index} className="relative">
+                                <SafeImage
+                                    src={slide.image_url}
+                                    fallback="/Home/slider1.png"
+                                    alt={slide.title?.[lang]}
+                                    width={3000}
+                                    height={3000}
+                                    className="w-full object-cover rounded-lg max-h-[18rem] md:max-h-[22rem] lg:max-h-[27rem]"
+                                    decoding="async"
+                                    priority={true}
+                                />
+
+                                <div
+                                    className="absolute inset-0 bg-opacity-50 flex flex-col items-end justify-center text-white text-right px-4 sm:px-8 pr-10 sm:pr-16 lg:mr-12 lg:gap-4"
+                                    style={{zIndex: 10}}
+                                >
+                                    <h2 className="text-xl md:text-2xl md:text-3xl font-bold">{slide.title?.[lang]}</h2>
+                                    <p className="text-base md:text-lg md:text-xl my-2">{slide.description?.[lang]}</p>
+
+                                    <div className="relative w-full flex justify-end mt-4 mr-4 md:mr-10"
+                                         style={{zIndex: 20}}>
+                                        <Link href={slide.link || "#"}>
+                                            <button
+                                                className="bg-white text-blue-600 px-4 py-1.5 md:px-6 md:py-2 text-sm md:text-base hover:bg-gray-400 w-auto rounded-full lg:rounded-md"
+                                                style={{position: "relative", zIndex: 30}}
+                                            >
+                                                {slide.button_text?.[lang]}
+                                            </button>
+                                        </Link>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                ))}
-            </Slider>
-        </div>
+                        ))}
+                    </Slider>
+                </div>
+            </motion.div>
+        </AnimatePresence>
     );
 };
 

@@ -1,6 +1,6 @@
 export const Carts=[
     {
-        img:"./images/Shopping/img.png",
+        img:"./images/Shopping/blur-placeholder.png",
         title:'بريتيجاردن بلوفر كاجوال كبير الحجم بقبة دائرية بدون طوق واكمام طويلة للنساء، بلوزة محبوكة مكتنزة',
         brand:"trendyol  ماركة  ",
         price:"‏50,000 IQD",
@@ -14,7 +14,7 @@ export const Carts=[
         ]
     },
     {
-        img:"./images/Shopping/img.png",
+        img:"./images/Shopping/blur-placeholder.png",
         title:'بريتيجاردن بلوفر كاجوال كبير الحجم بقبة دائرية بدون طوق واكمام طويلة للنساء، بلوزة محبوكة مكتنزة',
         brand:"trendyol  ماركة  ",
         price:"‏50,000 IQD",
@@ -28,7 +28,7 @@ export const Carts=[
         ]
     },
     {
-        img:"./images/Shopping/img.png",
+        img:"./images/Shopping/blur-placeholder.png",
         title:'بريتيجاردن بلوفر كاجوال كبير الحجم بقبة دائرية بدون طوق واكمام طويلة للنساء، بلوزة محبوكة مكتنزة',
         brand:"trendyol  ماركة  ",
         price:"‏50,000 IQD",
@@ -42,7 +42,7 @@ export const Carts=[
         ]
     },
     {
-        img:"./images/Shopping/img.png",
+        img:"./images/Shopping/blur-placeholder.png",
         title:'بريتيجاردن بلوفر كاجوال كبير الحجم بقبة دائرية بدون طوق واكمام طويلة للنساء، بلوزة محبوكة مكتنزة',
         brand:"trendyol  ماركة  ",
         price:"‏50,000 IQD",

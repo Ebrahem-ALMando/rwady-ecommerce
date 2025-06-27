@@ -40,6 +40,18 @@
 .bodyCell {
     padding: 15px;
 }
+.line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+    margin: 6px 0;
+    justify-content: end;
+
+}
+.icon{
+    color: #555;
+}
 .status{
     padding:5px;
     border-radius: 5px;

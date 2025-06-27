@@ -6,7 +6,7 @@ import './FilterCriteriaPrice.css';
 const MIN = 0;
 const MAX = 10000;
 
-const PriceSlider = ({ onChange }) => {
+const PriceSlider = ({ onChange ,t}) => {
     const [values, setValues] = useState([MIN, MAX]);
 
     const handleChange = (newValues) => {
@@ -33,7 +33,7 @@ const PriceSlider = ({ onChange }) => {
                 marginTop: '15px',
             }}>
                 <div>
-                    <label className="label-price" htmlFor="minPrice">من</label>
+                    <label className="label-price" htmlFor="minPrice">{t("priceFrom")}</label>
                     <input
                         disabled
                         className="input-price"
@@ -43,7 +43,7 @@ const PriceSlider = ({ onChange }) => {
                     />
                 </div>
                 <div>
-                    <label className="label-price" htmlFor="maxPrice">إلى</label>
+                    <label className="label-price" htmlFor="maxPrice">{t("priceTo")}</label>
                     <input
                         disabled
                         className="input-price"

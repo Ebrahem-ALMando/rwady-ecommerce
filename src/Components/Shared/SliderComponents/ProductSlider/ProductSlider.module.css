@@ -1,0 +1,38 @@
+.desktopVersion {
+    display: block;
+}
+
+.mobileVersion {
+    display: none;
+}
+
+@media (max-width: 630px) {
+    .desktopVersion {
+        /*display: none !important;*/
+    }
+
+    .mobileVersion {
+        /*display: block;*/
+    }
+
+    .mobileGrid {
+        width: 100%;
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, auto);
+        padding-top: 1rem;
+
+    }  .mobileGrid {
+           gap: 0.5rem;
+       }
+
+    /*.mobileGrid > * {*/
+    /*    width: 100%;*/
+    /*}*/
+
+
+    /*.card {*/
+    /*    width: 100%;*/
+    /*    min-height: 300px;*/
+    /*}*/
+}

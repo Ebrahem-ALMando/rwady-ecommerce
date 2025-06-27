@@ -11,6 +11,7 @@
     align-items: center;
     gap:15px;
     flex-wrap: wrap;
+    overflow: hidden;
 }
 .container h2{
     display: flex;
@@ -26,6 +27,9 @@
 }
 .container h2:hover{
     transform: translateY(-2px);
+}
+.heading{
+    text-transform: capitalize;
 }
 @media (max-width: 600px)
 {

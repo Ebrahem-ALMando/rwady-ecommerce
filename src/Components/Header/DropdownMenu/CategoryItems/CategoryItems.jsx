@@ -4,7 +4,7 @@ import { categoryIcon } from "@/utils/Icons";
 import React, { memo } from "react";
 import EmptyState from "@/Components/Shared/EmptyState/EmptyState";
 
-const CategoryItems = ({ title, data = [], link }) => {
+const CategoryItems = ({ title, data = [], link ,lang}) => {
     const dataList = Array.isArray(data)
         ? data
         : Array.isArray(data?.data)
@@ -27,19 +27,20 @@ const CategoryItems = ({ title, data = [], link }) => {
                             <EmptyState message="لا توجد اقسام فرعية لعرضها حالياً" />
                             :
                           <>
-                              <CategoryCard
-                                  logo="/images/img_10.png"
-                                  title="الجديد في"
-                                  link={link}
-                              />
+                              {/*<CategoryCard*/}
+                              {/*    logo="/images/img_10.png"*/}
+                              {/*    title="الجديد في"*/}
+                              {/*    link={link}*/}
+                              {/*/>*/}
 
                               {dataList.map((item) => (
                                   <CategoryCard
                                       key={item.id}
                                       id={item.id}
-                                      logo={item.logo}
-                                      title={item.title || item.name}
-                                      link={item.link}
+                                      logo={item.image_url}
+                                      // title={item.title || item.name}
+                                      title={item.name?.[lang]}
+                                      // link={item.link}
                                   />
                               ))}
                           </>

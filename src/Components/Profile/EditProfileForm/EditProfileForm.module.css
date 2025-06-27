@@ -111,14 +111,15 @@
 
 .textInput {
     width: 100%;
-    padding: 0.8rem 0.8rem 0.8rem 65px;
+    /*padding: 0.8rem 0.8rem 0.8rem 65px;*/
+    padding: 0.8rem ;
     border: 2px solid #e2e8f0;
     border-radius: 8px;
     font-size: 16px;
     font-weight: 400;
     transition: all 0.3s ease;
     color: #0641AD;
-    text-align: right;
+    text-align: start;
 }
 
 .textInput:focus {

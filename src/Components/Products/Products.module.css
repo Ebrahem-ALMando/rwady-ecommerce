@@ -165,6 +165,25 @@
     box-shadow: 0 6px 16px rgba(0,0,0,0.08);
 }
 
+.clearButton {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    background-color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    margin-inline-start: 8px;
+}
+
+.clearButton:hover {
+    background-color: #f3f3f3;
+    border-color: #999;
+}
+
 
 @media (max-width: 1120px) {
     .container {

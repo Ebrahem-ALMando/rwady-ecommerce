@@ -2,9 +2,7 @@
 
 export const sliderSettings  = {
     dots: false,
-    infinite: true,
     speed: 500,
-    slidesToShow: 5, // عرض 5 صور في الشاشات الكبيرة
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3000,
@@ -29,7 +27,7 @@ export const sliderSettings  = {
             },
         },
         {
-            breakpoint: 605,
+            breakpoint: 630,
             settings: {
                 slidesToShow: 1,
             },

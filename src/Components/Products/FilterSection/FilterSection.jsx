@@ -5,12 +5,13 @@ import {useState} from "react";
 import FilterCriteriaSelect
     from "@/Components/Products/FilterSection/FilterCriteriaSelect/FilterCriteriaSelect";
 import {downArrow, upArrow} from "@/utils/Icons";
+import {useTranslations} from "next-intl";
 
 
 
 const FilterSection=(props)=>{
     const [isOpen, setIsOpen] = useState(true);
-
+        const t=useTranslations('products')
     return (
         <div className={`${styles.items} ${isOpen ? styles.open : ''}`}>
             <button
@@ -32,8 +33,8 @@ const FilterSection=(props)=>{
             <div className={styles.content}>
                 {props.children}
                 {props.isMore ?
-                    <p className={styles.showMore}>عرض المزيد</p>
-                :''}
+                    <p className={styles.showMore}>{t("showMore")}</p>
+                    : ''}
             </div>
 
 

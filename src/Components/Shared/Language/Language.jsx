@@ -1,66 +1,59 @@
 "use client";
-import styles from './Language.module.css';
-import React, { useState, useEffect } from 'react';
-import Cookies from 'js-cookie';
-import { useRouter } from 'next/navigation';
-import i18n from '@/i18n';
-import {setHtmlDirection} from "@/utils/setDirection";
 
-function Language({ hideMobile }) {
+import React, from "react";
+import styles from "./Language.module.css";
+import { usePathname, useRouter } from "@/i18n/navigation";
+import { useParams } from "next/navigation";
+import {useTranslations} from "next-intl";
+
+
+const languages = [
+    { label: "ع", code: "ar", name: "العربية" },
+    { label: "En", code: "en", name: "الإنجليزية" },
+];
+
+export default function Language({ hideMobile }) {
     const router = useRouter();
-    const [isSelected, setIsSelected] = useState(0);
+    const pathname = usePathname();
+    const { locale: currentLocale } = useParams();
+    const t = useTranslations("Language");
+    const currentIndex = languages.findIndex(l => l.code === currentLocale);
 
-    const languages = [
-        { label: 'ع', value: 0, name: "العربية", code: "ar" },
-        { label: 'En', value: 1, name: "الإنجليزية", code: "en" }
-    ];
+    const handleSelect = (index) => {
+        if (index === currentIndex) return;
 
-    useEffect(() => {
-        const savedLang = Cookies.get('language') || 'ar';
-        const index = languages.findIndex(lang => lang.code === savedLang);
-        if (index !== -1) {
-            setIsSelected(index);
-            i18n.changeLanguage(languages[index].code);
-        }
-    }, []);
+        const langCode = languages[index].code;
 
-    const handleSelect = (val) => {
-        if (val === isSelected) return;
-
-        const langCode = languages[val].code;
-        Cookies.set('language', langCode);
-        i18n.changeLanguage(langCode);
-        setHtmlDirection(langCode);
-        setIsSelected(val);
-        router.replace(window.location.pathname);
-
+        router.replace(pathname, { locale: langCode });
     };
-
     return (
-        <div className={`${styles.languageDiv} ${hideMobile ? styles.hideMobile : ''}`}>
-            {languages.map((lang) => (
-                <div
-                    key={lang.value}
-                    role="button"
-                    tabIndex={0}
-                    aria-label={`تغيير اللغة إلى ${lang.name}`}
-                    onClick={() => handleSelect(lang.value)}
-                    onKeyDown={(e) => {
-                        if (e.key === "Enter") handleSelect(lang.value);
-                    }}
+        <div
+            className={`${styles.languageDiv} ${hideMobile ? styles.hideMobile : ""}`}
+            role="group"
+            aria-label={t("select")}
+        >
+            {languages.map((lang, i) => (
+                <button
+                    key={lang.code}
+                    type="button"
+                    aria-label={t("changeTo", { lang: lang.name })}
+                    onClick={() => handleSelect(i)}
                     className={styles.language}
                     style={{
-                        border: isSelected === lang.value ? '2px solid #0741AD' : '1px solid transparent',
-                        backgroundColor: isSelected === lang.value ? '#ffffff' : '#eeeff2',
-                        color: isSelected === lang.value ? '#0741AD' : '#000',
+                        border:
+                            currentIndex === i ? "2px solid #0741AD" : "1px solid transparent",
+                        backgroundColor:
+                            currentIndex === i ? "#ffffff" : "#eeeff2",
+                        color: currentIndex === i ? "#0741AD" : "#000",
+                        cursor: "pointer",
+                        padding: "6px 12px",
+                        borderRadius: "6px",
+                        transition: "all 0.2s ease-in-out",
                     }}
-
                 >
                     {lang.label}
-                </div>
+                </button>
             ))}
         </div>
     );
 }
-
-export default Language;

@@ -52,7 +52,7 @@ const CartItem = ({ item,cart, updateQuantity,getItemQuantity,removeItem }) => {
             <CustomToast
                 type="error"
                 title="تم الحذف من السلة"
-                message={`تم إزالة ${item.name} بنجاح`}
+                message={`تم إزالة ${item?.name} بنجاح`}
             />,
             {
                 position: 'bottom-left',
@@ -62,7 +62,7 @@ const CartItem = ({ item,cart, updateQuantity,getItemQuantity,removeItem }) => {
     }
 
     useEffect(() => {
-        const qty = getItemQuantity(item.id);
+        const qty = getItemQuantity(item?.id);
 
         setSelectedQty(qty > 0 ? qty : 1);
 
@@ -79,7 +79,7 @@ const CartItem = ({ item,cart, updateQuantity,getItemQuantity,removeItem }) => {
                 <SafeImage
                     fallback="/images/Shopping/img.png"
                     src={item.image}
-                    alt={item.name || "منتج"}
+                    alt={item?.name || "منتج"}
                     width={100}
                     height={100}
                     loading="lazy"
@@ -91,7 +91,7 @@ const CartItem = ({ item,cart, updateQuantity,getItemQuantity,removeItem }) => {
 
             <div className={styles.productItem}>
                 <h4 className={styles.title}>{item?.name}</h4>
-                <p className={styles.brand}>{item.brand.name}</p>
+                <p className={styles.brand}>{item?.brand?.name}</p>
                 <div className={styles.actionButton}>
                     <DeleteButton icon={DeleteIcon} onClick={handleRemoveCartItem}/>
                     <motion.button

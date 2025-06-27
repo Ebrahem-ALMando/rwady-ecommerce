@@ -2,17 +2,19 @@
 import { useState, useRef, useEffect } from "react";
 import styles from "./SortDropdown.module.css";
 import { FiChevronDown, FiCheck } from "react-icons/fi";
+import { useTranslations } from "next-intl";
 
 const SortDropdown = ({ value, onChange }) => {
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef(null);
+    const t = useTranslations("products.sort");
 
     const options = [
-        { value: "", label: "بدون ترتيب" },
-        { value: "price_desc", label: "السعر من الأعلى" },
-        { value: "price_asc", label: "السعر من الأقل" },
-        { value: "name_asc", label: "الاسم من أ → ي" },
-        { value: "name_desc", label: "الاسم من ي → أ" },
+        { value: "", label: t("none") }, // بدون ترتيب
+        { value: "price_desc", label: t("price_desc") },
+        { value: "price_asc", label: t("price_asc") },
+        { value: "name_asc", label: t("name_asc") },
+        { value: "name_desc", label: t("name_desc") },
     ];
 
     const selectedOption = options.find(opt => opt.value === value) || options[0];
@@ -30,8 +32,6 @@ const SortDropdown = ({ value, onChange }) => {
 
     return (
         <div className={styles.sortContainer}>
-            {/*<span className={styles.sortLabel}>ترتيب حسب:</span>*/}
-
             <div
                 className={styles.customDropdown}
                 ref={dropdownRef}
@@ -52,7 +52,6 @@ const SortDropdown = ({ value, onChange }) => {
                                     onChange(option.value);
                                     setIsOpen(false);
                                 }}
-
                             >
                                 {option.label}
                                 {value === option.value && <FiCheck className={styles.checkIcon} />}

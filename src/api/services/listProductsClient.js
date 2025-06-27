@@ -2,7 +2,7 @@ import {fetchAPI} from "@/api/api";
 import ApiConfig from "@/api/apiConfig";
 
 export const getProductsClient = async (filters = {}) => {
-    const endPointKey = "products";
+    const endPointKey = "user/products";
 
     try {
         const formData = new URLSearchParams();
@@ -39,17 +39,18 @@ export const getProductsClient = async (filters = {}) => {
 
         // console.log("🟦 formData sent:", formData.toString());
 
-        const response = await fetchAPI(endPointKey, "POST", formData, {
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-            },
-            next: {
-                revalidate: ApiConfig.revalidateTime,
-                tags: [endPointKey],
-            },
-        });
+        // const response = await fetchAPI(endPointKey, "GET", formData, {
+        //     headers: {
+        //         "Content-Type": "application/x-www-form-urlencoded",
+        //     },
+        //     next: {
+        //         revalidate: ApiConfig.revalidateTime,
+        //         tags: [endPointKey],
+        //     },
+        // });
 
-        return response ?? { data: [] };
+        // return response ?? { data: [] };
+        return []
     } catch (error) {
         console.error(`Failed to fetch ${endPointKey}:`, error.message);
         return { data: [] };

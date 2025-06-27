@@ -16,8 +16,7 @@
     color:#0741ad;
     font-size: 17px;
     font-weight: 600;
-    text-align: end;
-    direction: ltr;
+    text-align: start;
 }
 @media (max-width: 525px)
 {

@@ -7,8 +7,11 @@ export const sliderSettings={
     autoplay: true,
     autoplaySpeed: 3000,
     responsive: [
+
         { breakpoint: 1286, settings: { slidesToShow: 3 } },
         { breakpoint: 1095, settings: { slidesToShow: 2 } },
-        { breakpoint: 740, settings: { slidesToShow: 1 } },
+        { breakpoint: 750, settings: { slidesToShow: 1 } },
+
     ],
+
 }

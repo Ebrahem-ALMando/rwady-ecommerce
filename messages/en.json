@@ -1,0 +1,240 @@
+{
+  "HomePage": {
+    "title": "Welcome to Rwady!",
+    "about": "About Us"
+  },
+  "signin": {
+    "welcome": "Welcome to",
+    "subtitle": "Sign in to continue inside Rwady",
+    "phone": "Phone Number",
+    "phonePlaceholder": "Enter your phone number",
+    "submit": "Sign In",
+    "otpSent": "OTP sent successfully",
+    "otpFailed": "Failed to send OTP",
+    "genericError": "An error occurred while sending the code",
+    "invalidPhone": "Invalid phone number format"
+  },
+  "verify": {
+  "title": "Verification Code",
+  "instruction": "Enter the verification code that was just sent to your phone number",
+  "resendAfter": "You can resend after:",
+  "resend": "Resend Code",
+  "sending": "Sending...",
+  "confirm": "Confirm",
+  "verifying": "Verifying...",
+  "problem": "Having a problem?",
+  "support": "Contact support",
+  "otpSent": "Verification code sent successfully",
+  "otpFailed": "Failed to send the verification code",
+  "genericError": "An error occurred while sending the code",
+  "enter5Digits": "Please enter a 5-digit code",
+  "invalidCode": "The verification code is incorrect",
+  "loginSuccess": "Successfully logged in",
+  "loginFailed": "Login failed",
+  "loginError": "Operation failed. Please try again later",
+  "logoutSuccess": "Logged out successfully",
+  "logoutFailed": "Logout failed",
+  "logoutError": "An error occurred during logout"
+    },
+  "navBar": {
+    "title": "Deals on All Products",
+    "startShopping": "Start Shopping Now",
+    "close": "Close promo banner",
+    "promoRegion": "Promotional bar"
+  },
+  "toolNav": {
+    "toggleMenu": "Toggle side menu",
+    "homeLink": "Go to homepage",
+    "profile": "Profile",
+    "favourites": "Favourites",
+    "cart": "Shopping Cart",
+    "notifications": "Notifications",
+    "search": "Search",
+    "downloadApp": "Download App"
+  },
+  "Language": {
+    "select": "Select language",
+    "changeTo": "Change language to {lang}"
+  },
+  "searchBar": {
+    "label": "Search the site",
+    "aria": "Search field",
+    "placeholder": "Search for a product, brand, or category...",
+    "details": "Details"
+  },
+  "downloadApp": {
+    "button": "Download App",
+    "aria": "Download Rwady App",
+    "homeLabel": "Back to homepage",
+    "logoAlt": "Rwady website logo"
+  },
+  "notification": {
+    "dialog": "Notifications dialog",
+    "close": "Close notifications",
+    "ordersTitle": "Orders",
+    "oneHourAgo": "1 hour ago",
+    "message": "Your order has been successfully accepted by the RWADY team.",
+    "showMore": "Show more"
+  },
+  "mainNav": {
+    "label": "Main navigation",
+    "links": {
+      "categories": "Categories",
+      "offers": "Offers / Discounts",
+      "brands": "Brands",
+      "groups": "Collections",
+      "topSelling": "Top Selling",
+      "featured": "Featured"
+    }
+  },
+  "footer": {
+    "description": "Discover all you need from clothes, essentials, and electronics to household tools with the best quality and latest trends.",
+    "contactInfo": "Contact Information",
+    "followUs": "Follow Us",
+    "pages": "Pages",
+    "about": "About Us",
+    "contact": "Contact Us",
+    "privacy": "Privacy Policy",
+    "returnPolicy": "Return & Refund Policy",
+    "shippingPolicy": "Shipping & Delivery Policy",
+    "faq": "FAQs",
+    "downloadApp": "Download App",
+    "socialLabel": "Social Media Links",
+    "pagesLabel": "Site Pages Links",
+    "reloadError": "Please reload the page",
+    "copyright": "All rights reserved © RWADY"
+
+  },
+  "Profile": {
+    "title": "Profile",
+    "maxImageSize": "Maximum image size is 10 MB",
+    "changeImage": "Change Image",
+    "removeImage": "Remove Image",
+    "personalInfo": "Personal Information",
+    "edit": "Edit",
+    "fullName": "Full Name",
+    "phoneNumber": "Phone Number",
+    "errors": {
+      "imageTooLarge": "Please select an image smaller than 10 MB",
+      "uploadError": "An error occurred while uploading the image",
+      "updateFail": "Failed to update the image",
+      "uploadSuccess": "Image updated successfully"
+    },
+    "profileImageAlt": "{name} user profile image",
+    "imageRemovedSuccess": "Profile image removed successfully"
+  },
+  "editProfile": {
+    "title": "Edit Personal Information",
+    "fullName": "Full Name",
+    "phone": "Phone Number",
+    "saveChanges": "Save Changes",
+    "cancel": "Cancel",
+    "formError": "Please enter a valid full name (at least 3 characters)",
+    "successUpdate": "Profile updated successfully",
+    "errorUpdate": "Failed to update profile",
+    "unknownError": "An error occurred during update"
+  },
+  "Sidebar": {
+    "logout": "Logout",
+    "buttons": {
+      "profile": "Profile",
+      "orders": "My Orders",
+      "addresses": "Addresses",
+      "transactions": "Payments or Transactions"
+    },
+    "userImageAlt": "User photo",
+    "defaultName": "Account Name",
+    "defaultEmail": "user@mail.com",
+    "defaultPhone": "00999999999"
+  },
+  "titleSection": {
+    "viewAll": "View All"
+  },
+  "Breadcrumb":
+  {
+    "home": "Home",
+    "all_products": "All Products",
+    "product_details": "Product Details"
+  },
+  "ProductDetails": {
+    "descriptionTitle": "Product Description",
+    "showMore": "Show more",
+    "noDescription": "No description available for this product.",
+    "showLess": "Show less",
+    "colors": "Colors",
+    "color": "Color",
+    "remaining": "Remaining",
+    "unit": "unit",
+    "sold": "Sold",
+    "times": "times",
+    "rating": "Product Rating",
+    "reviews": "Reviews",
+    "addToFavourites": "Add to Favourites",
+    "shareProduct": "Share Product",
+    "installmentInfo": "Installment Payment Info",
+    "installmentPlan": "Pay in 6 monthly installments",
+    "installmentMonthly": "Installment available: 500 /month",
+    "youSaved": "You saved {amount} IQD",
+    "discountPercentage": "Discount {percent}%",
+    "mediaAlt": "Media number {index}",
+    "imageAlt": "Image number {index}",
+    "videoThumbnailAlt": "Thumbnail for video {index}",
+    "notAvailable": "Not Available",
+    "maximize": "Maximize"
+
+
+  },
+  "downSlider": {
+    "startShopping": "Start Shopping Now"
+  },
+  "Addresses": {
+    "myAddresses": "My Addresses",
+    "newTitle": "Add New Address",
+    "editTitle": "Edit Address",
+    "default": "Default",
+    "defaultLabel": "Address",
+    "changeAddress": "Change Address",
+    "deleteSuccess": "Address deleted successfully",
+    "deleteFail": "Failed to delete the address",
+    "setDefaultSuccess": "Address set as default",
+    "setDefaultFail": "Failed to set address as default",
+    "errorOccurred": "An error occurred during the operation",
+    "noAddress": "-",
+    "noPhone": "-",
+    "alreadyDefault": "This address is already the default",
+    "addSuccess": "Address added successfully",
+    "updateSuccess": "Address updated successfully",
+    "submitFail": "Operation failed",
+    "labelName": "Address Name",
+    "placeholderName": "e.g., Home, Work...",
+    "mapPlaceholder": "Select a location from the map here",
+    "setDefaultLabel": "Set this as the default address",
+    "enterName": "Please enter the address name",
+    "selectLocation": "Please select a location on the map",
+    "save": "Save",
+    "cancel": "Cancel"
+
+  },
+  "Buttons": {
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+  "products": {
+    "sort": {
+      "none": "No sorting",
+      "price_desc": "Price: High to Low",
+      "price_asc": "Price: Low to High",
+      "name_asc": "Name: A → Z",
+      "name_desc": "Name: Z → A"
+    },
+    "sortBy": "Sort by:",
+    "clearFilter": "Clear filter",
+    "categories": "Category",
+    "brands": "Brands",
+    "showMore": "Show more",
+    "price": "Price",
+    "priceFrom": "From",
+    "priceTo": "To"
+  }
+
+}

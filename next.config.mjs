@@ -1,6 +1,8 @@
-/** @type {import('next').NextConfig} */
-import nextI18NextConfig from './next-i18next.config.js';
+import createNextIntlPlugin from 'next-intl/plugin';
 
+const withNextIntl = createNextIntlPlugin();
+
+/** @type {import('next').NextConfig} */
 const nextConfig = {
     reactStrictMode: true,
 
@@ -16,15 +18,18 @@ const nextConfig = {
         remotePatterns: [
             {
                 protocol: 'https',
-                hostname: 'rawady.brainsoftsolutions.com',
+                hostname: 'rwady-backend.ahmed-albakor.com',
                 port: '',
                 pathname: '/**',
             },
+            {
+                protocol: 'https',
+                hostname: 'img.youtube.com',
+                port: '',
+                pathname: '/vi/**',
+            },
         ],
     },
-
-
-    i18n: nextI18NextConfig.i18n,
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);

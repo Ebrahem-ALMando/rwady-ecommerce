@@ -12,27 +12,44 @@ import Loading from "@/Components/Shared/Loading/Loading";
 
 const Payment=({handleChecked})=>{
 
-    const { data:listPaymentsData, error, isLoading, mutate } = useSWR(
-        "list-payments",
-        getListPayments
-    );
+    // const { data:listPaymentsData, error, isLoading, mutate } = useSWR(
+    //     "list-payments",
+    //     getListPayments
+    // );
+    //
+    //
+    // const hasError = error;
+    //
+    // if (isLoading) return <Loading />;
+    // if (hasError)
+    //     return (
+    //         <Error
+    //             onRetry={() =>
+    //                 mutate(undefined, {
+    //                     revalidate: true,
+    //                 })
+    //             }
+    //         />
+    //     );
+    const mockPayments = [
+        {
+            id: 1,
+            name: "الدفع عند الاستلام",
+            type: "cash",
+            icon: "CashIcon",
+            active: true
+        },
+        {
+            id: 2,
+            name: "تحويل بنكي",
+            type: "externel",
+            icon: "CreditCardIcon",
+            active: true
+        },
+    ];
 
-
-    const hasError = error;
-
-    if (isLoading) return <Loading />;
-    if (hasError)
-        return (
-            <Error
-                onRetry={() =>
-                    mutate(undefined, {
-                        revalidate: true,
-                    })
-                }
-            />
-        );
-
-    const Data = listPaymentsData?.data || [];
+    // const Data = listPaymentsData?.data || [];
+    const Data = mockPayments;
 
     return(
         <div className={styles.payment}>

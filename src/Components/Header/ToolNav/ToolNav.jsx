@@ -16,15 +16,25 @@ import {
 import { CiSearch } from "react-icons/ci";
 import Link from "next/link";
 import Image from "next/image";
-import React, { useEffect, useRef, useState, useCallback } from "react";
-import { useTranslation } from "next-i18next";
-import "@/i18n";
+import React, {useEffect, useRef, useState, useCallback, useMemo} from "react";
+import { useTranslations } from 'next-intl';
+import AutoScrollNavSlider from "@/Components/Header/ToolNav/AutoScrollNavSlider/AutoScrollNavSlider";
+import SearchModal from "@/Components/Shared/SearchModal/SearchModal";
+import useCart from "@/hooks/useCart";
+import {getCartFromStorage} from "@/utils/cartStorage";
 
-const ToolNav = ({ toggleMenu, isScrolled }) => {
-    const { t } = useTranslation("common");
+const ToolNav = ({ toggleMenu, isScrolled,getCartCount }) => {
+    const t = useTranslations("toolNav");
     const notificationRef = useRef(null);
     const [isNotificationVisible, setNotificationVisible] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const openSearchModal = () => setIsModalOpen(true);
+    const closeSearchModal = () => setIsModalOpen(false);
+
+
+
 
     const handleToggleMenu = useCallback(() => {
         setIsMenuOpen(prev => !prev);
@@ -44,7 +54,24 @@ const ToolNav = ({ toggleMenu, isScrolled }) => {
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
+
+
     }, []);
+
+
+    const [cartCount, setCartCount] = useState(0);
+
+    useEffect(() => {
+        const handleCartUpdate = () => {
+            const updatedCart = getCartFromStorage();
+            setCartCount(updatedCart.length);
+        };
+
+        window.addEventListener("cart-updated", handleCartUpdate);
+        return () => window.removeEventListener("cart-updated", handleCartUpdate);
+    }, []);
+
+
 
     return (
         <div>
@@ -55,26 +82,36 @@ const ToolNav = ({ toggleMenu, isScrolled }) => {
                             <button
                                 className={styles.menuToggle}
                                 onClick={handleToggleMenu}
-                                aria-label={t("toolNav.toggleMenu")}
+                                aria-label={t("toggleMenu")}
                             >
                                 {isMenuOpen ? CloseNavIcon : MenuNavIcon}
                             </button>
 
-                            <TopIcon link="/profile" isSelect element={ProfileIcon} aria={t("toolNav.profile")} />
-                            <TopIcon link="/collections/favourites" count={5} element={FavouriteIcon} aria={t("toolNav.favourites")} />
-                            <TopIcon link="/shopping-cart" count={6} element={ShoppingCartIcon} aria={t("toolNav.cart")} />
-                            <TopIcon setIsOpen={() => setNotificationVisible(prev => !prev)} count={7} element={NotificationIcon} aria={t("toolNav.notifications")} />
+                            <TopIcon link="/profile" isSelect element={ProfileIcon} aria={t("profile")} />
+                            <TopIcon link="/collections/favourites"
+
+                                     // count={0}
+
+                                     element={FavouriteIcon} aria={t("favourites")} />
+                            <TopIcon link="/shopping-cart" count={cartCount } element={ShoppingCartIcon} aria={t("cart")} />
+                            <TopIcon setIsOpen={() => setNotificationVisible(prev => !prev)} count={9} element={NotificationIcon} aria={t("notifications")} />
 
 
-                            {isScrolled && (
-                                <TopIcon showMobile isSearch element={<CiSearch size={28} />} aria={t("toolNav.search")} />
-                            )}
+
+                            <TopIcon
+                                showMobile
+                                isSearch
+                                onOpenModal={openSearchModal}
+                                element={<CiSearch size={28} />}
+                                aria={t("search")}
+                            />
+
 
                             <Language hideMobile />
                         </div>
 
                         <div className={styles.logo}>
-                            <Link href="/" aria-label={t("toolNav.homeLink")}>
+                            <Link href="/" aria-label={t("homeLink")}>
                                 <Image
                                     src="/logo.png"
                                     alt="Rwady Logo"
@@ -87,15 +124,40 @@ const ToolNav = ({ toggleMenu, isScrolled }) => {
                     </div>
 
                     <div className={styles.toolsDiv}>
-                        <SearchBar isScrolled={isScrolled} />
+
+
+
+
+                        <SearchBar
+                            className={styles.hideOnMobile}
+                            isScrolled={isScrolled}
+                            onOpenModal={openSearchModal}
+                            onCloseModal={closeSearchModal}
+                            isModalOpen={isModalOpen}
+                        />
+
+
+                        <AutoScrollNavSlider
+                                className={styles.showOnMobile}
+                                isScrolled={isScrolled}/>
+
+
                     </div>
 
                     <div className={styles.toolsDiv}>
-                        <DownloadAppWithLogo />
+                        <DownloadAppWithLogo/>
                     </div>
                 </div>
             </div>
-
+            {/*{  isModalOpen&&*/}
+            {/*<div className={`w-72 h-96 bg-red-500 `}>*/}
+            {/*    askj*/}
+            {/*</div>*/}
+            {/*}*/}
+            {/*<SearchModal*/}
+            {/*    isOpen={]}*/}
+            {/*    onClose={closeSearchModal}*/}
+            {/*/>*/}
             <div ref={notificationRef}>
                 <NotificationModel
                     isShow={isNotificationVisible}

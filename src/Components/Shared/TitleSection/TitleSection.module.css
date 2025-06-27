@@ -3,14 +3,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 90%;
-    margin: 2rem auto;
+    width: 95%;
+    margin: 2.5rem auto 2rem auto;
 }
 
 .title {
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     font-weight: bold;
     color: #0741AD;
+    transition: font-size 0.3s ease;
 }
 
 .viewAll {
@@ -20,12 +21,46 @@
     cursor: pointer;
     color: #0741AD;
     font-weight: bold;
+    font-size: 1rem;
+    transition: font-size 0.3s ease;
 }
 
+.arrowIconRotate{
+    transform: rotateY(180deg);
+}
 @media screen and (max-width: 800px) {
-   .titleSection{
-       margin: 3rem auto 1rem auto;
-       padding: 20px 20px;
-       width: 100%;
-   }
+    .titleSection {
+        margin: 2rem auto 1rem auto;
+        padding: 16px 20px;
+        width: 100%;
+    }
+
+    .title {
+        font-size: 1.4rem;
+    }
+
+    .viewAll {
+        font-size: 1.2rem;
+    }
+    .viewAll svg{
+        height: 35px !important;
+    }
+    }
+
+
+@media screen and (max-width: 500px) {
+    .title {
+        font-size: 1.3rem;
+    }
+    .viewAll {
+        font-size: 1rem;
+        gap: 5px;
+    }
+
+    .titleSection {
+        padding: 12px 16px;
+    }
+    .viewAll svg{
+        height: 30px !important;
+    }
 }

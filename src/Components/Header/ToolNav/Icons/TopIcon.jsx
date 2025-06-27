@@ -11,7 +11,8 @@ const TopIcon = ({
                      isSearch = false,
                      isDownload = false,
                      showMobile = false,
-                     aria = "Top icon"
+                     aria = "Top icon",
+                     onOpenModal
                  }) => {
     const handleClick = (e) => {
         if (setIsOpen) {
@@ -25,6 +26,7 @@ const TopIcon = ({
             href={link}
             className={`${styles.link} ${showMobile ? styles.showMobile : ""}`}
             aria-label={aria}
+            onClick={onOpenModal}
         >
             <div
                 className={`${styles.topIcon} 

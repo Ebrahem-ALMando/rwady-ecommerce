@@ -4,20 +4,19 @@ import Image from 'next/image';
 import Link from "next/link";
 import { DownloadIcon } from "@/utils/Icons";
 import React from "react";
-import { useTranslation } from "next-i18next";
-import "@/i18n";
+import {useTranslations} from "next-intl";
 
 const DownloadAppWithLogo = ({ hideLogo }) => {
-    const { t } = useTranslation("common");
+    const  t  = useTranslations("downloadApp");
 
     return (
         <div className={styles.mainDiv}>
             {!hideLogo && (
                 <div className={styles.logoContainer}>
-                    <Link href="/" aria-label={t("downloadApp.homeLabel")}>
+                    <Link href="/" aria-label={t("homeLabel")}>
                         <Image
                             src="/logo.png"
-                            alt={t("downloadApp.logoAlt")}
+                            alt={t("logoAlt")}
                             width={200}
                             height={150}
                             priority
@@ -28,10 +27,10 @@ const DownloadAppWithLogo = ({ hideLogo }) => {
             <button
                 type="button"
                 className={styles.downloadButton}
-                aria-label={t("downloadApp.aria")}
+                aria-label={t("aria")}
             >
                 {DownloadIcon}
-                {t("downloadApp.button")}
+                {t("button")}
             </button>
         </div>
     );

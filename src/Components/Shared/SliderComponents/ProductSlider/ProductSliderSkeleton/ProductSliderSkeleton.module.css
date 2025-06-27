@@ -1,0 +1,23 @@
+.skeletonWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.show4 { display: block; }
+.show3 { display: block; }
+.show2 { display: block; }
+.show1 { display: block; }
+
+@media (max-width: 1450px) {
+    .show4 { display: none; }
+}
+@media (max-width: 1200px) {
+    .show3 { display: none; }
+}
+@media (max-width: 768px) {
+    .show2 { display: none; }
+}
+/*@media (max-width: 480px) {*/
+/*    .show1 { display: none; }*/
+/*}*/

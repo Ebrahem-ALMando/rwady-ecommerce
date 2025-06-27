@@ -1,6 +1,5 @@
 .footer {
     margin-top: 7rem;
-    direction: rtl;
     background-color: #0741ad;
     color: white;
     display: flex;
@@ -13,13 +12,13 @@
 .contactInfo, .links, .socialLinks, .downloadLinks {
     flex: 1;
     margin: 1rem;
-    text-align: right;
+    text-align: start;
 }
 
 .contactInfo p, .links p, .socialLinks p, .downloadLinks p {
     font-weight: bold;
     margin-bottom: 1rem;
-    text-align: right;
+    text-align: start;
 }
 .contactInfo p {
     display: flex;
@@ -63,7 +62,6 @@
     width: 30%;
     min-width: 300px;
     margin-bottom: 3rem;
-
 }
 
 .downloadButtons{

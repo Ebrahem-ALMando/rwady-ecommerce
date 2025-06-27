@@ -1,5 +1,8 @@
 .container{
     width: 93%;
+    margin: 1rem auto;
+    padding: 3px;
+
 }
 
 .arrow {
@@ -34,17 +37,27 @@
     margin-right: 80px;
 }
 .description{
-    text-shadow: 4px 2px 4px rgba(255, 255, 255, 0.5); /* ظل داخلي للنص */
+    text-shadow: 4px 2px 4px rgba(255, 255, 255, 0.5);
 }
 
-.appendDotSpan{
+.appendDotSpan {
     position: relative;
     bottom: 30px;
+    left: 20%;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='51' viewBox='0 0 180 51' fill='none'><path d='M16.1051 6.59074C17.5398 2.63461 21.2978 0 25.506 0H159.51C164.144 0 168.172 3.18471 169.24 7.69464L179.5 51H0L16.1051 6.59074Z' fill='%23F7F7F7'/></svg>");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    width: 150px;
+    height: 51px;
+    padding:60px 40px 40px 40px;
 }
+
 .slickDots {
-    position: relative;
-    top: 5px;
+    position: relative !important;
+    top: -82px;
     right: 25%;
+
 }
 .slickDot {
     background-color: #ddf3f9 !important;
@@ -54,6 +67,7 @@
     transition: background-color 0.3s ease, width 0.3s ease;
     cursor: pointer;
     position: relative;
+
 
 }
 .slickBtn{
@@ -68,7 +82,11 @@
     width: 35px !important;
 }
 
+
 @media screen and (max-width: 1286px) {
+    .container {
+        width: 93%;
+    }
     .prevArrow {
         left: 10px;
     }
@@ -78,12 +96,71 @@
     }
 
 }
-@media screen and (max-width: 650px) {
-    .container{
-        width: 93%;
+@media screen and (max-width:900px) {
+    .appendDotSpan {
+        left:0% !important;
+        width: 120px;
+        height: 51px;
+        padding:40px 30px 30px 30px;
     }
-    .text{
-        margin-right: 20px;
+}
+
+@media screen and (max-width: 768px) {
+    .prevArrow,
+    .nextArrow {
+        display: none !important;
     }
 
+    .appendDotSpan {
+        padding:35px 30px 30px 30px;
+    }
+
+    .slickDot {
+        width: 18px !important;
+        height: 3px !important;
+        border-radius: 2px !important;
+    }
+
+    .slickActive {
+        width: 26px !important;
+    }
+}
+
+
+@media screen and (max-width: 650px) {
+    .text {
+        margin-right: 20px;
+    }
+    .slickDot {
+        width: 18px !important;
+        height: 4px !important;
+    }
+
+    .slickActive {
+        width: 35px !important;
+    }
+    .appendDotSpan {
+        bottom: 20px;
+        padding:33px 30px 30px 30px;
+    }
+
+}
+@media screen and (max-width: 570px)
+{
+    .slickDots {
+        right: 35%;
+    }
+    .appendDotSpan {
+        bottom: 20px;
+    }
+}
+@media screen and (max-width: 500px) {
+    .container img {
+        height: 8.5rem !important;
+        max-height: none !important;
+    }
+    .appendDotSpan {
+        bottom: 5px;
+        padding:33px 30px 30px 30px;
+    }
 }

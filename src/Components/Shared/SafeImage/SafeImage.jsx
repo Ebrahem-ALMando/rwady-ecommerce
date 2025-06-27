@@ -1,15 +1,19 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-/**
- * @param {string} src
- * @param {string} fallback
- * @param {string} alt
- * @param {object} props
- */
-const SafeImage = ({ src="/images/fallback.png", fallback = "/images/fallback.png", alt = "صورة", ...props }) => {
-    const [imgSrc, setImgSrc] = useState(src);
+export const isValidSrc = (src) => {
+    return !!src && typeof src === "string" && src.trim() !== "";
+};
+
+const SafeImage = ({
+                       src,
+                       fallback = "/images/fallback.png",
+                       alt = "صورة",
+                       offOnerror = false,
+                       ...props
+                   }) => {
+    const [imgSrc, setImgSrc] = useState(isValidSrc(src) ? src : fallback);
     const [hasError, setHasError] = useState(false);
 
     const handleError = () => {
@@ -18,18 +22,23 @@ const SafeImage = ({ src="/images/fallback.png", fallback = "/images/fallback.pn
             setHasError(true);
         }
     };
-        // if (!src) return null;
+
+    useEffect(() => {
+        if (isValidSrc(src)) {
+            setImgSrc(src);
+            setHasError(false);
+        } else {
+            setImgSrc(fallback);
+        }
+    }, [src]);
+
     return (
         <Image
-            src={imgSrc||undefined}
+            src={imgSrc}
             alt={alt}
-            onError={handleError}
-            onLoad={(result) => {
-                if (result.naturalWidth === 0) {
-                    handleError();
-                }
-            }}
+            decoding="async"
             {...props}
+            {...(!offOnerror && { onError: handleError })}
         />
     );
 };

@@ -14,15 +14,7 @@ import {getTokenWithClient} from "@/utils/getTokenWithClient";
 import {useRouter} from "next/navigation";
 
 const Orders = (props) => {
-    // const router = useRouter();
-    //
-    // useEffect(() => {
-    //     const token = getTokenWithClient();
-    //     if (!token) {
-    //
-    //         window.location.replace("/sign-in");
-    //     }
-    // }, []);
+
     const { data, isLoading, error, mutate } = useSWR("orderList", getOrders);
     const [selectedDate, setSelectedDate] = useState("");
     const [selectedStatus, setSelectedStatus] = useState("");
@@ -115,7 +107,7 @@ const Orders = (props) => {
 
                         <Line />
 
-                        {/* عرض الطلبات */}
+
                         {filteredOrders?.length > 0 ? (
                             filteredOrders.map(order => (
                                 <OrderCard

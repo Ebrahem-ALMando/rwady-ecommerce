@@ -1,8 +1,7 @@
-/*@import url('https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Nova+Mono&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap');*/
+@import 'nprogress/nprogress.css'; /*@import url('https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Nova+Mono&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap');*/
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 @media (prefers-color-scheme: light) {
   :root {
     --background: #0a0a0a;
@@ -12,6 +11,7 @@
 }
 
 body {
+  /*will-change: transform;*/
   /*direction: rtl;*/
   font-family: 'IBM Plex Sans Arabic', sans-serif;
   background-color: #f7f7f7;
@@ -99,9 +99,7 @@ body {
 .slick-slide {
   display: flex !important;
   justify-content: center;
-
 }
-
 @media (min-width: 1537px) {
   .mainContainer {
     max-width:100%;
@@ -122,4 +120,41 @@ body {
   width: 100%;
 
 }
+#nprogress .spinner {
+  display: none !important;
+}
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  height: 4px !important;
+  background: linear-gradient(90deg, #f43f5e, #f59e0b, #10b981, #3b82f6, #a855f7) !important;
+  border-radius: 10px !important;
+  background-size: 400% 400%;
+  animation: gradientMove 2s ease infinite;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+#nprogress .peg {
+  display: none !important;;
+}
+
+
 
