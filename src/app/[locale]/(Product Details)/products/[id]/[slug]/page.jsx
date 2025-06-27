@@ -10,8 +10,8 @@ import { slugify } from "@/utils/slugify";
 import Breadcrumb from "@/Components/Shared/Breadcrumb/Breadcrumb";
 import TitleSection from "@/Components/Shared/TitleSection/TitleSection";
 import EmptyState from "@/Components/Shared/EmptyState/EmptyState";
-import Loading from "daisyui/components/loading";
 import {getTranslations} from "next-intl/server";
+import Loading from "@/Components/Shared/Loading/Loading";
 
 // export async function generateStaticParams() {
 //     // try {
