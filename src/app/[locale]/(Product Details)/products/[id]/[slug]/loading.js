@@ -5,9 +5,7 @@ export default function LoadingPage() {
 
 
 return(
-    <h1>
-        asd
-    </h1>
+    <Loading/>
 )
 
 

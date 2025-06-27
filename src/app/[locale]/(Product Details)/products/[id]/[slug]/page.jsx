@@ -79,12 +79,12 @@ const DynamicProductDetailsPage =async  ({params}) => {
                 subUrl="/products"
                 currentPage={t("product_details")}
             />
-            <Suspense fallback={<Loading />}>
+            {/*<Suspense fallback={<Loading />}>*/}
                 <ProductDetailsData
                 id={id}
                 lang={locale}
                 />
-            </Suspense>
+            {/*</Suspense>*/}
             {/*<Footer />*/}
         </>
     );
