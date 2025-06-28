@@ -5,6 +5,7 @@
     height: 40px;
     margin: 0 0 0 0.2rem;
     width: 85px;
+    min-width: max-content;
     color: #6a6e83;
     display: flex;
     justify-content: space-evenly;

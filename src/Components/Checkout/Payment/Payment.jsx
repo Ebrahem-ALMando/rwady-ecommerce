@@ -33,20 +33,15 @@ const Payment=({handleChecked})=>{
     //     );
     const mockPayments = [
         {
-            id: 1,
-            name: "الدفع عند الاستلام",
-            type: "cash",
-            icon: "CashIcon",
-            active: true
-        },
-        {
-            id: 2,
-            name: "تحويل بنكي",
-            type: "externel",
+            id: "visa",
+            name: "الدفع بواسطة فيزا",
+            type: "visa",
             icon: "CreditCardIcon",
-            active: true
-        },
+            active: true,
+            payment_method:'qi'
+        }
     ];
+
 
     // const Data = listPaymentsData?.data || [];
     const Data = mockPayments;
@@ -61,7 +56,6 @@ const Payment=({handleChecked})=>{
                                 handleChecked={handleChecked}
                                 item={item}
                                 id={`CreditCardIcon-${index}`}
-
                             />
                             <Line
                                 styles={{ width: "93%",borderTop:"2px solid #E6EAEE" }}

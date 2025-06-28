@@ -4,12 +4,14 @@ import ApiConfig from "@/api/apiConfig";
 /**
  *
  * @param {Object} data -
+ * @param {bigint} productId -
  * @returns {Promise<{ error: boolean, data?: any, message?: string }>}
  */
-export const saveOrder = async (data) => {
-    const endPointKey = "user/orders";
 
-    const res = await fetchAPI(endPointKey, "POST", data, {
+export const updateCartItem = async (productId,data) => {
+    const endPointKey = `user/cart-items/${productId}`;
+
+    const res = await fetchAPI(endPointKey, "PUT", data, {
         next: {
             revalidate: ApiConfig.revalidateTime,
             tags: [endPointKey],

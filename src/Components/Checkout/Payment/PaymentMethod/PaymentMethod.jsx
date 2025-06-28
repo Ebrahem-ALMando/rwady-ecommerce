@@ -6,7 +6,7 @@ import {useState} from "react";
 const PaymentMethod=({item,handleChecked})=>{
 
     const checked=()=>{
-        handleChecked(item.id,item.type)
+        handleChecked(item.id,item.payment_method)
     }
     return(
         <div className={styles.paymentRow}>
@@ -26,7 +26,8 @@ const PaymentMethod=({item,handleChecked})=>{
                             {item.name}
                         </h2>
                         <p>
-                            {item.description??"تتوفر خدمة الدفع بالأقساط الشهرية"}
+                            بطاقة بنكية
+                            {/*{item.description??"تتوفر خدمة الدفع بالأقساط الشهرية"}*/}
                         </p>
                     </div>
                 </label>

@@ -4,11 +4,12 @@ import OrderSummary from "@/Components/Shared/OrderSummary/OrderSummary";
 import CartItem from "@/Components/ShoppingCartAndPayment/ShoppingCart/CartItem/CartItem";
 import useCart from "@/hooks/useCart";
 import EmptyState from "@/Components/Shared/EmptyState/EmptyState";
+import {useLocale, useTranslations} from "next-intl";
 
 const ShoppingCart=()=>{
     const {updateQuantity,getItemQuantity,removeItem,getTotalPrice,cart,getShippingTotal}=useCart()
-
-
+    const t=useTranslations('Cart')
+    const lang=useLocale()
     return(
         <div className={styles.mainDiv}>
 
@@ -17,33 +18,38 @@ const ShoppingCart=()=>{
                 <>
                     <div className={styles.products}>
                         <h2 className={styles.titlePage}>
-                          <span className={styles.item}>
-                            ( {cart.length} items)
+
+                            {t("cartTitle")}
+                            <span className={styles.item}>
+                    ( {cart.length} {t("items")})
                         </span>
-                            عربة التسوق
 
                         </h2>
-                        {/*{cart.map((cartItem, index) => (*/}
-                        {/*    <CartItem*/}
-                        {/*        cart={cart}*/}
-                        {/*        updateQuantity={updateQuantity}*/}
-                        {/*        getItemQuantity={getItemQuantity}*/}
-                        {/*        removeItem={removeItem}*/}
-                        {/*        key={index}*/}
-                        {/*        item={cartItem}/>*/}
-                        {/*))}*/}
+                        {cart.map((cartItem, index) => (
+                            <CartItem
+                                cart={cart}
+                                updateQuantity={updateQuantity}
+                                getItemQuantity={getItemQuantity}
+                                removeItem={removeItem}
+                                key={index}
+                                item={cartItem}
+                                lang={lang}
+                                t={t}
+                            />
+                        ))}
 
                     </div>
 
                     <div className={styles.processSummary}>
-                        {/*<OrderSummary*/}
-                        {/*    getShippingTotal={getShippingTotal}*/}
-                        {/*    getTotalPrice={getTotalPrice}*/}
-                        {/*/>*/}
+                        <OrderSummary
+                            lang={lang}
+                            getShippingTotal={getShippingTotal}
+                            getTotalPrice={getTotalPrice}
+                        />
                     </div>
                 </>
                 :
-                <EmptyState message={"لا توجد منتجات في السلة"}/>
+                <EmptyState message={t("emptyCart")}/>
             }
 
         </div>

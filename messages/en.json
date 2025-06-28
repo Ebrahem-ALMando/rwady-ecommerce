@@ -235,6 +235,51 @@
     "price": "Price",
     "priceFrom": "From",
     "priceTo": "To"
+  },
+  "Cart": {
+    "add": "Add to Cart",
+    "remove": "Remove from Cart",
+    "outOfStock": "Product is currently unavailable",
+    "increase": "Increase quantity",
+    "decrease": "Decrease quantity",
+    "addSuccessTitle": "Added successfully",
+    "addSuccessMessage": "{{name}} is now in the cart",
+    "removeSuccessTitle": "Removed from cart",
+    "removeSuccessMessage": "{{name}} was removed successfully",
+    "discount": "Save {percentage}%",
+    "freeDelivery": "Free delivery",
+    "shippingCost": "Shipping cost: {cost} IQD",
+    "shippingUnknown": "Shipping info not available",
+    "quantity": "Quantity",
+    "cartTitle": "Shopping Cart",
+    "items": "items",
+    "emptyCart": "No products in the cart"
+  },
+  "OrderSummary":{
+    "summaryTitle": "Order Summary",
+    "haveCoupon": "Do you have a discount code",
+    "enterCoupon": "Enter discount code",
+    "add": "Add",
+    "couponMissing": "Please enter a discount code",
+    "couponExample": "Example: RRF2025",
+    "inProgress": "In Progress",
+    "productsTotal": "Products Total",
+    "coupon": "Coupon",
+    "invalidCoupon": "Invalid Coupon",
+    "shippingCost": "Shipping Cost",
+    "grandTotal": "Grand Total",
+    "taxNote": "Prices include tax",
+    "completeOrder": "Place Order",
+    "sending": "Sending...",
+    "successTitle": "Order Sent Successfully",
+    "successMsg": "We are now processing your order.",
+    "failTitle": "Failed to Place Order",
+    "failMsg": "An error occurred while processing your order. Please try again later.",
+    "errorTitle": "Connection Error",
+    "errorMsg": "Failed to connect to the server. Please check your connection and try again."
+  },
+  "Checkout": {
+    "shipment": "Shipment"
   }
 
 }

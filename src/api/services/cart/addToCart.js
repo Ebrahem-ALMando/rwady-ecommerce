@@ -6,8 +6,9 @@ import ApiConfig from "@/api/apiConfig";
  * @param {Object} data -
  * @returns {Promise<{ error: boolean, data?: any, message?: string }>}
  */
-export const saveOrder = async (data) => {
-    const endPointKey = "user/orders";
+
+export const addToCart = async (data) => {
+    const endPointKey = "user/cart-items";
 
     const res = await fetchAPI(endPointKey, "POST", data, {
         next: {

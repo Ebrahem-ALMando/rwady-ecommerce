@@ -352,7 +352,7 @@
 
 import styles from './ProductCardSlider.module.css';
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useRef, useState} from "react";
 import { sliderSetting } from "@/Components/Shared/SliderComponents/ProductCardSlider/config";
 import { formatDuration } from "@/utils/formatDuration";
 import Image from "next/image";
@@ -369,14 +369,14 @@ import CustomToast from "@/Components/Shared/CustomToast/CustomToast";
 import {salesNumIcon, shoppeIcon} from "@/utils/Icons";
 import useCart from "@/hooks/useCart";
 import {checkAuthClient} from "@/utils/checkAuthClient";
-import {handleToggleCart} from "@/utils/handleToggleCart";
+
 import QuantityControl from "@/Components/ProductDetails/QuantityControl/QuantityControl";
 import { Flame  } from 'lucide-react'
 import {useLocale} from "next-intl";
 import {slugify} from "@/utils/slugify";
+import CartActionButton from "@/Components/Shared/Buttons/CartActionButton/CartActionButton";
 
 const settings = {
-
     ...sliderSetting,
     infinite: false,
     appendDots: dots => (
@@ -401,8 +401,14 @@ const ProductCardSlider = ({ product, lang, setIsDraggingInsideCard }) => {
     // const { favourites, toggle, isFavourite, mutateFavourites } = useFavourites();
     const [liked, setLiked] = useState(false);
     const [likedCount, setLikedCount] = useState(product.fav_num||0);
-    const router=useRouter()
 
+
+    const [isAddToCart,setIsAddToCart] = useState(false);
+    const cartRef = useRef();
+    const { getItemQuantity} = useCart();
+
+    const initialQty = getItemQuantity(product.id) || 1;
+    const [selectedQty, setSelectedQty] = useState(initialQty);
 
     useEffect(() => {
         const timerId = setInterval(() => {
@@ -413,45 +419,46 @@ const ProductCardSlider = ({ product, lang, setIsDraggingInsideCard }) => {
 
 
 
-    const [isAddToCart,setIsAddToCart] = useState(false);
+    // const [isAddToCart,setIsAddToCart] = useState(false);
 
 
-    const { addItem,getItemQuantity,getIsItemExisting,removeItem ,updateQuantity,cart} = useCart();
-    const initialQty = getItemQuantity(product.id) || 1;
+    // const { addItem,getItemQuantity,getIsItemExisting,removeItem ,updateQuantity,cart} = useCart();
+    // const initialQty = getItemQuantity(product.id) || 1;
+    // const [selectedQty, setSelectedQty] = useState(initialQty);
 
 
-    const [selectedQty, setSelectedQty] = useState(initialQty);
+    // const [selectedQty, setSelectedQty] = useState(initialQty);
 
+    //
+    // useEffect(() => {
+    //     const qty = getItemQuantity(product.id);
+    //
+    //     setSelectedQty(qty > 0 ? qty : 1);
+    //
+    //
+    //     setIsAddToCart(getIsItemExisting(product.id));
+    //
+    // }, [cart, product.id]);
 
-    useEffect(() => {
-        const qty = getItemQuantity(product.id);
+    // const handleQuantityChange = (newQty) => {
+    //     const numericQty = Number(newQty);
+    //     if (numericQty > 0 && numericQty <= product.quantity) {
+    //         setSelectedQty(numericQty);
+    //         if (getIsItemExisting(product.id)) {
+    //             updateQuantity(product.id, numericQty);
+    //         }
+    //     }
+    // };
 
-        setSelectedQty(qty > 0 ? qty : 1);
+    // useEffect(() => {
+    //     if (selectedQty > 0&&cart.length>0) {
+    //         updateQuantity(product.id, selectedQty);
+    //     }
+    // }, [selectedQty, product.id]);
 
-
-        setIsAddToCart(getIsItemExisting(product.id));
-
-    }, [cart, product.id]);
-
-    const handleQuantityChange = (newQty) => {
-        const numericQty = Number(newQty);
-        if (numericQty > 0 && numericQty <= product.quantity) {
-            setSelectedQty(numericQty);
-            if (getIsItemExisting(product.id)) {
-                updateQuantity(product.id, numericQty);
-            }
-        }
-    };
-
-    useEffect(() => {
-        if (selectedQty > 0&&cart.length>0) {
-            updateQuantity(product.id, selectedQty);
-        }
-    }, [selectedQty, product.id]);
-
-    const handleToggleToCart = () => {
-        handleToggleCart(isAddToCart,removeItem,product,addItem,selectedQty,lang)
-    }
+    // const handleToggleToCart = () => {
+    //     handleToggleCart(isAddToCart,removeItem,product,addItem,selectedQty,lang)
+    // }
 
 
     const handleColorClick = (color) => {
@@ -674,25 +681,48 @@ const ProductCardSlider = ({ product, lang, setIsDraggingInsideCard }) => {
 
                     </div>
                 </Link>
-                <div className="flex mb-1 mr-1">
-                    <motion.button
-                        disabled={product.stock <= 0 || !product.stock}
-                        onClick={handleToggleToCart}
-                        className={`${styles.addToCart} ${product.quantity <= 0 ? styles.disabled : ""}`}
-                        aria-label="أضف المنتج للسلة"
-                    >
-                        <span>{shoppeIcon}</span>
-                        {isAddToCart ? "حذف" : "أضف للسلة"}
-                    </motion.button>
-                    {isAddToCart &&
-                        <QuantityControl
-                            className={styles.quantity}
-                            productQTU={product.stock}
-                            quantity={selectedQty}
-                            onIncrement={() => setSelectedQty(prev => prev + 1)}
-                            onDecrement={() => setSelectedQty(prev => Math.max(1, prev - 1))}
-                        />}
-                </div>
+                {/*<div className="flex mb-1 mr-1">*/}
+                {/*    <CartActionButton*/}
+                {/*        icon={shoppeIcon}*/}
+                {/*        styles={styles}*/}
+                {/*        btnClassName={styles.addToCart}*/}
+                {/*        product={product}*/}
+                {/*        setAddToCart={setIsAddToCart}*/}
+                {/*        isAddToCart={isAddToCart}*/}
+                {/*        selectedQty={selectedQty}*/}
+                {/*        setSelectedQty={setSelectedQty}*/}
+                {/*        ref={cartRef}*/}
+                {/*        lang={lang}*/}
+                {/*    />*/}
+                {/*    /!*<motion.button*!/*/}
+                {/*    /!*    disabled={product.stock <= 0 || !product.stock}*!/*/}
+                {/*    /!*    onClick={handleToggleToCart}*!/*/}
+                {/*    /!*    className={`${styles.addToCart} ${product.quantity <= 0 ? styles.disabled : ""}`}*!/*/}
+                {/*    /!*    aria-label="أضف المنتج للسلة"*!/*/}
+                {/*    /!*>*!/*/}
+                {/*    /!*    <span>{shoppeIcon}</span>*!/*/}
+                {/*    /!*    {isAddToCart ? "حذف" : "أضف للسلة"}*!/*/}
+                {/*    /!*</motion.button>*!/*/}
+                {/*    {isAddToCart &&*/}
+                {/*        <QuantityControl*/}
+                {/*            className={styles.quantity}*/}
+                {/*            productQTU={product.stock}*/}
+                {/*            max={product.stock}*/}
+                {/*            quantity={selectedQty}*/}
+                {/*            onIncrement={() => cartRef.current?.increment()}*/}
+                {/*            onDecrement={() => cartRef.current?.decrement()}*/}
+                {/*        />}*/}
+                {/*    /!*{isAddToCart &&*!/*/}
+                {/*    /!*    <QuantityControl*!/*/}
+                {/*    /!*        className={styles.quantity}*!/*/}
+                {/*    /!*        productQTU={product.stock}*!/*/}
+                {/*    /!*        max={product.stock}*!/*/}
+                {/*    /!*        quantity={selectedQty}*!/*/}
+                {/*    /!*        onIncrement={() => cartRef.current?.increment()}*!/*/}
+                {/*    /!*        onDecrement={() => cartRef.current?.decrement()}*!/*/}
+
+                {/*    /!*    />}*!/*/}
+                {/*</div>*/}
             </div>
         </div>
     );

@@ -177,13 +177,21 @@ import {
     clearCartFromStorage,
 } from '@/utils/cartStorage';
 import { toast } from "react-hot-toast";
+import {useAuth} from "@/hooks/useAuth";
+import {addToCart} from "@/api/services/cart/addToCart";
+import {deleteCartItem} from "@/api/services/cart/deleteCartItem";
+import {updateCartItem} from "@/api/services/cart/updateCartItem";
 
-// ✅ إضافة الحدث المخصص لتحديث السلة يدويًا
+
 function dispatchCartUpdate() {
-    window.dispatchEvent(new Event("cart-updated"));
+
+    setTimeout(() => {
+        window.dispatchEvent(new Event("cart-updated"));
+    }, 200);
 }
 
 export default function useCart() {
+    const { isAuthenticated } = useAuth();
     const [cart, setCart] = useState([]);
     const [loaded, setLoaded] = useState(false);
 
@@ -198,7 +206,7 @@ export default function useCart() {
     useEffect(() => {
         if (loaded) {
             saveCartToStorage(cart);
-            dispatchCartUpdate(); // 🔥 إشارة لتحديث المكونات الأخرى
+            dispatchCartUpdate();
         }
     }, [cart, loaded]);
 
@@ -216,10 +224,10 @@ export default function useCart() {
         return () => window.removeEventListener('storage', handleStorageChange);
     }, [cart]);
 
-    const addItem = useCallback((product, quantity = 1) => {
+    const addItem = useCallback(async (product, quantity = 1) => {
         setCart((prev) => {
             const existing = prev.find((item) => item.id === product.id);
-            const currentQty = existing ? existing.stock : 0;
+            const currentQty = existing ? existing.quantity : 0;
             const maxQty = product.stock;
 
             if (currentQty + quantity > maxQty) {
@@ -238,20 +246,44 @@ export default function useCart() {
                 updated = [...prev, { ...product, quantity }];
             }
 
-            dispatchCartUpdate();
             return updated;
         });
-    }, []);
 
-    const removeItem = useCallback((id) => {
+
+        dispatchCartUpdate();
+
+        // مزامنة مع السيرفر في حال كنت بدك تفعلها لاحقًا
+        // if (isAuthenticated) {
+        //     try {
+        //         await addToCart({
+        //             product_id: product.id,
+        //             quantity,
+        //             color_id: product.color_id ?? product.colors?.[0]?.id ?? null,
+        //         });
+        //     } catch (error) {
+        //         toast.error("فشل في مزامنة السلة مع السيرفر");
+        //     }
+        // }
+    }, [isAuthenticated]);
+
+
+    const removeItem = useCallback(async (id) => {
         setCart((prev) => {
             const updated = prev.filter((item) => item.id !== id);
             dispatchCartUpdate();
             return updated;
         });
-    }, []);
 
-    const updateQuantity = useCallback((id, quantity) => {
+        // if (isAuthenticated) {
+        //     try {
+        //         await deleteCartItem(id);
+        //     } catch (error) {
+        //         toast.error("فشل في حذف العنصر من السلة على السيرفر");
+        //     }
+        // }
+    }, [isAuthenticated]);
+
+    const updateQuantity = useCallback(async (id, quantity) => {
         const val = Number(quantity);
         if (val <= 0) return removeItem(id);
 
@@ -262,54 +294,78 @@ export default function useCart() {
             dispatchCartUpdate();
             return updated;
         });
-    }, [removeItem]);
 
-    const clearCart = useCallback(() => {
+        // if (isAuthenticated) {
+        //     try {
+        //         await updateCartItem(id, { quantity: val });
+        //     } catch (error) {
+        //         toast.error("فشل في تعديل الكمية على السيرفر");
+        //     }
+        // }
+    }, [removeItem, isAuthenticated]);
+
+    const clearCart = useCallback(async () => {
+        if (isAuthenticated) {
+
+            await Promise.allSettled(
+                cart.map(item => deleteCartItem(item.id))
+            );
+        }
+
+
         setCart([]);
         clearCartFromStorage();
         dispatchCartUpdate();
-    }, []);
+    }, [cart, isAuthenticated]);
+
 
     const getTotalPrice = () =>
-        cart.reduce((sum, item) => sum + item.finalPrice * item.quantity, 0);
+        cart.reduce((sum, item) =>
+            sum + (item.price_after_discount ?? item.price) * item.quantity, 0);
 
-    const getShippingTotal = () => {
-        let fixedPrice = null;
-
-        const total = cart.reduce((sum, item) => {
-            const shipping = item.shipping_setting || {};
-            const quantity = item.quantity;
-
-            if (shipping.shipping_type === 'free') return sum;
-
-            const allNullOrZero =
-                !shipping.shipping_fixed_price &&
-                !shipping.per_product_price &&
-                !shipping.per_product_min_price;
-
-            if (allNullOrZero) return sum;
-
-            if (shipping.shipping_fixed_price != null) {
-                fixedPrice = shipping.shipping_fixed_price;
-            }
-
-            if (
-                shipping.min_product_number != null &&
-                shipping.per_product_min_price != null &&
-                quantity >= shipping.min_product_number
-            ) {
-                return sum + (shipping.per_product_min_price * quantity);
-            }
-
-            if (shipping.per_product_price != null) {
-                return sum + (shipping.per_product_price * quantity);
-            }
-
-            return sum;
-        }, 0);
-
-        return fixedPrice != null ? fixedPrice : total;
-    };
+    const getShippingTotal = () =>
+        cart.reduce((sum, item) =>
+                item.shipping_type === "free_shipping"
+                    ? sum
+                    : sum + (item.shipping_rate_single ?? 0),
+            0);
+    // const getShippingTotal = () => {
+    //     let fixedPrice = null;
+    //
+    //     const total = cart.reduce((sum, item) => {
+    //         const shipping = item.shipping_setting || {};
+    //         const quantity = item.quantity;
+    //
+    //         if (shipping.shipping_type === 'free') return sum;
+    //
+    //         const allNullOrZero =
+    //             !shipping.shipping_fixed_price &&
+    //             !shipping.per_product_price &&
+    //             !shipping.per_product_min_price;
+    //
+    //         if (allNullOrZero) return sum;
+    //
+    //         if (shipping.shipping_fixed_price != null) {
+    //             fixedPrice = shipping.shipping_fixed_price;
+    //         }
+    //
+    //         if (
+    //             shipping.min_product_number != null &&
+    //             shipping.per_product_min_price != null &&
+    //             quantity >= shipping.min_product_number
+    //         ) {
+    //             return sum + (shipping.per_product_min_price * quantity);
+    //         }
+    //
+    //         if (shipping.per_product_price != null) {
+    //             return sum + (shipping.per_product_price * quantity);
+    //         }
+    //
+    //         return sum;
+    //     }, 0);
+    //
+    //     return fixedPrice != null ? fixedPrice : total;
+    // };
 
     const getItemQuantity = (id) =>
         cart.find((item) => item.id === id)?.quantity || 0;

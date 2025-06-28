@@ -8,20 +8,15 @@
 .products{
     margin: 10px 30px;
     width: 60%;
-
     padding: 15px;
-
 }
 .titlePage{
-    text-align: right;
-    direction: ltr;
     font-size: 24px;
     font-weight: 600;
     color: #0741ad;
 }
 .item{
     margin-right: 0.5rem;
-    direction: ltr;
     font-size: 22px;
     font-weight: 400;
     color: #6A6E83;
@@ -29,7 +24,8 @@
 .productCard{
     width: 98%;
     background-color: white;
-    height: 27vh;
+    height: auto;
+    /*height: 27vh;*/
     border: 1px solid #e5e7eb;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease;
@@ -47,7 +43,6 @@
     width: 23%;
     height: 25vh;
     min-width: 150px;
-
     display: flex;
     align-items: center;
     border: 1px solid #e5e7eb;
@@ -81,6 +76,7 @@
 }
 .actionButton{
     display: flex;
+    gap: 0.5rem;
 }
 .heart{
     border-radius: 7px;

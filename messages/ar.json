@@ -235,7 +235,54 @@
     "price": "السعر",
     "priceFrom": "من",
     "priceTo": "إلى"
+  },
+  "Cart": {
+    "add": "أضف للسلة",
+    "remove": "إزالة من السلة",
+    "outOfStock": "المنتج غير متوفر حاليًا",
+    "increase": "زيادة الكمية",
+    "decrease": "نقصان الكمية",
+    "addSuccessTitle": "تمت الإضافة بنجاح",
+    "addSuccessMessage": "{name} الآن في سلة التسوق",
+    "removeSuccessTitle": "تم الحذف من السلة",
+    "removeSuccessMessage": "تم إزالة {name} بنجاح",
+    "discount": "خصم {percentage}%",
+    "freeDelivery": "توصيل مجاني",
+    "shippingCost": "تكلفة توصيل: {cost} IQD",
+    "shippingUnknown": "تفاصيل التوصيل غير محددة",
+    "quantity": "الكمية",
+    "cartTitle": "عربة التسوق",
+    "items": "عناصر",
+    "emptyCart": "لا توجد منتجات في السلة"
+  },
+  "OrderSummary": {
+    "summaryTitle": "ملخص الطلب",
+    "haveCoupon": "هل لديك كود خصم",
+    "enterCoupon": "أدخل كود الخصم",
+    "add": "إضافة",
+    "couponMissing": "الرجاء إدخال كود الخصم",
+    "couponExample": "مثال : RRF2025",
+    "inProgress": "قيد التطوير",
+    "productsTotal": "مجموع المنتجات",
+    "coupon": "كوبون",
+    "invalidCoupon": "كوبون غير صالح",
+    "shippingCost": "رسوم الشحن",
+    "grandTotal": "الإجمالي",
+    "taxNote": "الأسعار شاملة للضريبة",
+    "completeOrder": "إتمام الطلب",
+    "sending": "جاري الإرسال...",
+    "successTitle": "تم إرسال الطلب بنجاح",
+    "successMsg": "سنتابع معالجة طلبك الآن.",
+    "failTitle": "فشل في إرسال الطلب",
+    "failMsg": "حدث خطأ أثناء معالجة طلبك. يرجى المحاولة لاحقاً.",
+    "errorTitle": "خطأ في الاتصال",
+    "errorMsg": "تعذر الاتصال بالخادم. تحقق من اتصالك وحاول مرة أخرى."
+      },
+
+  "Checkout": {
+    "shipment": "شحنة رقم"
   }
+
 
 
 }

@@ -10,6 +10,7 @@ import { toast } from "react-hot-toast";
 import { useTranslations } from 'next-intl';
 import { useAuth } from "@/hooks/useAuth";
 import { getProfile } from "@/api/services/auth/getProfile";
+import {syncCartWithServerOnLogin} from "@/utils/syncCartWithServer";
 
 const Verify = () => {
     const t = useTranslations("verify");
@@ -81,6 +82,7 @@ const Verify = () => {
                         id: userData.data?.id,
                         name: userData.data?.name
                     });
+                    await syncCartWithServerOnLogin()
                     router.push(userData.data?.name ? "/" : "/profile");
                 } else {
                     toast.error("فشل في تحميل بيانات المستخدم");

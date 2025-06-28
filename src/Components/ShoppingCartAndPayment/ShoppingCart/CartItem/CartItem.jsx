@@ -16,7 +16,7 @@ import {useRouter} from "next/navigation";
 import CustomToast from "@/Components/Shared/CustomToast/CustomToast";
 import QuantityControl from "@/Components/ProductDetails/QuantityControl/QuantityControl";
 
-const CartItem = ({ item,cart, updateQuantity,getItemQuantity,removeItem }) => {
+const CartItem = ({ item,cart, updateQuantity,getItemQuantity,removeItem,lang,t }) => {
     const { favourites, toggle, isFavourite, mutateFavourites } = useFavourites();
     const [liked, setLiked] = useState(false);
     const router = useRouter();
@@ -52,7 +52,7 @@ const CartItem = ({ item,cart, updateQuantity,getItemQuantity,removeItem }) => {
             <CustomToast
                 type="error"
                 title="تم الحذف من السلة"
-                message={`تم إزالة ${item?.name} بنجاح`}
+                message={`تم إزالة ${item?.name?.[lang]} بنجاح`}
             />,
             {
                 position: 'bottom-left',
@@ -78,20 +78,22 @@ const CartItem = ({ item,cart, updateQuantity,getItemQuantity,removeItem }) => {
             <div className={styles.productImg}>
                 <SafeImage
                     fallback="/images/Shopping/img.png"
-                    src={item.image}
-                    alt={item?.name || "منتج"}
+                    src={item.media?.find(m => m.type === "image")?.url}
+                    alt={item?.name?.[lang] || "منتج"}
                     width={100}
                     height={100}
                     loading="lazy"
                     decoding={"async"}
                     // quality={10}
                 />
-
             </div>
 
             <div className={styles.productItem}>
-                <h4 className={styles.title}>{item?.name}</h4>
-                <p className={styles.brand}>{item?.brand?.name}</p>
+                <h4 className={styles.title}>{item?.name?.[lang]}</h4>
+                <p className={styles.brand}>
+                    {item.brands?.map(b => b.name?.[lang]).join(" / ")}
+                </p>
+
                 <div className={styles.actionButton}>
                     <DeleteButton icon={DeleteIcon} onClick={handleRemoveCartItem}/>
                     <motion.button
@@ -133,31 +135,43 @@ const CartItem = ({ item,cart, updateQuantity,getItemQuantity,removeItem }) => {
             </div>
 
             <div className={styles.productDetails}>
-                <p className={styles.price}>{item.finalPrice} IQD</p>
-                {item.isDiscountVaild &&
-                    <>
-                        <p className={styles.oldPrice}>
-                            <span
-                                className={styles.discount}> {" خصم "}{getDiscountPercentage(item.price, item.finalPrice)}%</span>
-                            <del>{item.price} IQD</del>
-                        </p>
-                    </>
-                }
+                <p className={styles.price}>
+                    {item.price_after_discount} IQD
+                </p>
+
+                {item.price > item.price_after_discount && (
+                    <p className={styles.oldPrice}>
+                          <span className={styles.discount}>
+                            {item.discount_percentage_text?.[lang] || t("discount", {
+                                percentage: getDiscountPercentage(item.price, item.price_after_discount)
+                            })}
+                          </span>
+                        <del>{item.price} IQD</del>
+                    </p>
+                )}
                 <p className={styles.freeDelivery}>
                     {deliveryIcon}
-                    {item.deliveryType || "توصيل مجانى"}
+                    {item.shipping_type === "free_shipping"
+                        ? t("freeDelivery")
+                        : item.shipping_rate_single
+                            ? t("shippingCost", {cost: item.shipping_rate_single})
+                            : t("shippingUnknown")
+                    }
                 </p>
-                <div className={styles.quenty}>
-                    <label htmlFor={`quantity-${item.id}`}>الكمية</label>
 
+                <div className={styles.quenty}>
+                    <label htmlFor={`quantity-${item.id}`}>{t("quantity")}</label>
                 </div>
                 <div className={styles.quantityControl}>
                     <QuantityControl
-                        productQTU={item.productQty}
+                        productQTU={item.stock_unlimited ? 999 : item.stock}
                         quantity={selectedQty}
-                        onIncrement={() => setSelectedQty(prev => prev + 1)}
-                        onDecrement={() => setSelectedQty(prev => Math.max(1, prev - 1))}
+                        onIncrement={() =>
+                            setSelectedQty(prev => Math.min(prev + 1, item.maximum_purchase))
+                        }
+                        onDecrement={() => setSelectedQty(prev => Math.max(item.minimum_purchase, prev - 1))}
                     />
+
                 </div>
             </div>
 
