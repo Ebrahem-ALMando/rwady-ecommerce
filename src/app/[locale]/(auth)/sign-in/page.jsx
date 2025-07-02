@@ -12,7 +12,7 @@ export async function generateMetadata({ params }) {
 
         description: isArabic
             ? "قم بتسجيل الدخول إلى حسابك في Rwady وتمتع بتجربة تسوق سلسة، عروض حصرية، وتتبع الطلبات بسهولة."
-            : "Log in to your Rwady account and enjoy a seamless shopping experience, exclusive deals, and easy order tracking.",
+            : "Log in to your Rwady account and enjoy a seamless shopping experience, exclusive deals, and easy orders tracking.",
 
         keywords: [
             "Rwady", "تسجيل الدخول", "sign in", "login", "روادي العراق", "حسابي",

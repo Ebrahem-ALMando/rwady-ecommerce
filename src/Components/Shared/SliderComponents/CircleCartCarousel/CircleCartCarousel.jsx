@@ -80,9 +80,12 @@ const CircleCartCarousel = (props) => {
                 margin: "auto auto 2rem auto",
                 width: "95%",
                 height: "auto",
+                // background:
+                //     props.bgColor ||
+                //     "linear-gradient(to bottom right, #f0f4ff, #ffffff)",
                 background:
                     props.bgColor ||
-                    "linear-gradient(to bottom right, #f0f4ff, #ffffff)",
+                    "",
                 borderRadius: props.borderRadius || "16px",
                 padding: props.isCategory ? 0 : "2rem 1rem",
             }}

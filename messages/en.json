@@ -12,7 +12,9 @@
     "otpSent": "OTP sent successfully",
     "otpFailed": "Failed to send OTP",
     "genericError": "An error occurred while sending the code",
-    "invalidPhone": "Invalid phone number format"
+    "invalidPhone": "Invalid phone number format",
+    "browseWithoutLogin": "Browse without signing in"
+
   },
   "verify": {
   "title": "Verification Code",
@@ -212,7 +214,11 @@
     "enterName": "Please enter the address name",
     "selectLocation": "Please select a location on the map",
     "save": "Save",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "extraAddress": "Extra Details",
+    "placeholderExtra_address": "e.g., street name, building, or any other notes",
+    "noExtra_address": "-"
+
 
   },
   "Buttons": {
@@ -243,9 +249,9 @@
     "increase": "Increase quantity",
     "decrease": "Decrease quantity",
     "addSuccessTitle": "Added successfully",
-    "addSuccessMessage": "{{name}} is now in the cart",
+    "addSuccessMessage": "{name} is now in the cart",
     "removeSuccessTitle": "Removed from cart",
-    "removeSuccessMessage": "{{name}} was removed successfully",
+    "removeSuccessMessage": "{name} was removed successfully",
     "discount": "Save {percentage}%",
     "freeDelivery": "Free delivery",
     "shippingCost": "Shipping cost: {cost} IQD",
@@ -279,7 +285,34 @@
     "errorMsg": "Failed to connect to the server. Please check your connection and try again."
   },
   "Checkout": {
-    "shipment": "Shipment"
+    "shipment": "Shipment",
+    "stepsTitles": ["Address", "Payment Method", "Order Confirmation"],
+    "prev": "Previous",
+    "next": "Next",
+    "yourOrder": "Your Order",
+    "confirmTitle": "Order Confirmation",
+    "confirmText": "Are you ready to complete your order? Please verify your address and payment method, then click the",
+    "completeOrder": "Complete Order",
+    "reviewNote": "Please review",
+    "shippingPolicy": "Shipping Policy",
+    "terms": "Terms & Conditions",
+    "notesLabel": "Additional Notes (optional):",
+    "notesPlaceholder": "e.g., Please call before delivery...",
+    "paymentTitle": "Payment",
+    "shippingAddressTitle": "Shipping Address",
+    "noAddressesAvailable": "No addresses available!",
+    "state": {
+      "successTitle": "Payment Successful!",
+      "failureTitle": "Payment Failed",
+      "externelTitle": "Order Under Review",
+      "successMsg": "Thank you! Your order is being prepared and will be shipped soon.",
+      "failureMsg": "Sorry, the payment could not be completed. Please try again later.",
+      "externelMsg": "We’ve received your transfer. We’ll review it and contact you once confirmed.",
+      "home": "Back to Home",
+      "viewOrders": "View Orders",
+      "close": "Close"
+    }
+
   }
 
 }

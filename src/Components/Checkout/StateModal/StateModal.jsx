@@ -3,24 +3,25 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import {CheckCircle2, XCircle, Clock, CircleX} from 'lucide-react';
-import { Home, ClipboardList } from 'lucide-react';
+import { CheckCircle2, XCircle, Clock, CircleX, Home, ClipboardList } from 'lucide-react';
 import Link from "next/link";
+import { useTranslations } from 'next-intl';
 
 const StateModal = ({ type, onClose }) => {
     const isSuccess = type === 'success' || type === 'externel';
     const router = useRouter();
+    const t = useTranslations("Checkout");
 
     const titles = {
-        success: 'تم الدفع بنجاح! ',
-        failure: 'فشل الدفع ',
-        externel: 'طلبك قيد المراجعة ',
+        success: t("state.successTitle"),
+        failure: t("state.failureTitle"),
+        externel: t("state.externelTitle"),
     };
 
     const messages = {
-        success: 'شكراً لك! سيتم تجهيز طلبك وإرساله قريباً.',
-        failure: 'عذرًا، لم يتم إتمام الدفع. حاول لاحقاً.',
-        externel: 'تم استلام حوالتك. سنقوم بمراجعتها والتواصل معك بعد التأكيد.',
+        success: t("state.successMsg"),
+        failure: t("state.failureMsg"),
+        externel: t("state.externelMsg"),
     };
 
     useEffect(() => {
@@ -58,8 +59,8 @@ const StateModal = ({ type, onClose }) => {
                         <Link
                             href={'/'}
                             className="flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-6 rounded-lg shadow"
-                             >
-                            <Home size={20} /> العودة للرئيسية
+                        >
+                            <Home size={20} /> {t("state.home")}
                         </Link>
 
                         {isSuccess && (
@@ -67,15 +68,14 @@ const StateModal = ({ type, onClose }) => {
                                 href={'/orders'}
                                 className="flex items-center justify-center gap-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded-lg shadow"
                             >
-                                <ClipboardList size={20} /> عرض الطلبات
+                                <ClipboardList size={20} /> {t("state.viewOrders")}
                             </Link>
-
                         )}
                         <button
                             onClick={onClose}
                             className="flex items-center justify-center gap-2 bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-6 rounded-lg shadow"
                         >
-                            <CircleX size={20} /> إغلاق
+                            <CircleX size={20} /> {t("state.close")}
                         </button>
                     </div>
                 </motion.div>

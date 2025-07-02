@@ -547,7 +547,7 @@ const LocationPickerMap = dynamic(
     { ssr: false, loading: () => <p>جارٍ تحميل الخريطة…</p> }
 );
 
-const AddressFormAction = ({ isOpen, setIsOpen, title, mutate, addressData, onSubmit }) => {
+const AddressFormAction = ({ isOpen, setIsOpen, title, mutate, addressData, onSubmit,isDefault=false }) => {
     const t = useTranslations('Addresses');
 
     const defaultCoords = {
@@ -558,7 +558,8 @@ const AddressFormAction = ({ isOpen, setIsOpen, title, mutate, addressData, onSu
         name: '',
         latitude: '',
         longitude: '',
-        is_default: false,
+        is_default: isDefault,
+        exstra_address:''
     });
     const [mapCoords, setMapCoords] = useState(defaultCoords);
 
@@ -575,7 +576,7 @@ const AddressFormAction = ({ isOpen, setIsOpen, title, mutate, addressData, onSu
                 lng: addressData.longitude || defaultCoords.lng,
             });
         } else {
-            setFormData({ name: '', latitude: '', longitude: '', is_default: false });
+            setFormData({ name: '', latitude: '', longitude: '', is_default: false,exstra_address:'' });
             setMapCoords(defaultCoords);
         }
 
@@ -604,6 +605,7 @@ const AddressFormAction = ({ isOpen, setIsOpen, title, mutate, addressData, onSu
             latitude: '',
             longitude: '',
             is_default: false,
+            exstra_address:''
         });
         // setIsOpen(false);
         // mutate?.();
@@ -634,19 +636,19 @@ const AddressFormAction = ({ isOpen, setIsOpen, title, mutate, addressData, onSu
                             name="address"
                             type="text"
                             value={formData.name}
-                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                            onChange={(e) => setFormData({...formData, name: e.target.value})}
                             placeholder={t('placeholderName')}
                             className={styles.textInput}
                         />
                     </div>
-                    {!addressData&&
+                    {!addressData &&
                         <LocationPickerMap
                             defaultPosition={mapCoords}
 
-                            onSelect={({ lat, lng }) => {
+                            onSelect={({lat, lng}) => {
                                 const latStr = String(lat);
                                 const lngStr = String(lng);
-                                setMapCoords({ lat, lng });
+                                setMapCoords({lat, lng});
                                 setFormData((prev) => ({
                                     ...prev,
                                     latitude: latStr,
@@ -655,26 +657,37 @@ const AddressFormAction = ({ isOpen, setIsOpen, title, mutate, addressData, onSu
                             }}
                         />
                     }
-
-                    {!addressData&&
                     <div className={styles.formGroup}>
-                        <label className={styles.switchLabel}>
-                            <input
-                                type="checkbox"
-                                name="is_default"
-                                checked={formData.is_default}
-                                onChange={(e) =>
-                                    setFormData((prev) => ({ ...prev, is_default: e.target.checked }))
-                                }
-                                className={styles.switchInput}
-                            />
-                            <span className={styles.switchSlider}></span>
-                            <span className={styles.switchText}>{t('setDefaultLabel')}</span>
-                        </label>
+                        <label className={styles.inputLabel}>{t('extraAddress')}</label>
+                        <input
+                            id="address"
+                            name="address"
+                            type="text"
+                            value={formData.exstra_address}
+                            onChange={(e) => setFormData({...formData, exstra_address: e.target.value})}
+                            placeholder={t('placeholderExtra_address')}
+                            className={styles.textInput}
+                        />
                     </div>
+                    {(!addressData && !isDefault) &&
+                        <div className={styles.formGroup}>
+                            <label className={styles.switchLabel}>
+                                <input
+                                    type="checkbox"
+                                    name="is_default"
+                                    checked={formData.is_default}
+                                    onChange={(e) =>
+                                        setFormData((prev) => ({...prev, is_default: e.target.checked}))
+                                    }
+                                    className={styles.switchInput}
+                                />
+                                <span className={styles.switchSlider}></span>
+                                <span className={styles.switchText}>{t('setDefaultLabel')}</span>
+                            </label>
+                        </div>
                     }
 
-                    <Line />
+                    <Line/>
 
                     <div className={styles.buttonGroup}>
                         <button type="submit" className={styles.saveButton}>

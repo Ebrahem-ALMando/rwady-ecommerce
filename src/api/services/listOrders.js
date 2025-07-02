@@ -6,7 +6,7 @@ import {getTokenWithClient} from "@/utils/getTokenWithClient";
 
 export const getOrders = async () => {
 
-    const endPointKey = "order-list";
+    const endPointKey = "orders-list";
 
     try {
 

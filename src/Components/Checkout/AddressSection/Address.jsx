@@ -130,6 +130,8 @@
 
         const locitionName = addressData?.name || t("defaultLabel");
         const fullAddress = addressData?.address || t("noAddress");
+        const extra_address = addressData?.exstra_address || '';
+        // const extra_address = addressData?.extra_address || t("noExtra_address");
 
 
 
@@ -171,7 +173,13 @@
                     </div>
                     <div className={styles.row}>
                         {LocitionIcon}
-                        <p>{fullAddress}</p>
+                        <p>{fullAddress}
+                            {extra_address.length>0?
+                            `- ${extra_address}`:''
+
+                            }
+
+                        </p>
                     </div>
                     <div className={styles.row}>
                         {CallIcon}

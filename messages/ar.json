@@ -12,7 +12,9 @@
     "otpSent": "تم إرسال رمز التحقق بنجاح",
     "otpFailed": "فشل في إرسال رمز التحقق",
     "genericError": "حدث خطأ أثناء إرسال الكود",
-    "invalidPhone": "تنسيق رقم الهاتف غير صالح"
+    "invalidPhone": "تنسيق رقم الهاتف غير صالح",
+    "browseWithoutLogin": "المتابعة بدون تسجيل الدخول"
+
   },
   "verify": {
     "title": "رمز التفعيل",
@@ -212,7 +214,11 @@
     "enterName": "يرجى إدخال اسم العنوان",
     "selectLocation": "يرجى تحديد موقع على الخريطة",
     "save": "حفظ",
-    "cancel": "إلغاء"
+    "cancel": "إلغاء",
+    "extraAddress": "تفاصيل إضافية",
+    "placeholderExtra_address": "مثل اسم الشارع، المبنى، أو أي ملاحظات أخرى",
+    "noExtra_address": "-"
+
 
   },
   "Buttons": {
@@ -280,8 +286,35 @@
       },
 
   "Checkout": {
-    "shipment": "شحنة رقم"
+    "shipment": "شحنة رقم",
+    "stepsTitles": ["العنوان", "نوع الدفع", "تأكيد الطلب"],
+    "prev": "السابق",
+    "next": "التالي",
+    "yourOrder": "طلبك",
+    "confirmTitle": "تأكيد الطلب",
+    "confirmText": "هل أنت مستعد لإتمام طلبك؟ تأكد من صحة العنوان وطريقة الدفع، ثم اضغط على زر",
+    "completeOrder": "إتمام الطلب",
+    "reviewNote": "يرجى مراجعة",
+    "shippingPolicy": "طريقة الشحن",
+    "terms": "سياسة التعامل",
+    "notesLabel": "ملاحظات إضافية (اختياري):",
+    "notesPlaceholder": "مثلاً: الاتصال قبل التوصيل...",
+    "paymentTitle": "الدفع",
+    "shippingAddressTitle": "عنوان الشحن",
+    "noAddressesAvailable": "لا يوجد عناوين متاحة !",
+    "state": {
+      "successTitle": "تم الدفع بنجاح!",
+      "failureTitle": "فشل الدفع",
+      "externelTitle": "طلبك قيد المراجعة",
+      "successMsg": "شكراً لك! سيتم تجهيز طلبك وإرساله قريباً.",
+      "failureMsg": "عذرًا، لم يتم إتمام الدفع. حاول لاحقاً.",
+      "externelMsg": "تم استلام حوالتك. سنقوم بمراجعتها والتواصل معك بعد التأكيد.",
+      "home": "العودة للرئيسية",
+      "viewOrders": "عرض الطلبات",
+      "close": "إغلاق"
+    }
   }
+
 
 
 

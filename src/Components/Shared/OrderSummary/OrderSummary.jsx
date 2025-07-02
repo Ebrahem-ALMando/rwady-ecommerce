@@ -327,15 +327,42 @@ import { validateOrderData } from "@/utils/Valid/validateOrderData";
 import useCart from "@/hooks/useCart";
 import {usePathname} from "@/i18n/navigation";
 import {useRouter} from "next/navigation";
+import {getCartFromStorage} from "@/utils/cartStorage";
 
 const OrderSummary = (props) => {
     const t = useTranslations("OrderSummary");
-    const [couponCode, setCouponCode] = useState('');
+    // const [couponCode, setCouponCode] = useState('');
     const [couponData, setCouponData] = useState(null);
     const [isChecking, setIsChecking] = useState(false);
     const [isProcessing, setIsProcessing] = useState(false);
+    const [orderSummary, setOrderSummary] = useState(null);
 
-    const { cart, clearCart } = useCart();
+    const {
+        cart,
+        clearCart,
+        setPaymentMethod,
+        setCouponCode,
+        couponCode,
+        // orderSummary,
+        initializeSummaryUpdater,
+    } = useCart();
+
+
+    useEffect(() => {
+        initializeSummaryUpdater(setOrderSummary);
+    }, []);
+
+
+    useEffect(() => {
+        if (orderSummary) {
+            setDisplaySummary((prev) => {
+                if (JSON.stringify(prev) !== JSON.stringify(orderSummary)) {
+                    return orderSummary;
+                }
+                return prev;
+            });
+        }
+    }, [orderSummary]);
     const router = useRouter();
     const pathname = usePathname();
 
@@ -346,7 +373,15 @@ const OrderSummary = (props) => {
         }
     }, []);
 
+    useEffect(() => {
+        if (props.paymentType) {
+            setPaymentMethod(props.paymentType);
+        }
+    }, [props.paymentType]);
+
+
     const handleCheckCoupon = async () => {
+    if(couponCode){
         if (!couponCode.trim()) {
             toast.custom(
                 <CustomToast
@@ -358,6 +393,7 @@ const OrderSummary = (props) => {
             );
             return;
         }
+    }
         setIsChecking(true);
         setTimeout(() => {
             toast.custom(
@@ -370,22 +406,21 @@ const OrderSummary = (props) => {
             setIsChecking(false);
         }, 2500)
     }
-
     const handleCompleteOrder = async () => {
-
         if (pathname === '/shopping-cart') {
             router.push('/checkout');
             return;
         }
 
         if (pathname === '/checkout') {
-            // if (!validateOrderData({
-            //     addressId: props.addressId,
-            //     paymentMethodId: props.paymentMethodId,
-            //     cart,
-            //     paymentType: props.paymentType,
-            //     uploadedFile: props.uploadedFile,
-            // })) return;
+            const isValid = validateOrderData({
+                addressId: props.addressId,
+                paymentType: props.paymentType,
+                identity: props.identity,
+                cart,
+            });
+
+            if (!isValid) return;
 
             try {
                 setIsProcessing(true);
@@ -393,70 +428,210 @@ const OrderSummary = (props) => {
                 const body = {
                     products: cart.map(item => ({
                         product_id: item.id,
-                        quantity: item.quantity
+                        quantity: item.quantity,
                     })),
                     success_url: `${window.location.origin}/${props.lang}/checkout?state=success`,
                     fail_url: `${window.location.origin}/${props.lang}/checkout?state=fail`,
-                    payment_method: props.paymentType
+                    payment_method: props.paymentType,
+                    notes: props.orderNotes,
+                    coupon_code: props.couponCode,
+                    address: {
+                        extra_address: props.extraAddress,
+                        latitude: props.latitude,
+                        longitude: props.longitude,
+                    },
+                    ...(props.paymentType === "installment" && {
+                        identity: props.identity, // مطلوب فقط في الدفع بالتقسيط
+                    }),
                 };
-                // const body = {
-                //     products: cart.map(item => ({
-                //         product_id: item.id,
-                //         quantity: item.quantity
-                //     })),
-                //     success_url: `${window.location.origin}/${props.lang}/checkout?state=success`,
-                //     fail_url: `${window.location.origin}/${props.lang}/checkout?state=fail`,
-                //     payment_method: props.paymentMethodId,
-                //     address_id: props.addressId,
-                //     coupon_code: props.couponCode,
-                //     notes: props.orderNotes
-                // };
 
                 const result = await saveOrder(body);
 
-                if (!result.error && result.data?.metadata?.formUrl) {
+                if (!result.error) {
                     clearCart();
                     clearCouponFromStorage();
-
-                    toast.custom(
-                        <CustomToast
-                            type="success"
-                            title={t("successTitle")}
-                            message={t("successMsg")}
-                        />,
-                        { position: 'top-center', duration: 2500 }
-                    );
-
                     sessionStorage.setItem('orderPlaced', 'true');
+                    setDisplaySummary(null)
+                    setOrderSummary(null)
+                    // ✅ معالجة حسب نوع الدفع
+                    switch (props.paymentType) {
+                        case "qi":
+                            // فتح صفحة الدفع
+                            if (result.data?.metadata?.formUrl) {
+                                toast.success(t("successMsg"));
+                                window.location.href = result.data.metadata.formUrl;
+                            } else {
+                                toast.error(t("failMsg"));
+                            }
+                            break;
 
-                    window.location.href = result.data.metadata.formUrl;
+                        case "cash":
+                            // عرض رسالة نجاح فقط
+                            toast.custom(
+                                <CustomToast
+                                    type="success"
+                                    title={t("successTitle")}
+                                    message={t("successMsg")}
+                                />,
+                                { position: 'top-center', duration: 2500 }
+                            );
+                            // router.push(`/checkout?state=externel`);
+                            router.push(`/checkout?state=success`);
+                            break;
 
+                        case "installment":
+
+                            toast.custom(
+                                <CustomToast
+                                    type="success"
+                                    title={t("successTitle")}
+                                    message={t("successMsg")}
+                                />,
+                                { position: 'top-center', duration: 2500 }
+                            ); // أو أظهر Modal مخصص للتقسيط
+                            router.push(`/checkout?state=success`);
+                            break;
+
+                        case "transfer":
+
+                            toast.custom(
+                                <CustomToast
+                                    type="success"
+                                    title={t("successTitle")}
+                                    message={t("successMsg")}
+                                />,
+                                { position: 'top-center', duration: 2500 }
+                            );
+                            router.push(`/checkout?state=success`);
+                            break;
+
+                        default:
+                            toast.custom(
+                                <CustomToast
+                                    type="success"
+                                    title={t("successTitle")}
+                                    message={t("successMsg")}
+                                />,
+                                { position: 'top-center', duration: 2500 }
+                            );
+                            router.push(`/checkout?state=success`);
+                            break;
+                    }
                 } else {
-                    toast.custom(
-                        <CustomToast
-                            type="error"
-                            title={t("failTitle")}
-                            message={t("failMsg")}
-                        />,
-                        { position: 'top-center', duration: 3000 }
-                    );
+                    router.push(`/checkout?state=failure`);
+                    toast.error(t("failMsg"));
                 }
 
             } catch (error) {
+
                 console.error("Order Error:", error.message);
-                toast.custom(
-                    <CustomToast
-                        type="error"
-                        title={t("errorTitle")}
-                        message={t("errorMsg")}
-                    />,
-                    { position: 'top-center', duration: 3000 }
-                );
+                toast.error(t("errorMsg"));
             } finally {
                 setIsProcessing(false);
             }
         }
     };
+
+
+    // const handleCompleteOrder = async () => {
+    //
+    //     if (pathname === '/shopping-cart') {
+    //         router.push('/checkout');
+    //         return;
+    //     }
+    //
+    //     if (pathname === '/checkout') {
+    //         // if (!validateOrderData({
+    //         //     addressId: props.addressId,
+    //         //     paymentMethodId: props.paymentMethodId,
+    //         //     cart,
+    //         //     paymentType: props.paymentType,
+    //         //     uploadedFile: props.uploadedFile,
+    //         // })) return;
+    //
+    //         try {
+    //             setIsProcessing(true);
+    //
+    //             const body = {
+    //                 products: cart.map(item => ({
+    //                     product_id: item.id,
+    //                     quantity: item.quantity
+    //                 })),
+    //                 success_url: `${window.location.origin}/${props.lang}/checkout?state=success`,
+    //                 fail_url: `${window.location.origin}/${props.lang}/checkout?state=fail`,
+    //                 payment_method: props.paymentType
+    //             };
+    //             // const body = {
+    //             //     products: cart.map(item => ({
+    //             //         product_id: item.id,
+    //             //         quantity: item.quantity
+    //             //     })),
+    //             //     success_url: `${window.location.origin}/${props.lang}/checkout?state=success`,
+    //             //     fail_url: `${window.location.origin}/${props.lang}/checkout?state=fail`,
+    //             //     payment_method: props.paymentMethodId,
+    //             //     address_id: props.addressId,
+    //             //     coupon_code: props.couponCode,
+    //             //     notes: props.orderNotes
+    //             // };
+    //
+    //             const result = await saveOrder(body);
+    //
+    //             if (!result.error && result.data?.metadata?.formUrl) {
+    //                 clearCart();
+    //                 clearCouponFromStorage();
+    //
+    //                 toast.custom(
+    //                     <CustomToast
+    //                         type="success"
+    //                         title={t("successTitle")}
+    //                         message={t("successMsg")}
+    //                     />,
+    //                     { position: 'top-center', duration: 2500 }
+    //                 );
+    //
+    //                 sessionStorage.setItem('orderPlaced', 'true');
+    //
+    //                 window.location.href = result.data.metadata.formUrl;
+    //
+    //             } else {
+    //                 toast.custom(
+    //                     <CustomToast
+    //                         type="error"
+    //                         title={t("failTitle")}
+    //                         message={t("failMsg")}
+    //                     />,
+    //                     { position: 'top-center', duration: 3000 }
+    //                 );
+    //             }
+    //
+    //         } catch (error) {
+    //             console.error("Order Error:", error.message);
+    //             toast.custom(
+    //                 <CustomToast
+    //                     type="error"
+    //                     title={t("errorTitle")}
+    //                     message={t("errorMsg")}
+    //                 />,
+    //                 { position: 'top-center', duration: 3000 }
+    //             );
+    //         } finally {
+    //             setIsProcessing(false);
+    //         }
+    //     }
+    // };
+
+    // useEffect(() => {
+    //     console.log("Updated summary:", orderSummary);
+    // }, [orderSummary]);
+
+    const [displaySummary, setDisplaySummary] = useState(null);
+
+    // useEffect(() => {
+    //     if (orderSummary) {
+    //         setDisplaySummary(orderSummary);
+    //     }
+    // }, [orderSummary]);
+
 
 
 
@@ -468,8 +643,8 @@ const OrderSummary = (props) => {
 
             <div className={styles.inputContainer}>
                 <motion.input
-                    value={couponCode}
-                    onChange={(e) => setCouponCode(e.target.value)}
+                    // value={couponCode||''}
+                    // onChange={(e) => setCouponCode(e.target.value)}
                     whileFocus={{ boxShadow: '0 0 8px rgba(245, 81, 87, 0.3)' }}
                     className={styles.inputCoupon}
                     style={{padding:props.lang==='en'?'0 0 0 80px':'0 80px 0 0'}}
@@ -499,7 +674,8 @@ const OrderSummary = (props) => {
 
             <RowTextWithNumber
                 title={t("productsTotal")}
-                value={`${Number(props.getTotalPrice())} IQD`}
+                // value={`${Number(props.getTotalPrice())} IQD`}
+                value={displaySummary ? `${orderSummary?.amount} IQD` : '...'}
                 colorValue="#0741AD"
             />
 
@@ -508,7 +684,9 @@ const OrderSummary = (props) => {
                     <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }}>
                         <RowTextWithNumber
                             title={`${t("coupon")}: ${couponData.code}`}
-                            value={`${calculateDiscount(couponData, props.getTotalPrice())} IQD`}
+                            // value={`${calculateDiscount(couponData, props.getTotalPrice())} IQD`}
+                            value={displaySummary ? `${orderSummary?.coupon_discount_value} IQD` : '...'}
+
                             colorValue="#FF647C"
                             colorTitle="#00C48C"
                             icon={<CheckCircle className={styles.checkIcon} />}
@@ -532,7 +710,8 @@ const OrderSummary = (props) => {
 
             <RowTextWithNumber
                 title={t("shippingCost")}
-                value={`${props.getShippingTotal()} IQD`}
+                // value={`${props.getShippingTotal()} IQD`}
+                value={displaySummary ? `${orderSummary?.shipping_fees} IQD` : '...'}
                 colorValue="#0741AD"
             />
 
@@ -540,7 +719,9 @@ const OrderSummary = (props) => {
 
             <RowTextWithNumber
                 title={t("grandTotal")}
-                value={`${calculateTotalAfterDiscount(props.getTotalPrice(), props.getShippingTotal(), calculateDiscount(couponData, props.getTotalPrice()))} IQD`}
+                value={displaySummary ? `${orderSummary?.amount_with_shipping_after_coupon_and_payment_fees} IQD` : '...'}
+
+                // value={`${calculateTotalAfterDiscount(props.getTotalPrice(), props.getShippingTotal(), calculateDiscount(couponData, props.getTotalPrice()))} IQD`}
                 colorTitle="#000"
                 weightTitle="500"
                 sizeValue="18px"

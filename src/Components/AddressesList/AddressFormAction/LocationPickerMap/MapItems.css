@@ -1,9 +1,9 @@
 .leaflet-touch .leaflet-geosearch-bar form input
 {
-    border-radius: 8px !important;
+    /*border-radius: 8px !important;*/
     padding: 7px !important;
     padding-right: 15px !important;
 
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+    /*box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;*/
     /*height: 35px !important;*/
 }

@@ -82,7 +82,7 @@ const Verify = () => {
                         id: userData.data?.id,
                         name: userData.data?.name
                     });
-                    await syncCartWithServerOnLogin()
+                    // await syncCartWithServerOnLogin()
                     router.push(userData.data?.name ? "/" : "/profile");
                 } else {
                     toast.error("فشل في تحميل بيانات المستخدم");

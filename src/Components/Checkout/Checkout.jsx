@@ -219,9 +219,9 @@
 //                                             </div>
 //
 //                                             <div className={styles.notesSection}>
-//                                                 <label htmlFor="order-notes">📝 ملاحظات إضافية (اختياري):</label>
+//                                                 <label htmlFor="orders-notes">📝 ملاحظات إضافية (اختياري):</label>
 //                                                 <textarea
-//                                                     id="order-notes"
+//                                                     id="orders-notes"
 //                                                     placeholder="مثلاً: الاتصال قبل التوصيل..."
 //                                                     rows="2"
 //                                                     value={orderNotes ?? ''}
@@ -313,11 +313,17 @@ import {updateAddress} from "@/api/services/address/updateAddress";
 import {addAddress} from "@/api/services/address/addAddress";
 import NewAddressButton from "@/Components/Shared/Buttons/NewAddressButton/NewAddressButton";
 import {useLocale, useTranslations} from "next-intl";
+import {getProfile} from "@/api/services/auth/getProfile";
 
 const Checkout = () => {
+    const [defaultAddress,setDefaultAddress]=useState({})
     const [isOpen, setIsOpen] = useState(false);
     const [selectedAddress, setSelectedAddress] = useState(null);
-    const [paymentData, setPaymentData] = useState({});
+    const [paymentData, setPaymentData] = useState(() => ({
+        id: null,
+        type: null,
+        method: null
+    }));
     const [uploadedFile, setUploadedFile] = useState(null);
     const [paymentState, setPaymentState] = useState(null);
     const [step, setStep] = useState(1);
@@ -325,13 +331,11 @@ const Checkout = () => {
     const searchParams = useSearchParams();
     const router = useRouter();
     const lang=useLocale()
-    const t=useTranslations('Addresses')
+    const tAddresses=useTranslations('Addresses')
+    const t = useTranslations("Checkout");
     useEffect(() => {
         const state = searchParams.get('state');
-
         const orderPlaced = sessionStorage.getItem('orderPlaced');
-
-
         if (['success', 'failure', 'externel'].includes(state)) {
             if (orderPlaced) {
                 setPaymentState(state);
@@ -342,10 +346,9 @@ const Checkout = () => {
         }
     }, [searchParams, router]);
 
-    const handleChecked = (id, type) => {
-        setPaymentData({ id, type });
+    const handleChecked = (id, type, method) => {
+        setPaymentData({ id, type, method });
     };
-
 
     const { updateQuantity, getItemQuantity, removeItem, getTotalPrice, cart, getShippingTotal } = useCart();
 
@@ -354,27 +357,28 @@ const Checkout = () => {
         revalidateIfStale: false,
         revalidateOnFocus: false,
     });
+    useEffect(() => {
+        if (data?.data) {
+            const defaultAddr = data.data.find(addr => addr.is_default) || data.data[0];
+            setDefaultAddress(defaultAddr);
+        }
+    }, [data]);
+
+    const { data:profileData } = useSWR("profileData", getProfile, {
+        revalidateOnFocus: false,
+    });
+    const fullName = profileData?.data?.name || "—";
+    const phone = profileData?.data?.phone || "—";
 
     if (isLoading) return <Loading />;
     if (error) return <Error onRetry={() => mutate(undefined, { revalidate: true })} />;
 
-    const addressList = data?.data || [];
-    const defaultAddress = selectedAddress || addressList.find(a => a.is_default);
 
-    // const handleDeleteAddress = async (id) => {
-    //     try {
-    //         const res = await deleteAddress(id);
-    //         if (res.status_code === 200) {
-    //             toast.success("تم حذف العنوان بنجاح");
-    //             mutate();
-    //         } else {
-    //             toast.error("فشل في حذف العنوان");
-    //         }
-    //     } catch (err) {
-    //         toast.error("حدث خطأ أثناء الحذف");
-    //         console.error("Delete Error:", err.message);
-    //     }
-    // };
+
+
+
+
+
 
     const next = () => setStep((prev) => prev + 1);
     const prev = () => setStep((prev) => prev - 1);
@@ -383,33 +387,35 @@ const Checkout = () => {
 
     const handleSubmit = async (formData) => {
         let res;
-        console.log(formData)
         if (selectedAddress?.id) {
-            const data={
-                "name": formData?.name,
-                // "is_default":formData?.is_default
-            }
-            res = await updateAddress(selectedAddress.id,data);
-        } else {
-            res = await addAddress(formData);
-        }
-        if (res.error) {
-            toast.error(t("submitFail"));
-        }
-        if(!res.error){
-            toast.success(
-                selectedAddress ? t("updateSuccess") : t("addSuccess")
-            );
-            mutate();
-            setIsOpen(false);
 
+            res = await updateAddress(selectedAddress.id, {
+                name: formData.name,
+
+            });
+        } else {
+
+            formData.is_default = true;
+            res = await addAddress(formData);
+            setDefaultAddress(res.data)
+        }
+
+        if (res.error) {
+            toast.error(tAddresses("submitFail"));
+        } else {
+            toast.success(
+                selectedAddress ? tAddresses("updateSuccess") : tAddresses("addSuccess")
+            );
+            setIsOpen(false);
+            setSelectedAddress(null);
+            // await mutate();
         }
     };
     const handleOpenNewAddress = () => {
         setSelectedAddress(null);
         setIsOpen(true);
     };
-    console.log(paymentData)
+
     return (
         <>
 
@@ -417,12 +423,13 @@ const Checkout = () => {
 
                 <div className={styles.container}>
                     <AddressFormAction
-                        title={selectedAddress ? t("editTitle") : t("newTitle")}
+                        title={selectedAddress ? tAddresses("editTitle") : tAddresses("newTitle")}
                         isOpen={isOpen}
                         setIsOpen={setIsOpen}
                         addressData={selectedAddress}
                         mutate={mutate}
                         onSubmit={handleSubmit}
+                        isDefault={true}
                     />
                     {paymentState && (
                         <StateModal
@@ -434,22 +441,11 @@ const Checkout = () => {
                         />
                     )}
 
-                    <AddressForm
-                        addresses={addressList}
-                        isOpen={isOpen}
-                        setIsOpen={setIsOpen}
-                        onSelectAddress={(address) => setSelectedAddress(address)}
-                        onEditAddress={(address) => {
-                            toast("وظيفة التعديل قيد التطوير");
-                        }}
-                        // onDeleteAddress={handleDeleteAddress}
-                        onAddNewAddress={() => toast("اذهب إلى صفحة العناوين لإضافة عنوان جديد")}
-                    />
                     <div className={styles.items}>
                         <StepProgressBar
                             currentStep={step}
                             totalSteps={3}
-                            stepsTitles={["العنوان", "نوع الدفع", "تأكيد الطلب"]}
+                            stepsTitles={t.raw("stepsTitles")}
                         />
 
                         <AnimatePresence mode="wait">
@@ -462,82 +458,84 @@ const Checkout = () => {
                             >
                                 {step === 1 && (
                                     <>
-                                        <h2 className={styles.titleSection}>عنوان الشحن</h2>
-                                        جاري العمل
-                                        {/*{defaultAddress ? (*/}
-                                        {/*    <Address*/}
-                                        {/*        onClick={() => setIsOpen(true)}*/}
-                                        {/*        key={defaultAddress.id}*/}
-                                        {/*        id={defaultAddress.id}*/}
-                                        {/*        isDefault={defaultAddress.is_default}*/}
-                                        {/*        addressData={defaultAddress}*/}
-                                        {/*        t={t}*/}
-                                        {/*    />*/}
-                                        {/*) : (*/}
-                                        {/*    <EmptyState*/}
-                                        {/*        message={"لا يوجد عناوين متاحة !"}*/}
-                                        {/*        item={*/}
-                                        {/*            <button*/}
-                                        {/*                onClick={handleOpenNewAddress}*/}
-                                        {/*                 >*/}
-                                        {/*                sad*/}
-                                        {/*            </button>*/}
-                                        {/*        }*/}
-                                        {/*    />*/}
-                                        {/*)}*/}
+                                        <h2 className={styles.titleSection}>{t("shippingAddressTitle")}</h2>
+
+
+                                        {defaultAddress ? (
+                                            <Address
+                                                onClick={() => setIsOpen(true)}
+                                                key={defaultAddress.id}
+                                                id={defaultAddress.id}
+                                                isDefault={defaultAddress.is_default}
+                                                addressData={defaultAddress}
+                                                fullName={fullName}
+                                                phone={phone}
+                                                t={tAddresses}
+
+                                            />
+                                        ) : (
+                                            <EmptyState
+                                                message={t("noAddressesAvailable")}
+                                                item={
+                                                    <NewAddressButton onClick={handleOpenNewAddress} t={t}/>
+                                                }
+                                            />
+                                        )}
                                     </>
                                 )}
 
                                 {step === 2 && (
                                     <>
-                                        <h2 className={styles.titleSection}>الدفع</h2>
-                                        <Payment handleChecked={handleChecked}/>
+                                        <h2 className={styles.titleSection}>{t("paymentTitle")}</h2>
+                                        <Payment
+                                            lang={lang}
+                                            handleChecked={handleChecked} selected={paymentData}/>
+
                                     </>
                                 )}
 
-                                {cart?.length > 0 &&
-                                    step === 3 && (
-                                        <>
-                                            <h2 className={styles.titleSection}>طلبك</h2>
-                                            <Order
-                                                lang={lang}
-                                            />
-                                        </>
-                                    )
-                                }
+                                {/*{cart?.length > 0 &&*/}
+                                {/*    step === 3 && (*/}
+                                {/*        <>*/}
+                                {/*            <h2 className={styles.titleSection}>{t("yourOrder")}</h2>*/}
+                                {/*            <Order*/}
+                                {/*                lang={lang}*/}
+                                {/*            />*/}
+                                {/*        </>*/}
+                                {/*    )*/}
+                                {/*}*/}
 
-                                {step === 4 && (
+                                {step === 3 && (
                                     <>
-                                        <h2 className={styles.titleSection}>تأكيد الطلب</h2>
+                                        <h2 className={styles.titleSection}>{t("confirmTitle")}</h2>
 
                                         <div className={styles.confirmBox}>
                                             <p className={styles.confirmText}>
-                                                هل أنت مستعد لإتمام طلبك؟ تأكد من صحة العنوان وطريقة الدفع، ثم اضغط على
-                                                زر <strong>إتمام الطلب</strong>.
+                                                {t("confirmText")} <strong>{t("completeOrder")}</strong>.
                                             </p>
 
                                             <div className={styles.policyLinks}>
-                                                <p>📄 يرجى مراجعة:</p>
+                                                <p>📄 {t("reviewNote")}:</p>
                                                 <ul>
-                                                    <li><a href="/shipping-policy" target="_blank">طريقة الشحن</a></li>
-                                                    <li><a href="/terms" target="_blank">سياسة التعامل</a></li>
+                                                    <li><a href="/shipping-policy"
+                                                           target="_blank">{t("shippingPolicy")}</a></li>
+                                                    <li><a href="/terms" target="_blank">{t("terms")}</a></li>
                                                 </ul>
                                             </div>
 
                                             <div className={styles.notesSection}>
-                                                <label htmlFor="order-notes">📝 ملاحظات إضافية (اختياري):</label>
+                                                <label htmlFor="order-notes">📝 {t("notesLabel")}</label>
                                                 <textarea
                                                     id="order-notes"
-                                                    placeholder="مثلاً: الاتصال قبل التوصيل..."
+                                                    placeholder={t("notesPlaceholder")}
                                                     rows="2"
                                                     value={orderNotes ?? ''}
                                                     className={styles.notesInput}
                                                     onChange={(e) => setOrderNotes(e.target.value)}
                                                 />
                                             </div>
-
-
                                         </div>
+
                                     </>
                                 )}
 
@@ -551,29 +549,42 @@ const Checkout = () => {
                                 disabled={step <= 1}
                             >
                                 {isRTL ? customNextArrowIcon : customPrevArrowIcon}
-                                السابق
+                                {t("prev")}
                             </button>
 
                             <button
                                 onClick={next}
-                                className={`${styles.nextButton} ${step >= 4 ? styles.disabled : ""}`}
-                                disabled={step >= 4}
+                                className={`${styles.nextButton} ${step >= 3 || (step === 2 && paymentData.id === null) || (step === 1 && defaultAddress.length === 0) ? styles.disabled : ""}`}
+                                disabled={step >= 3||(step===2&&paymentData.id===null)||(step===1&&defaultAddress.length===0)}
                             >
-                                التالي
+                                {t("next")}
                                 {isRTL ? customPrevArrowIcon : customNextArrowIcon}
                             </button>
+
                         </div>
 
                     </div>
 
                     <div className={styles.processSummary}>
+                        {/*<OrderSummary*/}
+                        {/*    addressId={defaultAddress?.id || null}*/}
+                        {/*    paymentMethodId={paymentData?.id || null}*/}
+                        {/*    paymentType={paymentData?.method || null}*/}
+                        {/*    uploadedFile={uploadedFile}*/}
+                        {/*    // payment_method={paymentData.method}*/}
+                        {/*    // getShippingTotal={getShippingTotal}*/}
+                        {/*    // getTotalPrice={getTotalPrice}*/}
+                        {/*/>*/}
                         <OrderSummary
                             addressId={defaultAddress?.id || null}
                             paymentMethodId={paymentData?.id || null}
-                            paymentType={paymentData?.type || null}
+                            paymentType={paymentData?.method || null}
                             uploadedFile={uploadedFile}
-                            getShippingTotal={getShippingTotal}
-                            getTotalPrice={getTotalPrice}
+                            orderNotes={orderNotes}
+                            extraAddress={defaultAddress?.extra_address || ""}
+                            latitude={defaultAddress?.latitude || ""}
+                            longitude={defaultAddress?.longitude || ""}
+                            identity={paymentData?.method === "installment" ? profileData?.data?.identity : null}
                         />
 
                     </div>

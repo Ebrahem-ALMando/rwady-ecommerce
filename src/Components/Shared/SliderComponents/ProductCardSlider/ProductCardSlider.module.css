@@ -26,6 +26,8 @@
     margin-top: 7px;
     font-size: 12px;
     z-index: 50;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    border: 1px solid #d2dfef;
 }
 .saveSeller {
     background: #dc2926;
@@ -38,6 +40,7 @@
     margin-top: 7px;
     font-size: 12px;
     z-index: 50;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 .productImgDiv {
     width: 100%;

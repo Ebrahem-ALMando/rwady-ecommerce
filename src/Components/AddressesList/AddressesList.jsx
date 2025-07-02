@@ -234,6 +234,7 @@ const AddressesList = () => {
             if (selectedAddress?.id) {
                 const data={
                     "name": formData?.name,
+                    "extra_address": formData?.extra_address,
                     // "is_default":formData?.is_default
                 }
                 res = await updateAddress(selectedAddress.id,data);

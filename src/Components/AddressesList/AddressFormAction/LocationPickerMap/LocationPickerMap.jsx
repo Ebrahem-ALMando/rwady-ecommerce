@@ -85,7 +85,8 @@ const LocationPickerMap = ({ defaultPosition, onSelect }) => {
     return (
         <>
             <MapContainer
-                key={`${position.lat}-${position.lng}`}
+                id="leaflet-map"
+                // key={`${position.lat}-${position.lng}`}
                 center={[position.lat, position.lng]}
                 zoom={13}
                 style={{ height: '330px', width: '100%' }}
@@ -97,7 +98,6 @@ const LocationPickerMap = ({ defaultPosition, onSelect }) => {
                 <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                 <Marker position={[position.lat, position.lng]}/>
                 <ClickHandler
-
                     onSelect={(pos) => {
                         setPosition(pos);
                         onSelect(pos);

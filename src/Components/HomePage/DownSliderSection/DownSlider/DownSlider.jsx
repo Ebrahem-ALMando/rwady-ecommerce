@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import ReloadWithError from "@/Components/Shared/ReloadWithError/ReloadWithError";
 import { useTranslations } from 'next-intl';
+import SafeImage from "@/Components/Shared/SafeImage/SafeImage";
 
 const groupItems = (items, size = 4) => {
     const groups = [];
@@ -141,14 +142,25 @@ const DownSlider = ({ downSliderData, initialError = false, lang }) => {
                                 </button>}
 
                         </div>
-                        <Image
+                        <SafeImage
                             className={styles.img}
                             src={getImage(currentGroup[3])}
+                            fallback="/FallbackProductImage.png"
                             alt={getTitle(currentGroup[3])}
-                            width={300}
-                            height={300}
+                            width={200}
+                            height={200}
                             loading="lazy"
+                            // priority={i === 0}
                         />
+
+                        {/*<Image*/}
+                        {/*    className={styles.img}*/}
+                        {/*    src={getImage(currentGroup[3])}*/}
+                        {/*    alt={getTitle(currentGroup[3])}*/}
+                        {/*    width={300}*/}
+                        {/*    height={300}*/}
+                        {/*    loading="lazy"*/}
+                        {/*/>*/}
                     </div>
                 </Link>
             </div>

@@ -172,6 +172,7 @@ const CartActionButton = ({ product, className = '',btnClassName='',styles ,icon
             updateQuantity(product.id, val);
         }
     };
+
     useImperativeHandle(ref, () => ({
         increment: () =>  handleQuantityChange(selectedQty + 1),
         decrement: () =>handleQuantityChange(Math.max(1, selectedQty - 1))

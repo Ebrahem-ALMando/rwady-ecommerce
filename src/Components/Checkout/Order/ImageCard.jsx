@@ -41,26 +41,26 @@ import SafeImage from "@/Components/Shared/SafeImage/SafeImage";
 
 const ImageCard = ({ item, lang }) => {
     const brand = item?.brands?.[0]?.name || '';
-    const localizedName = item?.name?.[lang] || item?.name || '';
+    const localizedName = item?.name?.[lang] || '';
     const displayName = localizedName.length > 40 ? localizedName.slice(0, 40) + "..." : localizedName;
 
     return (
         <div className={styles.checkoutImageCard}>
-            <SafeImage
-                fallback="/images/Shopping/img.png"
-                className={styles.productImage}
-                src={item?.image}
-                alt={`منتج ${localizedName}`}
-                width={80}
-                height={80}
-                decoding="async"
-            />
-            <div className={styles.productDetails}>
-                <span className={styles.quantity}>x{item?.quantity}</span>
-                {brand && <h3 className={styles.brand}>{brand}</h3>}
-                <p className={styles.name} title={localizedName}>{displayName}</p>
-                <p className={styles.price}>{item?.finalPrice} IQD</p>
-            </div>
+            {/*<SafeImage*/}
+            {/*    fallback="/images/Shopping/img.png"*/}
+            {/*    className={styles.productImage}*/}
+            {/*    src={item?.image}*/}
+            {/*    alt={`منتج ${localizedName}`}*/}
+            {/*    width={80}*/}
+            {/*    height={80}*/}
+            {/*    decoding="async"*/}
+            {/*/>*/}
+            {/*<div className={styles.productDetails}>*/}
+            {/*    <span className={styles.quantity}>x{item?.quantity}</span>*/}
+            {/*    {brand && <h3 className={styles.brand}>{brand}</h3>}*/}
+            {/*    <p className={styles.name} title={localizedName}>{displayName}</p>*/}
+            {/*    <p className={styles.price}>{item?.finalPrice} IQD</p>*/}
+            {/*</div>*/}
         </div>
     );
 };

@@ -195,6 +195,7 @@ import {uploadImage} from "@/api/services/general/uploadImage ";
 import ApiConfig from "@/api/apiConfig";
 import ProfileSkeleton from "@/Components/Profile/ProfileSkeleton/ProfileSkeleton";
 import ReloadWithError from "@/Components/Shared/ReloadWithError/ReloadWithError";
+import ProfileImage from "@/Components/Profile/ProfileImage/ProfileImage";
 
 const Profile=(props)=> {
     const t = useTranslations("Profile");
@@ -285,17 +286,12 @@ const Profile=(props)=> {
 
                 <div className={styles.mainInfo}>
                     <div className={styles.imgContainer}>
-                        <SafeImage
-                            key={data.avatar}
-                            src={profile.avatar}
-                            fallback="/images/img_9.webp"
-                            alt={t("profileImageAlt", { name: profile.name })}
-                            width={90}
-                            height={90}
-                            className={styles.profileImage}
-                            priority
-                            sizes="(max-width: 768px) 100vw, 200px"
-                        />
+                    <ProfileImage
+                    data={data}
+                    profile={profile}
+                    t={t}
+                    />
+
                         <div className={styles.imgAction}>
                             <p>{t("maxImageSize")}</p>
                             <input

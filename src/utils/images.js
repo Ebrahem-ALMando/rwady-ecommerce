@@ -107,7 +107,7 @@ import play_icon from "../assets/icons/play_icon.svg";
 import page_not_found from "../assets/images/page_not_found.png";
 import empty_cart_img from "../assets/images/empty_cart_img.svg";
 
-// order
+// orders
 import order1 from "../assets/images/order1.png";
 import order2 from "../assets/images/order2.png";
 

@@ -45,21 +45,18 @@ import styles from './HeaderProfileSidebar.module.css';
 import SafeImage from "@/Components/Shared/SafeImage/SafeImage";
 import React from "react";
 import { useTranslations } from "next-intl";
+import ProfileImage from "@/Components/Profile/ProfileImage/ProfileImage";
 
 const HeaderProfileSidebar = ({ data }) => {
     const t = useTranslations("Sidebar");
+    const tProfile = useTranslations("Profile");
 
     return (
         <div className={styles.headerProfileSidebar}>
-            <SafeImage
-                src={data.avatar}
-                fallback="/images/img_9.webp"
-                alt={t("userImageAlt")}
-                width={60}
-                height={60}
-                className={styles.personalPhoto}
-                priority
-                sizes="(max-width: 768px) 100vw, 200px"
+            <ProfileImage
+                data={data}
+                profile={data}
+                t={tProfile}
             />
             <div className={styles.mainInfo}>
                 <p>{data.name || t("defaultName")}</p>

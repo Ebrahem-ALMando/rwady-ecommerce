@@ -77,7 +77,7 @@ const Carousel = ({ dataList = [],lang }) => {
                 <div>
                     <Slider {...settings}>
                         {dataTemp.map((slide, index) => (
-                            <div key={index} className="relative">
+                            <div key={index} className={styles.banner}>
                                 <SafeImage
                                     src={slide.image_url}
                                     fallback="/Home/slider1.png"

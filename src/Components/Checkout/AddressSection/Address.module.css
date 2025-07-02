@@ -47,6 +47,7 @@
     font-weight: 500;
     padding: 5px;
     width: 120px;
+    min-width: max-content;
     border-radius: 5px;
     border: 1px solid #0641AD;
     transition: all 0.3s ease-in-out;
@@ -86,7 +87,13 @@
     .header {
         display: flex;
         flex-direction: column;
+        justify-content: center;
+
         gap: 15px;
+    }
+    .changeAddress{
+        margin: auto 10px;
+        padding: 10px;
     }
 }
 

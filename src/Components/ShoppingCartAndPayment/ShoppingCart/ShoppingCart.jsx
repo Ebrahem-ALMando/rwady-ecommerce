@@ -7,7 +7,7 @@ import EmptyState from "@/Components/Shared/EmptyState/EmptyState";
 import {useLocale, useTranslations} from "next-intl";
 
 const ShoppingCart=()=>{
-    const {updateQuantity,getItemQuantity,removeItem,getTotalPrice,cart,getShippingTotal}=useCart()
+    const {updateQuantity,getItemQuantity,removeItem,getTotalPrice,cart,getShippingTotal,orderSummary}=useCart()
     const t=useTranslations('Cart')
     const lang=useLocale()
     return(
@@ -41,11 +41,14 @@ const ShoppingCart=()=>{
                     </div>
 
                     <div className={styles.processSummary}>
+
                         <OrderSummary
+                            // key={JSON.stringify(orderSummary)}
                             lang={lang}
                             getShippingTotal={getShippingTotal}
                             getTotalPrice={getTotalPrice}
                         />
+
                     </div>
                 </>
                 :

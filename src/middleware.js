@@ -6,14 +6,15 @@ const intlMiddleware = createMiddleware(routing);
 
 export function middleware(request) {
     const token = request.cookies.get("token")?.value;
+    const user_id = request.cookies.get("user_id")?.value;
     const pathname = request.nextUrl.pathname;
 
 
-    if (token && ["/sign-in", "/verify"].some((path) => pathname.includes(path))) {
+    if ((token&&user_id) && ["/sign-in", "/verify"].some((path) => pathname.includes(path))) {
         return NextResponse.redirect(new URL("/", request.url));
     }
 
-    if (!token && ["/orders", "/profile"].some((path) => pathname.includes(path))) {
+    if (!(token&&user_id)&& ["/orders", "/profile","/checkout","/favourites","/addresses-list"].some((path) => pathname.includes(path))) {
         return NextResponse.redirect(new URL("/sign-in", request.url));
     }
     return intlMiddleware(request);

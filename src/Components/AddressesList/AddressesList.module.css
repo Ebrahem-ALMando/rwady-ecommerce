@@ -52,4 +52,13 @@
     .mainInfo {
         padding: 0px;
     }
+    .header{
+        flex-direction: column;
+    }
+    .header h3{
+        font-size: 30px;
+        font-weight: 600;
+        color: #0741ad;
+    }
+
 }

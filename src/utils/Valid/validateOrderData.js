@@ -27,7 +27,7 @@ export const validateOrderData = ({ addressId, paymentMethodId, cart, paymentTyp
         return false;
     }
 
-    if (!paymentMethodId) {
+    if (!paymentType) {
         toast.custom(
             <CustomToast
                 type="warning"

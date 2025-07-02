@@ -6,7 +6,8 @@ import { movingProducts } from "@/Data/movingProducts";
 import SafeImage from "@/Components/Shared/SafeImage/SafeImage";
 import Slider from 'react-slick'
 import ReloadWithError from "@/Components/Shared/ReloadWithError/ReloadWithError";
-
+import {slugify} from "@/utils/slugify";
+import Link from "next/link";
 export default function MovingProductsBarSlider({ productsData, initialError = false, lang }) {
     if (initialError) {
         return <ReloadWithError />;
@@ -22,7 +23,10 @@ export default function MovingProductsBarSlider({ productsData, initialError = f
                     const mainImgSrc = mainImageObj?.url || '/FallbackProductImage.png';
                     const productName = product.name?.[lang] || "منتج";
                     return (
-                                <div key={product.id}>
+
+                                <div
+                                    key={product.id}
+                                >
                                     <div
                                         style={{
                                             display: "flex",
@@ -32,6 +36,9 @@ export default function MovingProductsBarSlider({ productsData, initialError = f
                                         role="group"
                                         aria-label={`منتج: ${productName}`}
                                     >
+                                        <Link
+
+                                            href={`/products/${product.id}/${slugify(product.name?.[lang] || "")}`}>
                                         <SafeImage
                                             fallback="/FallbackProductImage.png"
                                             loading="lazy"
@@ -42,7 +49,7 @@ export default function MovingProductsBarSlider({ productsData, initialError = f
                                             className="w-40 h-40 object-cover rounded-md shadow-md"
                                             decoding="async"
                                         />
-
+                                        </Link>
                                         <p className="w-40 text-blue-800 text-sm font-bold text-center mt-2 px-2">
                                             {productName}
                                             <span className="block mr-5 text-blue-800 text-end font-bold mt-3">
@@ -51,6 +58,7 @@ export default function MovingProductsBarSlider({ productsData, initialError = f
                                         </p>
                                     </div>
                                 </div>
+
                     );
                 })}
             </Slider>

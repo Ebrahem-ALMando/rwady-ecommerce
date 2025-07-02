@@ -9,8 +9,9 @@ import Error from "@/Components/Shared/Error/Error";
 import {getListPayments} from "@/api/services/listPayments";
 import useSWR from "swr";
 import Loading from "@/Components/Shared/Loading/Loading";
+import {paymentOptions} from "@/Data/paymentOptions";
 
-const Payment=({handleChecked})=>{
+const Payment=({handleChecked,selected,lang })=>{
 
     // const { data:listPaymentsData, error, isLoading, mutate } = useSWR(
     //     "list-payments",
@@ -31,39 +32,36 @@ const Payment=({handleChecked})=>{
     //             }
     //         />
     //     );
-    const mockPayments = [
-        {
-            id: "visa",
-            name: "الدفع بواسطة فيزا",
-            type: "visa",
-            icon: "CreditCardIcon",
-            active: true,
-            payment_method:'qi'
-        }
-    ];
+
 
 
     // const Data = listPaymentsData?.data || [];
-    const Data = mockPayments;
-
-    return(
+    const Data = paymentOptions ;
+    return (
         <div className={styles.payment}>
-            {
-                Data.map((item,index)=>(
-                    // item.active&&
-                        <div  key={index}>
-                            <PaymentMethod
-                                handleChecked={handleChecked}
-                                item={item}
-                                id={`CreditCardIcon-${index}`}
-                            />
-                            <Line
-                                styles={{ width: "93%",borderTop:"2px solid #E6EAEE" }}
-                            />
-                        </div>
-                ))
-            }
+            {Data.map((item, index) => {
+                const isSelected =
+                    selected?.method === item.payment_method &&
+                    selected?.type === item.type &&
+                    selected?.id === item.id;
 
+                return (
+                    <div key={index}>
+                        <PaymentMethod
+                            handleChecked={() =>
+                                handleChecked(item.id, item.type, item.payment_method)
+                            }
+                            item={item}
+                            isSelected={isSelected}
+                            id={`CreditCardIcon-${index}`}
+                            lang={lang}
+                        />
+                        <Line
+                            styles={{width: "93%", borderTop: "2px solid #E6EAEE"}}
+                        />
+                    </div>
+                );
+            })}
         </div>
     )
 }

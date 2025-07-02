@@ -15,13 +15,14 @@ import useFavourites from "@/hooks/useFavourites";
 import {useRouter} from "next/navigation";
 import CustomToast from "@/Components/Shared/CustomToast/CustomToast";
 import QuantityControl from "@/Components/ProductDetails/QuantityControl/QuantityControl";
+import {useTranslations} from "next-intl";
 
 const CartItem = ({ item,cart, updateQuantity,getItemQuantity,removeItem,lang,t }) => {
     const { favourites, toggle, isFavourite, mutateFavourites } = useFavourites();
     const [liked, setLiked] = useState(false);
     const router = useRouter();
     const initialQty = getItemQuantity(item.id) || 1;
-
+    const tCart = useTranslations("Cart");
 
     const [selectedQty, setSelectedQty] = useState(initialQty);
     useEffect(() => {
@@ -47,12 +48,14 @@ const CartItem = ({ item,cart, updateQuantity,getItemQuantity,removeItem,lang,t 
     };
 
     const handleRemoveCartItem = () => {
+        const removeMessage = tCart("removeSuccessMessage", { name: item?.name?.[lang] });
         removeItem(item.id)
         toast.custom(
             <CustomToast
                 type="error"
-                title="تم الحذف من السلة"
-                message={`تم إزالة ${item?.name?.[lang]} بنجاح`}
+                title={tCart("removeSuccessTitle")}
+                message={removeMessage}
+
             />,
             {
                 position: 'bottom-left',
@@ -73,6 +76,7 @@ const CartItem = ({ item,cart, updateQuantity,getItemQuantity,removeItem,lang,t 
             updateQuantity(item.id, selectedQty);
         }
     }, [selectedQty, item.id]);
+
     return (
         <div className={styles.productCard}>
             <div className={styles.productImg}>
@@ -166,10 +170,17 @@ const CartItem = ({ item,cart, updateQuantity,getItemQuantity,removeItem,lang,t 
                     <QuantityControl
                         productQTU={item.stock_unlimited ? 999 : item.stock}
                         quantity={selectedQty}
+
+                        // onIncrement={() =>
+                        //     setSelectedQty(prev => Math.min(prev + 1, item.maximum_purchase))
+                        // }
+                        // onDecrement={() =>
+                        //     setSelectedQty(prev => Math.max(item.minimum_purchase, prev - 1))}
                         onIncrement={() =>
                             setSelectedQty(prev => Math.min(prev + 1, item.maximum_purchase))
                         }
-                        onDecrement={() => setSelectedQty(prev => Math.max(item.minimum_purchase, prev - 1))}
+                        onDecrement={() =>
+                            setSelectedQty(prev => Math.max(1, prev - 1))}
                     />
 
                 </div>

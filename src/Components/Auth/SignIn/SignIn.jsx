@@ -7,12 +7,12 @@ import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import { PhoneNumberUtil } from 'google-libphonenumber';
 
-import { sendOtp } from "@/api/services/auth/verifyOtp";
-import { getTokenWithClient } from "@/utils/getTokenWithClient";
+// import { sendOtp } from "@/api/services/auth/verifyOtp";
+// import { getTokenWithClient } from "@/utils/getTokenWithClient";
 import styles from './SignIn.module.css';
-import { useTranslations } from 'next-intl';
+import {useLocale, useTranslations} from 'next-intl';
 import {clientLogin} from "@/api/services/auth/clientLogin";
-
+import {ArrowRightToLine,ArrowLeftToLine} from 'lucide-react'
 const phoneUtil = PhoneNumberUtil.getInstance();
 
 const SignIn = () => {
@@ -58,7 +58,7 @@ const SignIn = () => {
             setIsSubmitting(false);
         }
     };
-
+    const lang=useLocale()
     return (
         <motion.div
             variants={{
@@ -88,7 +88,7 @@ const SignIn = () => {
                 </motion.p>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
-                    <motion.div variants={{ hidden: { y: 70, opacity: 0 }, visible: { y: 0, opacity: 1 } }}>
+                    <motion.div variants={{hidden: {y: 70, opacity: 0}, visible: {y: 0, opacity: 1}}}>
                         <label className="block text-gray-700 text-xl font-arabic mb-2 text-start">
                             {t("phone")}
                         </label>
@@ -148,7 +148,7 @@ const SignIn = () => {
                         />
                     </motion.div>
 
-                    <motion.div variants={{ hidden: { y: 70, opacity: 0 }, visible: { y: 0, opacity: 1 } }}>
+                    <motion.div variants={{hidden: {y: 70, opacity: 0}, visible: {y: 0, opacity: 1}}}>
                         <button
                             type="submit"
                             disabled={isSubmitting}
@@ -159,6 +159,25 @@ const SignIn = () => {
                                 : t("submit")}
                         </button>
                     </motion.div>
+                    <motion.div
+                        variants={{hidden: {y: 70, opacity: 0}, visible: {y: 0, opacity: 1}}}
+                        whileHover={{scale: 1.05}}
+                        whileTap={{scale: 0.95}}
+                        className="mt-6 flex justify-center"
+                    >
+                        <button
+                            type="button"
+                            onClick={() => router.push('/')}
+                            className="flex items-center gap-2 px-5 py-3 bg-white border border-blue-100 shadow-md hover:shadow-lg text-blue-600 hover:text-blue-800 text-lg transition-all rounded-xl  animate-pulse"
+                        >
+                            {t("browseWithoutLogin") || "تصفح دون تسجيل"}
+                            {lang === 'en' ?
+                                <ArrowRightToLine/> :
+                                <ArrowLeftToLine/>
+                            }
+                        </button>
+                    </motion.div>
+
                 </form>
             </motion.div>
         </motion.div>

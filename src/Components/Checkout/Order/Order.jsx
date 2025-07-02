@@ -7,7 +7,7 @@
 // const Order=props=>{
 //     const {cart}=useCart()
 //     return(
-//         <div className={styles.order}>
+//         <div className={styles.orders}>
 //             <div className={styles.header}>
 //                 <h2>
 //                     شحنة رقم 1 من 1
@@ -42,14 +42,14 @@ import useCart from "@/hooks/useCart";
 import { useTranslations } from "next-intl";
 
 const Order = ({ lang }) => {
-    const { cart } = useCart();
+    // const { cart } = useCart();
     const t = useTranslations("Checkout");
 
     return (
         <div className={styles.order}>
-            <div className={styles.header}>
-                <h2>{t("shipment")} 1 / 1</h2>
-            </div>
+            {/*<div className={styles.header}>*/}
+            {/*    <h2>{t("shipment")} 1 / 1</h2>*/}
+            {/*</div>*/}
 
             <Line styles={{ width: "93%", borderTop: "2px solid #E6EAEE" }} />
 
