@@ -5,18 +5,18 @@ import DropdownMenu from "@/Components/Header/DropdownMenu/DropdownMenu";
 import Language from "@/Components/Shared/Language/Language";
 import DownloadAppWithLogo from "@/Components/Header/ToolNav/DownloadAppWithLogo/DownloadWithLogo";
 import { navLinks } from "@/Data/NavLinks";
-import { useTranslation } from "next-i18next";
-import "@/i18n";
+import { useTranslations } from 'next-intl';
+
 
 const MainNavigation = ({ isMenuOpen, isOpenDropdown, toggleMenu, setIsOpenDropdown }) => {
-    const { t } = useTranslation("common");
+    const  t  = useTranslations("mainNav");
 
     return (
         <div className={styles.mainDiv}>
             <div className={styles.contDiv}>
                 <nav
                     role="navigation"
-                    aria-label={t("mainNav.label")}
+                    aria-label={t("label")}
                     className={`${styles.navItems} ${isMenuOpen ? styles.active : ''}`}
                     onMouseEnter={() => setIsOpenDropdown(true)}
                     onMouseLeave={() => setIsOpenDropdown(false)}
@@ -27,7 +27,7 @@ const MainNavigation = ({ isMenuOpen, isOpenDropdown, toggleMenu, setIsOpenDropd
                             href={link.href}
                             className={styles.navItem}
                         >
-                            {t(`mainNav.links.${link.label}`)}
+                            {t(`links.${link.label}`)}
                         </Link>
                     ))}
 

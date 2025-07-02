@@ -14,6 +14,6 @@ export const getHomeSections = async () => {
             tags: [endPointKey],
         },
     });
-
+    console.log(res);
     return res ?? [];
 };

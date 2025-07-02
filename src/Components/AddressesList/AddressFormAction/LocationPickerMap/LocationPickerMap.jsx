@@ -85,17 +85,17 @@ const LocationPickerMap = ({ defaultPosition, onSelect }) => {
     return (
         <>
             <MapContainer
-                id="leaflet-map"
-                // key={`${position.lat}-${position.lng}`}
+                // id="leaflet-map"
+                key={`${position.lat}-${position.lng}`}
                 center={[position.lat, position.lng]}
                 zoom={13}
-                style={{ height: '330px', width: '100%' }}
+                style={{height: '330px', width: '100%'}}
                 whenCreated={setMapInstance}
                 className={styles.customMapContainer}
             >
 
-            <ChangeView center={position}/>
-                <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+                <ChangeView center={position}/>
+                <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
                 <Marker position={[position.lat, position.lng]}/>
                 <ClickHandler
                     onSelect={(pos) => {
@@ -112,46 +112,73 @@ const LocationPickerMap = ({ defaultPosition, onSelect }) => {
                     }}
                 />
             </MapContainer>
+            {/* <div style={{marginTop: 10, display: 'flex', gap: '10px', justifyContent: 'center'}}>
+                <button
+                    type="button"
+                    onClick={() => {
+                        if (!navigator.geolocation) {
+                            alert('المتصفح لا يدعم تحديد الموقع');
+                            return;
+                        }
+                        navigator.geolocation.getCurrentPosition((pos) => {
+                            const coords = {
+                                lat: pos.coords.latitude,
+                                lng: pos.coords.longitude,
+                            };
+                            setPosition(coords);
+                            onSelect(coords);
+                            if (mapInstance) {
+                                mapInstance.setView(coords, 13);
+                            }
+                        }, () => {
+                            alert('تعذر الحصول على الموقع الحالي');
+                        });
+                    }}
+                    className={styles.saveButton}
+                >
+                    🧭 العثور على موقعي الحالي
+                </button>
+            </div> */}
 
-    {/*        <div style={{marginTop: 10, display: 'flex', gap: '10px', justifyContent: 'center'}}>*/}
-    {/*    <button*/}
-    {/*        type="button"*/}
-    {/*        onClick={() => {*/}
-    {/*            if (!mapInstance) return;*/}
-    {/*            const center = mapInstance.getCenter();*/}
-    {/*            const pos = {lat: center.lat, lng: center.lng};*/}
-    {/*            setPosition(pos);*/}
-    {/*            onSelect(pos);*/}
-    {/*        }}*/}
-    {/*        className={styles.saveButton}*/}
-    {/*    >*/}
-    {/*        📍 تحديد العنوان من مركز الخريطة*/}
-    {/*    </button>*/}
+            {/*        <div style={{marginTop: 10, display: 'flex', gap: '10px', justifyContent: 'center'}}>*/}
+            {/*    <button*/}
+            {/*        type="button"*/}
+            {/*        onClick={() => {*/}
+            {/*            if (!mapInstance) return;*/}
+            {/*            const center = mapInstance.getCenter();*/}
+            {/*            const pos = {lat: center.lat, lng: center.lng};*/}
+            {/*            setPosition(pos);*/}
+            {/*            onSelect(pos);*/}
+            {/*        }}*/}
+            {/*        className={styles.saveButton}*/}
+            {/*    >*/}
+            {/*        📍 تحديد العنوان من مركز الخريطة*/}
+            {/*    </button>*/}
 
-    {/*    <button*/}
-    {/*        type="button"*/}
-    {/*        onClick={() => {*/}
-    {/*            if (!navigator.geolocation) {*/}
-    {/*                alert('المتصفح لا يدعم تحديد الموقع');*/}
-    {/*                return;*/}
-    {/*            }*/}
-    {/*            navigator.geolocation.getCurrentPosition((pos) => {*/}
-    {/*                const coords = {*/}
-    {/*                    lat: pos.coords.latitude,*/}
-    {/*                    lng: pos.coords.longitude,*/}
-    {/*                };*/}
-    {/*                setPosition(coords);*/}
-    {/*                onSelect(coords);*/}
-    {/*                if (mapInstance) {*/}
-    {/*                    mapInstance.setView(coords, 13);*/}
-    {/*                }*/}
-    {/*            });*/}
-    {/*        }}*/}
-    {/*        className={styles.saveButton}*/}
-    {/*    >*/}
-    {/*        🧭 العثور على موقعي الحالي*/}
-    {/*    </button>*/}
-    {/*</div>*/}
+            {/*    <button*/}
+            {/*        type="button"*/}
+            {/*        onClick={() => {*/}
+            {/*            if (!navigator.geolocation) {*/}
+            {/*                alert('المتصفح لا يدعم تحديد الموقع');*/}
+            {/*                return;*/}
+            {/*            }*/}
+            {/*            navigator.geolocation.getCurrentPosition((pos) => {*/}
+            {/*                const coords = {*/}
+            {/*                    lat: pos.coords.latitude,*/}
+            {/*                    lng: pos.coords.longitude,*/}
+            {/*                };*/}
+            {/*                setPosition(coords);*/}
+            {/*                onSelect(coords);*/}
+            {/*                if (mapInstance) {*/}
+            {/*                    mapInstance.setView(coords, 13);*/}
+            {/*                }*/}
+            {/*            });*/}
+            {/*        }}*/}
+            {/*        className={styles.saveButton}*/}
+            {/*    >*/}
+            {/*        🧭 العثور على موقعي الحالي*/}
+            {/*    </button>*/}
+            {/*</div>*/}
         </>
     );
 };

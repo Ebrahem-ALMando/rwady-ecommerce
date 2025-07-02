@@ -33,7 +33,7 @@ const HorizontalProductSection = ({lang,sectionResp}) => {
 
     return (
         <>
-            {productsData.length > 0 &&
+            {productsData?.length > 0 &&
                 <section>
                     <TitleSection
                         initTitle={"منتجات ..."}

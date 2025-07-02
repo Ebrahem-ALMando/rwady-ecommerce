@@ -4,7 +4,7 @@ import React, {Suspense} from "react";
 import VideoSkeleton from "@/Components/HomePage/PromoSection/VideoSection/VideoSkeleton/VideoSkeleton";
 
 const PromoSection=({sectionResp,lang})=>{
-    const data=sectionResp?.data;
+    const data=sectionResp?.data||[];
     return (
         <section>
             <VideoSection

@@ -23,6 +23,8 @@ async function HomePageData ()
     const lang=useLocale()
     const sectionsResponse = await getHomeSections();
 
+    // console.log(sectionsResponse);
+    
     const sections = sectionsResponse?.data && Array.isArray(sectionsResponse.data)
         ? sectionsResponse.data.sort((a, b) => a.orders - b.orders)
         : [];

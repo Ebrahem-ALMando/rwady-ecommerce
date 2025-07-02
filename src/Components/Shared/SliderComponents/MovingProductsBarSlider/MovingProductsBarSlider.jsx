@@ -13,12 +13,21 @@ export default function MovingProductsBarSlider({ productsData, initialError = f
         return <ReloadWithError />;
     }
 
-    const productsToShow = productsData.length > 0 ? productsData : movingProducts;
-
+    // const productsToShow = productsData.length > 0 ? productsData : movingProducts;
+    const rawData = productsData.length > 0 ? productsData : movingProducts;
+    const isSingleSlide = rawData.length === 1;
+    const dataTemp = isSingleSlide ? [...rawData, ...rawData] : rawData;
+    const finalSliderSettings = {
+        ...sliderSettings,
+        infinite: !isSingleSlide,
+        arrows: !isSingleSlide,
+      };
     return (
         <div className={styles.mainDiv} aria-label="شريط المنتجات المقترحة" role="region">
-            <Slider {...sliderSettings} aria-roledescription="قائمة شرائح المنتجات">
-                {productsToShow.map((product) => {
+            <Slider {...finalSliderSettings
+
+            } aria-roledescription="قائمة شرائح المنتجات">
+                {dataTemp.map((product) => {
                     const mainImageObj = product.media?.find((m) => m.type === 'image');
                     const mainImgSrc = mainImageObj?.url || '/FallbackProductImage.png';
                     const productName = product.name?.[lang] || "منتج";

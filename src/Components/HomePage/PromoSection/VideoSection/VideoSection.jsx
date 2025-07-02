@@ -34,13 +34,18 @@ const VideoSection = ({ dataList, initialError=false }) => {
     }, [inView]);
 
     if (initialError) return <ReloadWithError />;
-
+    if (!dataList) {
+        console.error("❌ dataList is undefined in Home page server component");
+        return null; // أو return fallback UI
+      }
     // const Data = settingData?.settings || {};
     // const poster_video_url = Data.poster_video_url ? `${ApiConfig.IMAGE_BASE_URL}${Data.poster_video_url}` : null;
     // const promo_video_url = Data.promo_video_url ? `${ApiConfig.IMAGE_BASE_URL}${Data.promo_video_url}` : null;
+    const poster_video_url = (dataList && dataList.cover_image_url_for_home_page_video) 
+    || '/images/VideoCover.jpeg';
 
-    const poster_video_url = dataList.cover_image_url_for_home_page_video?dataList.cover_image_url_for_home_page_video:'/images/VideoCover.jpeg'
-    const promo_video_url = dataList.video_url ?dataList.video_url : null;
+    const promo_video_url = (dataList && dataList.video_url) || null;
+
     return (
         <div className={styles.container} ref={ref}>
             {!isMobile && <div className={styles.overlay}></div>}

@@ -17,7 +17,7 @@ return (
             lang={lang}
         />
         <CategoriesCarousel
-        data={orderData}
+        data={orderData||[]}
         lang={lang}
         />
     </section>

@@ -54,7 +54,7 @@ const  BrandsSection  = ({sectionResp,lang}) => {
             <CircleCartCarousel
                              borderRadius={'10px'}
                              bgColor={"#0741ad"}
-                             data={orderData}
+                             data={orderData||[]}
                              lang={lang}
                              // initialError={initialError}
                              filterKey={"brand_id"}
