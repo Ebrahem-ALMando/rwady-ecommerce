@@ -90,7 +90,7 @@ const ToolNav = ({ toggleMenu, isScrolled,getCartCount }) => {
                             <TopIcon link="/profile" isSelect element={ProfileIcon} aria={t("profile")} />
                             <TopIcon link="/collections/favourites"
 
-                                     // count={0}
+
 
                                      element={FavouriteIcon} aria={t("favourites")} />
                             <TopIcon link="/shopping-cart" count={cartCount } element={ShoppingCartIcon} aria={t("cart")} />

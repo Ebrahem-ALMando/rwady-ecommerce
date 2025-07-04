@@ -313,6 +313,12 @@
       "viewOrders": "عرض الطلبات",
       "close": "إغلاق"
     }
+  },
+  "categorySection": {
+    "categoryProducts": " منتجات الصنف : {name}",
+    "close": "إغلاق",
+    "showCategories": "عرض الأقسام",
+    "closeCategories": "إغلاق الأقسام"
   }
 
 

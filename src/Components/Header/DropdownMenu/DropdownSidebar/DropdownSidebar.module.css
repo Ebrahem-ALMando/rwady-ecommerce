@@ -5,6 +5,11 @@
     gap: 10px;
     border-left: 2px solid #EDE9E6;
     padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 15px;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    height: 100%;
 }
 .title{
     display: flex;

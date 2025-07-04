@@ -313,6 +313,13 @@
       "close": "Close"
     }
 
+  },
+  "categorySection": {
+    "categoryProducts": "Products in category: {name}",
+    "close": "Close",
+    "showCategories": "Show Categories",
+    "closeCategories": "Close Categories"
   }
+
 
 }

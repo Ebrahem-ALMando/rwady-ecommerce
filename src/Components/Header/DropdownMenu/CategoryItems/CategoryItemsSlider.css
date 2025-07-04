@@ -1,0 +1,48 @@
+.category-swiper {
+  width: 100%;
+  min-width: 0;
+}
+
+.custom-swiper-nav {
+  background: #fff;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  z-index: 10;
+  transform: translateY(-50%);
+  box-shadow: 0 2px 8px #0001;
+  cursor: pointer;
+  transition: border 0.2s, background 0.2s;
+  opacity: 0.85;
+}
+
+.custom-swiper-prev {
+  right: 8px;
+  left: auto;
+}
+.custom-swiper-next {
+  left: 8px;
+  right: auto;
+}
+
+.custom-swiper-nav:hover {
+  border-color: #2563eb;
+  background: #f0f4fa;
+}
+
+.category-swiper .swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  min-width: 0;
+}
+
+.category-swiper .swiper-wrapper {
+  min-width: 0;
+} 

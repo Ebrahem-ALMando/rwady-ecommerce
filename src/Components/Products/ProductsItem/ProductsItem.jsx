@@ -89,7 +89,7 @@ import {Carousel, CarouselContent, CarouselItem} from "@/Components/ui/carousel"
 import {useLocale} from "next-intl";
 
 
-const ProductsItem = ({data,isLoading=false,isError=false,lang}) => {
+const ProductsItem = ({data,isLoading=false,isError=false,lang,categoryPage=false}) => {
     // const [isDataFresh, setIsDataFresh] = useState(false);
     // const {data, error, isLoading, mutate} = useSWR(
     //     props.keyData,
@@ -130,7 +130,7 @@ const ProductsItem = ({data,isLoading=false,isError=false,lang}) => {
 
     return (
         <>
-            {data.length>0?
+            {data&&data.length>0?
                 (
                     <>
                         {data?.map((slide, index) => (
@@ -139,9 +139,14 @@ const ProductsItem = ({data,isLoading=false,isError=false,lang}) => {
 
                     </>
                 ) :
-                <p>
-                    لا توجد بيانات مطابقة
-                </p>
+
+                <>
+                    {!categoryPage &&
+                        <p>
+                            لا توجد بيانات مطابقة
+                        </p>
+                    }
+                </>
 
             }
         </>

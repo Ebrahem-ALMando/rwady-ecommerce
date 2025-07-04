@@ -1,12 +1,3 @@
-/*.mask {*/
-/*    position: sticky;*/
-/*    left: 0;*/
-/*    top: 100px;  !* يبدأ من أسفل القائمة *!*/
-/*    width: 100vw;*/
-/*    height: 32vh; !* يغطي الجزء السفلي فقط *!*/
-/*    background-color: rgba(0, 0, 0, 0.5);*/
-/*    z-index: 99; !* خلف المكون الرئيسي *!*/
-/*}*/
 
 .container {
     width: 100%;
@@ -15,25 +6,10 @@
     gap: 10px;
     padding: 15px;
     background: #f7f7f7;
-    /*position: absolute;*/
-    /*top: 80%;*/
-    /*left: 50%;*/
-    /*transform: translateX(-50%) translateY(20px);*/
-    /*z-index: 100;*/
     height: auto;
     border-radius: 10px;
-    /*box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);*/
-    /*opacity: 0;*/
-    /*pointer-events: none;*/
     transition: opacity 0.4s ease, transform 0.4s ease;
 }
-
-/*.container.show {*/
-/*    opacity: 1;*/
-/*    pointer-events: auto;*/
-/*    transform: translateX(-50%) translateY(0);*/
-/*}*/
-
 .sidebar {
     width: 25%;
     padding: 10px 3px;
@@ -97,14 +73,26 @@
         background-color: #eeeff2;
     }
 }
+@media (max-width: 768px) {
+    .sidebar {
+        display: none;
+    }
+}
 
-@media (max-width: 600px) {
+@media (max-width: 630px) {
+    .container{
+        width: 100%;
+        padding: 10px 0px;
+    }
     .categories {
         flex-direction: column;
+        width: 100%;
+        padding: 10px 0px;
     }
     .mainSection,
     .secondSection {
         width: 100%;
         height: max-content;
+        padding: 10px 0px;
     }
 }

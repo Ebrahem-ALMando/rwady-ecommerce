@@ -244,22 +244,25 @@ import DropdownSidebar from "@/Components/Header/DropdownMenu/DropdownSidebar/Dr
 import React, { useEffect, useState, memo } from "react";
 import EmptyState from "@/Components/Shared/EmptyState/EmptyState";
 import CategoryItems from "@/Components/Header/DropdownMenu/CategoryItems/CategoryItems";
-import { useLocale } from "next-intl";
+import {useLocale, useTranslations} from "next-intl";
 
 const DropdownMenu = ({ isShow, initialData, initialError, keyData, arSection }) => {
     const lang = useLocale();
     const [selectedCategoryId, setSelectedCategoryId] = useState(null);
     const [selectedCategoryName, setSelectedCategoryName] = useState(null);
     const [childrenData, setChildrenData] = useState([]);
+    const [selectedChild, setSelectedChild] = useState({});
 
-    // استخراج قائمة التصنيفات
+    const t=useTranslations('categorySection')
+
+
     const dataList = Array.isArray(initialData)
         ? initialData
         : Array.isArray(initialData?.data)
             ? initialData.data
             : [];
 
-    // دالة بحث متداخل للعثور على أي عنصر حسب ID
+
     const findCategoryById = (data, id) => {
         for (let item of data) {
             if (item.id === id) return item;
@@ -271,7 +274,7 @@ const DropdownMenu = ({ isShow, initialData, initialError, keyData, arSection })
         return null;
     };
 
-    // ضبط أول عنصر تلقائيًا عند أول تحميل
+
     useEffect(() => {
         if (
             keyData === "categories" &&
@@ -281,16 +284,58 @@ const DropdownMenu = ({ isShow, initialData, initialError, keyData, arSection })
             setSelectedCategoryId(firstCategory.id);
             setSelectedCategoryName(firstCategory.name?.[lang]);
             setChildrenData(firstCategory.children || []);
+
+            setSelectedChild(firstCategory?.children[0]);
+            console.log(firstCategory?.children[0])
         }
     }, [keyData, initialData, lang]);
 
-    // عند اختيار عنصر من الشجرة
+
     const handleSelect = (id, name) => {
         setSelectedCategoryId(id);
         setSelectedCategoryName(name);
         const selected = findCategoryById(dataList, id);
         setChildrenData(selected?.children || []);
+
+            setSelectedChild(selected?.children[0]);
+            console.log(selected.children[0])
+
     };
+
+    const [isMobileSidebarVisible, setIsMobileSidebarVisible] = useState(false);
+    const [animateSidebar, setAnimateSidebar] = useState(false);
+
+
+    const openSidebar = () => {
+        setIsMobileSidebarVisible(true);
+        requestAnimationFrame(() => {
+            setAnimateSidebar(true);
+        });
+    };
+
+    const closeSidebar = () => {
+        setAnimateSidebar(false);
+        setTimeout(() => setIsMobileSidebarVisible(false), 70);
+    };
+
+
+
+    useEffect(() => {
+        if (isMobileSidebarVisible) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = '';
+        }
+
+        return () => {
+            document.body.style.overflow = '';
+        };
+    }, [isMobileSidebarVisible]);
+
+
+
+
+
 
     return (
         <>
@@ -303,16 +348,64 @@ const DropdownMenu = ({ isShow, initialData, initialError, keyData, arSection })
                     aria-label={`${keyData}`}
                     aria-labelledby={`dropdown-${keyData}`}
                 >
+
+                    <button
+                        className={`md:hidden fixed left-1/2 transform -translate-x-1/2 bg-blue-600 text-white px-4 py-2 rounded-full shadow-lg z-[100000]
+                            transition-all duration-300
+                            ${isMobileSidebarVisible ? 'bottom-[calc(79%-28px)]' : 'bottom-4'}`}
+                        onClick={() => {
+                            isMobileSidebarVisible ? closeSidebar() : openSidebar();
+                        }}
+                    >
+                        {isMobileSidebarVisible ? t('closeCategories') : t('showCategories')}
+                    </button>
+
+
                     {keyData === "categories" && (
-                        <div className={styles.sidebar}>
-                            <DropdownSidebar
-                                keyData={keyData}
-                                arSection={arSection}
-                                data={dataList}
-                                onSelect={handleSelect}
-                                selectedId={selectedCategoryId}
-                            />
-                        </div>
+                        <>
+                            <div className={styles.sidebar}>
+                                <DropdownSidebar
+                                    keyData={keyData}
+                                    arSection={arSection}
+                                    data={dataList}
+                                    onSelect={handleSelect}
+                                    selectedId={selectedCategoryId}
+                                />
+                            </div>
+                            {isMobileSidebarVisible && (
+                                <div
+                                    className="fixed inset-0 bg-black bg-opacity-40 z-[99999]"
+                                    onClick={closeSidebar}
+                                >
+                                    <div
+                                        className={`fixed bottom-0 left-0 w-full max-h-[77%] bg-white rounded-t-2xl z-[99999] overflow-y-auto
+                                        transition-transform duration-300 ease-in-out
+                                        ${animateSidebar ? 'translate-y-0' : 'translate-y-full'}`}
+                                        onClick={(e) => e.stopPropagation()}
+                                    >
+                                        <div className="flex justify-end px-4 pt-2">
+                                            <button
+                                                onClick={closeSidebar}
+                                                className="text-sm text-gray-600 underline"
+                                            >
+                                                {t('close')}
+                                            </button>
+                                        </div>
+                                        <DropdownSidebar
+                                            keyData={keyData}
+                                            arSection={arSection}
+                                            data={dataList}
+                                            onSelect={handleSelect}
+                                            selectedId={selectedCategoryId}
+                                        />
+                                    </div>
+                                </div>
+                            )}
+
+
+                        </>
+
+
                     )}
 
                     <div className={styles.categories}>
@@ -322,6 +415,8 @@ const DropdownMenu = ({ isShow, initialData, initialError, keyData, arSection })
                                     lang={lang}
                                     title={selectedCategoryName || "الاقسام الاخرى "}
                                     data={childrenData}
+                                    setSelectedChild={setSelectedChild}
+                                    selectedChild={selectedChild}
                                 />
                             ) : (
                                 <CategoryItems

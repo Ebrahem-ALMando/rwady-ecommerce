@@ -8,19 +8,15 @@ import Link from "next/link";
 import Slider from "react-slick";
 import { motion, AnimatePresence } from "framer-motion";
 import ReloadWithError from "@/Components/Shared/ReloadWithError/ReloadWithError";
+import {groupItems} from "@/utils/groupItems";
+import {
+    containerVariants,
+    itemVariants
+} from "@/Components/Header/DropdownMenu/CategoryItems/CartCarousel/motionSetting";
 
 const CircleCartCarousel = (props) => {
     const { data = [], filterKey = "category_ids", initialError=false,showName,lang } = props;
     const [activeArrow, setActiveArrow] = useState(null);
-
-    const groupItems = (items, size) => {
-        const groups = [];
-        for (let i = 0; i < items.length; i += size) {
-            groups.push(items.slice(i, i + size));
-        }
-        return groups;
-    };
-
 
     const dataList =data || [];
 
@@ -46,30 +42,6 @@ const CircleCartCarousel = (props) => {
     if (initialError)
     {return <ReloadWithError/>}
 
-
-    const containerVariants = {
-        hidden: {},
-        visible: {
-            transition: {
-                delayChildren: 0,
-                staggerChildren: 0.06,
-            },
-        },
-    };
-
-    const itemVariants = {
-        hidden: { opacity: 0.6, y: 20 },
-        visible: {
-            opacity: 1,
-            y: 0,
-            transition: { duration: 0.2, ease: "easeOut" },
-        },
-        exit: {
-            opacity: 0,
-            y: 20,
-            transition: { duration: 0.15, ease: "easeIn" },
-        },
-    };
 
 
 

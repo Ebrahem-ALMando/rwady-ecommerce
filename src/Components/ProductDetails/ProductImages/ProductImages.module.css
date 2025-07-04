@@ -32,7 +32,7 @@
     display: flex;
     flex-direction: column;
     margin-left: -5px;
-    overflow-y: auto;
+    /*overflow-y: auto;*/
     scrollbar-width: thin;
     scrollbar-color: #8dacdc #e6ecf3;
 }

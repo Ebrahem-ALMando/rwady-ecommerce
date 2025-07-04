@@ -6,9 +6,14 @@ import { memo, useEffect, useRef } from "react";
 import SafeImage from "@/Components/Shared/SafeImage/SafeImage";
 
 const CategoryCard = ({
+                          id,
                           link = "#",
                           logo = "/images/img_10.png",
-                          title = "بدون اسم"
+                          title = "بدون اسم",
+                          setSelectedChild,
+                          selectedChild,
+                          category,
+
                       }) => {
     const cardRef = useRef(null);
 
@@ -33,14 +38,21 @@ const CategoryCard = ({
         };
     }, []);
 
+
+    const handleChange = () => {
+        setSelectedChild(category)
+    }
     return (
-        <Link
-            href={link}
-            className={styles.cardLink}
-            aria-label={`رابط إلى ${title}`}
-            prefetch={false}
-        >
-            <div className={styles.categoryCard} ref={cardRef}>
+        // <Link
+        //     href={link}
+        //     className={styles.cardLink}
+        //     aria-label={`رابط إلى ${title}`}
+        //     prefetch={false}
+        // >
+            <div onClick={handleChange} className={`${styles.categoryCard} 
+            ${id===selectedChild?.id?styles.select:''}
+            
+            `} ref={cardRef}>
                 <div className={styles.imageWrapper}>
                     <SafeImage
                         fallback="/images/img_10.png"
@@ -56,7 +68,7 @@ const CategoryCard = ({
                 <h3 className={styles.name}>{title}</h3>
                 <span className={styles.hoverEffect}></span>
             </div>
-        </Link>
+        // </Link>
     );
 };
 

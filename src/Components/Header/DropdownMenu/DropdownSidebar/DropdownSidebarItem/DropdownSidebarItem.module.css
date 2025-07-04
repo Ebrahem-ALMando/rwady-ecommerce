@@ -10,7 +10,8 @@
     border-radius: 7px;
     border: none;
     background-color: transparent;
-    text-align: right;
+    text-align: start;
+    margin: auto 5px;
 }
 
 .rowItem[aria-selected="true"] {
