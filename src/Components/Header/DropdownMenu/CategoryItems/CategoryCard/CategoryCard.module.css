@@ -265,9 +265,9 @@
 @media (max-width: 433px)
 {
     .categoryCard{
-        width:6.3rem !important;
+        width:6.5rem !important;
         padding: 10px 0px;
-        margin: 10px 2px;
+        margin: 10px 0px;
         height: 175px !important;
     }
     .image{

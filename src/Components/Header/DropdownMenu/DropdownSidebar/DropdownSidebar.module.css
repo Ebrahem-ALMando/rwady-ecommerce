@@ -8,7 +8,7 @@
     padding-right: 16px;
     padding-bottom: 15px;
     overflow-y: hidden;
-    overflow-x: hidden;
+    overflow-x: auto;
     height: 100%;
 }
 .title{
@@ -21,4 +21,10 @@
     color: #0641AD;
     font-weight: bold;
     font-size: 23px;
+}
+@media (max-width: 1000px)
+{
+    .dropdownSidebar{
+        overflow-y: auto;
+    }
 }

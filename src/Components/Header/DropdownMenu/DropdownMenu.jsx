@@ -370,7 +370,10 @@ const DropdownMenu = ({ isShow, initialData, initialError, keyData, arSection })
                                     onClick={closeSidebar}
                                 >
                                     <div
-                                        className={`fixed bottom-0 left-0 w-full max-h-[70%] bg-white rounded-t-2xl z-[99999] overflow-y-auto
+                                        className={`  fixed bottom-0 left-0 w-full 
+                                                              h-[70vh] 
+                                                              bg-white rounded-t-2xl z-[99999] 
+                                                              pb-20
                                         transition-transform duration-300 ease-in-out
                                         ${animateSidebar ? 'translate-y-0' : 'translate-y-full'}`}
                                         onClick={(e) => e.stopPropagation()}
