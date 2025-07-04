@@ -59,36 +59,44 @@
 .subSectionTow {
     border-top: 1px solid #EDE9E6;
 }
-
-@media (max-width: 800px) {
+@media (max-width: 1000px) {
     .container {
         flex-direction: column;
-
-    }
-    .categories {
         width: 100%;
+        padding: 10px 0px;
     }
+
     .sidebar {
+        display: none;
         width: 98%;
         background-color: #eeeff2;
     }
-}
-@media (max-width: 768px) {
-    .sidebar {
-        display: none;
-    }
-}
 
-@media (max-width: 630px) {
-    .container{
-        width: 100%;
-        padding: 10px 0px;
-    }
     .categories {
         flex-direction: column;
         width: 100%;
         padding: 10px 0px;
     }
+
+    .mainSection,
+    .secondSection {
+        width: 100%;
+        height: max-content;
+        padding: 10px 0px;
+    }
+}
+@media (max-width: 630px) {
+    .container {
+        width: 100%;
+        padding: 10px 0px;
+    }
+
+    .categories {
+        flex-direction: column;
+        width: 100%;
+        padding: 10px 0px;
+    }
+
     .mainSection,
     .secondSection {
         width: 100%;

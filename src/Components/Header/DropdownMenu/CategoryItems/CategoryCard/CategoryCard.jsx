@@ -13,6 +13,7 @@ const CategoryCard = ({
                           setSelectedChild,
                           selectedChild,
                           category,
+                          handleSetProduct
 
                       }) => {
     const cardRef = useRef(null);
@@ -41,6 +42,7 @@ const CategoryCard = ({
 
     const handleChange = () => {
         setSelectedChild(category)
+        // handleSetProduct()
     }
     return (
         // <Link

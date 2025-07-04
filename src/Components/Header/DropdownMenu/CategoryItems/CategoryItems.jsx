@@ -3,11 +3,16 @@
 import styles from './CategoryItems.module.css';
 import CategoryCard from "@/Components/Header/DropdownMenu/CategoryItems/CategoryCard/CategoryCard";
 import { categoryIcon } from "@/utils/Icons";
-import React, { memo } from "react";
+import React, {memo, useEffect, useState} from "react";
 import EmptyState from "@/Components/Shared/EmptyState/EmptyState";
 import CartCarousel from "@/Components/Header/DropdownMenu/CategoryItems/CartCarousel/CartCarousel";
 import ProductsItem from "@/Components/Products/ProductsItem/ProductsItem";
 import {useTranslations} from "next-intl";
+import {getProducts} from "@/api/services/listProducts";
+import {category} from "@/Data/data";
+import Loading from "@/Components/Shared/Loading/Loading";
+import ProductCardSkeleton
+    from "@/Components/Shared/SliderComponents/ProductCardSlider/ProductCardSkeleton/ProductCardSkeleton";
 
 const CategoryItems = ({ title, data = [], link ,lang,selectedChild,setSelectedChild}) => {
     const dataList = Array.isArray(data)
@@ -16,6 +21,32 @@ const CategoryItems = ({ title, data = [], link ,lang,selectedChild,setSelectedC
             ? data.data
             : [];
     const t=useTranslations('categorySection')
+
+    const [products,setProducts] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+
+    const handleSetProduct = async () => {
+        if (!selectedChild?.id || isLoading) return;
+        setIsLoading(true);
+        const categoryKey = `category_id=${selectedChild.id}`;
+        const res = await getProducts(categoryKey);
+        setIsLoading(false);
+
+        if (res.error) {
+            console.log(res.error);
+            return;
+        }
+        setProducts(res.data);
+    };
+
+
+    useEffect(() => {
+        if(selectedChild?.id){
+            handleSetProduct()
+        }
+
+    }, [selectedChild]);
+
     return (
         <section
             className={styles.container}
@@ -38,11 +69,12 @@ const CategoryItems = ({ title, data = [], link ,lang,selectedChild,setSelectedC
                               data={dataList}
                               setSelectedChild={setSelectedChild}
                               selectedChild={selectedChild}
+                              handleSetProduct={handleSetProduct}
                               />
                       </>
                 }
             </div>
-            { selectedChild?.products?.length>0&&selectedChild?.name?.[lang] && (
+            { products?.length>0&&selectedChild?.name?.[lang] && (
                 <h2 id={`section-${selectedChild?.name?.[lang]}`} className={styles.heading}
                     style={{marginTop:'3rem'}}
                 >
@@ -52,19 +84,26 @@ const CategoryItems = ({ title, data = [], link ,lang,selectedChild,setSelectedC
             )}
 
             <div className={styles.items}>
+                <div className={styles.items}>
+                    {isLoading ? (
+                       <>
+                           <ProductCardSkeleton/>
+                           <ProductCardSkeleton/>
+                           <ProductCardSkeleton/>
+                       </>
+                    ) : products.length === 0&&selectedChild?.id ? (
+                        <EmptyState message={t('noProducts', {name: selectedChild?.name?.[lang]})}/>
+                    ) : (
+                        products?.length>0&&selectedChild?.name?.[lang] &&
+                        <ProductsItem
+                            categoryPage
+                            data={products}
+                            lang={lang}
+                        />
 
-                <ProductsItem
-                    categoryPage
-                    data={selectedChild?.products}
-                    lang={lang}
-                    // isLoading={isLoading}
-                    // isError={isError}
-                    // mutate={mutate}
-                    // initialData={initialProductsData}
-                    // initialError={initialError}
-                    // getData={getProducts}
-                    // keyData={"productsList"}
-                />
+                    )}
+                </div>
+
             </div>
         </section>
     );

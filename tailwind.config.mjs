@@ -21,6 +21,9 @@ export default withMT({
 	],
 	theme: {
 		extend: {
+			screens: {
+				mobile: { max: '1000px' },
+			},
 			colors: {
 				...colors,
 				background: 'hsl(var(--background))',

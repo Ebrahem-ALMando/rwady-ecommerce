@@ -397,17 +397,17 @@ const settings = {
 const ProductCardSlider = ({ product, lang, setIsDraggingInsideCard }) => {
 
     const [activeImages, setActiveImages] = useState( []);
-    const [time, setTime] = useState(formatDuration(product.discount_start, product.discount_end)||0);
+    const [time, setTime] = useState(formatDuration(product?.price_discount_start, product?.price_discount_end)||0);
     // const { favourites, toggle, isFavourite, mutateFavourites } = useFavourites();
     const [liked, setLiked] = useState(false);
-    const [likedCount, setLikedCount] = useState(product.fav_num||0);
+    const [likedCount, setLikedCount] = useState(product?.fav_num||0);
 
 
     const [isAddToCart,setIsAddToCart] = useState(false);
     const cartRef = useRef();
     const { getItemQuantity} = useCart();
 
-    const initialQty = getItemQuantity(product.id) || 1;
+    const initialQty = getItemQuantity(product?.id) || 1;
     const [selectedQty, setSelectedQty] = useState(initialQty);
 
     useEffect(() => {

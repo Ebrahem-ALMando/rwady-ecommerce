@@ -17,7 +17,7 @@ import CategoryCard from "@/Components/Header/DropdownMenu/CategoryItems/Categor
 import {sliderSetting} from "@/Components/Header/DropdownMenu/CategoryItems/CartCarousel/SliderSetting";
 
 const CartCarousel = (props) => {
-    const { data = [], filterKey = "category_ids", initialError=false,showName,lang,selectedChild,setSelectedChild } = props;
+    const { data = [], filterKey = "category_ids", initialError=false,showName,lang,selectedChild,setSelectedChild,handleSetProduct } = props;
     const [activeArrow, setActiveArrow] = useState(null);
 
 
@@ -79,6 +79,7 @@ const CartCarousel = (props) => {
                                                 category={slide}
                                                 setSelectedChild={setSelectedChild}
                                                 selectedChild={selectedChild}
+                                                handleSetProduct={handleSetProduct}
                                             />
                                         </motion.div>
                                     ))}
@@ -104,6 +105,7 @@ const CartCarousel = (props) => {
                                             category={slide}
                                             setSelectedChild={setSelectedChild}
                                             selectedChild={selectedChild}
+                                            handleSetProduct={handleSetProduct}
                                         />
                                     </motion.div>
                                 ))

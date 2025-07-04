@@ -318,7 +318,9 @@
     "categoryProducts": "Products in category: {name}",
     "close": "Close",
     "showCategories": "Show Categories",
-    "closeCategories": "Close Categories"
+    "closeCategories": "Close Categories",
+    "noProducts": "No products available in {name}"
+
   }
 
 

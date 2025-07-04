@@ -318,7 +318,9 @@
     "categoryProducts": " منتجات الصنف : {name}",
     "close": "إغلاق",
     "showCategories": "عرض الأقسام",
-    "closeCategories": "إغلاق الأقسام"
+    "closeCategories": "إغلاق الأقسام",
+    "noProducts": "لا توجد منتجات في قسم {name}"
+
   }
 
 

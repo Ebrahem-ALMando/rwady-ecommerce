@@ -284,9 +284,7 @@ const DropdownMenu = ({ isShow, initialData, initialError, keyData, arSection })
             setSelectedCategoryId(firstCategory.id);
             setSelectedCategoryName(firstCategory.name?.[lang]);
             setChildrenData(firstCategory.children || []);
-
             setSelectedChild(firstCategory?.children[0]);
-            console.log(firstCategory?.children[0])
         }
     }, [keyData, initialData, lang]);
 
@@ -296,10 +294,7 @@ const DropdownMenu = ({ isShow, initialData, initialError, keyData, arSection })
         setSelectedCategoryName(name);
         const selected = findCategoryById(dataList, id);
         setChildrenData(selected?.children || []);
-
-            setSelectedChild(selected?.children[0]);
-            console.log(selected.children[0])
-
+        setSelectedChild(selected?.children[0]);
     };
 
     const [isMobileSidebarVisible, setIsMobileSidebarVisible] = useState(false);
@@ -334,9 +329,6 @@ const DropdownMenu = ({ isShow, initialData, initialError, keyData, arSection })
 
 
 
-
-
-
     return (
         <>
             {dataList.length === 0 ? (
@@ -350,9 +342,9 @@ const DropdownMenu = ({ isShow, initialData, initialError, keyData, arSection })
                 >
 
                     <button
-                        className={`md:hidden fixed left-1/2 transform -translate-x-1/2 bg-blue-600 text-white px-4 py-2 rounded-full shadow-lg z-[100000]
+                        className={`mobile:block hidden fixed left-1/2 transform -translate-x-1/2 bg-blue-600 text-white px-4 py-2 rounded-full shadow-lg z-[100000]
                             transition-all duration-300
-                            ${isMobileSidebarVisible ? 'bottom-[calc(79%-28px)]' : 'bottom-4'}`}
+                            ${isMobileSidebarVisible ? ' bottom-[calc(68%)] ' : 'bottom-4'}`}
                         onClick={() => {
                             isMobileSidebarVisible ? closeSidebar() : openSidebar();
                         }}
@@ -374,11 +366,11 @@ const DropdownMenu = ({ isShow, initialData, initialError, keyData, arSection })
                             </div>
                             {isMobileSidebarVisible && (
                                 <div
-                                    className="fixed inset-0 bg-black bg-opacity-40 z-[99999]"
+                                    className="mobile:block hidden fixed inset-0 bg-black bg-opacity-40 z-[99999]"
                                     onClick={closeSidebar}
                                 >
                                     <div
-                                        className={`fixed bottom-0 left-0 w-full max-h-[77%] bg-white rounded-t-2xl z-[99999] overflow-y-auto
+                                        className={`fixed bottom-0 left-0 w-full max-h-[70%] bg-white rounded-t-2xl z-[99999] overflow-y-auto
                                         transition-transform duration-300 ease-in-out
                                         ${animateSidebar ? 'translate-y-0' : 'translate-y-full'}`}
                                         onClick={(e) => e.stopPropagation()}
