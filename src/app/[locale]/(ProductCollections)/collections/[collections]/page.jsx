@@ -9,6 +9,8 @@ import {getTopSellingProducts} from "@/api/services/listTopSellingProducts";
 import {getOffers} from "@/api/services/listOffers";
 import {getRecommendProducts} from "@/api/services/listRecommendProducts";
 import ProductCollections from "@/Components/ProductCollections/ProductCollections";
+import {getFavourites} from "@/api/services/Favourites/favouritesList";
+import {getMessages, getTranslations} from "next-intl/server";
 // import ComingSoonPage from "@/Components/Shared/ComingSoonPage/ComingSoonPage";
 
 export async function generateStaticParams() {
@@ -21,32 +23,32 @@ export async function generateStaticParams() {
     ];
 }
 
-export async function generateMetadata({ params }) {
-    const { collections } = await params;
+export async function generateMetadata({ params, locale }) {
+    const messages = await getMessages();
+    const t = await getTranslations({ locale, namespace: 'productCollectionsMeta' });
 
-    const titles = {
-        "recently-added": "المضافة حديثًا - روادي",
-        "top-selling": "الأكثر مبيعًا - روادي",
-        "offers-list": "العروض والتخفيضات - روادي",
-        "recommend-list": "المميزة - روادي",
-        "favourites": "المفضلة - روادي",
-    };
+    const { collections } =await params;
+    const baseTitle = messages.productCollections?.[collections];
+    const fullTitle = baseTitle ? `${baseTitle}${t('titleSuffix')}` : t('defaultTitle');
 
     return {
-        title: titles[collections] || "روادي",
-        description: `استعرض ${titles[collections] || "محتوى"} بأفضل تجربة تسوق على روادي.`,
+        title: fullTitle,
+        description: t('description', {
+            title: baseTitle || t('defaultContent')
+        }),
     };
 }
 
 const DynamicProductCollectionPage = async ({ params }) => {
-    const { collections } = params;
+    const { collections } = await params;
+    const t = await getTranslations('productCollections');
 
     const config = {
-        "recently-added": { title: "المضافة حديثًا", dataPromise: getRecentAddedProducts },
-        "top-selling": { title: "الأكثر مبيعًا", dataPromise: getTopSellingProducts },
-        "offers-list": { title: "العروض", dataPromise: getOffers },
-        "recommend-list": { title: "المقترحة", dataPromise: getRecommendProducts },
-        "favourites": { title: "المفضلة", dataPromise: null },
+        "recently-added": { title: t("recently-added"), dataPromise: getRecentAddedProducts },
+        "top-selling": { title: t("top-selling"), dataPromise: getTopSellingProducts },
+        "offers-list": { title: t("offers-list"), dataPromise: getOffers },
+        "recommend-list": { title: t("recommend-list"), dataPromise: getRecommendProducts },
+        "favourites": { title: t("favourites"), dataPromise: null },
     };
 
     const section = config[collections];
@@ -55,48 +57,32 @@ const DynamicProductCollectionPage = async ({ params }) => {
     return (
         <>
             <Navbar />
-            {/* <ComingSoonPage/ > */}
-            <main className="flex flex-col items-center justify-center  bg-white px-6 p-6 text-center">
-      <img
-        src="https://cdn-icons-png.flaticon.com/512/471/471664.png"
-        alt="قيد التطوير"
-        className="mb-6 w-[180px] h-[180px]"
-        // priority
-      />
-      <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-3">
-        الصفحة قيد التطوير والاختبار
-      </h1>
-      <p className="text-lg md:text-xl text-gray-600">
-        سيتم توفير الصفحة قريبًا، شكرًا لصبركم!
-      </p>
-    </main>
-            {/*<Breadcrumb currentPage={section.title} />*/}
-            {/*<Suspense fallback={<Loading />}>*/}
-            {/*    <ProductCollectionsData*/}
-            {/*        title={section.title}*/}
-            {/*        collection={collections}*/}
-            {/*        dataPromise={section.dataPromise}*/}
-            {/*    />*/}
-            {/*</Suspense>*/}
+            <Breadcrumb currentPage={section.title} />
+            <Suspense fallback={<Loading />}>
+                <ProductCollectionsData
+                    title={section.title}
+                    collection={collections}
+                    dataPromise={section.dataPromise}
+                />
+            </Suspense>
             <Footer />
         </>
     );
 };
 
-
 export default DynamicProductCollectionPage;
+
+
+
 export async function ProductCollectionsData({ title,dataPromise, collection,  }) {
     let initialData = [];
     let initialError = false;
 
     if (collection !== "favourites" && typeof dataPromise === "function") {
-        try {
-            const data = await dataPromise();
-            initialData = data || [];
-        } catch (error) {
-            console.error("Data Fetch Error:", error.message);
-            initialError = true;
-        }
+        const data = await dataPromise();
+        initialError=data.error;
+        console.log(data)
+        initialData = data || [];
     }
 
     return (
@@ -104,8 +90,23 @@ export async function ProductCollectionsData({ title,dataPromise, collection,  }
             title={title}
             initialData={initialData}
             initialError={initialError}
-            getData={dataPromise}
+            // getData={dataPromise}
             keyData={collection}
         />
     );
 }
+{/*        /!* <ComingSoonPage/ > *!/*/}
+{/*        <main className="flex flex-col items-center justify-center  bg-white px-6 p-6 text-center">*/}
+{/*  <img*/}
+{/*    src="https://cdn-icons-png.flaticon.com/512/471/471664.png"*/}
+{/*    alt="قيد التطوير"*/}
+{/*    className="mb-6 w-[180px] h-[180px]"*/}
+{/*    // priority*/}
+{/*  />*/}
+{/*  <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-3">*/}
+{/*    الصفحة قيد التطوير والاختبار*/}
+{/*  </h1>*/}
+{/*  <p className="text-lg md:text-xl text-gray-600">*/}
+{/*    سيتم توفير الصفحة قريبًا، شكرًا لصبركم!*/}
+{/*  </p>*/}
+{/*</main>*/}

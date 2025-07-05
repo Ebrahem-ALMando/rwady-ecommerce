@@ -87,9 +87,10 @@ import Error from "@/Components/Shared/Error/Error";
 import {toast} from "react-hot-toast";
 import {Carousel, CarouselContent, CarouselItem} from "@/Components/ui/carousel";
 import {useLocale} from "next-intl";
+import EmptyState from "@/Components/Shared/EmptyState/EmptyState";
 
 
-const ProductsItem = ({data,isLoading=false,isError=false,lang,categoryPage=false}) => {
+const ProductsItem = ({data,isLoading=false,isError=false,lang,categoryPage=false,t}) => {
     // const [isDataFresh, setIsDataFresh] = useState(false);
     // const {data, error, isLoading, mutate} = useSWR(
     //     props.keyData,
@@ -141,11 +142,10 @@ const ProductsItem = ({data,isLoading=false,isError=false,lang,categoryPage=fals
                 ) :
 
                 <>
-                    {!categoryPage &&
-                        <p>
-                            لا توجد بيانات مطابقة
-                        </p>
-                    }
+                    {!categoryPage && (
+                            <EmptyState message={t('noMatchingData')} />
+                    )}
+
                 </>
 
             }

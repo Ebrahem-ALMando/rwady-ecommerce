@@ -17,5 +17,11 @@
     transition: all 0.3s ease;
 
 }
+@media (max-width: 630px) {
+    .products{
+        width: 100%;
+        padding: 10px;
+    }
+}
 
 

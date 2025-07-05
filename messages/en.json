@@ -240,7 +240,11 @@
     "showMore": "Show more",
     "price": "Price",
     "priceFrom": "From",
-    "priceTo": "To"
+    "priceTo": "To",
+    "showFilters": "Show Filters",
+    "closeFilters": "Close Filters",
+    "close": "Close",
+    "noMatchingData": "No matching data found"
   },
   "Cart": {
     "add": "Add to Cart",
@@ -321,6 +325,20 @@
     "closeCategories": "Close Categories",
     "noProducts": "No products available in {name}"
 
+  },
+  "productCollections":{
+    "recently-added": "Recently Added",
+    "top-selling": "Top Selling",
+    "offers-list": "Offers & Discounts",
+    "recommend-list": "Featured",
+    "favourites": "Favourites"
+  },
+
+  "productCollectionsMeta": {
+    "titleSuffix": " - Rwady",
+    "defaultTitle": "Rwady",
+    "defaultContent": "content",
+    "description": "Browse {title} for the best shopping experience on Rwady."
   }
 
 

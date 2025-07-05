@@ -375,6 +375,8 @@ import { Flame  } from 'lucide-react'
 import {useLocale} from "next-intl";
 import {slugify} from "@/utils/slugify";
 import CartActionButton from "@/Components/Shared/Buttons/CartActionButton/CartActionButton";
+import FavouriteToggleButton from "@/Components/Shared/Buttons/FavouriteToggleButton/FavouriteToggleButton";
+import useFavourites from "@/hooks/useFavourites";
 
 const settings = {
     ...sliderSetting,
@@ -399,8 +401,31 @@ const ProductCardSlider = ({ product, lang, setIsDraggingInsideCard }) => {
     const [activeImages, setActiveImages] = useState( []);
     const [time, setTime] = useState(formatDuration(product?.price_discount_start, product?.price_discount_end)||0);
     // const { favourites, toggle, isFavourite, mutateFavourites } = useFavourites();
+
+    const { toggle, isFavourite, favourites } = useFavourites(true);
+
     const [liked, setLiked] = useState(false);
-    const [likedCount, setLikedCount] = useState(product?.fav_num||0);
+    const [likedCount, setLikedCount] = useState(product.fav_num || 0);
+
+
+    useEffect(() => {
+        const isNowFav = isFavourite(product.id);
+        setLiked(isNowFav);
+
+        const baseCount = product.fav_num || 0;
+        const wasOriginallyFav = favourites.some((p) => p.id === product.id);
+        const adjustedCount = isNowFav && !wasOriginallyFav
+            ? baseCount + 1
+            : !isNowFav && wasOriginallyFav
+                ? baseCount - 1
+                : baseCount;
+
+        setLikedCount(adjustedCount);
+    }, [favourites, product.id]);
+
+    const handleToggle = async () => {
+        await toggle(product.id);
+    };
 
 
     const [isAddToCart,setIsAddToCart] = useState(false);
@@ -559,36 +584,14 @@ const ProductCardSlider = ({ product, lang, setIsDraggingInsideCard }) => {
                         ))}
                     </Slider>
 
-
-
-
-
-
                     <div className="absolute flex flex-col gap-2" style={{bottom: '-20px', left: '10px'}}>
-                        {/*<div className={styles.iconImage}>*/}
-                        {/*    <p>({likedCount})</p>*/}
-                        {/*    <motion.button onClick={handleToggle} whileTap={{scale: 1.2}}*/}
-                        {/*                   transition={{type: "spring", stiffness: 300}}>*/}
-                        {/*        <motion.svg*/}
-                        {/*            width="24" height="24" viewBox="0 0 24 24" fill="none"*/}
-                        {/*            xmlns="http://www.w3.org/2000/svg"*/}
-                        {/*            animate={liked ? {scale: [1, 1.2, 1]} : {scale: 1}}*/}
-                        {/*            transition={liked ? {*/}
-                        {/*                duration: 1,*/}
-                        {/*                repeat: Infinity,*/}
-                        {/*                repeatType: "loop",*/}
-                        {/*                ease: "easeInOut"*/}
-                        {/*            } : {duration: 0.2}}*/}
-                        {/*        >*/}
-                        {/*            <motion.path*/}
-                        {/*                d="M16.44 3.1001C14.63 3.1001 13.01 3.9801 12 5.3301C10.99 3.9801 9.37 3.1001 7.56 3.1001C4.49 3.1001 2 5.6001 2 8.6901C2 9.8801 2.19 10.9801 2.52 12.0001C4.1 17.0001 8.97 19.9901 11.38 20.8101C11.72 20.9301 12.28 20.9301 12.62 20.8101C15.03 19.9901 19.9 17.0001 21.48 12.0001C21.81 10.9801 22 9.8801 22 8.6901C22 5.6001 19.51 3.1001 16.44 3.1001Z"*/}
-                        {/*                fill={liked ? "#E41E1E" : "none"}*/}
-                        {/*                stroke={liked ? "#E41E1E" : "#0741AD"}*/}
-                        {/*                strokeWidth="1"*/}
-                        {/*            />*/}
-                        {/*        </motion.svg>*/}
-                        {/*    </motion.button>*/}
-                        {/*</div>*/}
+                        <div className={styles.iconImage}>
+                            <FavouriteToggleButton
+                                liked={liked}
+                                likedCount={likedCount}
+                                onToggle={handleToggle}
+                            />
+                        </div>
                         <div className={styles.iconImage}>
                             <p>
                                 {product.total_orders||0}

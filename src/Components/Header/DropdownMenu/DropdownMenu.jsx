@@ -321,7 +321,6 @@ const DropdownMenu = ({ isShow, initialData, initialError, keyData, arSection })
         } else {
             document.body.style.overflow = '';
         }
-
         return () => {
             document.body.style.overflow = '';
         };
@@ -340,7 +339,7 @@ const DropdownMenu = ({ isShow, initialData, initialError, keyData, arSection })
                     aria-label={`${keyData}`}
                     aria-labelledby={`dropdown-${keyData}`}
                 >
-
+                    {keyData === "categories" && (
                     <button
                         className={`mobile:block hidden fixed left-1/2 transform -translate-x-1/2 bg-blue-600 text-white px-4 py-2 rounded-full shadow-lg z-[100000]
                             transition-all duration-300
@@ -351,7 +350,7 @@ const DropdownMenu = ({ isShow, initialData, initialError, keyData, arSection })
                     >
                         {isMobileSidebarVisible ? t('closeCategories') : t('showCategories')}
                     </button>
-
+                    )}
 
                     {keyData === "categories" && (
                         <>

@@ -18,9 +18,10 @@
 }
 .bestSeller {
     background: #0741ad;
-    padding: 7px;
+    padding: 7px 10px;
     border-radius: 18px;
     width: 83px;
+    min-width: max-content;
     text-align: center;
     right: -5px;
     margin-top: 7px;
@@ -31,10 +32,10 @@
 }
 .saveSeller {
     background: #dc2926;
-    padding: 7px;
+    padding: 7px 10px;
     border-radius: 18px;
-    min-width: 83px;
-    width: max-content;
+    width: 83px;
+    min-width: max-content;
     text-align: center;
     left: -5px;
     margin-top: 7px;

@@ -103,15 +103,8 @@
 
         if (!productsData || products.error||categoriesRes.error||brandsRes.error)  initError=true;
 
-
-        // const productsPromise   =await getProducts();
-        // const dataPromiseCategories = getCategories();
-        //
-        // const dataPromiseBrands     = getBrands();
-        //
         // const dataPromiseColor=getColors()
 
-        // const dataPromiseSize=getSizes()
         return(
             <>
                 {/*<FullScreenLoader/>*/}

@@ -14,7 +14,7 @@ export function middleware(request) {
         return NextResponse.redirect(new URL("/", request.url));
     }
 
-    if (!(token&&user_id)&& ["/orders", "/profile","/checkout","/favourites","/addresses-list"].some((path) => pathname.includes(path))) {
+    if (!(token&&user_id)&& ["/orders", "/profile","/checkout","/favourites","/addresses-list","/favourites"].some((path) => pathname.includes(path))) {
         return NextResponse.redirect(new URL("/sign-in", request.url));
     }
     return intlMiddleware(request);

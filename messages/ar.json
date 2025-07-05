@@ -240,7 +240,11 @@
     "showMore": "عرض المزيد",
     "price": "السعر",
     "priceFrom": "من",
-    "priceTo": "إلى"
+    "priceTo": "إلى",
+    "showFilters": "عرض الفلاتر",
+    "closeFilters": "إغلاق الفلاتر",
+    "close": "إغلاق",
+    "noMatchingData": "لا توجد بيانات مطابقة"
   },
   "Cart": {
     "add": "أضف للسلة",
@@ -321,7 +325,21 @@
     "closeCategories": "إغلاق الأقسام",
     "noProducts": "لا توجد منتجات في قسم {name}"
 
+  },
+  "productCollections": {
+    "recently-added": "المضافة حديثًا",
+    "top-selling": "الأكثر مبيعًا",
+    "offers-list": "العروض والتخفيضات",
+    "recommend-list": "المميزة",
+    "favourites": "المفضلة"
+  },
+  "productCollectionsMeta": {
+    "titleSuffix": " - روادي",
+    "defaultTitle": "روادي",
+    "defaultContent": "محتوى",
+    "description": "استعرض {title} بأفضل تجربة تسوق على روادي."
   }
+
 
 
 
