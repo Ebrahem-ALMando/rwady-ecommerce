@@ -17,8 +17,9 @@
     font-weight: 600;
     font-size: 17px;
     text-wrap: wrap;
-    text-align: right;
+    text-align: start;
     line-height: 40px;
+    padding: 0 20px;
 }
 @media (max-width: 720px)
 {

@@ -159,7 +159,7 @@ const DownSlider = ({ downSliderData, initialError = false, lang }) => {
                         {/*    alt={getTitle(currentGroup[3])}*/}
                         {/*    width={300}*/}
                         {/*    height={300}*/}
-                        {/*    loading="lazy"*/}
+                        {/*    loading1="lazy"*/}
                         {/*/>*/}
                     </div>
                 </Link>

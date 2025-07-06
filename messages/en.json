@@ -104,7 +104,9 @@
     "socialLabel": "Social Media Links",
     "pagesLabel": "Site Pages Links",
     "reloadError": "Please reload the page",
-    "copyright": "All rights reserved © RWADY"
+    "copyright": "All rights reserved © RWADY",
+    "downloadAppAria": "Download the app",
+    "whatsappAria": "Chat with us on WhatsApp"
 
   },
   "Profile": {
@@ -339,7 +341,79 @@
     "defaultTitle": "Rwady",
     "defaultContent": "content",
     "description": "Browse {title} for the best shopping experience on Rwady."
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "description": "Find answers to the most common questions customers ask about Rwady’s services, delivery, orders, and support.",
+    "keywords": "faq, rwady, shipping, payment, orders, support, help center, customer service",
+    "error": "An error occurred. Please try again later."
+  },
+  "returnPolicy": {
+    "title": "Exchange and Return Policy",
+    "description": "Learn about Rwady’s return and exchange policy, including conditions for product returns.",
+    "keywords": "return, exchange, return policy, rwady, order conditions, refunds"
+  },
+  "terms": {
+    "title": "Terms and Conditions",
+    "description": "Read the terms and conditions of using Rwady's website and legal policies.",
+    "keywords": "terms, conditions, rwady, usage policy, agreements, legal"
+  },
+  "shippingPolicy": {
+    "title": "Shipping and Delivery Policy",
+    "description": "Learn about Rwady’s shipping and delivery policy, including delivery timeframes and shipping fees.",
+    "keywords": "shipping, delivery, policy, rwady, shipping cost, delivery time"
+  },
+  "about": {
+    "title": "About Us",
+    "description": "Learn about Rwady's story, our mission, and our vision to deliver the best shopping experience.",
+    "keywords": "about us, rwady, company story, mission, vision, rwady store"
+  },
+  "contact":{
+    "title": "Contact Us",
+    "subtitle": "We are here to help you. Feel free to send your inquiry.",
+    "meta_title": "Contact Us | Rwady",
+    "meta_description": "Get in touch with the Rwady support team through various communication channels. We are always ready to help.",
+    "meta_keywords": "contact, support, help, rwady, get in touch",
+    "formTitle": "Send a Message",
+    "socialTitle": "Social Media Links",
+    "otherMethodsTitle": "Other Contact Methods",
+    "otherMethodsDescription": "You can contact us directly through the following channels:",
+    "workingHoursTitle": "Working Hours:",
+    "workingDays": "Sunday - Thursday: 8 AM - 5 PM",
+    "weekend": "Friday - Saturday: Closed",
+    "methods": {
+      "whatsapp": {
+        "title": "WhatsApp"
+      },
+      "messenger": {
+        "title": "Messenger"
+      },
+      "email": {
+        "title": "Email"
+      },
+      "phone": {
+        "title": "Phone Call"
+      }
+    }
+  },
+  "contactForm":{
+  "title": "Send Your Message",
+  "subtitle": "We will respond to you as soon as possible.",
+  "successTitle": "Thank you!",
+  "successMessage": "Your message has been received and we will contact you shortly.",
+  "newMessage": "Send a New Message",
+  "requiredError": "Please fill in all required fields",
+  "invalidPhone": "Please enter a valid phone number (e.g., +966501234567)",
+  "submitError": "An error occurred while submitting. Please try again.",
+  "fields": {
+    "name": "Full Name *",
+    "namePlaceholder": "Enter your full name",
+    "phone": "Phone Number *",
+    "phonePlaceholder": "+966 50 123 4567",
+    "message": "Your Message *",
+    "messagePlaceholder": "Enter your message here...",
+    "submit": "Send Message"
   }
-
+}
 
 }

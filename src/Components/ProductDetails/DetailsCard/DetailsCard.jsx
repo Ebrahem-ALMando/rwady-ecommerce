@@ -203,7 +203,7 @@
 //
 //             <div className={styles.payment} aria-label="معلومات الدفع بالتقسيط">
 //                 <span className={styles.availableIcon}>
-//                     <img src={'/blur-placeholder.png'} alt='أيقونة الدفع' loading="lazy"/>
+//                     <img src={'/blur-placeholder.png'} alt='أيقونة الدفع' loading1="lazy"/>
 //                 </span>
 //                 <div>
 //                     <p>ادفع 6 اقساط شهرية</p>
@@ -541,7 +541,7 @@
 //
 //             <div className={styles.payment} aria-label={t('installmentInfo')}>
 //               <span className={styles.availableIcon}>
-//                 <img src={'/aksat.png'} alt={t('installmentInfo')} loading="lazy"/>
+//                 <img src={'/aksat.png'} alt={t('installmentInfo')} loading1="lazy"/>
 //               </span>
 //                 <div>
 //                     <p>{t('installmentPlan')}</p>
@@ -785,20 +785,27 @@ const DetailsCard = ({ product,lang }) => {
                 </motion.div>
             )}
 
-            <ProductDescription description={product.description} lang={lang}/>
+            {product.description.length>0&&
+                <ProductDescription description={product.description} lang={lang}/>
+            }
 
 
-            <p className={styles.textTitle}>{t('colors')}</p>
-            <div className={styles.color}>
-                {product.colors?.map((color) => (
-                    <motion.button
-                        key={color.id}
-                        style={{backgroundColor: color.color}}
-                        className={styles.colorButton}
-                        aria-label={`${t('color')} ${color.color}`}
-                    />
-                ))}
-            </div>
+
+            {product.colors.length>0&&
+                <>
+                    <p className={styles.textTitle}>{t('colors')}</p>
+                    <div className={styles.color}>
+                        {product.colors?.map((color) => (
+                            <motion.button
+                                key={color.id}
+                                style={{backgroundColor: color.color}}
+                                className={styles.colorButton}
+                                aria-label={`${t('color')} ${color.color}`}
+                            />
+                        ))}
+                    </div>
+                </>
+            }
 
             <div className={styles.countDetails}>
                 <div className={styles.section} aria-label={t('remaining')}>
@@ -849,6 +856,7 @@ const DetailsCard = ({ product,lang }) => {
 
             <div className={styles.actionButton}>
                 <CartActionButton
+
                     icon={shoppeIcon}
                     styles={styles}
                     product={product}

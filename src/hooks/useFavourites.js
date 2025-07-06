@@ -133,7 +133,7 @@ export default function useFavourites(isEnabled = true) {
     const handleToggleFavourite = async (productId) => {
         try {
            const res= await toggleFavourite(productId);
-            console.log(res)
+            // console.log(res)
             mutate(undefined,{revalidate:true})
             // mutate((prev) => {
             //     const exists = prev?.data?.some(p => p.id === productId);
@@ -144,6 +144,7 @@ export default function useFavourites(isEnabled = true) {
             //             : [...(prev?.data || []), { id: productId }],
             //     };
             // }, false);
+            return res??[]
         } catch (error) {
             console.error("Toggle Favourite err :", error);
         }

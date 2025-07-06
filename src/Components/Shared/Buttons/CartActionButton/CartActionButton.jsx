@@ -178,7 +178,7 @@ const CartActionButton = ({ product, className = '',btnClassName='',styles ,icon
         decrement: () =>handleQuantityChange(Math.max(1, selectedQty - 1))
     }));
     return (
-        <div className={`${styles.cartActionWrapper} ${className}`}>
+        <>
             <button
                 aria-label={isAddToCart ? t('remove') : t('add')}
                 onClick={handleToggleToCart}
@@ -205,7 +205,7 @@ const CartActionButton = ({ product, className = '',btnClassName='',styles ,icon
                     onDecrement={() => handleQuantityChange(Math.max(1, selectedQty - 1))}
                 />
             )}
-        </div>
+        </>
     );
 };
 

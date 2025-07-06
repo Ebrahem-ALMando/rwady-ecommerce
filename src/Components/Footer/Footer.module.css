@@ -72,6 +72,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
 
 }
 
@@ -93,6 +94,7 @@
 .description {
     font-size: 16px;
     margin-bottom: 15px;
+    text-wrap: wrap;
 }
 
 
@@ -102,6 +104,30 @@
     width: auto;
 
 }
+.footer.skeleton {
+    margin-top: 7rem;
+    background: linear-gradient(90deg, #d4d4d4 0%, #e0e0e0 50%, #d4d4d4 100%);
+    background-size: 300% 100%;
+    animation: shimmer 2.5s infinite ease-in-out;
+
+    color: transparent;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 2rem;
+    text-align: center;
+    position: relative;
+    opacity: 0.6;
+}
+@keyframes shimmer {
+    0% {
+        background-position: -300% 0;
+    }
+    100% {
+        background-position: 300% 0;
+    }
+}
+
 
 @media screen and (max-width: 1070px) {
     .socialIcons{
@@ -112,29 +138,47 @@
         height: max-content;
     }
 }
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 887px) {
     .footer {
         flex-direction: column;
         align-items: center;
+        padding:0.2rem;
     }
     .socialIcons{
         gap: 15px;
         flex-direction: row;
     }
     .contactInfo, .links, .socialLinks, .downloadLinks {
-        text-align: right;
+        text-align: start;
     }
     .downloadButtons{
-       margin: auto;
+       margin:1rem auto;
 
     }
+    html[dir="rtl"] .links {
+        padding-right: 30px;
+        padding-left: 0;
+    }
+
+    html[dir="ltr"] .links {
+        padding-left: 30px;
+        padding-right: 0;
+    }
+
+
 }
 @media screen and (max-width: 390px)
 {
     .downloadButtons{
      flex-direction: column;
-
     }
+    .logo {
+        width: 100%;
+        max-width: 300px;
+        min-width: 200px;
+        margin:0.5rem auto 2rem auto;
+    }
+
 }
 @media screen and (max-width: 350px) {
     .downloadSection {
@@ -154,22 +198,20 @@
     }
 
     .description {
-        max-width: 100%;
+        font-size: 14px;
+        max-width: 95%;
         word-wrap: break-word;
         overflow-wrap: break-word;
         overflow: hidden;
         text-align: center;
+        min-height: max-content;
+        margin-bottom: 1.4rem;
     }
 
     .logo {
         width: 30%;
         max-width: 150px;
-        margin-bottom: 3rem;
+        margin:0.5rem auto 2rem auto;
         overflow: hidden;
     }
-
-
-    /*html, body {*/
-    /*    overflow-x: hidden;*/
-    /*}*/
 }

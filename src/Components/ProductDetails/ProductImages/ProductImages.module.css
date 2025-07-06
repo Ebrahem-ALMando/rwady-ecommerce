@@ -133,9 +133,9 @@
     .thumbnailSwiper {
         width:100%;
         height: auto;
-        flex-direction: row !important;
         margin-left: 0;
         gap: 8px;
+        flex-direction: row !important;
         overflow-x: auto !important;
     }
     .thumbnailSwiper:hover {

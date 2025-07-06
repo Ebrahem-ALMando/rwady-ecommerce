@@ -1,3 +1,4 @@
+'use client'
 import Error from "@/Components/Shared/Error/Error";
 import {toast} from "react-hot-toast";
 import CustomToast from "@/Components/Shared/CustomToast/CustomToast";

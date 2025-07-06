@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 
 const FavouriteToggleButton = ({ liked, likedCount, onToggle }) => {
-    console.log(liked)
     return (
         <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
             <p>({likedCount})</p>

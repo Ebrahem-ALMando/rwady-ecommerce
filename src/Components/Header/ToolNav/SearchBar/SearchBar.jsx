@@ -3,7 +3,7 @@
 // import { CiSearch } from "react-icons/ci";
 //
 // import React, {useEffect, useMemo, useRef, useState} from "react";
-// import Skeleton from "react-loading-skeleton";
+// import Skeleton from "react-loading1-skeleton";
 // import { FiInfo } from "react-icons/fi";
 //
 // import NoResultsFound from "@/Components/Shared/SearchModal/NoResults/NoResultsFound";

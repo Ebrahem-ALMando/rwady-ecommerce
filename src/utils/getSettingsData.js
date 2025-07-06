@@ -5,7 +5,7 @@ export async function getSettingData(){
     let initialError=false;
 
     const setting = await getSettings();
-    settingDataList = setting || {};
+    settingDataList = setting || [];
 
     let settingData=settingDataList?.data
 

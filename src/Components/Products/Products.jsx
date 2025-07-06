@@ -28,7 +28,7 @@
 // // import {ColorsData} from "@/Components/Products/FilterSectionData/ColorsData";
 //
 // const Products = (props) => {
-//     const [loading, setLoading] = useState(false);
+//     const [loading1, setLoading] = useState(false);
 //     const [sortValue, setSortValue] = useState("");
 //     const [filtersData, setFiltersData] = useState({
 //         category_ids: [],
@@ -171,7 +171,7 @@
 //                     <ProductData
 //                         filters={filtersData}
 //                         isError={error}
-//                         isLoading={loading}
+//                         isLoading={loading1}
 //                         mutate={mutate}
 //                         data={ProductsListData}
 //                     />
@@ -227,7 +227,7 @@
 // // import {ColorsData} from "@/Components/Products/FilterSectionData/ColorsData";
 //
 // const Products = ({initError,data,categoriesData,brandsData,searchParams}) => {
-//     const [loading, setLoading] = useState(false);
+//     const [loading1, setLoading] = useState(false);
 //     const [sortValue, setSortValue] = useState("");
 //     const lang=useLocale()
 //     const t = useTranslations("products");
@@ -441,7 +441,7 @@ import BrandsData from "@/Components/Products/FilterSectionData/BrandData";
 import ProductCardSkeleton from "@/Components/Shared/SliderComponents/ProductCardSlider/ProductCardSkeleton/ProductCardSkeleton";
 
 const Products = ({initError, data, categoriesData, brandsData, searchParams}) => {
-    // const [loading, setLoading] = useState(false);
+    // const [loading1, setLoading] = useState(false);
     const [sortValue, setSortValue] = useState("");
     const [isMobileFilterVisible, setIsMobileFilterVisible] = useState(false);
     const [animateFilter, setAnimateFilter] = useState(false);

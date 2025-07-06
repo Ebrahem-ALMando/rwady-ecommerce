@@ -191,7 +191,7 @@
 //                                     animate={{opacity: 1}}
 //                                     transition={{duration: 0.3}}
 //                                 >
-//                                 <img src={image.url} alt={`Product Image ${index + 1}`} loading='lazy' className={styles.productImg} />
+//                                 <img src={image.url} alt={`Product Image ${index + 1}`} loading1='lazy' className={styles.productImg} />
 //                                 </motion.div>
 //                             </div>
 //                         ))}
@@ -408,24 +408,37 @@ const ProductCardSlider = ({ product, lang, setIsDraggingInsideCard }) => {
     const [likedCount, setLikedCount] = useState(product.fav_num || 0);
 
 
+    // useEffect(() => {
+    //     if (!product?.id || !Array.isArray(favourites)) return;
+    //
+    //     const currentlyFav = isFavourite(product.id);
+    //     setLiked(currentlyFav);
+    //     setLikedCount(product.fav_num || 0);
+    // }, [favourites, product.id]);
+
+
     useEffect(() => {
-        const isNowFav = isFavourite(product.id);
-        setLiked(isNowFav);
+        if (!product?.id || !Array.isArray(favourites)) return;
 
         const baseCount = product.fav_num || 0;
-        const wasOriginallyFav = favourites.some((p) => p.id === product.id);
-        const adjustedCount = isNowFav && !wasOriginallyFav
-            ? baseCount + 1
-            : !isNowFav && wasOriginallyFav
-                ? baseCount - 1
-                : baseCount;
+        const currentlyFav = isFavourite(product.id);
 
-        setLikedCount(adjustedCount);
-    }, [favourites, product.id]);
+        setLiked(currentlyFav);
+        setLikedCount(baseCount);
+
+    }, [product.id]);
+
 
     const handleToggle = async () => {
-        await toggle(product.id);
+        const res = await toggle(product.id);
+        const isNowFav = res?.data?.is_favorite;
+
+        setLiked(isNowFav);
+
+
+        setLikedCount((prev) => isNowFav ? prev + 1 : prev - 1);
     };
+
 
 
     const [isAddToCart,setIsAddToCart] = useState(false);

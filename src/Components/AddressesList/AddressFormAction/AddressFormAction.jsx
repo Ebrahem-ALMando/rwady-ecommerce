@@ -403,7 +403,7 @@
 //
 // const LocationPickerMap = dynamic(
 //     () => import('@/Components/AddressesList/AddressFormAction/LocationPickerMap/LocationPickerMap'),
-//     { ssr: false, loading: () => <p>جارٍ تحميل الخريطة…</p> }
+//     { ssr: false, loading1: () => <p>جارٍ تحميل الخريطة…</p> }
 // );
 //
 // const AddressFormAction = ({ isOpen, setIsOpen, title, mutate, addressData, onSubmit }) => {

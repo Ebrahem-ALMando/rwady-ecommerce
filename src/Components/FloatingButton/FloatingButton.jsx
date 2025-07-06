@@ -8,10 +8,13 @@ export default function FloatingButton({
                                            position = "right",
                                            positionVal = "20px",
                                        }) {
+    const isLeft = position === "left";
     const dynamicStyle = {
-        left: position === "left" ? "20px" : "unset",
-        right: position === "right" ? "20px" : "unset",
+        left: isLeft ? positionVal : "unset",
+        right: !isLeft ? positionVal : "unset",
+        bottom: positionVal,
     };
+
     const dynamicStyleMob = {
         left: position === "left" ? positionVal : "unset",
         bottom: position === "left" ? positionVal : "unset",
@@ -28,5 +31,6 @@ export default function FloatingButton({
         >
             {icon}
         </Link>
+
     );
 }

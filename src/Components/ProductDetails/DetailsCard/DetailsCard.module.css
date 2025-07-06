@@ -229,6 +229,7 @@
     justify-content: center;
     gap: 5px;
     transition: all 0.3s ease-in-out;
+    margin-top: 0.5rem;
 }
 .actionButton button:hover{
     transform: translateY(-3px);
@@ -237,9 +238,9 @@
     background-color: #0741AD;
     color: white;
 }
-.actionButton button:nth-of-type(2){
+.actionButton .favBtn{
     border:2px solid #0741AD;
-    color: #0741AD;
+    color: #0741AD !important;
 }
 .outOfStock {
     color: red;

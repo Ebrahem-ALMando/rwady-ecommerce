@@ -20,7 +20,7 @@ export default function MovingProductsBarSlider({ productsData, initialError = f
     const finalSliderSettings = {
         ...sliderSettings,
         infinite: !isSingleSlide,
-        arrows: !isSingleSlide,
+        arrows: false,
       };
     return (
         <div className={styles.mainDiv} aria-label="شريط المنتجات المقترحة" role="region">
@@ -55,7 +55,7 @@ export default function MovingProductsBarSlider({ productsData, initialError = f
                                             alt={`صورة ${productName}`}
                                             width={160}
                                             height={160}
-                                            className="w-40 h-40 object-cover rounded-md shadow-md"
+                                            className="w-40 h-40 object-cover rounded-md "
                                             decoding="async"
                                         />
                                         </Link>
