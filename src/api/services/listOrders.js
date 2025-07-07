@@ -1,31 +1,20 @@
 import { fetchAPI } from "@/api/api";
 import ApiConfig from "@/api/apiConfig";
-import {getTokenWithClient} from "@/utils/getTokenWithClient";
-
-
-
+/**
+ * @returns {Promise<{ error: boolean, data?: any, message?: string }>}
+ */
 export const getOrders = async () => {
+    const endPointKey = "user/orders";
 
-    const endPointKey = "orders-list";
+    // await new Promise(resolve => setTimeout(resolve, 3500));
+    const res = await fetchAPI(endPointKey, "GET", null, {
+        next: {
+            revalidate: ApiConfig.revalidateTime,
+            tags: [endPointKey],
+        },
+    });
 
-    try {
-
-        const token =  getTokenWithClient()
-        if (!token) throw new Error("Token not found");
-
-        const listOrders = await fetchAPI(endPointKey, "GET", null, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-            next: {
-                revalidate: ApiConfig.revalidateTime,
-                tags: [endPointKey],
-            },
-        });
-
-        return listOrders ?? [];
-    } catch (error) {
-        console.error(`Failed to fetch ${endPointKey}:`, error.message);
-        return [];
-    }
+    return res ?? [];
 };
+
+

@@ -68,3 +68,23 @@
 .detailsBtn:hover .arrow {
     transform: translateX(4px);
 }
+
+@media (max-width: 500px)
+{
+    .card{
+        width: 100%;
+        flex-direction: column;
+    }
+    .info {
+        width: 100%;
+    }
+    .actions{
+        width: 90%;
+    }
+    .detailsBtn{
+        margin-top: 0.8rem;
+        gap: 10px;
+        justify-content: center;
+    }
+
+}

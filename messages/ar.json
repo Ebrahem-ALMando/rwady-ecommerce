@@ -413,7 +413,27 @@
       "messagePlaceholder": "أدخل رسالتك هنا...",
       "submit": "إرسال الرسالة"
     }
+  },
+  "Orders": {
+    "title": "الطلبات",
+    "all_statuses": "كل الحالات",
+    "all_dates": "كل التواريخ",
+    "no_orders": "لا توجد طلبات مطابقة للفلاتر",
+    "statuses": {
+      "pending": "قيد الانتظار",
+      "paid": "تم الدفع",
+      "cancelled": "تم الإلغاء",
+      "unpaid": "غير مدفوع"
+    },
+    "order_number": "رقم الطلب",
+    "order_date": "بتاريخ",
+    "order_status": "حالة الطلب",
+    "payment_status": "حالة الدفع",
+    "details": "تفاصيل"
+
+
   }
+
 
 
 

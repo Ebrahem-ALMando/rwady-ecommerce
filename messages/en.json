@@ -414,6 +414,25 @@
     "messagePlaceholder": "Enter your message here...",
     "submit": "Send Message"
   }
-}
+},
+  "Orders": {
+    "title": "Orders",
+    "all_statuses": "All statuses",
+    "all_dates": "All dates",
+    "no_orders": "No matching orders found",
+    "statuses": {
+      "pending": "Pending",
+      "paid": "Paid",
+      "cancelled": "Cancelled",
+      "unpaid": "Unpaid"
+    },
+    "order_number": "Order No.",
+    "order_date": "Date",
+    "order_status": "Order Status",
+    "payment_status": "Payment Status",
+    "details": "Details"
+
+  }
+
 
 }
