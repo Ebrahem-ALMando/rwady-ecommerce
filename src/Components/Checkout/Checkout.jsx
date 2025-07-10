@@ -314,6 +314,7 @@ import {addAddress} from "@/api/services/address/addAddress";
 import NewAddressButton from "@/Components/Shared/Buttons/NewAddressButton/NewAddressButton";
 import {useLocale, useTranslations} from "next-intl";
 import {getProfile} from "@/api/services/auth/getProfile";
+import ReloadWithError from "@/Components/Shared/ReloadWithError/ReloadWithError";
 
 const Checkout = () => {
     const [defaultAddress,setDefaultAddress]=useState({})
@@ -359,7 +360,7 @@ const Checkout = () => {
     });
     useEffect(() => {
         if (data?.data) {
-            const defaultAddr = data.data.find(addr => addr.is_default) || data.data[0];
+            const defaultAddr = data.data.find(addr => addr.is_default) || data?.data[0]||[];
             setDefaultAddress(defaultAddr);
         }
     }, [data]);
@@ -371,7 +372,7 @@ const Checkout = () => {
     const phone = profileData?.data?.phone || "—";
 
     if (isLoading) return <Loading />;
-    if (error) return <Error onRetry={() => mutate(undefined, { revalidate: true })} />;
+    if (error) return <ReloadWithError />;
 
 
 
@@ -554,8 +555,8 @@ const Checkout = () => {
 
                             <button
                                 onClick={next}
-                                className={`${styles.nextButton} ${step >= 3 || (step === 2 && paymentData.id === null) || (step === 1 && defaultAddress.length === 0) ? styles.disabled : ""}`}
-                                disabled={step >= 3||(step===2&&paymentData.id===null)||(step===1&&defaultAddress.length===0)}
+                                className={`${styles.nextButton} ${step >= 3 || (step === 2 && paymentData.id === null) || (step === 1 && defaultAddress?.length === 0) ? styles.disabled : ""}`}
+                                disabled={step >= 3||(step===2&&paymentData.id===null)||(step===1&&defaultAddress?.length===0)}
                             >
                                 {t("next")}
                                 {isRTL ? customPrevArrowIcon : customNextArrowIcon}

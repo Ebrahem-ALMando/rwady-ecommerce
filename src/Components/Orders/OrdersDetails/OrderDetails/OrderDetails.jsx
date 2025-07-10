@@ -208,17 +208,31 @@ const OrderDetails = () => {
                                 <p>بيانات المنتجات</p>
                             </div>
                             <div>
-                                {order.order_products.map((p) => (
-                                    <Card
-                                        key={p.id}
-                                        id={p.product_id}
-                                        image={p.product?.main_img || ""}
-                                        title={p.product?.name || "منتج غير معروف"}
-                                        brand={`ماركة ${p.product?.brand?.name || "غير معروفة"}`}
-                                        link={`/orders/${order.id}/product/${p.product_id}`}
-                                    />
-                                ))}
-                            </div>
+                                    {order.order_products.map((p) => {
+                                            const product = p.product || {};
+                                            const title = product.name?.[locale] || "منتج غير معروف";
+
+
+                                            const image = product.media?.find(m => m.type === "image")?.url || "/images/default-product.png";
+
+
+                                            const brands = Array.isArray(product.brands)
+                                                ? product.brands.map(b => b.name?.[locale] || "ماركة غير معروفة")
+                                                : [];
+
+                                            return (
+                                                <Card
+                                                    key={p.id}
+                                                    id={p.product_id}
+                                                    image={image}
+                                                    title={title}
+                                                    brands={brands}
+                                                    link={`/orders/${order.id}/product/${p.product_id}`}
+                                                />
+                                            );
+                                        })}
+
+                                    </div>
                         </div>
                     </div>
 

@@ -172,6 +172,21 @@
     height: auto;
 }
 
+.brandsRow {
+    margin-top: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.brandBadge {
+    background-color: #f0f0f0;
+    color: #333;
+    font-size: 12px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    white-space: nowrap;
+}
 
 @media (max-width: 970px) {
     .mainDiv {

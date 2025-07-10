@@ -6,17 +6,25 @@ const intlMiddleware = createMiddleware(routing);
 
 export function middleware(request) {
     const token = request.cookies.get("token")?.value;
+    console.log(token,"MID")
     const user_id = request.cookies.get("user_id")?.value;
     const pathname = request.nextUrl.pathname;
 
+    const langMatch = pathname.match(/^\/(ar|en)(\/|$)/);
+    const locale = langMatch?.[1] || 'ar';
 
-    if ((token&&user_id) && ["/sign-in", "/verify"].some((path) => pathname.includes(path))) {
-        return NextResponse.redirect(new URL("/", request.url));
+
+    const path = pathname.replace(/^\/(ar|en)(\/|$)/, '/');
+
+
+    if ((token && user_id) && ["/sign-in", "/verify"].some((p) => path.includes(p))) {
+        return NextResponse.redirect(new URL(`/${locale}/`, request.url));
     }
 
-    if (!(token&&user_id)&& ["/orders", "/profile","/checkout","/favourites","/addresses-list","/favourites","/orders"]
-        .some((path) => pathname.startsWith(path))) {
-        return NextResponse.redirect(new URL("/sign-in", request.url));
+
+    if (!(token && user_id) && ["/orders", "/profile", "/checkout", "/favourites", "/addresses-list"]
+        .some((p) => path.startsWith(p))) {
+        return NextResponse.redirect(new URL(`/${locale}/sign-in`, request.url));
     }
     return intlMiddleware(request);
 }
