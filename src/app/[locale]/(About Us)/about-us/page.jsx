@@ -1,5 +1,5 @@
-import Navbar from "@/Components/Header/Navbar";
-import Footer from "@/Components/Footer/Footer";
+// import Navbar from "@/Components/Header/Navbar";
+// import Footer from "@/Components/Footer/Footer";
 import PageContainer from "@/Components/Shared/PageContainer/PageContainer";
 import { getTranslations } from "next-intl/server";
 import { getSettingData } from "@/utils/getSettingsData";
@@ -77,13 +77,13 @@ export  async function AboutUsPageData({ lang }) {
 
     return (
         <>
-            <Navbar />
+            {/*<Navbar />*/}
                 <PageContainer
                     title={t("title")}
                     initialError={initialError || !content}
                     data={content}
                 />
-            <Footer />
+            {/*<Footer />*/}
         </>
     );
 }

@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 // import Loading from "@/Components/Shared/Loading/Loading";
-import Navbar from "@/Components/Header/Navbar";
+// import Navbar from "@/Components/Header/Navbar";
 // import Footer from "@/Components/Footer/Footer";
 import { getProductDetails } from "@/api/services/getProductDetails";
 import ProductDetails from "@/Components/ProductDetails/ProductDetails";
@@ -12,6 +12,7 @@ import TitleSection from "@/Components/Shared/TitleSection/TitleSection";
 import EmptyState from "@/Components/Shared/EmptyState/EmptyState";
 import {getTranslations} from "next-intl/server";
 import Loading from "@/Components/Shared/Loading/Loading";
+// import Footer from "@/Components/Footer/Footer";
 
 // export async function generateStaticParams() {
 //     // try {
@@ -72,7 +73,7 @@ const DynamicProductDetailsPage =async  ({params}) => {
     const t = await getTranslations({ locale, namespace: "Breadcrumb" });
     return (
         <>
-            <Navbar />
+            {/*<Navbar />*/}
             <Breadcrumb
                 isSubUrl={true}
                 subName={t("all_products")}
@@ -98,32 +99,50 @@ export async function ProductDetailsData({id,lang }) {
     let initialError = false;
     const initialData = await getProductDetails(id);
     const data = initialData?.data || []
-    if (!data || Object.keys(data).length === 0) {
-        return <EmptyState message="المنتج غير موجود"/>;
-    }
+
     initialError=initialData?.error
-    console.log(data)
+
+    const related_products=data?.related_products||[]
+    const title=lang==='ar'?'منتجات مشابهة':'Related Products'
+    const message=lang==='ar'?'لا توجد منتجات مشابهة لهذا المنتج':'There are no Related Products to this product.'
+    const productMessage=lang==='ar'?'المنتج غير متوفر':'Product not available.'
+
     return (
     <section>
+        {!data || Object.keys(data).length === 0 ?
+            <div style={{width: '87%', margin: '3rem auto 1rem auto'}}>
+                <EmptyState
+                    initLink={`/${lang}/products`}
+                    message={productMessage}/>
+            </div>
+            :
+        <>
+            <ProductDetails
+                id={id}
+                lang={lang}
+                initialData={data}
+                initialError={initialError}
+                keyData={`productDetails-${id}`}
+            />
+            {!related_products || Object.keys(related_products).length === 0 ?
+                <div style={{width: '80%', margin: '8rem auto 1rem auto'}}>
+                    <EmptyState message={message}/>
+                </div>
+                :
+                <TitleSection
+                    initTitle={title}
+                    initLink={`/${lang}/products`}
+                    can_show_more={true}
+                    // show_more={`/${lang}/products`}
+                    show_title={true}
+                    // title={title?.[lang]}
+                    lang={lang}
+                />
+            }
+        </>
+        }
 
-        <ProductDetails
-            id={id}
-            lang={lang}
-            initialData={data}
-            initialError={initialError}
-            keyData={`productDetails-${id}`}
-        />
-        {/*<TitleSection*/}
-        {/*    initTitle={"منتجات مشابهة"}*/}
-        {/*    initLink={"/section/categories"}*/}
-        {/*    can_show_more={can_show_more}*/}
-        {/*    show_more={`/section/${show_more_path}`}*/}
-        {/*    show_title={show_title}*/}
-        {/*    title={title?.[lang]}*/}
-        {/*    lang={lang}*/}
-        {/*/>*/}
-        {/*<TitleSection initTitle={"منتجات مشابهة"}/>*/}
-        {/*<EmptyState message={"لا توجد منتجات لعرضها حالياً"}/>*/}
+
 
     </section>
     );

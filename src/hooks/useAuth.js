@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
+import { logoutUser} from "@/api/services/auth/logoutUser";
 
 export const useAuth = () => {
     const [token, setToken] = useState(null);
@@ -47,14 +48,20 @@ export const useAuth = () => {
         setIsAuthenticated(true);
     };
 
-    const logout = () => {
-        Cookies.remove("token");
-        Cookies.remove("user_id");
-        Cookies.remove("user_name");
-        setToken(null);
-        setUserId(null);
-        setUserName(null);
-        setIsAuthenticated(false);
+    const logout = async () => {
+        const res=await logoutUser()
+        console.log(res)
+        if(!res.error){
+            Cookies.remove("token");
+            Cookies.remove("user_id");
+            Cookies.remove("user_name");
+            setToken(null);
+            setUserId(null);
+            setUserName(null);
+            setIsAuthenticated(false);
+        }else {
+            console.log("Logout Error")
+        }
     };
 
     return {

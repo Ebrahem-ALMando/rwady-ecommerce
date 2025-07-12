@@ -3,10 +3,11 @@ import styles from './TitleNav.module.css';
 import { useState } from "react";
 import Link from "next/link";
 import { CloseIcon } from "@/utils/Icons";
-import { useTranslations } from 'next-intl';
+import {useLocale, useTranslations} from 'next-intl';
 
 const TitleNav = () => {
     const t = useTranslations('navBar');
+    const lang=useLocale()
     const [isVisible, setIsVisible] = useState(true);
 
     if (!isVisible) return null;
@@ -35,7 +36,8 @@ const TitleNav = () => {
             </div>
 
             <Link
-                href="/products"
+                prefetch={true}
+                href={`/${lang}/products`}
                 className={styles.startShopBTN}
                 aria-label={t("startShopping")}
             >

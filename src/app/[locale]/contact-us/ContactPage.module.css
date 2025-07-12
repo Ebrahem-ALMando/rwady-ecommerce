@@ -3,7 +3,8 @@
   min-height: 100vh;
   background-color: #fff;
   color: #0741ad;
-  border: 1px solid #0741ad;
+
+  /*border: 1px solid #0741ad;*/
 }
 
 .main {

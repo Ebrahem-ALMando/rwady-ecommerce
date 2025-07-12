@@ -1,6 +1,6 @@
 import Profile from "@/Components/Profile/Profile";
-import Navbar from "@/Components/Header/Navbar";
-import Footer from "@/Components/Footer/Footer";
+// import Navbar from "@/Components/Header/Navbar";
+// import Footer from "@/Components/Footer/Footer";
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata() {
@@ -13,9 +13,9 @@ export async function generateMetadata() {
 const ProfilePage = async () => {
     return (
         <>
-            <Navbar/>
+            {/*<Navbar/>*/}
             <Profile />
-            <Footer />
+            {/*<Footer />*/}
         </>
     );
 };

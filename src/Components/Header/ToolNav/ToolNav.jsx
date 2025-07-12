@@ -139,7 +139,8 @@ const ToolNav = ({ toggleMenu, isScrolled,getCartCount }) => {
 
                         <AutoScrollNavSlider
                                 className={styles.showOnMobile}
-                                isScrolled={isScrolled}/>
+                                isScrolled={isScrolled}
+                        />
 
 
                     </div>

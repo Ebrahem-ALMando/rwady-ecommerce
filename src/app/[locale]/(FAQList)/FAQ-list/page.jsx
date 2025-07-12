@@ -39,8 +39,8 @@
 
 
 
-import Navbar from "@/Components/Header/Navbar";
-import Footer from "@/Components/Footer/Footer";
+// import Navbar from "@/Components/Header/Navbar";
+// import Footer from "@/Components/Footer/Footer";
 import { getTranslations } from "next-intl/server";
 import { extractSettingValue } from "@/utils/extractSettingValue";
 import { getSettingData } from "@/utils/getSettingsData";
@@ -107,13 +107,13 @@ export default async function FAQListPage({ params }) {
     return (
         <>
 
-           <Navbar />
+           {/*<Navbar />*/}
              <PageContainer title={t("title")}
                             initialError={initialError || !faqContent}
                             // faqs={faqsData}
                             faqContent={faqContent}
                             isFAQ={true} />
-           <Footer />
+           {/*<Footer />*/}
         </>
     );
 }

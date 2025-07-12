@@ -5,7 +5,7 @@ import { getCategories } from "@/api/services/listCategories";
 import { getBrands } from "@/api/services/listBrands";
 import { getGroups } from "@/api/services/listGroups";
 import DropdownMenu from "@/Components/Header/DropdownMenu/DropdownMenu";
-import Navbar from "@/Components/Header/Navbar";
+// import Navbar from "@/Components/Header/Navbar";
 import { toast } from "react-hot-toast";
 
 export async function generateStaticParams() {
@@ -56,7 +56,7 @@ const DynamicShopSectionPage = async ({ params }) => {
 
     return (
         <>
-            <Navbar />
+            {/*<Navbar />*/}
             <Suspense fallback={<Loading />}>
                 <SectionTemplateData
                     section={section}

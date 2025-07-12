@@ -44,8 +44,8 @@
 // export default OrdersPage;
 
 
-import Navbar from "@/Components/Header/Navbar";
-import Footer from "@/Components/Footer/Footer";
+// import Navbar from "@/Components/Header/Navbar";
+// import Footer from "@/Components/Footer/Footer";
 import Orders from "@/Components/Orders/Orders";
 
 export const dynamic = "force-dynamic";
@@ -63,9 +63,9 @@ const OrdersPage = async () => {
 
     return (
         <>
-            <Navbar />
+            {/*<Navbar />*/}
             <Orders />
-            <Footer />
+            {/*<Footer />*/}
         </>
     );
 };

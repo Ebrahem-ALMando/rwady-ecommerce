@@ -1,5 +1,5 @@
-import Navbar from "@/Components/Header/Navbar";
-import Footer from "@/Components/Footer/Footer";
+// import Navbar from "@/Components/Header/Navbar";
+// import Footer from "@/Components/Footer/Footer";
 import AddressesList from "@/Components/AddressesList/AddressesList";
 
 export const dynamic = "force-dynamic";
@@ -13,9 +13,9 @@ const AddressesPage = () => {
 
     return (
         <>
-            <Navbar />
+            {/*<Navbar />*/}
             <AddressesList/>
-            <Footer />
+            {/*<Footer />*/}
         </>
     );
 };

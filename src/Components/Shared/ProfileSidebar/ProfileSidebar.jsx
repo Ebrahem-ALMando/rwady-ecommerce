@@ -11,11 +11,11 @@ import { useTranslations } from "next-intl";
 import {usePathname} from "@/i18n/navigation";
 
 
-const ProfileSidebar = ({ userData }) => {
+const ProfileSidebar = ({ userData,mutate }) => {
     const pathname = usePathname();
     const activeLink = pathname.split('/')[1];
     console.log(activeLink)
-    const handleLogout = useLogoutHandler();
+    const handleLogout = useLogoutHandler(mutate);
     const t = useTranslations("Sidebar");
 
     return (

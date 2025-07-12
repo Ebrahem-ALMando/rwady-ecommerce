@@ -5,7 +5,8 @@ import { toast } from 'react-hot-toast';
 import { useAuth } from '@/hooks/useAuth';
 import {useRouter} from "@/i18n/navigation";
 
-export const useLogoutHandler = () => {
+
+export const useLogoutHandler = (mutate) => {
     const { logout } = useAuth();
     const router = useRouter();
 
@@ -13,7 +14,8 @@ export const useLogoutHandler = () => {
 
     const handleLogout = async () => {
         try {
-            logout();
+            await logout();
+            await mutate();
             toast.success(t("logoutSuccess"));
             router.push(`/sign-in`);
         } catch (error) {

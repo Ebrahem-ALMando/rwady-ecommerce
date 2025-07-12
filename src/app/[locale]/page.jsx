@@ -79,20 +79,20 @@
 
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
-import Navbar from "@/Components/Header/Navbar";
+// import Navbar from "@/Components/Header/Navbar";
 import Home from "@/Components/HomePage/Home";
-import Footer from "@/Components/Footer/Footer";
+// import Footer from "@/Components/Footer/Footer";
 
 export default function HomePage() {
     const t = useTranslations('HomePage');
 
     return (
         <div>
-            <Navbar/>
+            {/*<Navbar/>*/}
             {/*<h1>{t('title')}</h1>*/}
             {/*<Link href="/contact-us">{t('about')}</Link>*/}
             <Home/>
-            <Footer/>
+            {/*<Footer/>*/}
         </div>
     );
 }

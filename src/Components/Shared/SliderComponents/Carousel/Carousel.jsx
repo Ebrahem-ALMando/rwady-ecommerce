@@ -63,11 +63,13 @@ const Carousel = ({ dataList = [],lang }) => {
             ),
         customPaging: (i) => <div className={styles.slickBtn} />,
     };
+    const isRtl = lang === "ar";
 
 
     return (
         <AnimatePresence>
             <motion.div
+                dir={lang === "ar" ? "rtl" : "ltr"}
                 initial={{ opacity: 0.8, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 30 }}
@@ -78,30 +80,45 @@ const Carousel = ({ dataList = [],lang }) => {
                     <Slider {...settings}>
                         {dataTemp.map((slide, index) => (
                             <div key={index} className={styles.banner}>
-                                <SafeImage
-                                    src={slide.image_url}
-                                    fallback="/Home/slider1.png"
-                                    alt={slide.title?.[lang]}
-                                    width={3000}
-                                    height={3000}
-                                    className="w-full object-cover rounded-lg max-h-[18rem] md:max-h-[22rem] lg:max-h-[27rem]"
-                                    decoding="async"
-                                    priority={true}
-                                />
+                                <div className="relative w-full h-full">
+                                    <SafeImage
+                                        src={slide.image_url}
+                                        fallback="/Home/slider1.png"
+                                        alt={slide.title?.[lang]}
+                                        width={3000}
+                                        height={3000}
+                                        decoding="async"
+                                        priority={true}
+                                        // className={`w-full h-full object-cover rounded-lg ${lang === 'en' ? 'scale-x-[-1]' : ''}`}
+                                    />
+                                </div>
 
                                 <div
-                                    className="absolute inset-0 bg-opacity-50 flex flex-col items-end justify-center text-white text-right px-4 sm:px-8 pr-10 sm:pr-16 lg:mr-12 lg:gap-4"
-                                    style={{zIndex: 10}}
+                                    className={`absolute inset-0 bg-opacity-50 flex flex-col justify-center text-white
+                  ${isRtl ? 'items-end text-right pr-10 sm:pr-16 lg:mr-12' : 'items-start text-left pl-10 sm:pl-16 lg:ml-12'}
+                  px-4 sm:px-8 lg:gap-4`}
+                                    style={{ zIndex: 10 }}
                                 >
-                                    <h2 className="text-xl md:text-2xl md:text-3xl font-bold">{slide.title?.[lang]}</h2>
-                                    <p className="text-base md:text-lg md:text-xl my-2">{slide.description?.[lang]}</p>
+                                    <h2 className={`text-xl md:text-2xl md:text-3xl font-bold ${styles.title}`}>
+                                        {slide.title?.[lang]}
+                                    </h2>
 
-                                    <div className="relative w-full flex justify-end mt-4 mr-4 md:mr-10"
-                                         style={{zIndex: 20}}>
+                                    <p className={`text-base md:text-lg md:text-xl my-2 ${styles.text}`}>
+                                        {slide.description?.[lang]}
+                                    </p>
+
+                                    <div
+                                        className={`relative w-full flex mt-4
+                    ${isRtl ? 'justify-end mr-4 md:mr-10' : 'justify-start ml-4 md:ml-10'}
+                    ${styles.btn}`}
+                                        style={{ zIndex: 20 }}
+                                    >
                                         <Link href={slide.link || "#"}>
                                             <button
-                                                className="bg-white text-blue-600 px-4 py-1.5 md:px-6 md:py-2 text-sm md:text-base hover:bg-gray-400 w-auto rounded-full lg:rounded-md"
-                                                style={{position: "relative", zIndex: 30}}
+                                                className="bg-white text-blue-600 px-4 py-1.5 md:px-6 md:py-2 text-sm md:text-base w-auto
+                       rounded-full lg:rounded-md transition-all duration-300 ease-in-out min-w-[100px]
+                       hover:bg-blue-600 hover:text-white hover:shadow-lg hover:-translate-y-[2px]"
+                                                style={{ position: "relative", zIndex: 30 }}
                                             >
                                                 {slide.button_text?.[lang]}
                                             </button>
@@ -110,6 +127,7 @@ const Carousel = ({ dataList = [],lang }) => {
                                 </div>
                             </div>
                         ))}
+
                     </Slider>
                 </div>
             </motion.div>

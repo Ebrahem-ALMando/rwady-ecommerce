@@ -23,7 +23,7 @@ const ButtonTap = ({ link = "profile", icon, text, isLogout, isSelect, onClick }
         </button>
     );
 
-    return isLogout || isCurrent ? button : <Link href={href} replace>{button}</Link>;
+    return isLogout || isCurrent ? button : <Link href={href}  scroll={true}>{button}</Link>;
 };
 
 export default ButtonTap;

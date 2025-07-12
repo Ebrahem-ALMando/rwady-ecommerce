@@ -1,8 +1,8 @@
 import {notFound} from "next/navigation";
 import React, { Suspense } from "react";
 import Loading from "@/Components/Shared/Loading/Loading";
-import Navbar from "@/Components/Header/Navbar";
-import Footer from "@/Components/Footer/Footer";
+// import Navbar from "@/Components/Header/Navbar";
+// import Footer from "@/Components/Footer/Footer";
 import Breadcrumb from "@/Components/Shared/Breadcrumb/Breadcrumb";
 import {getRecentAddedProducts} from "@/api/services/listRecentAddedProducts";
 import {getTopSellingProducts} from "@/api/services/listTopSellingProducts";
@@ -56,7 +56,7 @@ const DynamicProductCollectionPage = async ({ params }) => {
 
     return (
         <>
-            <Navbar />
+            {/*<Navbar />*/}
             <Breadcrumb currentPage={section.title} />
             <Suspense fallback={<Loading />}>
                 <ProductCollectionsData
@@ -65,7 +65,7 @@ const DynamicProductCollectionPage = async ({ params }) => {
                     dataPromise={section.dataPromise}
                 />
             </Suspense>
-            <Footer />
+            {/*<Footer />*/}
         </>
     );
 };

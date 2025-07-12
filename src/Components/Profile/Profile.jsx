@@ -275,7 +275,7 @@ const Profile=(props)=> {
             />
 
             <aside className={styles.sidebar}>
-                <ProfileSidebar userData={profile} />
+                <ProfileSidebar userData={profile}  mutate={mutate}/>
             </aside>
 
             <section className={styles.profileCard}>

@@ -1,14 +1,14 @@
-import Navbar from "@/Components/Header/Navbar";
-import Footer from "@/Components/Footer/Footer";
+// import Navbar from "@/Components/Header/Navbar";
+// import Footer from "@/Components/Footer/Footer";
 import Notification from "@/Components/Notification/Notification";
 
 
 const  NotificationPage=()=>{
     return(
         <>
-            <Navbar/>
+            {/*<Navbar/>*/}
             <Notification/>
-            <Footer/>
+            {/*<Footer/>*/}
         </>
     )
 }

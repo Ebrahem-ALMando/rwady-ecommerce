@@ -76,8 +76,8 @@
 import ContactForm from "@/Components/ContactUs/ContactForm";
 import SocialLinks from "@/Components/SocialLinks/SocialLinks";
 import styles from "./ContactPage.module.css";
-import Navbar from "@/Components/Header/Navbar";
-import Footer from "@/Components/Footer/Footer";
+// import Navbar from "@/Components/Header/Navbar";
+// import Footer from "@/Components/Footer/Footer";
 import { getTranslations } from "next-intl/server";
 
 export async function generateMetadata({ params }) {
@@ -129,7 +129,7 @@ export default function ContactPage() {
 
   return (
       <div className={styles.container}>
-        <Navbar />
+        {/*<Navbar />*/}
 
         <main className={styles.main}>
           <div className={styles.header}>
@@ -149,7 +149,7 @@ export default function ContactPage() {
           </div>
         </main>
 
-        <Footer />
+        {/*<Footer />*/}
       </div>
   );
 }

@@ -1,5 +1,5 @@
-import Navbar from "@/Components/Header/Navbar";
-import Footer from "@/Components/Footer/Footer";
+// import Navbar from "@/Components/Header/Navbar";
+// import Footer from "@/Components/Footer/Footer";
 import OrderDetails from "@/Components/Orders/OrdersDetails/OrderDetails/OrderDetails";
 
 
@@ -13,9 +13,9 @@ export async function generateMetadata() {
 const OrderDetailsPage = () => {
     return (
         <>
-            <Navbar />
+            {/*<Navbar />*/}
             <OrderDetails />
-            <Footer />
+            {/*<Footer />*/}
         </>
     );
 };

@@ -113,7 +113,7 @@
 
 //-----------------
 import { NextIntlClientProvider } from 'next-intl';
-import { notFound } from 'next/navigation';
+import {notFound} from 'next/navigation';
 import { setRequestLocale } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 import 'leaflet/dist/leaflet.css';
@@ -127,6 +127,11 @@ import { Toaster } from "react-hot-toast";
 
 import ProgressBar from "@/Components/Shared/ProgressBar/ProgressBar";
 import NetworkStatus from "@/Components/Shared/NetworkStatus/NetworkStatus";
+import ScrollToTop from '@/Components/ScrollToTop';
+import {headers} from "next/headers";
+import Navbar from "@/Components/Header/Navbar";
+import Footer from "@/Components/Footer/Footer";
+
 
 
 const geistSans = Geist({
@@ -230,20 +235,48 @@ export default async function LocaleLayout({ children, params }) {
 
     const messages = (await import(`../../../messages/${locale}.json`)).default;
     const dir = locale === "ar" ? "rtl" : "ltr";
+    const headersList =await headers();
+    const domain = headersList.get("x-forwarded-host") || "";
+
+
+    const fullUrl = headersList.get('referer') || "";
+    const [, pathname] = fullUrl.match(new RegExp(`https?:\/\/${domain}(.*)`)) || [];
+    let isAuthPage = false;
+    if (pathname) {
+        const parts = pathname.split('/').filter(Boolean); // ['ar', 'contact-us']
+        const lastSegment = parts[parts.length - 1] || "";
+        const hideLayoutRoutes = ["sign-in", "verify"];
+         isAuthPage = hideLayoutRoutes.includes(lastSegment);
+    } else {
+        console.log('No pathname found');
+         isAuthPage = false;
+    }
+
+
 
     return (
         <html lang={locale} dir={dir}>
         <body className={`${geistSans.variable} ${geistMono.variable} ${ibmArabic.variable} antialiased`}>
         <Toaster position="top-center" reverseOrder={false} duration={3000}/>
+        <main >
         <div className="mainContainer">
             <ProgressBar/>
             <div className="child">
                 <NetworkStatus/>
                 <NextIntlClientProvider locale={locale} messages={messages}>
+                    {/* <ScrollToTop/> */}
+
+                    {!isAuthPage && <Navbar />}
+
                     {children}
+
+                    {!isAuthPage && <Footer />}
+
                 </NextIntlClientProvider>
             </div>
         </div>
+        </main>
+        
         </body>
         </html>
     );

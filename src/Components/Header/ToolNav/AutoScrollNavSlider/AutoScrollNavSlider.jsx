@@ -90,7 +90,8 @@ export default function MobileNavScrollBar({ isScrolled,className }) {
                 {navItems.map((item, index) => (
                     <Link
                         key={index}
-                        href={item.href}
+                        // href={item.href}
+                        href={"#"}
                         className={`flex-shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 transform ${
                             item.isStatic
                                 ? 'bg-gradient-to-br from-blue-500 to-blue-600 text-white'

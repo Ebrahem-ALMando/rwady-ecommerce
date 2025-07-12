@@ -5,8 +5,9 @@ import { Ghost } from "lucide-react";
 import styles from "./EmptyState.module.css";
 import Image from "next/image";
 import {useLocale} from "next-intl";
+import Link from "next/link";
 
-const EmptyState = ({ message = "لا توجد منتجات لعرضها حالياً" ,item=null}) => {
+const EmptyState = ({ message = "لا توجد منتجات لعرضها حالياً" ,item=null,initLink="/products"}) => {
     const prefersReducedMotion = typeof window !== 'undefined'
         ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
         : false;
@@ -79,16 +80,18 @@ const EmptyState = ({ message = "لا توجد منتجات لعرضها حال�
                         ease: "anticipate",
                     }}
                 >
-                    <Image
-                        src="/img_7.png"
-                        alt={message}
-                        className={styles.ghostIcon}
-                        width={80}
-                        height={80}
-                        style={{
-                            '--base-rotation': lang === 'ar' ? 'rotateY(180deg)' : 'rotateY(0deg)'
-                        }}
-                    />
+                  <Link href={initLink} prefetch={true} >
+                      <Image
+                          src="/img_7.png"
+                          alt={message}
+                          className={styles.ghostIcon}
+                          width={80}
+                          height={80}
+                          style={{
+                              '--base-rotation': lang === 'ar' ? 'rotateY(180deg)' : 'rotateY(0deg)'
+                          }}
+                      />
+                  </Link>
 
 
                     {/*<Ghost className={styles.ghostIcon}/>*/}
