@@ -11,7 +11,7 @@
     // import DeleteButton from "@/Components/Shared/Buttons/DeleteButton/DeleteButton";
     // import EditButton from "@/Components/Shared/Buttons/EditButton/EditButton";
     // import useSWR from "swr";
-    // import { getProfile } from "@/api/services/auth/getProfile";
+    // import { getProfile } from "@/api/services/(auth)/getProfile";
     //
     // const Address = (props) => {
     //     const { data: profileData } = useSWR("profileData", getProfile);

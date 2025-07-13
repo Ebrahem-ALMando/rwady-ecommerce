@@ -5,7 +5,7 @@
 // import Line from "@/Components/Shared/Line/Line";
 // import { CloseIcon } from "@/utils/Icons";
 // import { toast } from "react-hot-toast";
-// import { updateProfile } from "@/api/services/auth/updateProfile";
+// import { updateProfile } from "@/api/services/(auth)/updateProfile";
 // import useSWR from "swr";
 // import { getCities } from "@/api/services/location/getCities";
 // import { getDistricts } from "@/api/services/location/getDistricts";

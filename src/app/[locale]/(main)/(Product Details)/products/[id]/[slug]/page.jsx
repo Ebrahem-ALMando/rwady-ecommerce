@@ -12,6 +12,7 @@ import TitleSection from "@/Components/Shared/TitleSection/TitleSection";
 import EmptyState from "@/Components/Shared/EmptyState/EmptyState";
 import {getTranslations} from "next-intl/server";
 import Loading from "@/Components/Shared/Loading/Loading";
+import ProductSlider from "@/Components/Shared/SliderComponents/ProductSlider/ProductSlider";
 // import Footer from "@/Components/Footer/Footer";
 
 // export async function generateStaticParams() {
@@ -129,6 +130,7 @@ export async function ProductDetailsData({id,lang }) {
                     <EmptyState message={message}/>
                 </div>
                 :
+            <>
                 <TitleSection
                     initTitle={title}
                     initLink={`/${lang}/products`}
@@ -138,6 +140,8 @@ export async function ProductDetailsData({id,lang }) {
                     // title={title?.[lang]}
                     lang={lang}
                 />
+                <ProductSlider initialData={related_products}/>
+            </>
             }
         </>
         }

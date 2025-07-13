@@ -133,8 +133,21 @@ export default function useFavourites(isEnabled = true) {
     const handleToggleFavourite = async (productId) => {
         try {
            const res= await toggleFavourite(productId);
+            const isNowFav = res?.data?.is_favorite;
+            mutate((prev) => {
+                const exists = prev?.data?.some((p) => p.id === productId);
+
+                const newData = exists
+                    ? prev.data.filter((p) => p.id !== productId)
+                    : [...(prev?.data || []), { id: productId }];
+
+                return {
+                    ...prev,
+                    data: newData,
+                };
+            }, false); // بدون revalidation
             // console.log(res)
-            mutate(undefined,{revalidate:true})
+            // mutate(undefined,{revalidate:true})
             // mutate((prev) => {
             //     const exists = prev?.data?.some(p => p.id === productId);
             //     return {

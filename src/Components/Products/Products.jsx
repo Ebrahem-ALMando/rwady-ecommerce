@@ -518,7 +518,7 @@ const Products = ({initError, data, categoriesData, brandsData, searchParams}) =
 
     const closeFilter = () => {
         setAnimateFilter(false);
-        setTimeout(() => setIsMobileFilterVisible(false), 300);
+        setTimeout(() => setIsMobileFilterVisible(false), 70);
     };
 
     useEffect(() => {

@@ -24,7 +24,7 @@ html[dir="ltr"] .container {
 
 .container.show {
     opacity: 1;
-    z-index: 1000;
+    z-index: 1003;
     visibility: visible;
 }
 

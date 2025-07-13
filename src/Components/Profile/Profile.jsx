@@ -10,10 +10,10 @@
 // import Loading from "@/Components/Shared/Loading/Loading";
 // import Error from "@/Components/Shared/Error/Error";
 // import { editProfileIcon } from "@/utils/Icons";
-// import { updateProfile } from "@/api/services/auth/updateProfile";
+// import { updateProfile } from "@/api/services/(auth)/updateProfile";
 // import { toast } from "react-hot-toast";
 // import Image from "next/image";
-// import {getProfile} from "@/api/services/auth/getProfile";
+// import {getProfile} from "@/api/services/(auth)/getProfile";
 // import SafeImage from "@/Components/Shared/SafeImage/SafeImage";
 //
 // const Profile = (props) => {

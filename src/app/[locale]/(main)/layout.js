@@ -122,7 +122,7 @@ import 'leaflet-geosearch/dist/geosearch.css';
 import { Geist, Geist_Mono, IBM_Plex_Sans_Arabic } from "next/font/google";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "../../styles/globals.css";
+import "../../../styles/globals.css";
 import { Toaster } from "react-hot-toast";
 
 import ProgressBar from "@/Components/Shared/ProgressBar/ProgressBar";
@@ -226,31 +226,33 @@ export async function generateMetadata({ params }) {
 
 
 
-export default async function LocaleLayout({ children, params }) {
+export default async function MainLayout({ children, params }) {
     const { locale } =await params;
 
     if (!routing.locales.includes(locale)) notFound();
 
     setRequestLocale(locale);
 
-    const messages = (await import(`../../../messages/${locale}.json`)).default;
+    const messages = (await import(`../../../../messages/${locale}.json`)).default;
     const dir = locale === "ar" ? "rtl" : "ltr";
-    const headersList =await headers();
-    const domain = headersList.get("x-forwarded-host") || "";
-
-
-    const fullUrl = headersList.get('referer') || "";
-    const [, pathname] = fullUrl.match(new RegExp(`https?:\/\/${domain}(.*)`)) || [];
-    let isAuthPage = false;
-    if (pathname) {
-        const parts = pathname.split('/').filter(Boolean); // ['ar', 'contact-us']
-        const lastSegment = parts[parts.length - 1] || "";
-        const hideLayoutRoutes = ["sign-in", "verify"];
-         isAuthPage = hideLayoutRoutes.includes(lastSegment);
-    } else {
-        console.log('No pathname found');
-         isAuthPage = false;
-    }
+    // const headersList =await headers();
+    // const domain = headersList.get("x-forwarded-host") || "";
+    //
+    //
+    // const fullUrl = headersList.get('referer') || "";
+    // const  pathname = fullUrl.match(new RegExp(`https?:\/\/${domain}(.*)`))[1] || [];
+    // let isAuthPage = false;
+    // // console.log(pathname)
+    // if (pathname) {
+    //     const parts = pathname.split('/').filter(Boolean); // ['ar', 'contact-us']
+    //     const lastSegment = parts[parts.length - 1] || "";
+    //     const hideLayoutRoutes = ["sign-in", "verify"];
+    //     // console.log(lastSegment)
+    //      isAuthPage = hideLayoutRoutes.includes(lastSegment);
+    // } else {
+    //     console.log('No pathname found');
+    //      isAuthPage = false;
+    // }
 
 
 
@@ -266,12 +268,12 @@ export default async function LocaleLayout({ children, params }) {
                 <NextIntlClientProvider locale={locale} messages={messages}>
                     {/* <ScrollToTop/> */}
 
-                    {!isAuthPage && <Navbar />}
-
+                    {/*{!isAuthPage && <Navbar />}*/}
+                    <Navbar/>
                     {children}
 
-                    {!isAuthPage && <Footer />}
-
+                    {/*{!isAuthPage && <Footer />}*/}
+                    <Footer/>
                 </NextIntlClientProvider>
             </div>
         </div>

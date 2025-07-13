@@ -4,13 +4,18 @@ import {delay} from "@/utils/delay";
 
 export const getTopSellingProducts = async () => {
 
-    const endPointKey = "list-top-selling-products";
-
-    const res = await fetchAPI(endPointKey, "GET", null, {
-        next: {
-            revalidate: ApiConfig.revalidateTime,
-            tags: [endPointKey],
-        },
-    });
-    return res ?? [];
+    // const endPointKey = "list-top-selling-products";
+    //
+    // const res = await fetchAPI(endPointKey, "GET", null, {
+    //     next: {
+    //         revalidate: ApiConfig.revalidateTime,
+    //         tags: [endPointKey],
+    //     },
+    // });
+    // return res ?? [];
+    return {
+        error: true,
+        data: [],
+        message: "Token not found",
+    };
 };

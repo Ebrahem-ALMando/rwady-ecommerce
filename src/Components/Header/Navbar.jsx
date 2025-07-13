@@ -2,7 +2,7 @@
 import TitleNav from "@/Components/Header/TitleNav/TitleNav";
 import MainNavigation from "@/Components/Header/MainNavigation/MainNavigation";
 import styles from "./Navbar.module.css";
-import { useEffect, useState } from "react";
+import {useEffect, useRef, useState} from "react";
 import ToolNav from "@/Components/Header/ToolNav/ToolNav";
 import StepProgressBar from "@/Components/Shared/StepProgressBar/StepProgressBar";
 import useCart from "@/hooks/useCart";
@@ -17,53 +17,83 @@ const Navbar = () => {
         setIsMenuOpen(prev => !prev);
     };
 
+    // useEffect(() => {
+    //     let lastScrollY = window.scrollY;
+    //     let timeoutId = null;
+    //
+    //     const handleScroll = () => {
+    //         clearTimeout(timeoutId);
+    //
+    //         timeoutId = setTimeout(() => {
+    //             const currentScrollY = window.scrollY;
+    //
+    //             if (currentScrollY > lastScrollY && currentScrollY > 50) {
+    //                 setIsScrolled(true);
+    //             } else if (currentScrollY < lastScrollY) {
+    //                 setIsScrolled(false);
+    //             }
+    //
+    //             lastScrollY = currentScrollY;
+    //         }, 50);
+    //     };
+    //
+    //     window.addEventListener("scroll", handleScroll, { passive: true });
+    //
+    //     return () => {
+    //         window.removeEventListener("scroll", handleScroll);
+    //         clearTimeout(timeoutId);
+    //     };
+    // }, []);
+
+    const triggerRef = useRef(null);
+    const [isVisible, setIsVisible] = useState(true);
+
     useEffect(() => {
-        let lastScrollY = window.pageYOffset;
-        let ticking = false;
-        const animationFrame = window.requestAnimationFrame || ((cb) => setTimeout(cb, 16.6));
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                setIsVisible(entry.isIntersecting);
+            },
+            { threshold: 0.1 }
+        );
 
-        const handleScroll = () => {
-            lastScrollY = window.scrollY;
-            if (!ticking) {
-                animationFrame(() => {
+        if (triggerRef.current) {
+            observer.observe(triggerRef.current);
+        }
 
-                    setTimeout(() => {
-                        setIsScrolled(lastScrollY > 50);
-                        ticking = false;
-                    }, 100);
-                });
-                ticking = true;
+        return () => {
+            if (triggerRef.current) {
+                observer.unobserve(triggerRef.current);
             }
         };
-
-        window.addEventListener("scroll", handleScroll, { passive: true });
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-        };
     }, []);
+
     const {getCartCount}=useCart()
     return (
-        <div className={styles.navbarContainer}>
-            <TitleNav />
-            <CartProvider>
-                <ToolNav
-                    getCartCount={getCartCount}
-                    isScrolled={isScrolled}
+        <>
+            <header className={styles.navbarContainer}>
+
+                <TitleNav/>
+                <CartProvider>
+                    <ToolNav
+                        getCartCount={getCartCount}
+                        isScrolled={!isVisible}
+                        toggleMenu={handleToggleMenu}
+                    />
+                </CartProvider>
+
+                <MainNavigation
+                    isScrolled={!isVisible}
+                    isMenuOpen={isMenuOpen}
+                    setIsMenuOpen={setIsMenuOpen}
                     toggleMenu={handleToggleMenu}
+                    isOpenDropdown={isOpenDropdown}
+                    setIsOpenDropdown={setIsOpenDropdown}
                 />
-            </CartProvider>
-
-            <MainNavigation
-               isScrolled={isScrolled}
-               isMenuOpen={isMenuOpen}
-               setIsMenuOpen={setIsMenuOpen}
-               toggleMenu={handleToggleMenu}
-               isOpenDropdown={isOpenDropdown}
-               setIsOpenDropdown={setIsOpenDropdown}
-            />
 
 
-        </div>
+            </header>
+            <div ref={triggerRef} style={{height: "1px"}}></div>
+        </>
     );
 };
 

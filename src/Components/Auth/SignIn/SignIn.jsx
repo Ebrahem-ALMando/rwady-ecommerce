@@ -7,7 +7,7 @@ import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import { PhoneNumberUtil } from 'google-libphonenumber';
 
-// import { sendOtp } from "@/api/services/auth/verifyOtp";
+// import { sendOtp } from "@/api/services/(auth)/verifyOtp";
 // import { getTokenWithClient } from "@/utils/getTokenWithClient";
 import styles from './SignIn.module.css';
 import {useLocale, useTranslations} from 'next-intl';

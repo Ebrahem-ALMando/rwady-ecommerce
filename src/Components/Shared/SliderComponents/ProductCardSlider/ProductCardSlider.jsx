@@ -424,19 +424,17 @@ const ProductCardSlider = ({ product, lang, setIsDraggingInsideCard }) => {
         const currentlyFav = isFavourite(product.id);
 
         setLiked(currentlyFav);
-        setLikedCount(baseCount);
+        setLikedCount(currentlyFav?1:0);
 
-    }, [product.id]);
+    }, [favourites, product.id]);
 
 
     const handleToggle = async () => {
         const res = await toggle(product.id);
         const isNowFav = res?.data?.is_favorite;
-
         setLiked(isNowFav);
 
-
-        setLikedCount((prev) => isNowFav ? prev + 1 : prev - 1);
+        setLikedCount(isNowFav?1:0);
     };
 
 

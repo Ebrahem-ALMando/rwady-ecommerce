@@ -22,7 +22,6 @@ export default function MobileNavScrollBar({ isScrolled,className }) {
     const hintTimeout = useRef(null);
 
 
-
     const handleScroll = () => {
         if (hintTimeout.current) {
             clearTimeout(hintTimeout.current);
@@ -71,11 +70,7 @@ export default function MobileNavScrollBar({ isScrolled,className }) {
     }, [isDragging]);
 
     return (
-        <div className={`bg-white shadow-sm relative ${isScrolled ? styles.scrolled : ''}
-        
-        ${className}
-        `}>
-
+        <div className={`${styles.navWrapper} ${isScrolled ? styles.scrolled : ''} ${className}`}>
             <div
                 ref={scrollRef}
                 className={`flex overflow-x-auto scrollbar-hide gap-4 px-4 py-3 scroll-smooth transition-shadow duration-300 ${
@@ -90,13 +85,12 @@ export default function MobileNavScrollBar({ isScrolled,className }) {
                 {navItems.map((item, index) => (
                     <Link
                         key={index}
-                        // href={item.href}
-                        href={"#"}
+                        href="#"
                         className={`flex-shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 transform ${
                             item.isStatic
                                 ? 'bg-gradient-to-br from-blue-500 to-blue-600 text-white'
                                 : `bg-gray-200 hover:bg-gray-300 text-gray-600 shadow-sm 
-                                   ${isDragging ? 'scale-95 opacity-90' : 'scale-100 opacity-100'}`
+                 ${isDragging ? 'scale-95 opacity-90' : 'scale-100 opacity-100'}`
                         }`}
                     >
                         <span className="text-lg">{item.icon}</span>
@@ -104,8 +98,7 @@ export default function MobileNavScrollBar({ isScrolled,className }) {
                     </Link>
                 ))}
 
-
-                <div className="flex-shrink-0 w-4" />
+                <div className="flex-shrink-0 w-4"/>
             </div>
         </div>
     );
