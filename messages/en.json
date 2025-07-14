@@ -432,7 +432,12 @@
     "payment_status": "Payment Status",
     "details": "Details"
 
+  },
+  "productCard":{
+    "stock_unlimited": "Unlimited quantity",
+    "stock_limited": "Only {count} items left"
   }
+
 
 
 }

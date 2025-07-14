@@ -432,8 +432,12 @@
     "details": "تفاصيل"
 
 
-  }
+  },
 
+  "productCard":{
+    "stock_unlimited": "كمية غير محدودة",
+    "stock_limited": "مُتبقي: {count} عناصر"
+  }
 
 
 

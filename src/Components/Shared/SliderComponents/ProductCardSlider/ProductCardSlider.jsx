@@ -372,7 +372,7 @@ import {checkAuthClient} from "@/utils/checkAuthClient";
 
 import QuantityControl from "@/Components/ProductDetails/QuantityControl/QuantityControl";
 import { Flame  } from 'lucide-react'
-import {useLocale} from "next-intl";
+import {useLocale, useTranslations} from "next-intl";
 import {slugify} from "@/utils/slugify";
 import CartActionButton from "@/Components/Shared/Buttons/CartActionButton/CartActionButton";
 import FavouriteToggleButton from "@/Components/Shared/Buttons/FavouriteToggleButton/FavouriteToggleButton";
@@ -406,7 +406,7 @@ const ProductCardSlider = ({ product, lang, setIsDraggingInsideCard }) => {
 
     const [liked, setLiked] = useState(false);
     const [likedCount, setLikedCount] = useState(product.fav_num || 0);
-
+    const t=useTranslations('productCard')
 
     // useEffect(() => {
     //     if (!product?.id || !Array.isArray(favourites)) return;
@@ -549,7 +549,7 @@ const ProductCardSlider = ({ product, lang, setIsDraggingInsideCard }) => {
 
 
                 {discountValue > 0 && isDiscountValid && time!=="NaNH : NaN M : NaN S"&&(
-                    <div className="absolute top-[-17px] left-1/2 -translate-x-1/2 z-50">
+                    <div className={`absolute top-[-17px] left-1/2 -translate-x-1/2 z-50 ${styles.timeBox}`}>
                         <div className={styles.time}>
                             <p className={styles.timeText}>
                                 <span className={styles.timeIcon}>
@@ -562,7 +562,7 @@ const ProductCardSlider = ({ product, lang, setIsDraggingInsideCard }) => {
                 )}
 
 
-                <div className="relative w-full h-[300px] mt-3">
+                <div className={`relative w-full h-[300px] mt-3 ${styles.imgCont}`}>
                     <Slider
                         {...settings}
                         onMouseEnter={handleDisableDrag}
@@ -579,7 +579,6 @@ const ProductCardSlider = ({ product, lang, setIsDraggingInsideCard }) => {
                                     transition={{ duration: 0.3 }}
                                 >
                                     <img
-
                                         onMouseEnter={handleDisableDrag}
                                         onMouseLeave={handleEnableDrag}
                                         onTouchStart={handleDisableDrag}
@@ -593,9 +592,9 @@ const ProductCardSlider = ({ product, lang, setIsDraggingInsideCard }) => {
                                 </motion.div>
                             </div>
                         ))}
-                    </Slider>
+                      </Slider>
 
-                    <div className="absolute flex flex-col gap-2" style={{bottom: '-20px', left: '10px'}}>
+                    <div className={`absolute flex flex-col gap-2 ${styles.icons}`} style={{bottom: '-20px', left: '10px'}}>
                         <div className={styles.iconImage}>
                             <FavouriteToggleButton
                                 liked={liked}
@@ -618,7 +617,7 @@ const ProductCardSlider = ({ product, lang, setIsDraggingInsideCard }) => {
                             {product.categories?.slice(0, 2).map((ctr, idx) => (
                                 <span
                                     key={idx}
-                                    className="bg-blue-100 text-blue-700 px-3 py-1 text-xs rounded-full whitespace-nowrap"
+                                    className={`bg-blue-100 text-blue-700 px-3 py-1 text-xs rounded-full whitespace-nowrap ${styles.categ}`}
                                     title={ctr.name?.[lang]}
                                 >
                           {ctr.name?.[lang]}
@@ -645,11 +644,11 @@ const ProductCardSlider = ({ product, lang, setIsDraggingInsideCard }) => {
                         </p>
 
                         {/* Waite Implement Aksat Service */}
-                        {product.stock > 0 && (
+                        {product.stock > 0 || product.stock_unlimited && (
                             <p className={styles.available}>
-                  <span className={styles.availableIcon}>
-                    <img src={'/images/img_6.png'} alt="available"/>
-                  </span>
+                              <span className={styles.availableIcon}>
+                                <img src={'/images/img_6.png'} alt="available"/>
+                              </span>
                                 اشتري بالاقساط . . . (قريباًْ)
                             </p>
                         )}
@@ -677,19 +676,20 @@ const ProductCardSlider = ({ product, lang, setIsDraggingInsideCard }) => {
                                     <img src={'/images/img_7.png'} alt="remaining"/>
                                   </span>
                                     {product.stock_unlimited
-                                        ? "كمية غير محدودة"
-                                        : `مُتبقي: ${product.stock} عناصر`}
+                                        ? t('stock_unlimited')
+                                        : t('stock_limited', { count: product.stock })}
                                 </p>
                             </div>
                         ) : (
-                            <div className={styles.outherDetails}>
-                                <p className={`${styles.remaining}`}>
-                              <span className={styles.remainingIcon}>
-                                <img src={'/images/img_7.png'} alt="remaining"/>
-                              </span>
-                                    غير متوفر حالياً
-                                </p>
-                            </div>
+                            <></>
+                            // <div className={styles.outherDetails}>
+                            //     <p className={`${styles.remaining}`}>
+                            //   <span className={styles.remainingIcon}>
+                            //     <img src={'/images/img_7.png'} alt="remaining"/>
+                            //   </span>
+                            //         غير متوفر حالياً
+                            //     </p>
+                            // </div>
                         )}
 
 

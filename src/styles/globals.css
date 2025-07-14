@@ -103,16 +103,16 @@ body {
 @media (min-width: 1537px) {
   .mainContainer {
     max-width:100%;
-    padding-right: 6rem;
-    padding-left: 6rem;
+    /*padding-right: 6rem;*/
+    /*padding-left: 6rem;*/
     display: flex;
     justify-content: center;
 
   }
   .child{
-    max-width:1636px;
-    padding-right: 6rem;
-    padding-left: 6rem;
+    max-width:1690px;
+    /*padding-right: 6rem;*/
+    /*padding-left: 6rem;*/
 
     }
   }

@@ -208,39 +208,31 @@ const ProductCollections = ({ initialData, initialError, getData, keyData }) => 
         <div className={styles.container}>
 
             <div className={styles.products}>
-                {/*{pagedData.map((item, index) => (*/}
-                {/*<ProductCardSlider*/}
-                {/*    key={item.id + '-' + index}*/}
-                {/*    product={item}*/}
-                {/*    lang={lang}*/}
-                {/*/>*/}
-                {/*))*/}
-                {/*}*/}
                 {pagedData.length === 0 ? (
                     <EmptyState message="لا توجد منتجات لعرضها حالياً" />
                 ) : (
                     // isClient && (
-                        <AnimatePresence mode="wait">
-                            <motion.div
-                                {...mainDivMotion}
-                                className={styles.items}
-                            >
-                                {pagedData.map((item, index) => (
-                                    <motion.div
+                    <AnimatePresence mode="wait">
+                        <motion.div
+                            {...mainDivMotion}
+                            className={styles.items}
+                        >
+                            {pagedData.map((item, index) => (
+                                <motion.div
+                                    key={item.id + '-' + index}
+                                    variants={itemMotionVariants}
+                                    transition={itemTransition}
+                                >
+                                    <ProductCardSlider
                                         key={item.id + '-' + index}
-                                        variants={itemMotionVariants}
-                                        transition={itemTransition}
-                                    >
-                                        <ProductCardSlider
-                                            key={item.id + '-' + index}
-                                            product={item}
-                                            lang={lang}
-                                        />
-                                    </motion.div>
-                                ))}
-                            </motion.div>
-                        </AnimatePresence>
-                    )
+                                        product={item}
+                                        lang={lang}
+                                    />
+                                </motion.div>
+                            ))}
+                        </motion.div>
+                    </AnimatePresence>
+                )
                     // )
                 }
             </div>

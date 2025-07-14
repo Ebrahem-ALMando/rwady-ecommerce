@@ -89,7 +89,7 @@ export async function ProductCollectionsData({ title,dataPromise, collection,  }
     if (collection !== "favourites" && typeof dataPromise === "function") {
         const data = await dataPromise();
         initialError=data.error;
-        console.log(data)
+        // console.log(data)
         initialData = data || [];
     }
 

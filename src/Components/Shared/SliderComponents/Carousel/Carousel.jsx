@@ -40,6 +40,7 @@ const Carousel = ({ dataList = [],lang }) => {
         ...sliderSettings,
         infinite: !isSingleSlide,
         arrows: !isSingleSlide,
+        autoplaySpeed: 2000,
         prevArrow: <CustomPrevArrow />,
         nextArrow: <CustomNextArrow />,
         appendDots: (dots) =>

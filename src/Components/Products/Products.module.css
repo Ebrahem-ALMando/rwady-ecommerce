@@ -48,12 +48,15 @@
 .items{
     width:100%;
     height: auto;
-    display: flex;
+    /*display: flex;*/
     justify-content: center;
     flex-wrap: wrap;
     gap: 5px;
     margin-top: 2rem;
-    /*overflow-x: hidden;*/
+    overflow-x: hidden;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, max-content));
+    justify-content: center;
 }
 .resetButton {
     margin: 15px auto;
@@ -205,7 +208,30 @@
         flex-direction: column;
     }
 }
-@media (max-width: 1000px)
-{
+@media (max-width: 775px) {
+    .items {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(165px, max-content));
+        justify-content: center;
+        gap: 8px;
+        padding: 8px 4px;
+    }
 
+    .container {
+        padding: 8px 12px;
+    }
+}
+
+@media (max-width: 400px) {
+    .items {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(165px, max-content));
+        justify-content: center;
+        gap: 6px;
+        padding: 8px 2px;
+    }
+
+    .container {
+        padding: 8px 6px;
+    }
 }

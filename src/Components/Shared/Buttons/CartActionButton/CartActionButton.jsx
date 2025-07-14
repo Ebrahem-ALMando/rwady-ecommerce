@@ -193,9 +193,9 @@ const CartActionButton = ({ product, className = '',btnClassName='',styles ,icon
                 {isAddToCart ? t('remove') : t('add')}
             </button>
 
-            {!product.stock && (
-                <p className={styles.outOfStockText}>{t('outOfStock')}</p>
-            )}
+            {/*{!product.stock && (*/}
+            {/*    <p className={styles.outOfStockText}>{t('outOfStock')}</p>*/}
+            {/*)}*/}
 
             {isAddToCart && showQuantityControl&& (
                 <QuantityControl

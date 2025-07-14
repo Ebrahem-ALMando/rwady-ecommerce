@@ -131,7 +131,7 @@
     color: #0741AD;
     font-weight: 600;
     font-size: 18px;
-    text-align: right;
+    text-align: start;
     white-space: normal;
     overflow-wrap: break-word;
     word-break: break-word;
@@ -148,7 +148,7 @@
 .price {
     margin-top: 0.7rem;
     color: #FF3B30;
-    text-align: right;
+    text-align: end;
     font-size: 18px;
     font-weight: 500;
     direction: ltr;
@@ -178,6 +178,7 @@
     gap: 7px;
     margin-top: 0.8rem;
     align-items: center;
+    flex-wrap: wrap;
 }
 .colorButton {
     width: 15px;
@@ -296,6 +297,130 @@
 }
 .shop:hover{
     background: #b60909;
+}
+@media (max-width: 775px)
+{
+    .cardDiv{
+        padding:5px !important;
+
+    }
+    .card {
+        position: relative;
+        width: 165px;
+        min-height: 280px;
+        height: auto;
+    }
+    .saveSeller{
+        width: 43px;
+        min-width: max-content;
+        font-size: 10px !important;
+    }
+    .bestSeller{
+        width: 43px;
+        min-width: max-content;
+        font-size: 10px !important;
+    }
+    .timeBox{
+        width: 120px !important;
+        min-width: max-content;
+    }
+    .time {
+        top: 3px;
+        right: 3px;
+        width: 110px !important;
+        min-width: max-content;
+        height: 27px;
+        font-size: 10px !important;
+    }
+    .timeText{
+        font-weight: 400 !important;
+        font-size: 10px !important;
+    }
+    .timeIcon {
+        width: 25px;
+        height: 25px;
+    }
+    .imgCont{
+        margin-top: 0.3rem !important;
+        /*width: 160px !important;*/
+        height: auto !important;
+        display: block;
+        padding: 0px 7px !important;
+    }
+    .productImgDiv {
+        padding: 0px !important;
+        margin: 0 !important;
+    }
+    .productImg {
+        object-fit: cover;
+    }
+    .icons{
+        bottom: 10px !important;
+        left: 7px !important;
+        gap: 5px !important;
+    }
+    .iconImage {
+        width: auto !important;
+        height: 30px!important;
+        min-width: max-content;
+        padding: 17px 5px ;
+
+    }
+    .iconImage  svg{
+        width: 22px;
+    }
+    .slickDot button, .slickActive button {
+        width: 11px !important;
+        height: 11px !important;
+        background: transparent !important;
+        border: none !important;
+        cursor: pointer;
+        position: absolute;
+        right: 10px !important;
+
+        border-radius: 50%;
+        opacity: 0;
+
+    }
+    .slickDot, .slickActive {
+            top: -8px !important;
+    }
+    .slickDot {
+        background-color: #bec8d9;
+    }
+    .slickActive {
+        background-color: #0741ad;
+    }
+    .infoCard {
+        padding:2px 5px !important;
+        background-color: #f7f7f7;
+        width: 160px !important;
+        margin: 0.3rem auto !important;
+    }
+    .categ{
+        font-size: 10px !important;
+        font-weight: 500;
+    }
+    .title{
+        font-size: 13px !important;
+        font-weight: 500;
+        -webkit-line-clamp: 3;
+        line-height: 1.3rem;
+        max-height: 5.2rem;
+        padding: 0 3px !important;
+    }
+    .price,.oldPrice,.available{
+        font-size: 10px !important;
+        font-weight: 500;
+        margin-top: 0.5rem;
+    }
+    .availableIcon{
+        margin-right: 0.2rem;
+    }
+    .remaining{
+        font-size: 12px !important;
+    }
+
 }
 /*@media (max-width: 630px) {*/
 

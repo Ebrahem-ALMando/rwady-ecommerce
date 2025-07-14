@@ -2,16 +2,15 @@ export const sliderSettings={
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 4,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 4000,
+    slidesToShow: 4,
     responsive: [
-
         { breakpoint: 1286, settings: { slidesToShow: 3 } },
         { breakpoint: 1095, settings: { slidesToShow: 2 } },
-        { breakpoint: 750, settings: { slidesToShow: 1 } },
-
+        { breakpoint: 774, settings: { slidesToShow: 3 } },
+        { breakpoint: 562, settings: { slidesToShow: 2 } },
     ],
 
 }

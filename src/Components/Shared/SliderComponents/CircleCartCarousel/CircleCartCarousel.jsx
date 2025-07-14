@@ -8,7 +8,7 @@ import Link from "next/link";
 import Slider from "react-slick";
 import { motion, AnimatePresence } from "framer-motion";
 import ReloadWithError from "@/Components/Shared/ReloadWithError/ReloadWithError";
-import {groupItems} from "@/utils/groupItems";
+import {groupFixedItems, groupItems} from "@/utils/groupItems";
 import {
     containerVariants,
     itemVariants
@@ -20,7 +20,7 @@ const CircleCartCarousel = (props) => {
 
     const dataList =data || [];
 
-    const groups = groupItems(dataList, 6);
+    const groups = groupFixedItems(dataList, 6);
     const hasData = groups.length > 0;
     const isSingleGroup = hasData && groups.length === 1 && groups[0].length <= 6;
 
