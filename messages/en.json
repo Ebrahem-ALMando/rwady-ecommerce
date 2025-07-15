@@ -62,7 +62,13 @@
     "label": "Search the site",
     "aria": "Search field",
     "placeholder": "Search for a product, brand, or category...",
-    "details": "Details"
+    "details": "Details",
+    "recent": {
+      "title": "Recent Searches",
+      "clear": "Clear History",
+      "showMore": "Show More →",
+      "showLess": "Show Less ←"
+    }
   },
   "downloadApp": {
     "button": "Download App",

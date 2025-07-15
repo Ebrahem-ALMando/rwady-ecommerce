@@ -6,8 +6,9 @@ import './scrollbar-hide.css';
 import styles from '../SearchBar/SearchBar.module.css';
 import {getNavItems, navItems} from "@/Components/Header/ToolNav/AutoScrollNavSlider/getNavItems";
 import { useLocale, useTranslations } from "next-intl";
-import { usePathname } from "@/i18n/navigation";
+
 import {isLinkActive} from "@/utils/isLinkActive";
+import {usePathname} from "next/navigation";
 
 export default function MobileNavScrollBar({ isScrolled, className }) {
     const scrollRef = useRef(null);
@@ -83,10 +84,11 @@ export default function MobileNavScrollBar({ isScrolled, className }) {
                 }}
             >
                 {navItems.map((item, index) => {
-                    const isActive = isLinkActive(pathname, item.href);
+                    const isActive = isLinkActive(pathname, item.href,locale);
 
                     return (
                         <Link
+                            prefetch={true}
                             key={index}
                             href={item.href}
                             className={`flex-shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 transform

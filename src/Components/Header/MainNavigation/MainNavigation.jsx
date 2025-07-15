@@ -24,6 +24,7 @@ const MainNavigation = ({ isMenuOpen, isOpenDropdown, toggleMenu, setIsOpenDropd
                 >
                     {navLinks.map((link, index) => (
                         <Link
+                            prefetch={true}
                             key={index}
                             href={link.href}
                             className={styles.navItem}

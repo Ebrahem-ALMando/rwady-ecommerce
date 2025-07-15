@@ -2,7 +2,7 @@
     height: 53px;
     width: 100%;
     background-color: #ffffff;
-    position: relative; /* مهم لتموضع النتائج */
+    position: relative;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -132,14 +132,26 @@ html[dir="ltr"] .SearchInput {
     display: flex;
     align-items: center;
     gap: 0.75rem;
+    flex: 1;
+    max-width: calc(100% - 120px);
+}
+.wrapperImg {
+    width: 55px;
+    height: 55px;
+    min-width: 55px;
+    min-height: 55px;
+    display: inline-block;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid #0a58ca;
+    flex-shrink: 0;
 }
 
 .productImage {
-    width: 50px;
-    height: 50px;
+    width: 100% !important;
+    height: 100% !important;
     object-fit: cover;
-    border-radius: 50%;
-    border: 1px solid #0a58ca;
+    display: block;
 }
 
 
@@ -151,7 +163,17 @@ html[dir="rtl"] .SearchIcon {
 html[dir="ltr"] .SearchIcon {
     left: 10px;
 }
-
+.productName {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #333;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.3rem;
+}
 
 @media (max-width: 768px) {
     .mainDiv {
