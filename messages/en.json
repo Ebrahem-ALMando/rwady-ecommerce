@@ -81,6 +81,7 @@
   "mainNav": {
     "label": "Main navigation",
     "links": {
+      "home": "home",
       "categories": "Categories",
       "offers": "Offers / Discounts",
       "brands": "Brands",

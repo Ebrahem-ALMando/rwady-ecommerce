@@ -22,7 +22,7 @@ export function middleware(request) {
     }
 
 
-    if (!(token && user_id) && ["/orders", "/profile", "/checkout", "/favourites", "/addresses-list"]
+    if (!(token && user_id) && ["/orders", "/profile", "/checkout", "/favourites", "/addresses-list", "/favourites"]
         .some((p) => path.startsWith(p))) {
         return NextResponse.redirect(new URL(`/${locale}/sign-in`, request.url));
     }

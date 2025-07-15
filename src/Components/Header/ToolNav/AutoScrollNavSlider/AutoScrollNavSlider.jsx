@@ -1,33 +1,31 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
-import { FaHome, FaTags, FaFireAlt, FaStar } from 'react-icons/fa';
-import { MdDiscount, MdCollections } from 'react-icons/md';
 import Link from 'next/link';
+
 import './scrollbar-hide.css';
 import styles from '../SearchBar/SearchBar.module.css';
+import {getNavItems, navItems} from "@/Components/Header/ToolNav/AutoScrollNavSlider/getNavItems";
+import { useLocale, useTranslations } from "next-intl";
+import { usePathname } from "@/i18n/navigation";
+import {isLinkActive} from "@/utils/isLinkActive";
 
-const navItems = [
-    { label: 'الرئيسية', icon: <FaHome />, href: '/', isStatic: true },
-    { label: 'العروض / التخفيضات', icon: <MdDiscount />, href: '/offers' },
-    { label: 'الماركات', icon: <FaTags />, href: '/brands' },
-    { label: 'الأكثر مبيعاً', icon: <FaFireAlt />, href: '/top-selling' },
-    { label: 'المميزة', icon: <FaStar />, href: '/featured' },
-];
-
-export default function MobileNavScrollBar({ isScrolled,className }) {
+export default function MobileNavScrollBar({ isScrolled, className }) {
     const scrollRef = useRef(null);
     const [isDragging, setIsDragging] = useState(false);
     const startX = useRef(0);
     const scrollLeft = useRef(0);
     const hintTimeout = useRef(null);
 
+    const t = useTranslations("mainNav");
+    const pathname = usePathname();
+    const locale = useLocale();
 
+    const navItems = getNavItems(locale);
     const handleScroll = () => {
         if (hintTimeout.current) {
             clearTimeout(hintTimeout.current);
         }
     };
-
 
     useEffect(() => {
         const container = scrollRef.current;
@@ -52,8 +50,9 @@ export default function MobileNavScrollBar({ isScrolled,className }) {
             e.preventDefault();
 
             const x = e.pageX - container.offsetLeft;
+            const directionFactor = locale === 'ar' ? -1 : 1;
             const walk = (x - startX.current) * 1.8;
-            container.scrollLeft = scrollLeft.current - walk;
+            container.scrollLeft = scrollLeft.current - walk * directionFactor;
         };
 
         container.addEventListener('mousedown', handleMouseDown);
@@ -67,7 +66,8 @@ export default function MobileNavScrollBar({ isScrolled,className }) {
             document.removeEventListener('mousemove', handleMouseMove);
             container.removeEventListener('scroll', handleScroll);
         };
-    }, [isDragging]);
+    }, [isDragging, locale]);
+
 
     return (
         <div className={`${styles.navWrapper} ${isScrolled ? styles.scrolled : ''} ${className}`}>
@@ -79,24 +79,29 @@ export default function MobileNavScrollBar({ isScrolled,className }) {
                 style={{
                     WebkitOverflowScrolling: 'touch',
                     cursor: isDragging ? 'grabbing' : 'grab',
-                    direction: 'rtl',
+                    direction: locale === 'ar' ? 'rtl' : 'ltr',
                 }}
             >
-                {navItems.map((item, index) => (
-                    <Link
-                        key={index}
-                        href="#"
-                        className={`flex-shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 transform ${
-                            item.isStatic
-                                ? 'bg-gradient-to-br from-blue-500 to-blue-600 text-white'
-                                : `bg-gray-200 hover:bg-gray-300 text-gray-600 shadow-sm 
-                 ${isDragging ? 'scale-95 opacity-90' : 'scale-100 opacity-100'}`
-                        }`}
-                    >
-                        <span className="text-lg">{item.icon}</span>
-                        <span className="whitespace-nowrap">{item.label}</span>
-                    </Link>
-                ))}
+                {navItems.map((item, index) => {
+                    const isActive = isLinkActive(pathname, item.href);
+
+                    return (
+                        <Link
+                            key={index}
+                            href={item.href}
+                            className={`flex-shrink-0 flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 transform
+            ${
+                                isActive || item.isStatic
+                                    ? 'bg-gradient-to-br from-blue-500 to-blue-600 text-white'
+                                    : `bg-gray-200 hover:bg-gray-300 text-gray-600 shadow-sm 
+                    ${isDragging ? 'scale-95 opacity-90' : 'scale-100 opacity-100'}`
+                            }`}
+                        >
+                            <span className="text-lg">{item.icon}</span>
+                            <span className="whitespace-nowrap">{t(`links.${item.label}`)}</span>
+                        </Link>
+                    );
+                })}
 
                 <div className="flex-shrink-0 w-4"/>
             </div>

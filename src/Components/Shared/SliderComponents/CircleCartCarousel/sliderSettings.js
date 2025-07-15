@@ -8,6 +8,14 @@ export const sliderSettings  = {
     autoplaySpeed: 3000,
     responsive: [
         {
+
+            breakpoint: 10900,
+            settings: {
+                slidesToShow: 6,
+            },
+        },
+        {
+
             breakpoint: 1286,
             settings: {
                 slidesToShow: 4,

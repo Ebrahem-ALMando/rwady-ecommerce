@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import CustomArrows from "@/Components/Shared/SliderComponents/CustomArrow/CustomArrow";
 import { sliderSettings } from "@/Components/Shared/SliderComponents/CircleCartCarousel/sliderSettings";
 import SafeImage from "@/Components/Shared/SafeImage/SafeImage";
@@ -13,6 +13,8 @@ import {
     containerVariants,
     itemVariants
 } from "@/Components/Header/DropdownMenu/CategoryItems/CartCarousel/motionSetting";
+import CircleSkeletonLoader
+    from "@/Components/Shared/SliderComponents/CircleCartCarousel/CircleSkeletonLoader/CircleSkeletonLoader";
 
 const CircleCartCarousel = (props) => {
     const { data = [], filterKey = "category_ids", initialError=false,showName,lang } = props;
@@ -23,6 +25,12 @@ const CircleCartCarousel = (props) => {
     const groups = groupFixedItems(dataList, 6);
     const hasData = groups.length > 0;
     const isSingleGroup = hasData && groups.length === 1 && groups[0].length <= 6;
+    const [isClient, setIsClient] = useState(false);
+
+    useEffect(() => {
+
+        setIsClient(true);
+    }, []);
 
 
      const settings = {
@@ -30,7 +38,8 @@ const CircleCartCarousel = (props) => {
         infinite: !isSingleGroup && dataList.length > 6 ,
         initialSlide: 0,
         arrows:true,
-        slidesToShow: Math.min(6, dataList.length),
+
+        // slidesToShow: Math.min(6, dataList.length),
         prevArrow: (
             <CustomArrows type="prev" activeArrow={activeArrow} onArrowClick={setActiveArrow} />
         ),
@@ -63,75 +72,83 @@ const CircleCartCarousel = (props) => {
             }}
         >
             <AnimatePresence>
-                <motion.div variants={containerVariants} initial="hidden" animate="visible">
-                   <div className={styles.mobileVersion}>
-                       <Slider {...settings}>
-                           {groups.map((group, groupIndex) => (
-                               <div key={groupIndex} className={styles.mobileGrid}>
-                                   {group.map((slide, index) => (
-                                       <motion.div
-                                           key={index}
-                                           variants={itemVariants}
-                                           className={styles.circleItem}
-                                       >
-                                           <div className={styles.imageWrapper}>
-                                               <Link href={`/products?${filterKey}=${slide.id}`} prefetch={false}>
-                                                   <SafeImage
-                                                       fallback="/images/fallbackCircle.png"
-                                                       decoding="async"
-                                                       width={200}
-                                                       height={200}
-                                                       src={slide?.image_url}
-                                                       offOnerror={true}
-                                                       alt={`${slide?.title?.[lang] || slide?.name?.[lang]} صورة`}
-                                                       className={styles.image}
-                                                   />
-                                               </Link>
-                                           </div>
-                                           {showName &&
-                                               <h3 className={styles.title}>{slide.title?.[lang] || slide.name?.[lang]}</h3>}
-                                       </motion.div>
-                                   ))}
-                               </div>
-                           ))
-                           }
-                       </Slider>
-                   </div>
+                {hasData && isClient?
+                    (
+                        <motion.div variants={containerVariants} initial="hidden" animate="visible">
+                            <div className={styles.mobileVersion}>
+                                <Slider {...settings}>
+                                    {groups.map((group, groupIndex) => (
+                                        <div key={groupIndex} className={styles.mobileGrid}>
+                                            {group.map((slide, index) => (
+                                                <motion.div
+                                                    key={index}
+                                                    variants={itemVariants}
+                                                    className={styles.circleItem}
+                                                >
+                                                    <div className={styles.imageWrapper}>
+                                                        <Link href={`/${lang}/products?${filterKey}=${slide.id}`}
+                                                              prefetch={true}>
+                                                            <SafeImage
+                                                                fallback="/images/fallbackCircle.png"
+                                                                decoding="async"
+                                                                width={200}
+                                                                height={200}
+                                                                src={slide?.image_url}
+                                                                offOnerror={true}
+                                                                alt={`${slide?.title?.[lang] || slide?.name?.[lang]} صورة`}
+                                                                className={styles.image}
+                                                            />
+                                                        </Link>
+                                                    </div>
+                                                    {showName &&
+                                                        <h3 className={styles.title}>{slide.title?.[lang] || slide.name?.[lang]}</h3>}
+                                                </motion.div>
+                                            ))}
+                                        </div>
+                                    ))
+                                    }
+                                </Slider>
+                            </div>
 
-                    <div className={styles.desktopVersion}>
-                        <Slider {...settings}>
-                            {
-                                dataList.map((slide, index) => (
-                                        <motion.div
-                                            key={index}
-                                            variants={itemVariants}
-                                            className={styles.circleItem}
-                                        >
-                                            <div className={styles.imageWrapper}>
-                                                <Link href={`/products?${filterKey}=${slide.id}`} prefetch={false}>
-                                                    <SafeImage
-                                                        fallback="/images/fallbackCircle.png"
-                                                        decoding="async"
-                                                        width={200}
-                                                        height={200}
-                                                        src={slide?.image_url}
-                                                        offOnerror={true}
-                                                        alt={`${slide?.title?.[lang] || slide?.name?.[lang]} صورة`}
-                                                        className={styles.image}
-                                                    />
-                                                </Link>
-                                            </div>
-                                            {showName &&
-                                                <h3 className={styles.title}>{slide.title?.[lang] || slide.name?.[lang]}</h3>}
-                                        </motion.div>
-                                ))
-                            }
-                        </Slider>
+                            <div className={styles.desktopVersion}>
+                                <Slider {...settings}>
+                                    {
+                                        dataList.map((slide, index) => (
+                                            <motion.div
+                                                key={index}
+                                                variants={itemVariants}
+                                                className={styles.circleItem}
+                                            >
+                                                <div className={styles.imageWrapper}>
+                                                    <Link href={`/${lang}/products?${filterKey}=${slide.id}`}
+                                                          prefetch={true}>
+                                                        <SafeImage
+                                                            fallback="/images/fallbackCircle.png"
+                                                            decoding="async"
+                                                            width={200}
+                                                            height={200}
+                                                            src={slide?.image_url}
+                                                            offOnerror={true}
+                                                            alt={`${slide?.title?.[lang] || slide?.name?.[lang]} صورة`}
+                                                            className={styles.image}
+                                                        />
+                                                    </Link>
+                                                </div>
+                                                {showName &&
+                                                    <h3 className={styles.title}>{slide.title?.[lang] || slide.name?.[lang]}</h3>}
+                                            </motion.div>
+                                        ))
+                                    }
+                                </Slider>
+                            </div>
+                        </motion.div>
+                    )
+                    :
+                    <CircleSkeletonLoader/>
+                    }
+                    </AnimatePresence>
                     </div>
-                </motion.div>
-            </AnimatePresence>
-        </div>
-    );
-};
+                    );
+                };
 
 export default CircleCartCarousel;

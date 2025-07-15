@@ -14,7 +14,7 @@ const TitleSection = ({initTitle="الاسم فارغ",initLink="#",show_title,t
                 </h3>
             }
             {can_show_more&&
-                <Link href={show_more||initLink}>
+                <Link href={`/${lang}/${show_more||initLink}`} prefetch={true}>
                     <p className={styles.viewAll}>
                         {t("viewAll")}
                         <span  className={lang==='en'?styles.arrowIconRotate:''}>

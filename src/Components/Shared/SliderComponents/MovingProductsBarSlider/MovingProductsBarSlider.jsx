@@ -46,8 +46,8 @@ export default function MovingProductsBarSlider({ productsData, initialError = f
                                         aria-label={`منتج: ${productName}`}
                                     >
                                         <Link
-
-                                            href={`/products/${product.id}/${slugify(product.name?.[lang] || "")}`}>
+                                            prefetch={true}
+                                            href={`${lang}/products/${product.id}/${slugify(product.name?.[lang] || "")}`}>
                                         <SafeImage
                                             fallback="/FallbackProductImage.png"
                                             loading="lazy"

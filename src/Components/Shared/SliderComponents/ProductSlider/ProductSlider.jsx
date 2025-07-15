@@ -1,7 +1,7 @@
 "use client";
 
 import ProductCardSlider from "@/Components/Shared/SliderComponents/ProductCardSlider/ProductCardSlider";
-import React, {useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import CustomArrows from "@/Components/Shared/SliderComponents/CustomArrow/CustomArrow";
 import { products } from "@/Data/products";
 import { sliderSettings } from "@/Components/Shared/SliderComponents/ProductSlider/settings";
@@ -10,6 +10,8 @@ import Slider from "react-slick";
 import { AnimatePresence, motion } from "framer-motion";
 import styles from "./ProductSlider.module.css";
 import {useLocale} from "next-intl";
+import ProductSliderSkeleton
+    from "@/Components/Shared/SliderComponents/ProductSlider/ProductSliderSkeleton/ProductSliderSkeleton";
 
 const groupItems = (items, size) => {
     const groups = [];
@@ -36,7 +38,12 @@ const ProductSlider = ({ initialData, initialError }) => {
 
     const tempData = dataList.length > 0 ? dataList : products;
     const [isDraggingInsideCard, setIsDraggingInsideCard] = useState(false);
+    const [isClient, setIsClient] = useState(false);
 
+    useEffect(() => {
+
+        setIsClient(true);
+    }, []);
     const settings = {
         ...sliderSettings,
         arrows: true,
@@ -87,45 +94,49 @@ const ProductSlider = ({ initialData, initialError }) => {
     return (
         <div style={{ margin: "auto auto 2rem auto", width: "95%", paddingTop: "20px" }}>
             <AnimatePresence>
-                <motion.div  variants={containerVariants} initial="hidden" animate="visible">
+                {isClient ?
+                    <motion.div variants={containerVariants} initial="hidden" animate="visible">
 
-                    <div className={styles.desktopVersion}
-                    >
-                        <Slider
-                            {...settings}>
-                            {tempData
-                                .slice()
-                                .reverse()
-                                .slice(0, 16)
-                                .map((slide, index) => (
-                                    <motion.div key={slide.id + "-" + index} variants={itemVariants}>
-                                        <ProductCardSlider
-                                            product={slide}
-                                            lang={lang}
-                                            setIsDraggingInsideCard={setIsDraggingInsideCard}
-                                        />
-
-
-                                    </motion.div>
-                                ))}
-                        </Slider>
-                    </div>
+                        <div className={styles.desktopVersion}
+                        >
+                            <Slider
+                                {...settings}>
+                                {tempData
+                                    .slice()
+                                    .reverse()
+                                    .slice(0, 16)
+                                    .map((slide, index) => (
+                                        <motion.div key={slide.id + "-" + index} variants={itemVariants}>
+                                            <ProductCardSlider
+                                                product={slide}
+                                                lang={lang}
+                                                setIsDraggingInsideCard={setIsDraggingInsideCard}
+                                            />
 
 
-                    {/*<div className={styles.mobileVersion}>*/}
-                    {/*    <Slider {...settings}>*/}
-                    {/*        {groupItems(tempData.slice()*/}
-                    {/*            .reverse()*/}
-                    {/*            .slice(0, 16), 4).map((group, groupIndex) => (*/}
-                    {/*            <div key={"group-" + groupIndex} className={styles.mobileGrid}>*/}
-                    {/*                {group.map((product, index) => (*/}
-                    {/*                    <ProductCardSlider key={product.id + "-m-" + index} product={product} />*/}
-                    {/*                ))}*/}
-                    {/*            </div>*/}
-                    {/*        ))}*/}
-                    {/*    </Slider>*/}
-                    {/*</div>*/}
-                </motion.div>
+                                        </motion.div>
+                                    ))}
+                            </Slider>
+                        </div>
+
+
+                        {/*<div className={styles.mobileVersion}>*/}
+                        {/*    <Slider {...settings}>*/}
+                        {/*        {groupItems(tempData.slice()*/}
+                        {/*            .reverse()*/}
+                        {/*            .slice(0, 16), 4).map((group, groupIndex) => (*/}
+                        {/*            <div key={"group-" + groupIndex} className={styles.mobileGrid}>*/}
+                        {/*                {group.map((product, index) => (*/}
+                        {/*                    <ProductCardSlider key={product.id + "-m-" + index} product={product} />*/}
+                        {/*                ))}*/}
+                        {/*            </div>*/}
+                        {/*        ))}*/}
+                        {/*    </Slider>*/}
+                        {/*</div>*/}
+                    </motion.div>
+                    :
+                    <ProductSliderSkeleton/>
+                }
             </AnimatePresence>
         </div>
     );

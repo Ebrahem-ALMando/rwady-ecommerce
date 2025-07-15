@@ -45,22 +45,26 @@
 }
 .productImgDiv {
     width: 100%;
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 5 / 5;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 7px;
+    padding:2px 7px;
     max-height: 340px;
     overflow: hidden;
     position: relative;
     border-radius: 0.4rem;
 }
+
 .productImg {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
     border-radius: 0.4rem;
+    display: block;
+    cursor: pointer;
 }
+
 .iconImage {
     display: flex;
     justify-content: space-around;
@@ -370,8 +374,8 @@
         width: 22px;
     }
     .slickDot button, .slickActive button {
-        width: 11px !important;
-        height: 11px !important;
+        width:  9.5px !important;
+        height:  9.5px !important;
         background: transparent !important;
         border: none !important;
         cursor: pointer;
@@ -382,8 +386,13 @@
         opacity: 0;
 
     }
+
+
+
     .slickDot, .slickActive {
-            top: -8px !important;
+        width: 9.5px !important;
+        height:  9.5px !important;
+        top: -8px !important;
     }
     .slickDot {
         background-color: #bec8d9;
@@ -398,11 +407,11 @@
         margin: 0.3rem auto !important;
     }
     .categ{
-        font-size: 10px !important;
+        font-size: 11.4px !important;
         font-weight: 500;
     }
     .title{
-        font-size: 13px !important;
+        font-size: 13.5px !important;
         font-weight: 500;
         -webkit-line-clamp: 3;
         line-height: 1.3rem;
@@ -410,7 +419,7 @@
         padding: 0 3px !important;
     }
     .price,.oldPrice,.available{
-        font-size: 10px !important;
+        font-size: 11px !important;
         font-weight: 500;
         margin-top: 0.5rem;
     }
@@ -418,7 +427,7 @@
         margin-right: 0.2rem;
     }
     .remaining{
-        font-size: 12px !important;
+        font-size: 11.4px !important;
     }
 
 }

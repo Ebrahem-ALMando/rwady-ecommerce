@@ -377,6 +377,7 @@ import {slugify} from "@/utils/slugify";
 import CartActionButton from "@/Components/Shared/Buttons/CartActionButton/CartActionButton";
 import FavouriteToggleButton from "@/Components/Shared/Buttons/FavouriteToggleButton/FavouriteToggleButton";
 import useFavourites from "@/hooks/useFavourites";
+import SafeImage from "@/Components/Shared/SafeImage/SafeImage";
 
 const settings = {
     ...sliderSetting,
@@ -499,8 +500,15 @@ const ProductCardSlider = ({ product, lang, setIsDraggingInsideCard }) => {
 
     const handleColorClick = (color) => {
         const colorImages = product.media?.filter(m => m.type === "image" && m.product_color_id === color.id) || [];
-        if (colorImages.length > 0) setActiveImages(colorImages.slice(0, 3));
+        const firstThree = colorImages.slice(0, 3);
+        const currentUrls = activeImages.map(img => img.url);
+        const newUrls = firstThree.map(img => img.url);
+
+        if (JSON.stringify(currentUrls) !== JSON.stringify(newUrls)) {
+            setActiveImages(firstThree);
+        }
     };
+
 
     const discountValue = getDiscount(product.price, product.price_after_discount);
     const isDiscountValid = product.price_after_discount < product.price;
@@ -509,21 +517,28 @@ const ProductCardSlider = ({ product, lang, setIsDraggingInsideCard }) => {
         const images = product.media?.filter(m => m.type === "image").slice(0, 3) || [];
         setActiveImages(images);
     }, [product.media]);
-    let dragTimer;
+    const dragTimerRef = useRef(null);
+
 
     const handleDisableDrag = () => {
-        clearTimeout(dragTimer);
-        dragTimer = setTimeout(() => {
-            if(setIsDraggingInsideCard)
-            setIsDraggingInsideCard(true);
+        clearTimeout(dragTimerRef.current);
+        dragTimerRef.current = setTimeout(() => {
+            if (setIsDraggingInsideCard) setIsDraggingInsideCard(true);
         }, 250);
     };
 
     const handleEnableDrag = () => {
-        clearTimeout(dragTimer);
-        if(setIsDraggingInsideCard)
-        setIsDraggingInsideCard(false);
+        clearTimeout(dragTimerRef.current);
+        dragTimerRef.current = setTimeout(() => {
+            if (setIsDraggingInsideCard) {
+                setIsDraggingInsideCard(false);
+            }
+        }, 250);
     };
+    const isDraggingNowRef = useRef(false);
+    const router = useRouter();
+
+
 
 
     return (
@@ -562,39 +577,90 @@ const ProductCardSlider = ({ product, lang, setIsDraggingInsideCard }) => {
                 )}
 
 
-                <div className={`relative w-full h-[300px] mt-3 ${styles.imgCont}`}>
+                <div
+                    onMouseEnter={handleDisableDrag}
+                    onMouseLeave={handleEnableDrag}
+                    onTouchStart={handleDisableDrag}
+                    onTouchEnd={handleEnableDrag}
+                    className={`relative w-full h-[300px] mt-3 ${styles.imgCont}`}>
                     <Slider
+
                         {...settings}
-                        onMouseEnter={handleDisableDrag}
-                        onMouseLeave={handleEnableDrag}
-                        onTouchStart={handleDisableDrag}
-                        onTouchEnd={handleEnableDrag}
+                        // onMouseEnter={handleDisableDrag}
+                        // onMouseLeave={handleEnableDrag}
+                        // onTouchStart={handleDisableDrag}
+                        // onTouchEnd={handleEnableDrag}
                     >
-                        {activeImages.map((image, index) => (
-                            <div key={index}>
+                        {activeImages?.length > 0 ? (
+
+                            activeImages?.map((image, index) => (
+                                <div key={index}
+                                     onClick={() => {
+                                         if (!isDraggingNowRef.current) {
+                                             router.push(`${lang}/products/${product.id}/${slugify(product.name?.[lang] || "")}`);
+                                         }
+                                     }}
+                                     onMouseDown={() => {
+                                         isDraggingNowRef.current = false;
+                                     }}
+                                     onMouseMove={() => {
+                                         isDraggingNowRef.current = true;
+                                     }}
+                                     onTouchStart={() => {
+                                         isDraggingNowRef.current = false;
+                                     }}
+                                     onTouchMove={() => {
+                                         isDraggingNowRef.current = true;
+                                     }}
+
+                                >
+                                    <motion.div
+                                        className={styles.productImgDiv}
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        transition={{ duration: 0.3 }}
+                                    >
+                                        <SafeImage
+                                            fallback="/FallbackProductImage.png"
+                                            src={image.url}
+                                            alt={product.name?.[lang] ? `${product.name[lang]} - ${index + 1}` : `Product Image ${index + 1}`}
+                                            loading="lazy"
+                                            className={styles.productImg}
+                                            draggable={false}
+                                            width={300}
+                                            height={300}
+                                        />
+                                    </motion.div>
+                                </div>
+                            ))
+                        ) : (
+
+                            <div>
                                 <motion.div
                                     className={styles.productImgDiv}
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
                                     transition={{ duration: 0.3 }}
                                 >
-                                    <img
-                                        onMouseEnter={handleDisableDrag}
-                                        onMouseLeave={handleEnableDrag}
-                                        onTouchStart={handleDisableDrag}
-                                        onTouchEnd={handleEnableDrag}
-                                        src={image.url||"/FallbackProductImage.png"}
-                                        alt={`Product Image ${index + 1}`}
+                                    <SafeImage
+                                        fallback="/FallbackProductImage.png"
+                                        src="/FallbackProductImage.png"
+                                        alt="Product Image"
                                         loading="lazy"
                                         className={styles.productImg}
                                         draggable={false}
+                                        width={300}
+                                        height={300}
                                     />
                                 </motion.div>
                             </div>
-                        ))}
-                      </Slider>
+                        )}
 
-                    <div className={`absolute flex flex-col gap-2 ${styles.icons}`} style={{bottom: '-20px', left: '10px'}}>
+
+                    </Slider>
+
+                    <div className={`absolute flex flex-col gap-2 ${styles.icons}`}
+                         style={{bottom: '-20px', left: '10px'}}>
                         <div className={styles.iconImage}>
                             <FavouriteToggleButton
                                 liked={liked}
@@ -604,14 +670,14 @@ const ProductCardSlider = ({ product, lang, setIsDraggingInsideCard }) => {
                         </div>
                         <div className={styles.iconImage}>
                             <p>
-                                {product.total_orders||0}
+                                {product.total_orders || 0}
                             </p>
                             {salesNumIcon}
                         </div>
                     </div>
                 </div>
 
-                <Link href={`/products/${product.id}/${slugify(product.name?.[lang] || "")}`}>
+                <Link prefetch={true} href={`${lang}/products/${product.id}/${slugify(product.name?.[lang] || "")}`}>
                     <div className={styles.infoCard}>
                         <div className="flex flex-wrap gap-2 mt-3 mb-1">
                             {product.categories?.slice(0, 2).map((ctr, idx) => (

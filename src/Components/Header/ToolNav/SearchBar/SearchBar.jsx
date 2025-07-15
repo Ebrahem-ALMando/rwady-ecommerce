@@ -276,7 +276,7 @@ import useDebounce from "@/hooks/useDebounce";
 import {images} from "@/Data/images";
 import {AnimatePresence,motion} from "framer-motion";
 import SafeImage from "@/Components/Shared/SafeImage/SafeImage";
-import {useRouter} from "next/navigation";
+import {useRouter, useSearchParams} from "next/navigation";
 import Link from 'next/link'
 import RecentSearches from "@/Components/Shared/SearchModal/RecentSearches/RecentSearches";
 import {useLocale, useTranslations} from "next-intl";
@@ -296,9 +296,17 @@ const SearchBar = ({
     const [searchQuery, setSearchQuery] = useState('');
     const [recentSearches, setRecentSearches] = useState([]);
     const [showMore, setShowMore] = useState(false);
-
+    const router =useRouter()
     const debouncedQuery = useDebounce(searchQuery, 600);
-    const router = useRouter();
+
+    const searchParams = useSearchParams();
+    const search = searchParams.get('search') || '';
+    useEffect(() => {
+        if (search && search !== searchQuery) {
+            setSearchQuery(search);
+        }
+    }, [search]);
+
 
     const inputRef=useRef(null)
 

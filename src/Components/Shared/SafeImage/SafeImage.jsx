@@ -34,6 +34,10 @@ const SafeImage = ({
 
     return (
         <Image
+            onMouseEnter={props.onMouseEnter}
+            onMouseLeave={props.onMouseLeave}
+            onTouchStart={props.onTouchStart}
+            onTouchEnd={props.onTouchEnd}
             src={imgSrc}
             alt={alt}
             decoding="async"

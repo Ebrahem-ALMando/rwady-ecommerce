@@ -4,13 +4,14 @@ import styles from './MainNavigation.module.css';
 import DropdownMenu from "@/Components/Header/DropdownMenu/DropdownMenu";
 import Language from "@/Components/Shared/Language/Language";
 import DownloadAppWithLogo from "@/Components/Header/ToolNav/DownloadAppWithLogo/DownloadWithLogo";
-import { navLinks } from "@/Data/NavLinks";
-import { useTranslations } from 'next-intl';
+import { getNavLinks } from "@/Data/getNavLinks";
+import {useLocale, useTranslations} from 'next-intl';
 
 
 const MainNavigation = ({ isMenuOpen, isOpenDropdown, toggleMenu, setIsOpenDropdown }) => {
     const  t  = useTranslations("mainNav");
-
+    const locale = useLocale();
+    const navLinks = getNavLinks(locale);
     return (
         <div className={styles.mainDiv}>
             <div className={styles.contDiv}>

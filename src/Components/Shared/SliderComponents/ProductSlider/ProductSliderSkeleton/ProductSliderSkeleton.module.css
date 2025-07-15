@@ -16,7 +16,7 @@
     .show3 { display: none; }
 }
 @media (max-width: 768px) {
-    .show2 { display: none; }
+    /*.show2 { display: none; }*/
 }
 /*@media (max-width: 480px) {*/
 /*    .show1 { display: none; }*/

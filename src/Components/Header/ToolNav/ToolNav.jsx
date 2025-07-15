@@ -16,12 +16,14 @@ import {
 import { CiSearch } from "react-icons/ci";
 import Link from "next/link";
 import Image from "next/image";
-import React, {useEffect, useRef, useState, useCallback, useMemo} from "react";
-import { useTranslations } from 'next-intl';
+import React, {useEffect, useRef, useState, useCallback, useMemo, Suspense} from "react";
+import {useLocale, useTranslations} from 'next-intl';
 import AutoScrollNavSlider from "@/Components/Header/ToolNav/AutoScrollNavSlider/AutoScrollNavSlider";
 import SearchModal from "@/Components/Shared/SearchModal/SearchModal";
 import useCart from "@/hooks/useCart";
 import {getCartFromStorage} from "@/utils/cartStorage";
+import Loading from "@/Components/Shared/Loading/Loading";
+import useFavourites from "@/hooks/useFavourites";
 
 const ToolNav = ({ toggleMenu, isScrolled,getCartCount }) => {
     const t = useTranslations("toolNav");
@@ -32,8 +34,10 @@ const ToolNav = ({ toggleMenu, isScrolled,getCartCount }) => {
 
     const openSearchModal = () => setIsModalOpen(true);
     const closeSearchModal = () => setIsModalOpen(false);
+    const lang=useLocale()
 
-
+    const { favourites } = useFavourites();
+    const favouritesCount = favourites.length;
 
 
     const handleToggleMenu = useCallback(() => {
@@ -87,13 +91,12 @@ const ToolNav = ({ toggleMenu, isScrolled,getCartCount }) => {
                                 {isMenuOpen ? CloseNavIcon : MenuNavIcon}
                             </button>
 
-                            <TopIcon link="/profile" isSelect element={ProfileIcon} aria={t("profile")} />
-                            <TopIcon link="/collections/favourites"
-
-
-
+                            <TopIcon link={`/${lang}/profile`} isSelect element={ProfileIcon} aria={t("profile")} />
+                            <TopIcon link={`/${lang}/collections/favourites`}
+                                     count={favouritesCount}
                                      element={FavouriteIcon} aria={t("favourites")} />
-                            <TopIcon link="/shopping-cart" count={cartCount } element={ShoppingCartIcon} aria={t("cart")} />
+                            <TopIcon link={`/${lang}/shopping-cart`}
+                                     count={cartCount } element={ShoppingCartIcon} aria={t("cart")} />
                             <TopIcon setIsOpen={() => setNotificationVisible(prev => !prev)} count={9} element={NotificationIcon} aria={t("notifications")} />
 
 
@@ -111,7 +114,7 @@ const ToolNav = ({ toggleMenu, isScrolled,getCartCount }) => {
                         </div>
 
                         <div className={styles.logo}>
-                            <Link href="/" aria-label={t("homeLink")}>
+                            <Link href={`/${lang}`} aria-label={t("homeLink")}>
                                 <Image
                                     src="/logo.png"
                                     alt="Rwady Logo"
@@ -128,13 +131,15 @@ const ToolNav = ({ toggleMenu, isScrolled,getCartCount }) => {
 
 
 
-                        <SearchBar
-                            className={styles.hideOnMobile}
-                            isScrolled={isScrolled}
-                            onOpenModal={openSearchModal}
-                            onCloseModal={closeSearchModal}
-                            isModalOpen={isModalOpen}
-                        />
+                     <Suspense fallback={<Loading/>}>
+                         <SearchBar
+                             className={styles.hideOnMobile}
+                             isScrolled={isScrolled}
+                             onOpenModal={openSearchModal}
+                             onCloseModal={closeSearchModal}
+                             isModalOpen={isModalOpen}
+                         />
+                     </Suspense>
 
 
                         <AutoScrollNavSlider
@@ -146,7 +151,9 @@ const ToolNav = ({ toggleMenu, isScrolled,getCartCount }) => {
                     </div>
 
                     <div className={styles.toolsDiv}>
-                        <DownloadAppWithLogo/>
+                        <DownloadAppWithLogo
+                            lang={lang}
+                        />
                     </div>
                 </div>
             </div>
