@@ -597,7 +597,7 @@ const ProductCardSlider = ({ product, lang, setIsDraggingInsideCard }) => {
                                 <div key={index}
                                      onClick={() => {
                                          if (!isDraggingNowRef.current) {
-                                             router.push(`${lang}/products/${product.id}/${slugify(product.name?.[lang] || "")}`);
+                                             router.push(`/${lang}/products/${product.id}/${slugify(product.name?.[lang] || "")}`);
                                          }
                                      }}
                                      onMouseDown={() => {
@@ -677,7 +677,7 @@ const ProductCardSlider = ({ product, lang, setIsDraggingInsideCard }) => {
                     </div>
                 </div>
 
-                <Link prefetch={true} href={`${lang}/products/${product.id}/${slugify(product.name?.[lang] || "")}`}>
+                <Link prefetch={true} href={`/${lang}/products/${product.id}/${slugify(product.name?.[lang] || "")}`}>
                     <div className={styles.infoCard}>
                         <div className="flex flex-wrap gap-2 mt-3 mb-1">
                             {product.categories?.slice(0, 2).map((ctr, idx) => (

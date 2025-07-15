@@ -52,7 +52,9 @@ const ShoppingCart=()=>{
                     </div>
                 </>
                 :
-                <EmptyState message={t("emptyCart")}/>
+                <div style={{width:'90%',display:'flex',justifyContent:'center',alignItems:'center',margin:'auto'}}>
+                    <EmptyState message={t("emptyCart")}/>
+                </div>
             }
 
         </div>

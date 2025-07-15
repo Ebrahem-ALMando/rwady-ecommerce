@@ -27,6 +27,7 @@ const TopIcon = ({
             className={`${styles.link} ${showMobile ? styles.showMobile : ""}`}
             aria-label={aria}
             onClick={onOpenModal}
+            prefetch={true}
         >
             <div
                 className={`${styles.topIcon} 

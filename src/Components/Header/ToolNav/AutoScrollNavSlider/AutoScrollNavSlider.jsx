@@ -84,7 +84,7 @@ export default function MobileNavScrollBar({ isScrolled, className }) {
                 }}
             >
                 {navItems.map((item, index) => {
-                    const isActive = isLinkActive(pathname, item.href,locale);
+                    const isActive = isLinkActive(pathname, item.href,locale,navItems);
 
                     return (
                         <Link
