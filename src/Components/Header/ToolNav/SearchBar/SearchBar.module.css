@@ -202,18 +202,25 @@ html[dir="ltr"] .SearchIcon {
         transition: all 0.3s ease-in-out;
     }
     .navWrapper {
-        max-height: 60px;
+        height: auto;
         opacity: 1;
+        transform: translateY(0);
         pointer-events: auto;
+        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, height 0.3s ease-in-out;
+        will-change: transform, opacity, height;
         overflow: hidden;
-        transition: max-height 0.3s ease, opacity 0.3s ease;
     }
 
-    .scrolled {
-        max-height: 0;
+    .navWrapper.scrolled {
+        height: 0;
         opacity: 0;
+        transform: translateY(-10px);
         pointer-events: none;
+        overflow: hidden;
+        padding: 0 !important;
     }
+
+
 
 
     /*.scrolled {*/

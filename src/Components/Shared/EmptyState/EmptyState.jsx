@@ -80,7 +80,7 @@ const EmptyState = ({ message = "لا توجد منتجات لعرضها حال�
                         ease: "anticipate",
                     }}
                 >
-                  <Link href={initLink} prefetch={true} >
+                  <Link href={`/${lang}/${initLink}`} prefetch={true} >
                       <Image
                           src="/img_7.png"
                           alt={message}

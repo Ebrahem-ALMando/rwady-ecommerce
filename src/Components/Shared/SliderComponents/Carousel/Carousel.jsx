@@ -77,8 +77,8 @@ const Carousel = ({ dataList = [],lang }) => {
                 transition={{ duration: 0.4 }}
                 className={`${styles.container} mx-auto mt-4 mb-[-50px]`}
             >
-                <div>
-                    <Slider {...settings}>
+                <div className={styles.main}>
+                    <Slider {...settings} className={`${styles.main} custom-slider`}>
                         {dataTemp.map((slide, index) => (
                             <div key={index} className={styles.banner}>
                                 <div className="relative w-full h-full">
@@ -86,10 +86,11 @@ const Carousel = ({ dataList = [],lang }) => {
                                         src={slide.image_url}
                                         fallback="/Home/slider1.png"
                                         alt={slide.title?.[lang]}
-                                        width={3000}
-                                        height={3000}
+                                        width={4000}
+                                        height={4000}
                                         decoding="async"
                                         priority={true}
+                                        className={`w-full h-full object-cover rounded-lg`}
                                         // className={`w-full h-full object-cover rounded-lg ${lang === 'en' ? 'scale-x-[-1]' : ''}`}
                                     />
                                 </div>

@@ -183,3 +183,6 @@ body {
     transform: translateY(0);
   }
 }
+.custom-slider .slick-slide > div {
+  width: 100% !important;
+}

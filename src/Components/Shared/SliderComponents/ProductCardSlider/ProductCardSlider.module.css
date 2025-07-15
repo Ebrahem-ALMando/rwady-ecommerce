@@ -305,7 +305,7 @@
 @media (max-width: 775px)
 {
     .cardDiv{
-        padding:5px !important;
+        padding:20px 5px !important;
 
     }
     .card {
@@ -313,6 +313,7 @@
         width: 165px;
         min-height: 280px;
         height: auto;
+
     }
     .saveSeller{
         width: 43px;
@@ -407,8 +408,9 @@
         margin: 0.3rem auto !important;
     }
     .categ{
-        font-size: 11.4px !important;
+        font-size: 10px !important;
         font-weight: 500;
+        min-width: max-content;
     }
     .title{
         font-size: 13.5px !important;

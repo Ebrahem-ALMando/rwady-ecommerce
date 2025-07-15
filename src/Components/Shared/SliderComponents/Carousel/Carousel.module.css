@@ -14,7 +14,7 @@
     /*width: 100%;*/
     aspect-ratio: 16 / 4.85;
     max-height: 593px !important;
-
+    display: inline-block;
     /*overflow: hidden;*/
 
 }
@@ -100,6 +100,17 @@
 .slickActive {
     background-color: #007bff !important;
     width: 35px !important;
+}
+.main{
+    width: 100% !important;
+}
+.banner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    aspect-ratio: 16 / 4.85;
+    max-height: 593px !important;
 }
 
 
