@@ -1,6 +1,6 @@
 "use client";
 import styles from './ToolNav.module.css';
-import TopIcon from "@/Components/Header/ToolNav/Icons/TopIcon";
+
 import Language from "@/Components/Shared/Language/Language";
 import SearchBar from "@/Components/Header/ToolNav/SearchBar/SearchBar";
 import DownloadAppWithLogo from "@/Components/Header/ToolNav/DownloadAppWithLogo/DownloadWithLogo";
@@ -25,12 +25,19 @@ import {getCartFromStorage} from "@/utils/cartStorage";
 import Loading from "@/Components/Shared/Loading/Loading";
 import useFavourites from "@/hooks/useFavourites";
 
+import {RiListIndefinite} from "react-icons/ri";
+import {IconFade} from "@/Components/Header/ToolNav/Icons/IconFade";
+import TopIcon from "@/Components/Header/ToolNav/Icons/TopIcon";
+import {AnimatePresence,motion} from "framer-motion";
+
+
 const ToolNav = ({ toggleMenu, isScrolled,getCartCount }) => {
     const t = useTranslations("toolNav");
     const notificationRef = useRef(null);
     const [isNotificationVisible, setNotificationVisible] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isSearchOpen, setIsSearchOpen] = useState(false);
 
     const openSearchModal = () => setIsModalOpen(true);
     const closeSearchModal = () => setIsModalOpen(false);
@@ -91,26 +98,35 @@ const ToolNav = ({ toggleMenu, isScrolled,getCartCount }) => {
                                 {isMenuOpen ? CloseNavIcon : MenuNavIcon}
                             </button>
 
-                            <TopIcon link={`/${lang}/profile`} isSelect element={ProfileIcon} aria={t("profile")} />
+                            <TopIcon link={`/${lang}/profile`} isSelect element={ProfileIcon} aria={t("profile")}/>
                             <TopIcon link={`/${lang}/collections/favourites`}
                                      count={favouritesCount}
-                                     element={FavouriteIcon} aria={t("favourites")} />
+                                     element={FavouriteIcon} aria={t("favourites")}/>
                             <TopIcon link={`/${lang}/shopping-cart`}
-                                     count={cartCount } element={ShoppingCartIcon} aria={t("cart")} />
-                            <TopIcon setIsOpen={() => setNotificationVisible(prev => !prev)} count={9} element={NotificationIcon} aria={t("notifications")} />
-
+                                     count={cartCount} element={ShoppingCartIcon} aria={t("cart")}/>
+                            <TopIcon setIsOpen={() => setNotificationVisible(prev => !prev)} count={9}
+                                     element={NotificationIcon} aria={t("notifications")}/>
 
 
                             <TopIcon
                                 showMobile
-                                isSearch
-                                onOpenModal={openSearchModal}
-                                element={<CiSearch size={28} />}
-                                aria={t("search")}
+                                isSearch={isSearchOpen}
+                                onOpenModal={setIsSearchOpen}
+                                aria={isSearchOpen ? "قائمة" : "بحث"}
+                                element={
+                                    <div style={{position: "relative", width: 28, height: 28}}>
+                                        <IconFade show={!isSearchOpen}>
+                                            <CiSearch size={28}/>
+                                        </IconFade>
+                                        <IconFade show={isSearchOpen}>
+                                            <RiListIndefinite size={28}/>
+                                        </IconFade>
+                                    </div>
+                                }
                             />
 
 
-                            <Language hideMobile />
+                            <Language hideMobile/>
                         </div>
 
                         <div className={styles.logo}>
@@ -126,29 +142,54 @@ const ToolNav = ({ toggleMenu, isScrolled,getCartCount }) => {
                         </div>
                     </div>
 
-                    <div className={styles.toolsDiv}>
-
-
-
-
-                     <Suspense fallback={<Loading/>}>
-                         <SearchBar
-                             className={styles.hideOnMobile}
-                             isScrolled={isScrolled}
-                             onOpenModal={openSearchModal}
-                             onCloseModal={closeSearchModal}
-                             isModalOpen={isModalOpen}
-                         />
-                     </Suspense>
-
-
-                        <AutoScrollNavSlider
-                                className={styles.showOnMobile}
-                                isScrolled={isScrolled}
-                        />
-
-
+                    <div className={`${styles.toolsDiv} ${isScrolled ? styles.isScrole : ""}`}>
+                       <div className={styles.hideOnMobile} style={{width:'100%'}}>
+                           <Suspense fallback={<Loading/>}>
+                               <SearchBar
+                                   isScrolled={isScrolled}
+                                   onOpenModal={openSearchModal}
+                                   onCloseModal={closeSearchModal}
+                                   isModalOpen={isModalOpen}
+                               />
+                           </Suspense>
+                       </div>
+                        <AnimatePresence
+                            mode="wait">
+                            {isSearchOpen ? (
+                                <motion.div
+                                    className={styles.showOnMobile}
+                                    key="search"
+                                    initial={{opacity: 0, x: 10}}
+                                    animate={{opacity: 1, x: 0}}
+                                    exit={{opacity: 0, x: -10}}
+                                    transition={{duration: 0.3}}
+                                >
+                                    <Suspense fallback={<Loading/>}>
+                                        <SearchBar
+                                            isScrolled={isScrolled}
+                                            onOpenModal={openSearchModal}
+                                            onCloseModal={closeSearchModal}
+                                            isModalOpen={isModalOpen}
+                                        />
+                                    </Suspense>
+                                </motion.div>
+                            ) : (
+                                <motion.div
+                                    key="nav"
+                                    initial={{opacity: 0, y: 10}}
+                                    animate={{opacity: 1, y: 0}}
+                                    exit={{opacity: 0, y: -10}}
+                                    transition={{duration: 0.3}}
+                                >
+                                    <AutoScrollNavSlider
+                                        className={styles.showOnMobile}
+                                        isScrolled={isScrolled}
+                                    />
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
                     </div>
+
 
                     <div className={styles.toolsDiv}>
                         <DownloadAppWithLogo

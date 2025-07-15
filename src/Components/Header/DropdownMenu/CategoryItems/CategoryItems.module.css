@@ -43,7 +43,7 @@
     flex-wrap: wrap;
     gap: 5px;
     margin-top: 2rem;
-    /*overflow-x: hidden;*/
+    overflow-x: hidden;
 }
 @media (max-width: 630px)
 {

@@ -397,9 +397,25 @@ const SearchBar = ({
                 {t("label")}
             </label>
 
-            <span className={styles.SearchIcon}>
-                <CiSearch size={22} />
-            </span>
+            <span
+                className={styles.SearchIcon}
+                role="button"
+                tabIndex={0}
+                onClick={() => {
+                    if (!searchQuery.trim()) return;
+                    router.push(`/products?search=${searchQuery.trim()}`);
+                    closeModal();
+                }}
+                onKeyDown={(e) => {
+                    if (e.key === "Enter" && searchQuery.trim()) {
+                        router.push(`/products?search=${searchQuery.trim()}`);
+                        closeModal();
+                    }
+                }}
+            >
+                      <CiSearch size={22}/>
+                    </span>
+
 
             <input
                 ref={inputRef}
@@ -416,9 +432,9 @@ const SearchBar = ({
                     handleSearch(query);
                 }}
                 onBlur={closeModal}
-                onClick={(e)=>{
+                onClick={(e) => {
                     // const query = e.target.value;
-                    if(recentSearches.length>0) {
+                    if (recentSearches.length > 0) {
                         onOpenModal();
                     }
                 }}
@@ -432,12 +448,11 @@ const SearchBar = ({
             />
             <AnimatePresence>
                 {isModalOpen && (
-
                     <motion.div
-                        initial={{ opacity: 0, y: -15 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -15 }}
-                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                        initial={{opacity: 0, y: -15}}
+                        animate={{opacity: 1, y: 0}}
+                        exit={{opacity: 0, y: -15}}
+                        transition={{duration: 0.3, ease: "easeInOut"}}
                         className={`${styles.searchArea}`}>
                         {searchQuery.length === 0 && showRecentSearches &&
                             <ul className={styles.resultsList}>
@@ -481,61 +496,60 @@ const SearchBar = ({
                             <ul className={styles.resultsList}
 
                             >
-                                {filteredProducts.length > 0&& !showRecentSearches ? (
+                                {filteredProducts.length > 0 && !showRecentSearches ? (
                                     filteredProducts.map((result, index) => {
 
                                         const imageUrl =
                                             result.media?.find((item) => item.type === 'image')?.url ??
                                             '/placeholder.jpg';
-                                                    return (
-                                                        <motion.li
-                                                            key={index}
-                                                            className={styles.resultItem}
-                                                            initial={{opacity: 0, x: -30}}
-                                                            animate={{opacity: 1, x: 0}}
-                                                            transition={{duration: 0.3, delay: index * 0.05}}
+                                        return (
+                                            <motion.li
+                                                key={index}
+                                                className={styles.resultItem}
+                                                initial={{opacity: 0, x: -30}}
+                                                animate={{opacity: 1, x: 0}}
+                                                transition={{duration: 0.3, delay: index * 0.05}}
 
-                                                        >
-                                                            <div
-                                                                onMouseEnter={() => {
-                                                                    router.prefetch(`/${lang}/products?search=${searchQuery.trim()}`);
-                                                                }}
-                                                                onClick={(e) =>
-                                                                {
-                                                                    e.stopPropagation()
-                                                                    router.push(`/${lang}/products?search=${searchQuery.trim()}`);
-                                                                }}
-                                                                className={styles.productInfo}
+                                            >
+                                                <div
+                                                    onMouseEnter={() => {
+                                                        router.prefetch(`/${lang}/products?search=${searchQuery.trim()}`);
+                                                    }}
+                                                    onClick={(e) => {
+                                                        e.stopPropagation()
+                                                        router.push(`/${lang}/products?search=${searchQuery.trim()}`);
+                                                    }}
+                                                    className={styles.productInfo}
 
-                                                            >
-                                                                <div className={styles.wrapperImg}>
-                                                                    <SafeImage
-                                                                        fallback="/FallbackProductImage.png"
-                                                                        src={imageUrl}
-                                                                        alt={result.name?.[lang]}
-                                                                        width={50}
-                                                                        height={50}
-                                                                        className={styles.productImage}
-                                                                    />
-                                                                </div>
-                                                                <span className={styles.productName}>{result.name?.[lang]}</span>
-                                                            </div>
+                                                >
+                                                    <div className={styles.wrapperImg}>
+                                                        <SafeImage
+                                                            fallback="/FallbackProductImage.png"
+                                                            src={imageUrl}
+                                                            alt={result.name?.[lang]}
+                                                            width={50}
+                                                            height={50}
+                                                            className={styles.productImage}
+                                                        />
+                                                    </div>
+                                                    <span className={styles.productName}>{result.name?.[lang]}</span>
+                                                </div>
 
-                                                            <Link
-                                                                href={`/${lang}/products/${result.id}/${slugify(result?.name?.[lang])}`}
-                                                                className={styles.detailsButton}
-                                                                prefetch={false}
-                                                                onClick={(e) => e.stopPropagation()}
-                                                                onMouseEnter={() => {
-                                                                    router.prefetch(`/${lang}/products/${result.id}/${slugify(result?.name?.[lang])}`);
-                                                                }}
-                                                            >
-                                                                <FiInfo/>
-                                                                <span>{t("details", "تفاصيل")}</span>
-                                                            </Link>
-                                                        </motion.li>
+                                                <Link
+                                                    href={`/${lang}/products/${result.id}/${slugify(result?.name?.[lang])}`}
+                                                    className={styles.detailsButton}
+                                                    prefetch={false}
+                                                    onClick={(e) => e.stopPropagation()}
+                                                    onMouseEnter={() => {
+                                                        router.prefetch(`/${lang}/products/${result.id}/${slugify(result?.name?.[lang])}`);
+                                                    }}
+                                                >
+                                                    <FiInfo/>
+                                                    <span>{t("details", "تفاصيل")}</span>
+                                                </Link>
+                                            </motion.li>
 
-                                                    )
+                                        )
 
                                     })
                                 ) : (

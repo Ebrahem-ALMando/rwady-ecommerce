@@ -160,6 +160,20 @@
     .showOnMobile {
         display: block !important;
     }
+    .toolsDiv {
+        position: relative;
+        min-height: 70px;
+        transition: all 0.3s ease;
+        overflow: hidden;
+    }
+
+    .isScrole {
+        display: none !important;
+        opacity: 0;
+        max-height: 0 !important;
+        pointer-events: none;
+    }
+
 }
 @media (max-width: 505px)
 {

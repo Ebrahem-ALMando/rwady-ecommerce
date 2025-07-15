@@ -1,3 +1,4 @@
+// TopIcon.jsx
 import React from "react";
 import styles from "./TopIcon.module.css";
 import Link from "next/link";
@@ -12,12 +13,18 @@ const TopIcon = ({
                      isDownload = false,
                      showMobile = false,
                      aria = "Top icon",
-                     onOpenModal
+                     onOpenModal,
                  }) => {
     const handleClick = (e) => {
         if (setIsOpen) {
             e.preventDefault();
             setIsOpen((prev) => !prev);
+        }
+    };
+    const handleOnOpenModal = (e) => {
+        if (onOpenModal) {
+            e.preventDefault();
+            onOpenModal((prev) => !prev);
         }
     };
 
@@ -26,7 +33,7 @@ const TopIcon = ({
             href={link}
             className={`${styles.link} ${showMobile ? styles.showMobile : ""}`}
             aria-label={aria}
-            onClick={onOpenModal}
+            onClick={handleOnOpenModal}
             prefetch={true}
         >
             <div
@@ -55,3 +62,5 @@ const TopIcon = ({
 };
 
 export default TopIcon;
+
+
