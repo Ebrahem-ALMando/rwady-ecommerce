@@ -33,6 +33,7 @@
 }
 .heading{
     text-transform: capitalize;
+    margin: 0 1rem;
 }
 .items{
     width:100%;

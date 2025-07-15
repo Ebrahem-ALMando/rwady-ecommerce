@@ -1,19 +1,20 @@
 export function isLinkActive(pathname, href, locale, navItems = []) {
     if (!locale) return false;
 
-    const normalizedHref = href.endsWith('/') ? href : href + '/';
-    const normalizedPath = pathname.endsWith('/') ? pathname : pathname + '/';
+    const addTrailingSlash = (url) => url.endsWith('/') ? url : url + '/';
 
-    const isHome = normalizedHref === `/${locale}/` || normalizedHref === `/${locale}`;
+    const normalizedHref = addTrailingSlash(href);
+    const normalizedPath = addTrailingSlash(pathname);
+    const localePrefix = `/${locale}/`;
+
+
+    const isHome = normalizedHref === localePrefix;
 
     if (isHome) {
-        const knownHrefs = navItems.map(item =>
-            item.href.endsWith('/') ? item.href : item.href + '/'
-        );
-
-
+        const knownHrefs = navItems.map(item => addTrailingSlash(item.href));
         const isMatched = knownHrefs.some(href => normalizedPath === href);
-        return !isMatched;
+
+        return !isMatched || normalizedPath === localePrefix;
     }
 
     return normalizedPath === normalizedHref;
