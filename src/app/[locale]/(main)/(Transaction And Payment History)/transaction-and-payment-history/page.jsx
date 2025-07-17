@@ -1,14 +1,13 @@
-// import Navbar from "@/Components/Header/Navbar";
-// import Orders from "@/Components/Orders/Orders";
-// import Footer from "@/Components/Footer/Footer";
-// import TransactionAndPaymentHistory from "@/Components/TransactionAndPaymentHistory/TransactionAndPaymentHistory";
+
+
+import TransactionAndPaymentHistory from "@/Components/TransactionAndPaymentHistory/TransactionAndPaymentHistory";
 
 const TransactionAndPaymentHistoryPage = (props) => {
     return(
         <>
-            {/*<Navbar/>*/}
-            {/*<TransactionAndPaymentHistory/>*/}
-            {/*<Footer/>*/}
+
+            <TransactionAndPaymentHistory/>
+
         </>
     )
 }

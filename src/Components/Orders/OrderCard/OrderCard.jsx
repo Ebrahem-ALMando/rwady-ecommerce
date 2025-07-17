@@ -121,7 +121,7 @@ const OrderCard = ({ id, date, status, paymentStatus, isCanceled,locale }) => {
 
             <div className={styles.actions}>
                 <Link className={styles.detailsBtn} href={`/orders/${id}`}>
-                    {t("details")}{" "}
+                    {t("orderDetails")}{" "}
                     <span
                         className={styles.arrow}
                         style={{

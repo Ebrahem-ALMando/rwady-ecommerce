@@ -1,89 +1,202 @@
 
+/*.table {*/
+/*    width: 100%;*/
+/*    border-collapse: collapse;*/
+/*    margin: 2rem auto;*/
+/*    font-size: 16px;*/
+/*    text-align: start;*/
+
+/*}*/
+/*.headerRow {*/
+/*    font-size: 17px;*/
+/*    font-weight: 400;*/
+/*    color:#0641AD;*/
+/*}*/
+
+/*.headerCell {*/
+/*    padding: 12px 15px 1.3rem 15px;*/
+/*}*/
+/*.oddRow{*/
+/*    background-color: #ffffff;*/
+
+/*}*/
+/*.bodyRow{*/
+/*    font-size: 16px;*/
+/*    font-weight: 400;*/
+
+/*}*/
+/*.evenRow{*/
+/*    background-color: #f2f5fb;*/
+/*}*/
+/*.bodyRow td:nth-of-type(1){*/
+/*    direction: ltr;*/
+/*    font-weight: 500;*/
+/*}*/
+/*.bodyRow td:nth-of-type(4){*/
+/*    color: #0641AD;*/
+/*    direction: ltr;*/
+/*    font-weight: 500;*/
+/*}*/
+/*.bodyCell {*/
+/*    padding: 15px;*/
+/*}*/
+/*.line {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    gap: 8px;*/
+/*    font-size: 15px;*/
+/*    margin: 6px 0;*/
+/*    justify-content: start;*/
+
+/*}*/
+/*.icon{*/
+/*    color: #555;*/
+/*}*/
+/*.status{*/
+/*    padding:5px;*/
+/*    border-radius: 5px;*/
+/*    width:80px;*/
+/*    text-align: start;*/
+/*    min-width: max-content;*/
+/*}*/
+/*.inProgress{*/
+/*   background-color:#FF7A001F;*/
+/*   color:#FF7A00;*/
+/*}*/
+/*.success{*/
+/*    background-color:#1DA04C1F;*/
+/*    color:#00AF6C;*/
+/*}*/
+/*.failed{*/
+/*    background-color:#F551571A;*/
+/*    color:#F55157;*/
+/*}*/
+/*.rejected{*/
+/*    background-color:#F551571A;*/
+/*    color:#F55157;*/
+/*}*/
+/*.bodyCell button{*/
+/*    background-color: #0B65BA1A;*/
+/*    color: #417AC8;*/
+/*    padding: 8px;*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
+/*    gap: 10px;*/
+/*    border-radius: 8px;*/
+/*}*/
+/*@media (max-width: 720px) {*/
+/*    .table {*/
+/*        width: 100%;*/
+/*        min-width: 600px;*/
+/*    }*/
+/*}*/
+
 .table {
     width: 100%;
     border-collapse: collapse;
     margin: 2rem auto;
     font-size: 16px;
-    text-align: right;
-
+    text-align: center;
+    /*direction: inherit;*/
 }
+
 .headerRow {
     font-size: 17px;
     font-weight: 400;
-    color:#0641AD;
+    color: #0641AD;
 }
 
 .headerCell {
     padding: 12px 15px 1.3rem 15px;
+    white-space: nowrap;
 }
-.oddRow{
-    background-color: #ffffff;
 
-}
-.bodyRow{
+.bodyRow {
     font-size: 16px;
     font-weight: 400;
-
 }
-.evenRow{
+
+.oddRow {
+    background-color: #ffffff;
+}
+
+.evenRow {
     background-color: #f2f5fb;
 }
-.bodyRow td:nth-of-type(1){
-    direction: ltr;
-    font-weight: 500;
-}
-.bodyRow td:nth-of-type(4){
-    color: #0641AD;
-    direction: ltr;
-    font-weight: 500;
-}
+
 .bodyCell {
     padding: 15px;
+    white-space: nowrap;
+    /*direction: inherit;*/
 }
+
+.bodyRow td:nth-of-type(1),
+.bodyRow td:nth-of-type(4) {
+    font-weight: 500;
+    /*direction: ltr;*/
+    text-align: center;
+}
+
 .line {
     display: flex;
     align-items: center;
     gap: 8px;
     font-size: 15px;
     margin: 6px 0;
-    justify-content: end;
-
-}
-.icon{
-    color: #555;
-}
-.status{
-    padding:5px;
-    border-radius: 5px;
-    width:80px;
+    justify-content: flex-start;
+    /*direction: ltr;*/
     text-align: center;
 }
-.inProgress{
-   background-color:#FF7A001F;
-   color:#FF7A00;
+
+.icon {
+    color: #555;
 }
-.success{
-    background-color:#1DA04C1F;
-    color:#00AF6C;
+
+.status {
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-align: center;
+    min-width: max-content;
+    font-weight: 500;
 }
-.failed{
-    background-color:#F551571A;
-    color:#F55157;
+
+.inProgress {
+    background-color: #FF7A001F;
+    color: #FF7A00;
 }
-.rejected{
-    background-color:#F551571A;
-    color:#F55157;
+
+.success {
+    background-color: #1DA04C1F;
+    color: #00AF6C;
 }
-.bodyCell button{
+
+.failed {
+    background-color: #F551571A;
+    color: #F55157;
+}
+
+.rejected {
+    background-color: #F551571A;
+    color: #F55157;
+}
+
+.bodyCell button {
     background-color: #0B65BA1A;
     color: #417AC8;
-    padding: 8px;
+    padding: 8px 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 8px;
     border-radius: 8px;
+    font-weight: 500;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    direction: ltr;
 }
+
 @media (max-width: 720px) {
     .table {
         width: 100%;

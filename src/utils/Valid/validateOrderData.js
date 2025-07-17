@@ -1,14 +1,26 @@
 import CustomToast from "@/Components/Shared/CustomToast/CustomToast";
 import { toast } from "react-hot-toast";
 
-
-export const validateOrderData = ({ addressId, paymentMethodId, cart, paymentType, uploadedFile }) => {
+/**
+ *
+ * @param {{
+ *  addressId: number|null,
+ *  paymentMethodId?: number|null,
+ *  cart: any[],
+ *  paymentType: string,
+ *  uploadedFile?: string|null,
+ *  identity?: string|null,
+ *  t: Function
+ * }} param0
+ * @returns {boolean}
+ */
+export const validateOrderData = ({ addressId, cart, paymentType, uploadedFile, identity, t }) => {
     if (cart.length === 0) {
         toast.custom(
             <CustomToast
                 type="warning"
-                title="لا يوجد منتجات"
-                message="سلة التسوق فارغة، لا يمكن إتمام الطلب."
+                title={t("validation.emptyCartTitle")}
+                message={t("validation.emptyCartMsg")}
             />,
             { position: 'top-center', duration: 2500 }
         );
@@ -19,8 +31,8 @@ export const validateOrderData = ({ addressId, paymentMethodId, cart, paymentTyp
         toast.custom(
             <CustomToast
                 type="warning"
-                title="العنوان مفقود"
-                message="يرجى اختيار عنوان الشحن قبل إتمام الطلب."
+                title={t("validation.missingAddressTitle")}
+                message={t("validation.missingAddressMsg")}
             />,
             { position: 'top-center', duration: 2500 }
         );
@@ -31,20 +43,32 @@ export const validateOrderData = ({ addressId, paymentMethodId, cart, paymentTyp
         toast.custom(
             <CustomToast
                 type="warning"
-                title="طريقة الدفع مفقودة"
-                message="يرجى اختيار طريقة الدفع قبل إتمام الطلب."
+                title={t("validation.missingPaymentTitle")}
+                message={t("validation.missingPaymentMsg")}
             />,
             { position: 'top-center', duration: 2500 }
         );
         return false;
     }
 
-    if (paymentType === "externel" && !uploadedFile) {
+    if (paymentType === "transfer" && !uploadedFile) {
         toast.custom(
             <CustomToast
                 type="warning"
-                title="صورة الحوالة مطلوبة"
-                message="يرجى رفع صورة إثبات الدفع قبل إتمام الطلب."
+                title={t("validation.missingTransferProofTitle")}
+                message={t("validation.missingTransferProofMsg")}
+            />,
+            { position: 'top-center', duration: 2500 }
+        );
+        return false;
+    }
+
+    if (paymentType === "installment" && (!identity || identity.trim() === "")) {
+        toast.custom(
+            <CustomToast
+                type="warning"
+                title={t("validation.missingIdentityTitle")}
+                message={t("validation.missingIdentityMsg")}
             />,
             { position: 'top-center', duration: 2500 }
         );

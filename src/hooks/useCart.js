@@ -401,6 +401,7 @@ import {addToCart} from "@/api/services/cart/addToCart";
 import {deleteCartItem} from "@/api/services/cart/deleteCartItem";
 import {updateCartItem} from "@/api/services/cart/updateCartItem";
 import { checkDetails } from "@/api/services/orders/checkDetails";
+import {getCouponFromStorage} from "@/utils/orderSummaryStorage";
 
 
 function dispatchCartUpdate() {
@@ -436,12 +437,14 @@ export default function useCart() {
                 color: item.color_id ?? null,
             })),
             payment_method: paymentMethod,
-            coupon_code: couponCode,
+            coupon_code: getCouponFromStorage()?.code || null,
+
         };
 
         try {
             setIsCheckingDetails(true);
             const res = await checkDetails(payload);
+            // console.log(res?.data)
             if (!res.error) {
                 externalSetOrderSummary?.(res.data);
             } else {
@@ -459,15 +462,16 @@ export default function useCart() {
     useEffect(() => {
         const currentPayload = JSON.stringify({
             cart: cart.map(item => ({ id: item.id, q: item.quantity })),
-            paymentMethod,
-            couponCode
+            paymentMethod
+
         });
 
         if (currentPayload !== prevPayloadRef.current) {
             prevPayloadRef.current = currentPayload;
             runCheckDetails();
         }
-    }, [cart, paymentMethod, couponCode]);
+    }, [cart, paymentMethod]);
+
 
 
     useEffect(() => {
@@ -505,7 +509,7 @@ export default function useCart() {
             const currentQty = existing ? existing.quantity : 0;
             const maxQty = product.stock;
 
-            if (currentQty + quantity > maxQty) {
+            if ((currentQty + quantity > maxQty)&&!product.stock_unlimited) {
                 toast.error(`لا يمكنك إضافة أكثر من ${maxQty} قطعة من هذا المنتج`);
                 return prev;
             }

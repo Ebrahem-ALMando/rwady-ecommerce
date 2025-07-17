@@ -320,12 +320,15 @@ const Checkout = () => {
     const [defaultAddress,setDefaultAddress]=useState({})
     const [isOpen, setIsOpen] = useState(false);
     const [selectedAddress, setSelectedAddress] = useState(null);
+    const [orderId, setOrderId] = useState(null);
+
     const [paymentData, setPaymentData] = useState(() => ({
         id: null,
         type: null,
-        method: null
+        method: null,
+        name:null
     }));
-    const [uploadedFile, setUploadedFile] = useState(null);
+    // const [uploadedFile, setUploadedFile] = useState(null);
     const [paymentState, setPaymentState] = useState(null);
     const [step, setStep] = useState(1);
     const [orderNotes, setOrderNotes] = useState('');
@@ -337,18 +340,23 @@ const Checkout = () => {
     useEffect(() => {
         const state = searchParams.get('state');
         const orderPlaced = sessionStorage.getItem('orderPlaced');
-        if (['success', 'failure', 'externel'].includes(state)) {
+        const orderId = sessionStorage.getItem('placedOrderId');
+
+        if (['success', 'failure', 'externel', 'installment'].includes(state)) {
             if (orderPlaced) {
                 setPaymentState(state);
+                setOrderId(orderId??null);
                 sessionStorage.removeItem('orderPlaced');
+                sessionStorage.removeItem('placedOrderId');
             } else {
-                router.push('/checkout');
+                router.push(`/${lang}/checkout`);
             }
         }
     }, [searchParams, router]);
 
-    const handleChecked = (id, type, method) => {
-        setPaymentData({ id, type, method });
+
+    const handleChecked = (id, type, method,name) => {
+        setPaymentData({ id, type, method,name });
     };
 
     const { updateQuantity, getItemQuantity, removeItem, getTotalPrice, cart, getShippingTotal } = useCart();
@@ -437,10 +445,13 @@ const Checkout = () => {
                             type={paymentState}
                             onClose={() => {
                                 setPaymentState(null);
-                                router.push('/checkout')
+                                router.push(`/${lang}/checkout`);
                             }}
+                            lang={lang}
+                            orderId={orderId}
                         />
                     )}
+
 
                     <div className={styles.items}>
                         <StepProgressBar
@@ -580,12 +591,14 @@ const Checkout = () => {
                             addressId={defaultAddress?.id || null}
                             paymentMethodId={paymentData?.id || null}
                             paymentType={paymentData?.method || null}
-                            uploadedFile={uploadedFile}
+                            paymentName={paymentData?.name?.[lang] || null}
+                            // uploadedFile={uploadedFile}
                             orderNotes={orderNotes}
                             extraAddress={defaultAddress?.extra_address || ""}
                             latitude={defaultAddress?.latitude || ""}
                             longitude={defaultAddress?.longitude || ""}
                             identity={paymentData?.method === "installment" ? profileData?.data?.identity : null}
+                            lang={lang}
                         />
 
                     </div>

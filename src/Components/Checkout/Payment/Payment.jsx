@@ -49,7 +49,7 @@ const Payment=({handleChecked,selected,lang })=>{
                     <div key={index}>
                         <PaymentMethod
                             handleChecked={() =>
-                                handleChecked(item.id, item.type, item.payment_method)
+                                handleChecked(item.id, item.type, item.payment_method,item.name)
                             }
                             item={item}
                             isSelected={isSelected}

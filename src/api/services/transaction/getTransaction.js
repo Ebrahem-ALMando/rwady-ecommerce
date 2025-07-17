@@ -1,12 +1,13 @@
-import { fetchAPI } from "@/api/api";
-import ApiConfig from "@/api/apiConfig";
 import {getTokenWithClient} from "@/utils/getTokenWithClient";
+import {fetchAPI} from "@/api/api";
+import ApiConfig from "@/api/apiConfig";
+
 
 /**
  * @returns {Promise<{ error: boolean, data?: any, message?: string }>}
  */
-export const getProfile = async () => {
-    const endPointKey = "user/me";
+export const getTransaction = async () => {
+    const endPointKey = "user/order-payments";
     const token = getTokenWithClient();
     if (!token) {
 

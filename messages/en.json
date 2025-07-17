@@ -274,20 +274,24 @@
     "items": "items",
     "emptyCart": "No products in the cart"
   },
-  "OrderSummary":{
+  "OrderSummary": {
     "summaryTitle": "Order Summary",
-    "haveCoupon": "Do you have a discount code",
-    "enterCoupon": "Enter discount code",
-    "add": "Add",
-    "couponMissing": "Please enter a discount code",
-    "couponExample": "Example: RRF2025",
+    "haveCoupon": "Have a coupon?",
+    "enterCoupon": "Enter your coupon code",
+    "add": "Apply",
+    "couponMissing": "Please enter a coupon code",
+    "couponExample": "Example: SAVE10",
     "inProgress": "In Progress",
     "productsTotal": "Products Total",
     "coupon": "Coupon",
+    "couponDiscount": "Coupon Discount",
     "invalidCoupon": "Invalid Coupon",
     "shippingCost": "Shipping Cost",
-    "grandTotal": "Grand Total",
-    "taxNote": "Prices include tax",
+    "grandTotal": "Total After All Fees",
+    "totalWithShipping": "Total with Shipping",
+    "paymentFees": "Payment Fees",
+    "monthlyInstallment": "Monthly Installment",
+    "taxNote": "* The total includes taxes and applicable fees.",
     "completeOrder": "Place Order",
     "sending": "Sending...",
     "successTitle": "Order Sent Successfully",
@@ -295,8 +299,38 @@
     "failTitle": "Failed to Place Order",
     "failMsg": "An error occurred while processing your order. Please try again later.",
     "errorTitle": "Connection Error",
-    "errorMsg": "Failed to connect to the server. Please check your connection and try again."
+    "errorMsg": "Failed to connect to the server. Please check your connection and try again.",
+    "couponAppliedTitle": "Discount Applied",
+    "couponAppliedMessageFixed": "Discount of {amount} IQD applied successfully",
+    "couponAppliedMessagePercent": "Discount of {amount}% applied successfully",
+    "invalidCouponTitle": "Invalid Coupon",
+    "invalidCouponMessage": "Please check the code and try again",
+    "showDetails": "Show Details",
+    "hideDetails": "Hide Details",
+    "paymentProofUploaded": "Payment proof uploaded successfully",
+    "paymentDetails": "Payment Details",
+    "selectedMethod": "Selected Payment Method",
+    "identityNumberLabel": "National ID Number",
+    "identityNumberPlaceholder": "Enter your national ID number",
+    "invalidIdentityNumber": "The card or identity number is incorrect",
+    "invalidIdentityTitle": "Verification Failed",
+    "validation": {
+      "emptyCartTitle": "No Products",
+      "emptyCartMsg": "Your cart is empty. You can't place an order.",
+      "missingAddressTitle": "Missing Address",
+      "missingAddressMsg": "Please select a shipping address before placing the order.",
+      "missingPaymentTitle": "Missing Payment Method",
+      "missingPaymentMsg": "Please choose a payment method before placing the order.",
+      "missingTransferProofTitle": "Transfer Proof Required",
+      "missingTransferProofMsg": "Please upload a payment proof image before completing the order.",
+      "missingIdentityTitle": "Identity Number Required",
+      "missingIdentityMsg": "Please enter your national ID number to proceed with installment payment."
+    }
+
+
   },
+
+
   "Checkout": {
     "shipment": "Shipment",
     "stepsTitles": ["Address", "Payment Method", "Order Confirmation"],
@@ -323,8 +357,13 @@
       "externelMsg": "We’ve received your transfer. We’ll review it and contact you once confirmed.",
       "home": "Back to Home",
       "viewOrders": "View Orders",
-      "close": "Close"
+      "close": "Close",
+      "installmentTitle": "Installment Order Received",
+      "installmentMsg": "Thank you! Your order was received successfully. You will be redirected to the order details page to complete the verification process."
+
     }
+
+
 
   },
   "categorySection": {
@@ -437,14 +476,128 @@
     "order_date": "Date",
     "order_status": "Order Status",
     "payment_status": "Payment Status",
-    "details": "Details"
+    "orderDetails": "Details",
+    "otp": {
+      "title": "Enter the verification code (OTP)",
+      "submit": "Verify",
+      "verifying": "Verifying...",
+      "failed": "Verification failed, please try again.",
+      "success": "Verification successful",
+      "error": "An error occurred during verification"
+    },
+    "details": {
+      "title": "Order Details",
+      "orderId": "Order ID:",
+      "orderCode": "Order Code:",
+      "date": "Date:",
+      "status": "Order Status:",
+      "paymentStatus": "Payment Status:",
+      "paymentMethod": "Payment Method:",
+      "paymentFees": "Payment Fees:",
+      "totalAmount": "Total Amount:",
+      "totalPaid": "Amount Paid:",
+      "notes": "Notes:",
+      "paymentSessionId": "Payment Session ID:",
+      "otpStatus": "OTP Verification Status:",
+      "otpVerified": "Verified",
+      "otpPending": "Pending Verification",
+      "validatePlanMessage": "Payment Plan Notes:",
+      "shippingAddress": "Shipping Address",
+      "products": "Products",
+      "quantity": "Quantity",
+      "price": "Price",
+      "viewProduct": "View Product",
+      "loadError": "Failed to load order details",
+      "productNotFound": "Product not found in this order",
+      "unknownProduct": "Unknown product",
+      "unknownBrand": "Unknown brand",
+      "haveProblem": "Having an issue with this product?",
+      "contactUs": "Contact us",
+      "shareExperience": "Share your experience",
+      "rate": {
+        "shipping": "Write your opinion about shipping",
+        "shippingBtn": "Rate Delivery",
+        "product": "Write your opinion about the product",
+        "productBtn": "Rate Product",
+        "seller": "Write your opinion about the seller",
+        "sellerBtn": "Rate Seller"
+      },
+      "productData": "Product Information",
+      "productNumber": "Product ID",
+      "orderSummary": "Order Summary",
+      "noAddress": "Address not available"
+    },
+    "statuses": {
+      "pending": "Pending",
+      "completed": "Completed",
+      "cancelled": "Cancelled"
+    },
+    "paymentStatuses": {
+      "paid": "Paid",
+      "unpaid": "Unpaid",
+      "failed": "Failed"
+    },
+    "paymentMethods": {
+      "installment": "Installment",
+      "cash": "Cash",
+      "externel": "External Payment"
+    },
+      "products": "Products",
 
+    "error_loading": "Failed to load order details",
+    "unknown_product": "Unknown product",
+    "unknown_brand": "Unknown brand"
   },
+
   "productCard":{
     "stock_unlimited": "Unlimited quantity",
     "stock_limited": "Only {count} items left"
+  },
+  "PaymentProof": {
+    "uploadTitle": "Upload Payment Proof",
+    "dropZoneText": "Drag the file here or click to choose",
+    "chooseFile": "Choose a file",
+    "confirm": "Confirm Upload",
+    "remove": "Remove",
+    "close": "Close",
+    "errors": {
+      "imageTooLarge": "Please select an image smaller than 10 MB",
+      "uploadError": "An error occurred while uploading the image",
+      "updateFail": "Failed to upload image",
+      "uploadSuccess": "Image updated successfully"
+    }
+  },
+  "Transactions": {
+    "title": "Transactions & Payments",
+    "filter": {
+      "status": "Payment Status",
+      "date": "Date",
+      "allStatuses": "All Statuses",
+      "allDates": "All Dates"
+    },
+    "status": {
+      "pending": "Pending",
+      "completed": "Successful",
+      "failed": "Failed",
+      "unknown": "Unknown"
+    },
+    "methods": {
+      "qi": "Electronic Payment",
+      "cash": "Cash",
+      "card": "Credit Card"
+    },
+    "unknownMethod": "Unknown Payment Method",
+    "noDescription": "No description available",
+    "loading": "Loading transactions...",
+    "table": {
+      "orderId": "Order Number",
+      "date": "Date",
+      "amount": "Amount",
+      "method": "Payment Method",
+      "status": "Status",
+      "actions": "Actions",
+      "download": "Download"
+    }
   }
-
-
 
 }

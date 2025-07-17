@@ -42,6 +42,7 @@
     border: 2px solid #EEEEEE;
     margin: 0.7rem auto;
     border-radius: 5px;
+    padding: 2px 80px !important;
 }
 
 .buttonInput {
@@ -59,7 +60,7 @@
     right: 10px;
 }
 .inputCoupon[placeholder]{
-    padding: 10px 45px;
+    /*padding: 10px 45px;*/
 }
 .completeProcess{
     margin-top: 0.5rem;
@@ -165,4 +166,44 @@
 .buttonInput:disabled {
     opacity: 0.7;
     cursor: not-allowed;
+}
+.toggleDetails {
+    background-color: transparent;
+    border: none;
+    color: #0741AD;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 8px 2px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    user-select: none;
+    width: 150px;
+    min-width: max-content;
+    text-align: start;
+
+}
+
+.toggleDetails:hover {
+    background-color: #0741AD;
+    color: white;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(7, 65, 173, 0.5);
+}
+
+.arrowDown, .arrowUp {
+    display: inline-block;
+    margin-left: 11px;
+    margin-right: 11px;
+    margin-bottom: 1px;
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg);
+    transition: transform 0.3s ease;
+}
+
+.arrowUp {
+    transform: rotate(-135deg);
 }

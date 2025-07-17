@@ -276,17 +276,21 @@
   },
   "OrderSummary": {
     "summaryTitle": "ملخص الطلب",
-    "haveCoupon": "هل لديك كود خصم",
+    "haveCoupon": "هل لديك كود خصم؟",
     "enterCoupon": "أدخل كود الخصم",
     "add": "إضافة",
     "couponMissing": "الرجاء إدخال كود الخصم",
-    "couponExample": "مثال : RRF2025",
+    "couponExample": "مثال : SAVE10",
     "inProgress": "قيد التطوير",
     "productsTotal": "مجموع المنتجات",
     "coupon": "كوبون",
+    "couponDiscount": "قيمة الخصم",
     "invalidCoupon": "كوبون غير صالح",
     "shippingCost": "رسوم الشحن",
-    "grandTotal": "الإجمالي",
+    "totalWithShipping": "الإجمالي بعد الشحن",
+    "paymentFees": "رسوم الدفع",
+    "monthlyInstallment": "القسط الشهري",
+    "grandTotal": "الإجمالي بعد كل الرسوم",
     "taxNote": "الأسعار شاملة للضريبة",
     "completeOrder": "إتمام الطلب",
     "sending": "جاري الإرسال...",
@@ -295,8 +299,38 @@
     "failTitle": "فشل في إرسال الطلب",
     "failMsg": "حدث خطأ أثناء معالجة طلبك. يرجى المحاولة لاحقاً.",
     "errorTitle": "خطأ في الاتصال",
-    "errorMsg": "تعذر الاتصال بالخادم. تحقق من اتصالك وحاول مرة أخرى."
-      },
+    "errorMsg": "تعذر الاتصال بالخادم. تحقق من اتصالك وحاول مرة أخرى.",
+    "couponAppliedTitle": "تم تطبيق الخصم",
+    "couponAppliedMessageFixed": "تم خصم {amount} IQD بنجاح",
+    "couponAppliedMessagePercent": "تم خصم {amount}% بنجاح",
+    "invalidCouponTitle": "كوبون غير صالح",
+    "invalidCouponMessage": "الرجاء التحقق من الكود والمحاولة مرة أخرى",
+    "showDetails": "تفاصيل أكثر",
+    "hideDetails": "إخفاء التفاصيل",
+    "paymentProofUploaded": "تم رفع إثبات الدفع بنجاح",
+    "paymentDetails": "تفاصيل الدفع",
+    "selectedMethod": "طريقة الدفع المحددة",
+    "identityNumberLabel": "رقم الهوية الوطنية",
+    "identityNumberPlaceholder": "أدخل رقم الهوية",
+
+    "invalidIdentityNumber": "رقم البطاقة أو المعرّف غير صحيح",
+    "invalidIdentityTitle": "تعذر التحقق",
+    "validation": {
+      "emptyCartTitle": "لا يوجد منتجات",
+      "emptyCartMsg": "سلة التسوق فارغة، لا يمكن إتمام الطلب.",
+      "missingAddressTitle": "العنوان مفقود",
+      "missingAddressMsg": "يرجى اختيار عنوان الشحن قبل إتمام الطلب.",
+      "missingPaymentTitle": "طريقة الدفع مفقودة",
+      "missingPaymentMsg": "يرجى اختيار طريقة الدفع قبل إتمام الطلب.",
+      "missingTransferProofTitle": "صورة الحوالة مطلوبة",
+      "missingTransferProofMsg": "يرجى رفع صورة إثبات الدفع قبل إتمام الطلب.",
+      "missingIdentityTitle": "رقم الهوية مفقود",
+      "missingIdentityMsg": "يرجى إدخال رقم الهوية الوطنية لإتمام عملية التقسيط."
+    }
+
+  },
+
+
 
   "Checkout": {
     "shipment": "شحنة رقم",
@@ -324,8 +358,12 @@
       "externelMsg": "تم استلام حوالتك. سنقوم بمراجعتها والتواصل معك بعد التأكيد.",
       "home": "العودة للرئيسية",
       "viewOrders": "عرض الطلبات",
-      "close": "إغلاق"
+      "close": "إغلاق",
+      "installmentTitle": "تم استلام الطلب بالتقسيط",
+      "installmentMsg": "شكراً لك! تم استلام طلبك بنجاح وسيتم تحويلك لصفحة تفاصيل الطلب لإكمال عملية التحقق."
+
     }
+
   },
   "categorySection": {
     "categoryProducts": " منتجات الصنف : {name}",
@@ -436,16 +474,126 @@
     "order_date": "بتاريخ",
     "order_status": "حالة الطلب",
     "payment_status": "حالة الدفع",
-    "details": "تفاصيل"
-
-
+    "orderDetails": "تفاصيل",
+    "otp": {
+      "title": "أدخل رمز التحقق (OTP)",
+      "submit": "تحقق",
+      "verifying": "جاري التحقق...",
+      "failed": "فشل التحقق، حاول مرة أخرى.",
+      "success": "تم التحقق بنجاح",
+      "error": "حدث خطأ أثناء التحقق"
+    },
+    "details": {
+      "title": "تفاصيل الطلب",
+      "orderId": "رقم الطلب:",
+      "orderCode": "كود الطلب:",
+      "date": "التاريخ:",
+      "status": "حالة الطلب:",
+      "paymentStatus": "حالة الدفع:",
+      "paymentMethod": "طريقة الدفع:",
+      "paymentFees": "رسوم الدفع:",
+      "totalAmount": "المبلغ الكلي:",
+      "totalPaid": "المبلغ المدفوع:",
+      "notes": "ملاحظات:",
+      "paymentSessionId": "رمز جلسة الدفع:",
+      "otpStatus": "حالة التحقق (OTP):",
+      "otpVerified": "تم التحقق",
+      "otpPending": "بانتظار التحقق",
+      "validatePlanMessage": "ملاحظات خطة الدفع:",
+      "shippingAddress": "عنوان الشحن",
+      "products": "المنتجات",
+      "quantity": "الكمية",
+      "price": "السعر",
+      "viewProduct": "تفاصيل المنتج",
+      "loadError": "تعذر تحميل تفاصيل الطلب",
+      "productNotFound": "لم يتم العثور على المنتج ضمن هذا الطلب",
+      "unknownProduct": "منتج غير معروف",
+      "unknownBrand": "ماركة غير معروفة",
+      "haveProblem": "هل لديك مشكلة مع هذا المنتج؟",
+      "contactUs": "تواصل معنا",
+      "shareExperience": "شاركنا تجربتك",
+      "rate": {
+        "shipping": "اكتب رأيك في الشحن",
+        "shippingBtn": "قيّم التوصيل",
+        "product": "اكتب رأيك في المنتج",
+        "productBtn": "قيّم المنتج",
+        "seller": "اكتب رأيك في البائع",
+        "sellerBtn": "قيّم البائع"
+      },
+      "productData": "بيانات المنتج",
+      "productNumber": "رقم المنتج",
+      "orderSummary": "ملخص الطلب",
+      "noAddress": "العنوان غير متوفر حالياً"
+    },
+    "statuses": {
+      "pending": "قيد الانتظار",
+      "completed": "مكتمل",
+      "cancelled": "تم الإلغاء"
+    },
+    "paymentStatuses": {
+      "paid": "تم الدفع",
+      "unpaid": "غير مدفوع",
+      "failed": "فشل الدفع"
+    },
+    "paymentMethods": {
+      "installment": "تقسيط",
+      "cash": "نقداً",
+      "externel": "دفع خارجي"
+    },
+    "error_loading": "تعذر تحميل تفاصيل الطلب",
+    "unknown_product": "منتج غير معروف",
+    "unknown_brand": "ماركة غير معروفة"
   },
 
   "productCard":{
     "stock_unlimited": "كمية غير محدودة",
     "stock_limited": "مُتبقي: {count} عناصر"
-  }
-
+  },
+  "PaymentProof": {
+    "uploadTitle": "رفع إثبات الدفع",
+    "dropZoneText": "اسحب الملف هنا أو انقر للاختيار",
+    "chooseFile": "اختر ملفًا",
+    "confirm": "تأكيد الرفع",
+    "remove": "حذف",
+    "close": "إغلاق",
+    "errors": {
+      "imageTooLarge": "الرجاء اختيار صورة أقل من 10 ميغا",
+      "uploadError": "حدث خطأ أثناء رفع الصورة",
+      "updateFail": "فشل في رفع الصورة",
+      "uploadSuccess": "تم تحديث الصورة بنجاح"
+    }
+  },
+    "Transactions": {
+      "title": "الحركة المالية / الدفعات",
+      "filter": {
+        "status": "حالة الدفع",
+        "date": "التاريخ",
+        "allStatuses": "كل الحالات",
+        "allDates": "كل التواريخ"
+      },
+      "status": {
+        "pending": "قيد التنفيذ",
+        "completed": "ناجحة",
+        "failed": "فاشلة",
+        "unknown": "غير معروف"
+      },
+      "methods": {
+        "qi": "الدفع الإلكتروني",
+        "cash": "نقداً",
+        "card": "بطاقة ائتمان"
+      },
+      "unknownMethod": "طريقة دفع غير معروفة",
+      "noDescription": "لا يوجد وصف",
+      "table": {
+        "orderId": "رقم الطلب",
+        "date": "التاريخ",
+        "amount": "مبلغ المعاملة",
+        "method": "طريقة الدفع",
+        "status": "حالة المعاملة",
+        "actions": "الإجراءات",
+        "download": "تحميل"
+      }
+    }
 
 
 

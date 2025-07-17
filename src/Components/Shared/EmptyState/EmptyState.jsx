@@ -7,7 +7,7 @@ import Image from "next/image";
 import {useLocale} from "next-intl";
 import Link from "next/link";
 
-const EmptyState = ({ message = "لا توجد منتجات لعرضها حالياً" ,item=null,initLink="/products"}) => {
+const EmptyState = ({ message = "لا توجد منتجات لعرضها حالياً" ,item=null,initLink="products"}) => {
     const prefersReducedMotion = typeof window !== 'undefined'
         ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
         : false;

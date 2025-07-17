@@ -1,0 +1,79 @@
+import { useEffect, useRef } from "react";
+import { useTranslations } from "next-intl";
+
+const OtpInput = ({
+                      otp,
+                      setOtp,
+                      handleVerifyOtp,
+                      verifying,
+                      otpError,
+                      digits = 5,
+                      t,
+                  }) => {
+    const inputsRef = useRef([]);
+
+    const handleChange = (e, index) => {
+        const value = e.target.value;
+        if (!/^\d*$/.test(value)) return;
+
+        const newOtp = otp.split("");
+        newOtp[index] = value;
+        setOtp(newOtp.join(""));
+
+        if (value && index < digits - 1) {
+            inputsRef.current[index + 1]?.focus();
+        }
+    };
+
+    const handleKeyDown = (e, index) => {
+        if (e.key === "Backspace" && !otp[index] && index > 0) {
+            const newOtp = otp.split("");
+            newOtp[index - 1] = "";
+            setOtp(newOtp.join(""));
+            inputsRef.current[index - 1]?.focus();
+            e.preventDefault();
+        }
+    };
+
+    useEffect(() => {
+        if (inputsRef.current[0]) inputsRef.current[0].focus();
+    }, []);
+
+    return (
+        <div className="mt-6 bg-gray-50 p-4 rounded-lg shadow-sm border text-center">
+            <h4 className="text-sm font-semibold mb-3 text-gray-800">
+                {t("otp.title")}
+            </h4>
+
+            <div className="flex justify-center gap-3 mb-3">
+                {[...Array(digits)].map((_, index) => (
+                    <input
+                        key={index}
+                        type="text"
+                        maxLength={1}
+                        value={otp[index] || ""}
+                        onChange={(e) => handleChange(e, index)}
+                        onKeyDown={(e) => handleKeyDown(e, index)}
+                        ref={(el) => (inputsRef.current[index] = el)}
+                        className="w-12 h-12 text-center border border-gray-300 rounded-md text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                ))}
+            </div>
+
+            {otpError && (
+                <p className="text-red-500 text-sm mb-2">{otpError}</p>
+            )}
+
+            <button
+                onClick={handleVerifyOtp}
+                disabled={verifying || otp.length < digits}
+                className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded disabled:opacity-50"
+            >
+                {verifying ? t("otp.verifying") : t("otp.submit")}
+            </button>
+        </div>
+    );
+};
+
+export default OtpInput;
+

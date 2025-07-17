@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import {useLocale, useTranslations} from 'next-intl';
 import { toast } from 'react-hot-toast';
 import { useAuth } from '@/hooks/useAuth';
 import {useRouter} from "@/i18n/navigation";
@@ -9,15 +9,15 @@ import {useRouter} from "@/i18n/navigation";
 export const useLogoutHandler = (mutate) => {
     const { logout } = useAuth();
     const router = useRouter();
-
+    const lang=useLocale()
     const t = useTranslations("verify");
 
     const handleLogout = async () => {
         try {
             await logout();
-            await mutate();
+            // await mutate();
             toast.success(t("logoutSuccess"));
-            router.push(`/sign-in`);
+            router.push(`/${lang}/sign-in`);
         } catch (error) {
             toast.error(t("logoutError"));
             console.error("Error during logout:", error.message);

@@ -78,8 +78,10 @@ import styles from './Card.module.css';
 import { Eye } from "lucide-react";
 import Link from "next/link";
 import SafeImage from "@/Components/Shared/SafeImage/SafeImage";
+import { useTranslations } from "next-intl";
 
 const Card = (props) => {
+   const {t}=props
     const slug = props.title?.replace(/\s+/g, '-').toLowerCase();
 
     return (
@@ -87,12 +89,14 @@ const Card = (props) => {
             <div className={styles.productImg}>
                 <SafeImage
                     src={props.image}
-                    fallback="/images/Shopping/img.png"
+                    fallback="/FallbackProductImage.png"
                     alt={props.title}
-                    width={100}
-                    height={100}
+                    width={0}
+                    height={0}
+                    sizes="100vw"
                     className={styles.productImage}
                 />
+
             </div>
 
             <div className={styles.productItem}>
@@ -100,13 +104,12 @@ const Card = (props) => {
                     <h4 className={styles.title}>{props.title}</h4>
 
                     {props.link && (
-                        <Link href={props.link} className={styles.viewProductBtn}>
+                        <Link prefetch={true} href={props.link} className={styles.viewProductBtn}>
                             <Eye size={16} />
-                            <span>تفاصيل المنتج</span>
+                            <span>{t("details.viewProduct")}</span>
                         </Link>
                     )}
                 </div>
-
 
                 {Array.isArray(props.brands) && props.brands.length > 0 && (
                     <div className={styles.brandsRow}>

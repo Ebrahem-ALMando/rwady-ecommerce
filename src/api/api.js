@@ -339,7 +339,7 @@ const fetchAPI = async (
     const startTime = Date.now();
 
     try {
-        const timeout = body instanceof FormData ? 60000 : 120000;//30000
+        const timeout = body instanceof FormData ? 60000 : 30000;//30000
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), timeout);
         const response = await fetch(url, { ...fetchOptions, signal: controller.signal });

@@ -182,8 +182,8 @@ const CartActionButton = ({ product, className = '',btnClassName='',styles ,icon
             <button
                 aria-label={isAddToCart ? t('remove') : t('add')}
                 onClick={handleToggleToCart}
-                disabled={!product.stock || product.stock <= 0 ||!product.availability}
-                className={`${(!product.stock || product.stock <= 0 ||!product.availability) ? styles.disabled : null} ${isAddToCart ? styles.addToCart : null} ${btnClassName}`}
+                disabled={(!product.stock || product.stock <= 0 ||!product.availability)&&!product.stock_unlimited}
+                className={`${((!product.stock || product.stock <= 0 ||!product.availability)&&!product.stock_unlimited) ? styles.disabled : null} ${isAddToCart ? styles.addToCart : null} ${btnClassName}`}
             >
                 {icon&&
                     <span>
@@ -199,8 +199,9 @@ const CartActionButton = ({ product, className = '',btnClassName='',styles ,icon
 
             {isAddToCart && showQuantityControl&& (
                 <QuantityControl
+                    stockUnlimited={product.stock_unlimited}
                     quantity={selectedQty}
-                    max={product.stock}
+                    max={!product.stock_unlimited?product.stock:999}
                     onIncrement={() => handleQuantityChange(selectedQty + 1)}
                     onDecrement={() => handleQuantityChange(Math.max(1, selectedQty - 1))}
                 />

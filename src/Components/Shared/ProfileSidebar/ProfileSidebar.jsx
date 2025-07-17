@@ -14,7 +14,7 @@ import {usePathname} from "@/i18n/navigation";
 const ProfileSidebar = ({ userData,mutate }) => {
     const pathname = usePathname();
     const activeLink = pathname.split('/')[1];
-    console.log(activeLink)
+
     const handleLogout = useLogoutHandler(mutate);
     const t = useTranslations("Sidebar");
 

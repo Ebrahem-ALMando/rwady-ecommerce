@@ -743,6 +743,7 @@ const DetailsCard = ({ product,lang }) => {
 
     return (
         <div className={styles.detailsCard}>
+
             {Array.isArray(product.brands) && product.brands.length > 0 ? (
                 <div className={styles.brandsWrapper}>
                     {product.brands.map((brand, index) => (
@@ -751,17 +752,17 @@ const DetailsCard = ({ product,lang }) => {
                             className={styles.brand}
                             aria-label={brand.name?.[lang]}
                         >
-                            {brand.name?.[lang] || "ماركة غير متاحة"}
+                            {brand.name?.[lang] || "...."}
                         </button>
                     ))}
                 </div>
             ) : (
-                <span className={styles.brand}>ماركة غير متوفرة</span>
+                ''
             )}
 
 
             <h1 className={styles.title}>
-                {product.name?.[lang] || "منتج بدون اسم"}
+                {product.name?.[lang] || "...."}
             </h1>
 
             <motion.div
@@ -928,8 +929,9 @@ const DetailsCard = ({ product,lang }) => {
             </div>
             {isAddToCart &&
                 <QuantityControl
+                    stockUnlimited={product.stock_unlimited}
+                    max={!product.stock_unlimited?product.stock:999}
                     productQTU={product.stock}
-                    max={product.stock}
                     quantity={selectedQty}
                     onIncrement={() => cartRef.current?.increment()}
                     onDecrement={() => cartRef.current?.decrement()}
