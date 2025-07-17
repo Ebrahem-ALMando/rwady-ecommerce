@@ -466,7 +466,7 @@
     "all_statuses": "All statuses",
     "all_dates": "All dates",
     "no_orders": "No matching orders found",
-    "statuses": {
+    "statusesType": {
       "pending": "Pending",
       "paid": "Paid",
       "cancelled": "Cancelled",
