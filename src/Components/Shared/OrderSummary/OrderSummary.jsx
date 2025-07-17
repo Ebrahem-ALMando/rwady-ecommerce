@@ -343,7 +343,8 @@ const OrderSummary = (props) => {
     const [showUploadModal, setShowUploadModal] = useState(false);
     const [uploadedPaymentProof, setUploadedPaymentProof] = useState(null);
     const [identity, setIdentity] = useState("");
-
+    const router = useRouter();
+    const pathname = usePathname();
     // useEffect(() => {
     //
     //     if (props.paymentType === "installment" && props.identity) {
@@ -367,7 +368,11 @@ const OrderSummary = (props) => {
     useEffect(() => {
         initializeSummaryUpdater(setOrderSummary);
     }, []);
-
+    useEffect(() => {
+        if (pathname === '/shopping-cart') {
+            router.prefetch(`/${props.lang}/checkout`);
+        }
+    }, [pathname, props.lang, router]);
 
     useEffect(() => {
         if (orderSummary) {
@@ -379,8 +384,7 @@ const OrderSummary = (props) => {
             });
         }
     }, [orderSummary]);
-    const router = useRouter();
-    const pathname = usePathname();
+
 
     useEffect(() => {
         const saved = getCouponFromStorage();
@@ -454,9 +458,10 @@ const OrderSummary = (props) => {
         }
         runCheckDetails();
     };
+
     const handleCompleteOrder = async () => {
         if (pathname === '/shopping-cart') {
-            router.push('/checkout');
+            router.push(`/${props.lang}/checkout`);
             return;
         }
         if (pathname === '/checkout') {
