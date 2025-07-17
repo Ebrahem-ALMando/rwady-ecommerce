@@ -120,7 +120,7 @@ const OrderCard = ({ id, date, status, paymentStatus, isCanceled,locale }) => {
             </div>
 
             <div className={styles.actions}>
-                <Link className={styles.detailsBtn} href={`/orders/${id}`}>
+                <Link className={styles.detailsBtn} href={`/${locale}/orders/${id}`} prefetch={true}>
                     {t("orderDetails")}{" "}
                     <span
                         className={styles.arrow}

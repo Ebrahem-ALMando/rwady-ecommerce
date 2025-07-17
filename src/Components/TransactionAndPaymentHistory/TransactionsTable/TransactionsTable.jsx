@@ -139,7 +139,7 @@ const TransactionsTable = ({ orders }) => {
                             </p>
                         </td>
                         <td className={styles.bodyCell}>
-                            <Link href={order.downloadLink}>
+                            <Link prefetch={true} href={order.downloadLink}>
                                 <button>
                                     {downloadOrderIcon}
                                     {t("table.download")}

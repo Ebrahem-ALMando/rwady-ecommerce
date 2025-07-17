@@ -267,7 +267,7 @@ const OrderDetails = () => {
                                             image={image}
                                             title={title}
                                             brands={brands}
-                                            link={`/orders/${order.id}/product/${p.product_id}`}
+                                            link={`/${locale}/orders/${order.id}/product/${p.product_id}`}
                                             t={t}
                                         />
                                     );
