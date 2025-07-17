@@ -16,7 +16,7 @@ const ButtonTap = ({ link = "profile", icon, text, isLogout, isSelect, onClick }
                 ${isSelect ? styles.buttonSelect : ''}
                 ${isLogout ? styles.buttonLogout : ''}`}
             onClick={(e) => {
-                e.preventDefault();
+
                 if (isLogout) return onClick?.();
                 if (isCurrent) return;
             }}

@@ -59,12 +59,17 @@ export async function generateMetadata({ params }) {
         metadataBase: new URL("https://rwady.com"),
 
         alternates: {
-            canonical: "https://rwady.com/sign-in",
+            canonical: `https://rwady.com/${locale}/sign-in`,
             languages: {
                 "ar": "https://rwady.com/ar/sign-in",
                 "en": "https://rwady.com/en/sign-in",
             },
+        },
+        robots: {
+            index: true,
+            follow: true,
         }
+
     };
 }
 

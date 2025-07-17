@@ -1,11 +1,11 @@
 "use client";
 
-import React, from "react";
+import React, {useEffect} from "react";
 import styles from "./Language.module.css";
 import { usePathname, useRouter } from "@/i18n/navigation";
-import { useParams } from "next/navigation";
-import {useTranslations} from "next-intl";
 
+import {useTranslations} from "next-intl";
+import {useParams} from "next/navigation";
 
 const languages = [
     { label: "ع", code: "ar", name: "العربية" },
@@ -26,6 +26,22 @@ export default function Language({ hideMobile }) {
 
         router.replace(pathname, { locale: langCode });
     };
+    const handleSelectPrefetch = (index) => {
+        if (index === currentIndex) return;
+
+        const langCode = languages[index].code;
+
+
+        const segments = pathname.split('/');
+        const pathWithoutLocale = `/${segments.slice(2).join('/')}` || '/';
+
+        const targetPath = `/${pathWithoutLocale}`;
+        console.log("Prefetching:", targetPath);
+
+        router.prefetch(targetPath);
+    };
+
+
     return (
         <div
             className={`${styles.languageDiv} ${hideMobile ? styles.hideMobile : ""}`}
@@ -38,6 +54,7 @@ export default function Language({ hideMobile }) {
                     type="button"
                     aria-label={t("changeTo", { lang: lang.name })}
                     onClick={() => handleSelect(i)}
+                    onMouseEnter={()=>handleSelectPrefetch(i)}
                     className={styles.language}
                     style={{
                         border:
