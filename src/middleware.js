@@ -6,7 +6,7 @@ const intlMiddleware = createMiddleware(routing);
 
 export function middleware(request) {
     const token = request.cookies.get("token")?.value;
-    console.log(token,"MID")
+
     const user_id = request.cookies.get("user_id")?.value;
     const pathname = request.nextUrl.pathname;
 
@@ -22,7 +22,8 @@ export function middleware(request) {
     }
 
 
-    if (!(token && user_id) && ["/orders", "/profile", "/checkout", "/favourites", "/addresses-list", "/favourites"]
+    if (!(token && user_id) && ["/orders", "/profile", "/checkout", "/favourites", "/addresses-list",
+        "/transaction-and-payment-history"]
         .some((p) => path.startsWith(p))) {
         return NextResponse.redirect(new URL(`/${locale}/sign-in`, request.url));
     }

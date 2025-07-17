@@ -83,7 +83,12 @@ const Verify = () => {
                         name: userData.data?.name
                     });
                     // await syncCartWithServerOnLogin()
-                    router.push(userData.data?.name ? "/" : "/profile");
+                    setTimeout(() => {
+
+                        // router.replace(router.asPath);
+                        router.push(userData.data?.name ? "/" : "/profile");
+                    }, 100);
+
                 } else {
                     toast.error("فشل في تحميل بيانات المستخدم");
                     Cookies.remove("token");

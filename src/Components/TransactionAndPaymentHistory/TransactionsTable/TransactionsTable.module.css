@@ -91,6 +91,10 @@
 /*        min-width: 600px;*/
 /*    }*/
 /*}*/
+.tableWrapper {
+    overflow-x: auto;
+    width: 100%;
+}
 
 .table {
     width: 100%;

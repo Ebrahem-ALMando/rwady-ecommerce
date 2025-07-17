@@ -2,13 +2,14 @@
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { logoutUser} from "@/api/services/auth/logoutUser";
+import {useRouter} from "next/navigation";
 
 export const useAuth = () => {
     const [token, setToken] = useState(null);
     const [userId, setUserId] = useState(null);
     const [userName, setUserName] = useState(null);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-
+    const router=useRouter()
     useEffect(() => {
         const storedToken = Cookies.get("token");
         const storedUserId = Cookies.get("user_id");

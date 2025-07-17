@@ -14,14 +14,13 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 20px;
     width: 65%;
-    overflow-x: auto;
 }
 .header{
     display: flex;
     justify-content: space-between;
 }
 .header h3{
-    font-size: 32px;
+    font-size: 25px;
     font-weight: 600;
     color: #0741ad;
     padding: 23px 18px;
@@ -58,7 +57,7 @@
 .selectInput {
     color: #424242;
     width: 100%;
-    padding: 0.8rem;
+    padding: 0.5rem;
     border: 2px solid #e2e8f0;
     border-radius: 8px;
     background: #ffffff;

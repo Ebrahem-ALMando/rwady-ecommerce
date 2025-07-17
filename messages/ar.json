@@ -539,7 +539,8 @@
       "installment": "تقسيط",
       "cash": "نقداً",
       "externel": "دفع خارجي",
-      "transfer": "حوالة خارجية"
+      "transfer": "حوالة خارجية",
+      "qi": "qi"
     },
     "error_loading": "تعذر تحميل تفاصيل الطلب",
     "unknown_product": "منتج غير معروف",

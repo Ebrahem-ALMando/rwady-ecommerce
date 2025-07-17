@@ -541,7 +541,8 @@
       "installment": "Installment",
       "cash": "Cash",
       "externel": "External Payment",
-      "transfer": "Transfer"
+      "transfer": "Transfer",
+      "qi": "qi"
     },
       "products": "Products",
 
