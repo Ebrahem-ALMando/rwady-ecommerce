@@ -103,7 +103,7 @@ const OrderCard = ({ id, date, status, paymentStatus, isCanceled,locale }) => {
                     ) : (
                         <CheckCircle size={16} className={styles.icon}/>
                     )}
-                    {t("order_status")}: {t(`statuses.${status}`) || status}
+                    {t("order_status")}: {t(`statusesType.${status}`) || status}
                 </p>
 
                 {paymentStatus && (
@@ -112,7 +112,7 @@ const OrderCard = ({ id, date, status, paymentStatus, isCanceled,locale }) => {
                         style={{color: paymentStatus === "paid" ? "#07AD5D" : "#F55157"}}
                     >
                         <CreditCard size={16} className={styles.icon}/>
-                        {t("payment_status")}: {t(`statuses.${paymentStatus}`) || paymentStatus}
+                        {t("payment_status")}: {t(`statusesType.${paymentStatus}`) || paymentStatus}
                     </p>
                 )}
 

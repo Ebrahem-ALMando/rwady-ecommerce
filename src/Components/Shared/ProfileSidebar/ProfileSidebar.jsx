@@ -35,7 +35,7 @@ const ProfileSidebar = ({ userData,mutate }) => {
             <ButtonTap
                 icon={logoutIcon}
                 text={t("logout")}
-                link={"#"}
+                link={"/"}
                 isLogout={true}
                 onClick={handleLogout}
             />

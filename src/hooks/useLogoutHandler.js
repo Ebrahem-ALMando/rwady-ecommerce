@@ -3,7 +3,8 @@
 import {useLocale, useTranslations} from 'next-intl';
 import { toast } from 'react-hot-toast';
 import { useAuth } from '@/hooks/useAuth';
-import {useRouter} from "@/i18n/navigation";
+import {useRouter} from "next/navigation";
+
 
 
 export const useLogoutHandler = (mutate) => {

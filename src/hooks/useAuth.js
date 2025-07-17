@@ -50,7 +50,6 @@ export const useAuth = () => {
 
     const logout = async () => {
         const res=await logoutUser()
-        console.log(res)
         if(!res.error){
             Cookies.remove("token");
             Cookies.remove("user_id");

@@ -229,7 +229,7 @@ const OrderDetails = () => {
 
             <div className={styles.details}>
                 <div className={styles.header}>
-                    <Link href={`/${locale}/orders`}>
+                    <Link prefetch={true} href={`/${locale}/orders`}>
                         <h3>{t("title")}</h3>
                     </Link>
                     <span>/</span>

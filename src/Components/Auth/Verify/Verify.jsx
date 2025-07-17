@@ -105,11 +105,14 @@ const Verify = () => {
             initial={{opacity: 0}}
             animate={{opacity: 1}}
             className="min-h-screen bg-gradient-to-br from-blue-50 to-white flex items-center justify-center p-4"
+
         >
             <form
                 onSubmit={handleConfirm}
             >
-                <div className="bg-white rounded-2xl shadow-xl w-full max-w-3xl p-8">
+                <div
+                    className="bg-white rounded-2xl shadow-xl w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-3xl p-4 sm:p-6 md:p-8">
+
                     <h1 className="text-3xl font-arabic font-bold text-start mb-6 text-gray-800">
                         {t("title")}
                     </h1>
@@ -167,7 +170,7 @@ const Verify = () => {
                 </div>
             </form>
         </motion.div>
-);
+    );
 };
 
 export default Verify;

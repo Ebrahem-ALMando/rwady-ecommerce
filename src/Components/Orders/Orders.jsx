@@ -230,7 +230,7 @@ const Orders = () => {
                                         <option value="">{t("all_statuses")}</option>
                                         {statusOptions.map(status => (
                                             <option key={status} value={status}>
-                                                {t(`statuses.${status}`)}
+                                                {t(`statusesType.${status}`)}
                                             </option>
                                         ))}
                                     </select>

@@ -464,7 +464,7 @@
     "all_statuses": "كل الحالات",
     "all_dates": "كل التواريخ",
     "no_orders": "لا توجد طلبات مطابقة للفلاتر",
-    "statuses": {
+    "statusesType": {
       "pending": "قيد الانتظار",
       "paid": "تم الدفع",
       "cancelled": "تم الإلغاء",
@@ -538,7 +538,8 @@
     "paymentMethods": {
       "installment": "تقسيط",
       "cash": "نقداً",
-      "externel": "دفع خارجي"
+      "externel": "دفع خارجي",
+      "transfer": "حوالة خارجية"
     },
     "error_loading": "تعذر تحميل تفاصيل الطلب",
     "unknown_product": "منتج غير معروف",

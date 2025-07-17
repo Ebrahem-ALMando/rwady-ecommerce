@@ -540,7 +540,8 @@
     "paymentMethods": {
       "installment": "Installment",
       "cash": "Cash",
-      "externel": "External Payment"
+      "externel": "External Payment",
+      "transfer": "Transfer"
     },
       "products": "Products",
 
