@@ -1,4 +1,4 @@
-import {getSettings} from "@/api/services/settings";
+import {getSettings} from "@/api/services/general/settings/settings";
 
 export async function getSettingData(){
     let  settingDataList = [];

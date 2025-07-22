@@ -82,7 +82,24 @@
     "ordersTitle": "Orders",
     "oneHourAgo": "1 hour ago",
     "message": "Your order has been successfully accepted by the RWADY team.",
-    "showMore": "Show more"
+    "showMore": "Show more",
+    "new order": "New Order",
+    "details": "View Order",
+    "welcome_title": "Welcome to RWADY!",
+    "welcome_message": "Welcome to RWADY! Complete your profile and browse the latest offers and requests.",
+    "complete_now": "Complete Now",
+    "skip": "Not Now"
+
+  },
+  "time": {
+    "ago": "ago",
+    "day": "day",
+    "days": "days",
+    "hour": "hour",
+    "hours": "hours",
+    "minute": "minute",
+    "minutes": "minutes",
+    "and": "and"
   },
   "mainNav": {
     "label": "Main navigation",

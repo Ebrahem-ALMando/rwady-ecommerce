@@ -7,7 +7,7 @@ import Link from "next/link";
 import {useTranslations} from "next-intl";
 
 
-const NotificationModel = ({ isShow, onClose }) => {
+const NotificationModel = ({ isShow, onClose,lang }) => {
     const  t  = useTranslations("notification");
 
     return (
@@ -47,7 +47,7 @@ const NotificationModel = ({ isShow, onClose }) => {
                     />
                     <Line />
 
-                    <Link href="/notification" className={styles.moreLink}>
+                    <Link prefetch={true} href={`/${lang}/notification`} className={styles.moreLink}>
                         {t("showMore")}
                     </Link>
                 </div>

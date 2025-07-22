@@ -303,13 +303,14 @@ const fetchAPI = async (
     method = "GET",
     data = null,
     options = {},
-    config = { showError: true }
+    config = { showError: true },
+    langParam=null
 ) => {
     // const lang = "ar";
     const url = `${baseUrl}${endpoint}`;
     const token = Cookies.get("token");
-    const lang = Cookies.get("NEXT_LOCALE") || 'ar';
-
+    const lang =langParam??( Cookies.get("NEXT_LOCALE")||"ar");
+    // const lang=locale==="ar"?"en":"ar"
     const headers = new Headers({
         "Accept-Language": lang,
         ...(token && { Authorization: `Bearer ${token}` }),

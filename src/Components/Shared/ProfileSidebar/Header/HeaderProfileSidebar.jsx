@@ -59,8 +59,8 @@ const HeaderProfileSidebar = ({ data }) => {
                 t={tProfile}
             />
             <div className={styles.mainInfo}>
-                <p>{data.name || t("defaultName")}</p>
-                <p>{"00"+data.phone || t("defaultPhone")}</p>
+                <p>{data?.name || t("defaultName")}</p>
+                <p>{"00"+data?.phone || t("defaultPhone")}</p>
             </div>
         </div>
     );

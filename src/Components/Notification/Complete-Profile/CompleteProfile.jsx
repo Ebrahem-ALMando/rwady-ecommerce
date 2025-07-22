@@ -1,30 +1,33 @@
+import { useTranslations } from "next-intl";
 import styles from './CompleteProfile.module.css';
 import NotificationCard from "@/Components/Notification/NotificationCard/NotificationCard";
+import Link from "next/link";
 
-const CompleteProfile = () => {
+const CompleteProfile = ({ lang }) => {
+    const t = useTranslations("notification");
+
     return (
         <div className={styles.completeProfile}>
             <NotificationCard
-                time="منذ ساعة"
-                title="نورت RWADY!"
+                // time="منذ ساعة"
+                title={t("welcome_title")}
                 color="#0741AD"
-                text="أهلاً ومرحباً بك في موقع RWADY، قم بإكمال ملفك الشخصي وتصفح آخر العروض والطلبات الموجودة"
+                text={t("welcome_message")}
             />
             <div className={styles.buttonAction}>
-                <button
+                <Link
+                    prefetch={true}
+                    href={`/${lang}/profile`}
                     className={styles.primaryBtn}
-                    aria-label="الانتقال لإكمال الملف الشخصي"
-                    // onClick={() => {
-                    //
-                    // }}
+                    aria-label={t("complete_now")}
                 >
-                    إكمال الآن
-                </button>
+                    {t("complete_now")}
+                </Link>
                 <button
                     className={styles.secondaryBtn}
-                    aria-label="تخطي إكمال الملف الشخصي حالياً"
+                    aria-label={t("skip")}
                 >
-                    ليس الآن
+                    {t("skip")}
                 </button>
             </div>
         </div>

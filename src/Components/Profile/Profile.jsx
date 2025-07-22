@@ -191,7 +191,7 @@ import SafeImage from "@/Components/Shared/SafeImage/SafeImage";
 import { editProfileIcon } from "@/utils/Icons";
 import { getProfile } from "@/api/services/auth/getProfile";
 import { updateProfile } from "@/api/services/auth/updateProfile";
-import {uploadImage} from "@/api/services/general/uploadImage ";
+import {uploadImage} from "@/api/services/general/images/uploadImage";
 import ApiConfig from "@/api/apiConfig";
 import ProfileSkeleton from "@/Components/Profile/ProfileSkeleton/ProfileSkeleton";
 import ReloadWithError from "@/Components/Shared/ReloadWithError/ReloadWithError";

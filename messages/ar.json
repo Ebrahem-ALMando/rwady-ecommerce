@@ -83,8 +83,25 @@
     "ordersTitle": "الطلبات",
     "oneHourAgo": "منذ ساعة",
     "message": "تم قبول طلبك بنجاح من خلال إدارة RWADY",
-    "showMore": "عرض المزيد"
+    "showMore": "عرض المزيد",
+    "new order": "طلب جديد",
+    "details": "تفاصيل الطلب",
+    "welcome_title": "نورت RWADY!",
+    "welcome_message": "أهلاً ومرحباً بك في موقع RWADY، قم بإكمال ملفك الشخصي وتصفح آخر العروض والطلبات الموجودة",
+    "complete_now": "إكمال الآن",
+    "skip": "ليس الآن"
   },
+  "time": {
+    "ago": "منذ",
+    "day": "يوم",
+    "days": "أيام",
+    "hour": "ساعة",
+    "hours": "ساعات",
+    "minute": "دقيقة",
+    "minutes": "دقائق",
+    "and": "و"
+  }
+,
   "mainNav": {
     "label": "القائمة الرئيسية",
     "links": {
@@ -596,6 +613,8 @@
         "download": "تحميل"
       }
     }
+
+
 
 
 

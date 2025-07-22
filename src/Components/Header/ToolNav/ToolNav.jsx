@@ -29,6 +29,9 @@ import {RiListIndefinite} from "react-icons/ri";
 import {IconFade} from "@/Components/Header/ToolNav/Icons/IconFade";
 import TopIcon from "@/Components/Header/ToolNav/Icons/TopIcon";
 import {AnimatePresence,motion} from "framer-motion";
+import useSWR from "swr";
+import {getNotifications} from "@/api/services/general/notifications/getNotifications";
+import {getUnreadCountNotifications} from "@/api/services/general/notifications/getUnreadCountNotifications";
 
 
 const ToolNav = ({ toggleMenu, isScrolled,getCartCount }) => {
@@ -83,6 +86,14 @@ const ToolNav = ({ toggleMenu, isScrolled,getCartCount }) => {
     }, []);
 
 
+    // const { data, error, isLoading, mutate }
+    //     = useSWR(
+    //     `notificationDataCount`,
+    //     getUnreadCountNotifications,
+    //     {
+    //         revalidateOnFocus: false,
+    //     }
+    // );
 
     return (
         <div>
@@ -211,6 +222,7 @@ const ToolNav = ({ toggleMenu, isScrolled,getCartCount }) => {
                 <NotificationModel
                     isShow={isNotificationVisible}
                     onClose={() => setNotificationVisible(false)}
+                    lang={lang}
                 />
             </div>
         </div>

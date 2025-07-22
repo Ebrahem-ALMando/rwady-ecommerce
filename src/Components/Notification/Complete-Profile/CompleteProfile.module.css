@@ -7,14 +7,19 @@
     display: flex;
     gap: 1rem;
 }
-.buttonAction button{
+.buttonAction button,.buttonAction .primaryBtn{
     font-size: 14px;
     font-weight: 400;
     width: 76px;
     height: 45px;
+    min-width: max-content;
+    padding: 2px 5px;
     border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.buttonAction button:first-child{
+.buttonAction .primaryBtn{
     color: #fff;
     background-color: #0741ad;
 }

@@ -150,7 +150,7 @@ import styles from './UploadPaymentModal.module.css';
 import { useTranslations } from 'next-intl';
 import {CloseIcon} from "@/utils/Icons";
 import {toast} from "react-hot-toast";
-import {uploadImage} from "@/api/services/general/uploadImage ";
+import {uploadImage} from "@/api/services/general/images/uploadImage";
 
 
 const UploadPaymentModal = ({ onClose, onUploadSuccess }) => {
