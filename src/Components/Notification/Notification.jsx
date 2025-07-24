@@ -100,6 +100,7 @@ import {formatTime} from "@/utils/formatTime";
 import {useEffect} from "react";
 import {readNotification} from "@/api/services/general/notifications/readNotification";
 import { database } from "@/lib/firebase";
+import EmptyNotificationBox from "@/Components/Notification/EmptyNotificationBox/EmptyNotificationBox";
 // import { ref, onChildAdded } from "firebase/database";
 const Notification = () => {
     const t = useTranslations("notification");
@@ -171,20 +172,28 @@ const Notification = () => {
                             <Line />
                         </>
                     )}
-                    {notificationList.map((notif) => (
-                        <div key={notif.id}>
-                            <NotificationCard
-                                orderId={notif?.metadata?.data?.order_id}
-                                title={notif.title}
-                                time={formatTime(notif.created_at,time)}
-                                text={notif.message}
-                                isAnyDetails={!!notif.notificationable_id}
-                                lang={lang}
+                    {!notificationList||notificationList.length===0
+                        ?
+                        <EmptyNotificationBox/>
+                        :
+                        <>
+                            {notificationList.map((notif) => (
+                                <div key={notif.id}>
+                                    <NotificationCard
+                                        orderId={notif?.metadata?.data?.order_id}
+                                        title={notif.title}
+                                        time={formatTime(notif.created_at,time)}
+                                        text={notif.message}
+                                        isAnyDetails={!!notif.notificationable_id}
+                                        lang={lang}
 
-                            />
-                            <Line />
-                        </div>
-                    ))}
+                                    />
+                                    <Line />
+                                </div>
+                            ))}
+                        </>
+                    }
+
 
 
                 </div>

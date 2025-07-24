@@ -486,12 +486,14 @@ const OrderSummary = (props) => {
 
                 const isExternalPayment = props.paymentType === "transfer"
 
+
+                // console.log("HHH:",`${window.location.origin}/${props.lang}/checkout?state=success`)
                 const body = {
                     products: cart.map(item => ({
                         product_id: item.id,
                         quantity: item.quantity,
                     })),
-                    success_url: `${window.location.origin}/${props.lang}/checkout?state=success`,
+                    success_url: `${window.location.origin}/${props.lang}/orders/`,
                     // success_url: `${window.location.origin}/${props.lang}/checkout?state=${isExternalPayment ? 'externel' : 'success'}`,
                     fail_url: `${window.location.origin}/${props.lang}/checkout?state=failure`,
 
@@ -531,6 +533,9 @@ const OrderSummary = (props) => {
                         case "qi":
                             if (result.data?.metadata?.formUrl) {
                                 window.location.href = result.data.metadata.formUrl;
+                               // setTimeout(()=>{
+                               //
+                               // },5000)
                             } else {
                                 toast.error(t("failMsg"));
                             }

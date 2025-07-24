@@ -7,7 +7,7 @@ const OtpInput = ({
                       handleVerifyOtp,
                       verifying,
                       otpError,
-                      digits = 5,
+                      digits = 8,
                       t,
                   }) => {
     const inputsRef = useRef([]);
@@ -38,14 +38,32 @@ const OtpInput = ({
     useEffect(() => {
         if (inputsRef.current[0]) inputsRef.current[0].focus();
     }, []);
+    const handlePaste = (e) => {
+        e.preventDefault();
+        const pasted = e.clipboardData.getData("text").replace(/\D/g, "").slice(0, digits);
+
+        if (!pasted) return;
+
+        const newOtp = otp.split("");
+        for (let i = 0; i < pasted.length; i++) {
+            newOtp[i] = pasted[i];
+            if (inputsRef.current[i]) {
+                inputsRef.current[i].value = pasted[i];
+            }
+        }
+
+        setOtp(newOtp.join(""));
+
+        inputsRef.current[pasted.length - 1]?.focus();
+    };
 
     return (
-        <div className="mt-6 bg-gray-50 p-4 rounded-lg shadow-sm border text-center">
+        <div className="mt-6 bg-gray-50 pb-4 pt-4 rounded-lg shadow-sm border text-center">
             <h4 className="text-sm font-semibold mb-3 text-gray-800">
                 {t("otp.title")}
             </h4>
 
-            <div className="flex justify-center gap-3 mb-3">
+            <div className="flex justify-center gap-1 mb-3 flex-wrap">
                 {[...Array(digits)].map((_, index) => (
                     <input
                         key={index}
@@ -54,6 +72,7 @@ const OtpInput = ({
                         value={otp[index] || ""}
                         onChange={(e) => handleChange(e, index)}
                         onKeyDown={(e) => handleKeyDown(e, index)}
+                        onPaste={handlePaste}
                         ref={(el) => (inputsRef.current[index] = el)}
                         className="w-12 h-12 text-center border border-gray-300 rounded-md text-lg font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />

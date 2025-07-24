@@ -78,7 +78,7 @@ const DynamicProductDetailsPage =async  ({params}) => {
             <Breadcrumb
                 isSubUrl={true}
                 subName={t("all_products")}
-                subUrl="/products"
+                subUrl={`/${locale}/products`}
                 currentPage={t("product_details")}
             />
             {/*<Suspense fallback={<Loading />}>*/}

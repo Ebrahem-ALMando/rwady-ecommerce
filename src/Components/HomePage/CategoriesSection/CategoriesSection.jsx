@@ -9,9 +9,9 @@ return (
     <section>
         <TitleSection
             initTitle={"الاقسام"}
-            initLink={"/section/categories"}
+            initLink={"section/categories"}
             can_show_more={can_show_more}
-            show_more={`/section/${show_more_path}`}
+            show_more={`section/${show_more_path}`}
             show_title={show_title}
             title={title?.[lang]}
             lang={lang}

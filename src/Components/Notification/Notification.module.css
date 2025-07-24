@@ -10,6 +10,7 @@
     background-color: #ffffff;
     display: flex;
     justify-content: center;
+    border-radius: 8px;
 }
 .notification{
     width: 90%;

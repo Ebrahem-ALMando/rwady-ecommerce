@@ -1,6 +1,7 @@
 import createMiddleware from 'next-intl/middleware';
 import {routing} from '@/i18n/routing';
 import {NextResponse} from 'next/server';
+import {getTokenWithServer} from "@/utils/getTokenWithServer";
 
 const intlMiddleware = createMiddleware(routing);
 
@@ -16,15 +17,22 @@ export function middleware(request) {
 
     const path = pathname.replace(/^\/(ar|en)(\/|$)/, '/');
 
+    const params = request.nextUrl.searchParams;
+    const isPaymentCallback =
+        params.has('requestId') &&
+        params.has('paymentId') &&
+        params.has('paymentType') &&
+        params.has('status');
 
     if ((token && user_id) && ["/sign-in", "/verify"].some((p) => path.includes(p))) {
         return NextResponse.redirect(new URL(`/${locale}/`, request.url));
     }
 
-
-    if (!(token && user_id) && ["/orders", "/profile", "/checkout", "/favourites", "/addresses-list",
-        "/transaction-and-payment-history"]
-        .some((p) => path.startsWith(p))) {
+    // startsWith
+    if (!(token && user_id) &&
+        !isPaymentCallback &&
+        ["/orders", "/profile", "/checkout", "/favourites", "/addresses-list", "/transaction-and-payment-history"]
+            .some((p) => path.includes(p))) {
         return NextResponse.redirect(new URL(`/${locale}/sign-in`, request.url));
     }
     return intlMiddleware(request);

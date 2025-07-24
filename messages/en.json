@@ -88,8 +88,9 @@
     "welcome_title": "Welcome to RWADY!",
     "welcome_message": "Welcome to RWADY! Complete your profile and browse the latest offers and requests.",
     "complete_now": "Complete Now",
-    "skip": "Not Now"
-
+    "skip": "Not Now",
+    "emptyTitle": "No Notifications Yet",
+    "emptySubtitle": "You’ll see your updates here when you have notifications."
   },
   "time": {
     "ago": "ago",
