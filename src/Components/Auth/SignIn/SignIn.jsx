@@ -167,7 +167,7 @@ const SignIn = () => {
                     >
                         <button
                             type="button"
-                            onClick={() => router.push('/')}
+                            onClick={() => router.push(`/${lang}/`)}
                             className="flex items-center gap-2 px-5 py-3 bg-white border border-blue-100 shadow-md hover:shadow-lg text-blue-600 hover:text-blue-800 text-lg transition-all rounded-xl  animate-pulse"
                         >
                             {t("browseWithoutLogin") || "تصفح دون تسجيل"}
