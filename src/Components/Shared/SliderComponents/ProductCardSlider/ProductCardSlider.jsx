@@ -704,20 +704,22 @@ const ProductCardSlider = ({ product, lang, setIsDraggingInsideCard }) => {
 
                         <p className={styles.price}>
                             {product.price_after_discount || product.price} - IQD
+                            <span className={styles.priceText}>&nbsp;</span>
                             {product.price_after_discount && (
                                 <del className={styles.oldPrice}>{product.price} - IQD</del>
                             )}
                         </p>
 
                         {/* Waite Implement Aksat Service */}
-                        {product.stock > 0 || product.stock_unlimited && (
+                        {/* {product.stock > 0 || product.stock_unlimited && ( */}
                             <p className={styles.available}>
                               <span className={styles.availableIcon}>
                                 <img src={'/images/img_6.png'} alt="available"/>
                               </span>
-                                اشتري بالاقساط . . . (قريباًْ)
+                                {t("pay_monthly", { price: Math.round((product.price_after_discount || product.price) / 10) })
+                            }
                             </p>
-                        )}
+                        {/* )} */}
                         {Array.isArray(product.colors) && product.colors.length > 0 && (
                             <div className={styles.colorButtons}>
                                 {product.colors.map((color, index) => (

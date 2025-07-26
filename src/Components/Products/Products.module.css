@@ -58,6 +58,19 @@
     grid-template-columns: repeat(auto-fit, minmax(350px, max-content));
     justify-content: center;
 }
+
+/* List view layout */
+.items.listView {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    grid-template-columns: none;
+}
+
+.items.listView > * {
+    width: 100%;
+    max-width: none;
+}
 .resetButton {
     margin: 15px auto;
     width: 100%;
@@ -210,28 +223,43 @@
 }
 @media (max-width: 775px) {
     .items {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(165px, max-content));
-        justify-content: center;
+        grid-template-columns: repeat(auto-fit, minmax(280px, max-content));
         gap: 8px;
-        padding: 8px 4px;
+    }
+    
+    .items.listView {
+        gap: 6px;
     }
 
     .container {
-        padding: 8px 12px;
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .products, .filterSidebar {
+        width: 100%;
+    }
+
+    .products{
+        order: 1;
+    }
+
+    .sort{
+        font-size: 12px;
     }
 }
 
 @media (max-width: 400px) {
     .items {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(165px, max-content));
-        justify-content: center;
+        grid-template-columns: 1fr;
         gap: 6px;
-        padding: 8px 2px;
+    }
+    
+    .items.listView {
+        gap: 4px;
     }
 
     .container {
-        padding: 8px 6px;
+        padding: 5px;
     }
 }

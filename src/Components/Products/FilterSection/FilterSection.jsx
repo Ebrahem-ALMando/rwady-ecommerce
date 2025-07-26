@@ -32,9 +32,9 @@ const FilterSection=(props)=>{
 
             <div className={styles.content}>
                 {props.children}
-                {props.isMore ?
+                {/* {props.isMore ?
                     <p className={styles.showMore}>{t("showMore")}</p>
-                    : ''}
+                    : ''} */}
             </div>
 
 

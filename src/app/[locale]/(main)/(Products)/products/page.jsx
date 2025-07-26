@@ -5,7 +5,7 @@ import InitProductsPage from "@/Components/Products/InitProductsPage";
 
 const ProductsPage = async ({ searchParams }) => {
     const search=await searchParams;
-    console.log(search)
+
 
     return(
         <>

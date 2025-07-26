@@ -1,0 +1,65 @@
+.container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 4px;
+    border: 1px solid #e9ecef;
+}
+
+.toggleButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 6px;
+    background-color: transparent;
+    color: #6c757d;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.toggleButton:hover {
+    background-color: #e9ecef;
+    color: #495057;
+}
+
+.toggleButton.active {
+    background-color: #0741AD;
+    color: white;
+    box-shadow: 0 2px 4px rgba(7, 65, 173, 0.3);
+}
+
+.toggleButton.active:hover {
+    background-color: #052d7a;
+    color: white;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .container {
+        gap: 6px;
+        padding: 3px;
+    }
+    
+    .toggleButton {
+        width: 32px;
+        height: 32px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        gap: 4px;
+        padding: 2px;
+    }
+    
+    .toggleButton {
+        width: 28px;
+        height: 28px;
+    }
+} 

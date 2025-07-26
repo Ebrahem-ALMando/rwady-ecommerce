@@ -4,7 +4,7 @@ import Stars from "@/Components/Shared/Stars/Stars";
 
 const FilterCriteriaSelect = (props) => {
     const { id, section, title, quantity, isColor, color, isRating,productRating, type, onChange,selected,disabled } = props;
-    console.log("selected:", selected, "id:", id);
+
 
     return (
         <div className={styles.row}>

@@ -1,5 +1,5 @@
 .card {
-    direction: rtl;
+    /* direction: rtl; */
     background-color: white;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 0.5rem;
@@ -125,6 +125,9 @@
     margin: 2rem auto 0.5rem auto;
     border-radius: 10px;
     height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 .brand {
     color: #0741AD;
@@ -152,10 +155,11 @@
 .price {
     margin-top: 0.7rem;
     color: #FF3B30;
-    text-align: end;
+    text-align: start;
     font-size: 18px;
     font-weight: 500;
-    direction: ltr;
+    display: flex;
+
 }
 .oldPrice {
     color: #0741AD;
@@ -229,6 +233,7 @@
     font-size: 13px;
     font-weight: 500;
     display: flex;
+    gap: 3px;
 }
 .time {
     position: relative;
@@ -305,95 +310,91 @@
 @media (max-width: 775px)
 {
     .cardDiv{
-        padding:20px 5px !important;
-
+        padding:15px 3px !important;
+       
     }
     .card {
         position: relative;
-        width: 165px;
-        min-height: 280px;
+        width: 155px;
+        min-height: 280px !important;
         height: auto;
-
+        
     }
     .saveSeller{
-        width: 43px;
+        width: 40px;
         min-width: max-content;
-        font-size: 10px !important;
+        font-size: 9px !important;
+        padding: 5px 8px !important;
     }
     .bestSeller{
-        width: 43px;
+        width: 40px;
         min-width: max-content;
-        font-size: 10px !important;
+        font-size: 9px !important;
+        padding: 5px 8px !important;
     }
     .timeBox{
-        width: 120px !important;
+        width: 110px !important;
         min-width: max-content;
     }
     .time {
         top: 3px;
         right: 3px;
-        width: 110px !important;
+        width: 100px !important;
         min-width: max-content;
-        height: 27px;
-        font-size: 10px !important;
+        height: 25px;
+        font-size: 9px !important;
     }
     .timeText{
         font-weight: 400 !important;
-        font-size: 10px !important;
+        font-size: 9px !important;
     }
     .timeIcon {
-        width: 25px;
-        height: 25px;
+        width: 22px;
+        height: 22px;
     }
     .imgCont{
-        margin-top: 0.3rem !important;
-        /*width: 160px !important;*/
+        margin-top: 0.2rem !important;
         height: auto !important;
         display: block;
-        padding: 0px 7px !important;
+        padding: 0px 5px !important;
     }
     .productImgDiv {
         padding: 0px !important;
         margin: 0 !important;
+        max-height: 120px !important;
     }
     .productImg {
         object-fit: cover;
     }
     .icons{
-        bottom: 10px !important;
-        left: 7px !important;
-        gap: 5px !important;
+        bottom: 8px !important;
+        left: 5px !important;
+        gap: 4px !important;
     }
     .iconImage {
         width: auto !important;
-        height: 30px!important;
+        height: 25px !important;
         min-width: max-content;
-        padding: 17px 5px ;
-
+        padding: 12px 4px !important;
     }
     .iconImage  svg{
-        width: 22px;
+        width: 18px;
     }
     .slickDot button, .slickActive button {
-        width:  9.5px !important;
-        height:  9.5px !important;
+        width: 8px !important;
+        height: 8px !important;
         background: transparent !important;
         border: none !important;
         cursor: pointer;
         position: absolute;
-        right: 10px !important;
-
+        right: 8px !important;
         border-radius: 50%;
         opacity: 0;
-
     }
-
-
-
     .slickDot, .slickActive {
-        width: 9.5px !important;
-        height:  9.5px !important;
-        top: -8px !important;
+        width: 8px !important;
+        height: 8px !important;
+        top: -6px !important;
     }
     .slickDot {
         background-color: #bec8d9;
@@ -402,37 +403,52 @@
         background-color: #0741ad;
     }
     .infoCard {
-        padding:2px 5px !important;
+        padding: 6px 4px !important;
         background-color: #f7f7f7;
-        width: 160px !important;
-        margin: 0.3rem auto !important;
+        width: 150px !important;
+        margin: 0.2rem auto !important;
+        height: auto !important;
+        min-height: 210px !important;
     }
     .categ{
-        font-size: 10px !important;
+        font-size: 9px !important;
         font-weight: 500;
         min-width: max-content;
+        padding: 2px 4px !important;
     }
     .title{
-        font-size: 13.5px !important;
+        font-size: 12px !important;
         font-weight: 500;
         -webkit-line-clamp: 3;
-        line-height: 1.3rem;
-        max-height: 5.2rem;
-        padding: 0 3px !important;
+        line-height: 1.2rem;
+        max-height: 4.5rem;
+        padding: 0 2px !important;
     }
     .price,.oldPrice,.available{
-        font-size: 11px !important;
+        font-size: 10px !important;
         font-weight: 500;
-        margin-top: 0.5rem;
+        margin-top: 0.3rem;
     }
     .availableIcon{
         margin-right: 0.2rem;
+        width: 14px !important;
     }
-
     .remaining{
-        font-size: 11.4px !important;
+        font-size: 10px !important;
+        
     }
-
+    .outherDetails{
+        margin-right: 3px;
+        margin-left:  3px;
+    }
+    .colorButtons {
+        margin-top: 4px !important;
+        gap: 4px !important;
+    }
+    .colorButton {
+        width: 10px !important;
+        height: 10px !important;
+    }
 }
 /*@media (max-width: 630px) {*/
 

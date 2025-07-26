@@ -265,6 +265,7 @@
     "categories": "Category",
     "brands": "Brands",
     "showMore": "Show more",
+    "showLess": "Show less",
     "price": "Price",
     "priceFrom": "From",
     "priceTo": "To",
@@ -272,6 +273,7 @@
     "closeFilters": "Close Filters",
     "close": "Close",
     "noMatchingData": "No matching data found"
+   
   },
   "Cart": {
     "add": "Add to Cart",
@@ -571,7 +573,8 @@
 
   "productCard":{
     "stock_unlimited": "Unlimited quantity",
-    "stock_limited": "Only {count} items left"
+    "stock_limited": "Only {count} items left",
+    "pay_monthly": "Pay in {price} IQD per month *"
   },
   "PaymentProof": {
     "uploadTitle": "Upload Payment Proof",

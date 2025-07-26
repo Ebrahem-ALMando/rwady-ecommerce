@@ -266,6 +266,7 @@
     "categories": "الفئة",
     "brands": "الماركات",
     "showMore": "عرض المزيد",
+    "showLess": "عرض أقل",
     "price": "السعر",
     "priceFrom": "من",
     "priceTo": "إلى",
@@ -273,6 +274,7 @@
     "closeFilters": "إغلاق الفلاتر",
     "close": "إغلاق",
     "noMatchingData": "لا توجد بيانات مطابقة"
+   
   },
   "Cart": {
     "add": "أضف للسلة",
@@ -487,7 +489,8 @@
       "pending": "قيد الانتظار",
       "paid": "تم الدفع",
       "cancelled": "تم الإلغاء",
-      "unpaid": "غير مدفوع"
+      "unpaid": "غير مدفوع",
+      "CREATED": "تم الانشاء"
     },
     "order_number": "رقم الطلب",
     "order_date": "بتاريخ",
@@ -500,7 +503,8 @@
       "verifying": "جاري التحقق...",
       "failed": "فشل التحقق، حاول مرة أخرى.",
       "success": "تم التحقق بنجاح",
-      "error": "حدث خطأ أثناء التحقق"
+      "error": "حدث خطأ أثناء التحقق",
+      "completed": "مكتمل"
     },
     "details": {
       "title": "تفاصيل الطلب",
@@ -568,7 +572,8 @@
 
   "productCard":{
     "stock_unlimited": "كمية غير محدودة",
-    "stock_limited": "مُتبقي: {count} عناصر"
+    "stock_limited": "مُتبقي: {count} عناصر",
+    "pay_monthly": "اشتر مقابل {price} د.ع في الشهر *"
   },
   "PaymentProof": {
     "uploadTitle": "رفع إثبات الدفع",

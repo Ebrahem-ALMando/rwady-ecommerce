@@ -4,18 +4,27 @@ import Slider from 'react-slider';
 import './FilterCriteriaPrice.css';
 
 const MIN = 0;
-const MAX = 10000;
+const MAX = 100000;
 
-const PriceSlider = ({ onChange ,t}) => {
+const PriceSlider = ({ onChange, t, searchParams, setPriceRange, lang }) => {
     const [values, setValues] = useState([MIN, MAX]);
+
+    // Initialize values from URL parameters
+    useEffect(() => {
+        const minPrice = searchParams?.price_min ? parseInt(searchParams.price_min) : MIN;
+        const maxPrice = searchParams?.price_max ? parseInt(searchParams.price_max) : MAX;
+        setValues([minPrice, maxPrice]);
+    }, [searchParams]);
 
     const handleChange = (newValues) => {
         setValues(newValues);
     };
 
-    useEffect(() => {
-        onChange?.(values[0], values[1]);
-    }, [values]);
+    const handleDragEnd = (newValues) => {
+        setValues(newValues);
+        // Apply price filter only when dragging ends
+        setPriceRange(newValues[0], newValues[1], lang);
+    };
 
     return (
         <div style={{ padding: '20px' }}>
@@ -23,6 +32,7 @@ const PriceSlider = ({ onChange ,t}) => {
                 className="slider"
                 value={values}
                 onChange={handleChange}
+                onAfterChange={handleDragEnd}
                 min={MIN}
                 max={MAX}
             />

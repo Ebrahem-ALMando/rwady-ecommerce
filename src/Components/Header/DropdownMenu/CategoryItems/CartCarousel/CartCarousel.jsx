@@ -29,11 +29,12 @@ const CartCarousel = (props) => {
 
 
     const settings = {
-        ...sliderSetting,
+
         infinite: !isSingleGroup && dataList.length > 6,
         initialSlide: 0,
         arrows:true,
         slidesToShow: Math.min(6, dataList.length),
+        ...sliderSetting,
         prevArrow: (
             <CustomArrows type="prev" activeArrow={activeArrow} onArrowClick={setActiveArrow} />
         ),
