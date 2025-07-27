@@ -126,6 +126,7 @@ const ProductCardHorizontal = ({ product, lang, setIsDraggingInsideCard }) => {
                 {/* Discount Badge */}
                 {product.discount_percentage_text?.[lang] && isDiscountValid && (
                     <div className={styles.saveSeller}>
+                        {/* <span className={styles.badgeIcon}>🔥</span> */}
                         {product.discount_percentage_text[lang]}
                     </div>
                 )}
@@ -138,6 +139,7 @@ const ProductCardHorizontal = ({ product, lang, setIsDraggingInsideCard }) => {
                             background: product.ribbon_color?.length > 0 ? product.ribbon_color : undefined,
                         }}
                     >
+                        {/* <span className={styles.badgeIcon}>⭐</span> */}
                         {product.ribbon_text[lang]}
                     </div>
                 )}
@@ -151,6 +153,7 @@ const ProductCardHorizontal = ({ product, lang, setIsDraggingInsideCard }) => {
                                     <Image width={16} height={16} src={'/images/img_8.png'} alt={'time'} />
                                 </span>
                                 {time}
+                                <span className={styles.soonBadge}>SOON</span>
                             </p>
                         </div>
                     </div>
@@ -189,8 +192,8 @@ const ProductCardHorizontal = ({ product, lang, setIsDraggingInsideCard }) => {
                                         loading="lazy"
                                         className={styles.productImg}
                                         draggable={false}
-                                        width={200}
-                                        height={200}
+                                        width={280}
+                                        height={240}
                                     />
                                 </div>
                             ))}
@@ -203,14 +206,21 @@ const ProductCardHorizontal = ({ product, lang, setIsDraggingInsideCard }) => {
                             loading="lazy"
                             className={styles.productImg}
                             draggable={false}
-                            width={200}
-                            height={200}
+                            width={280}
+                            height={240}
                         />
                     )}
 
                     {/* Action Icons */}
                     <div className={styles.actionIcons}>
-                        <div className={styles.iconContainer}>
+                        <div 
+                            className={styles.iconContainer}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                e.preventDefault();
+                                handleToggle();
+                            }}
+                        >
                             <FavouriteToggleButton
                                 liked={liked}
                                 likedCount={likedCount}
@@ -218,10 +228,14 @@ const ProductCardHorizontal = ({ product, lang, setIsDraggingInsideCard }) => {
                             />
                         </div>
                         <div className={styles.iconContainer}>
-                            <p>{product.total_orders || 0}</p>
+                            <p>({product.total_orders || 0})</p>
+                            &nbsp;
                             {salesNumIcon}
                         </div>
                     </div>
+
+                    {/* Image Overlay Gradient */}
+                    <div className={styles.imageOverlay}></div>
                 </div>
 
                 {/* Product Info */}
@@ -260,6 +274,7 @@ const ProductCardHorizontal = ({ product, lang, setIsDraggingInsideCard }) => {
                             <img src={'/images/img_6.png'} alt="installment"/>
                         </span>
                         {t("pay_monthly", { price: Math.round((product.price_after_discount || product.price) / 10) })}
+                        {/* <span className={styles.starIcon}>*</span> */}
                     </p>
 
                     {/* Colors */}
@@ -276,6 +291,7 @@ const ProductCardHorizontal = ({ product, lang, setIsDraggingInsideCard }) => {
                                         handleColorClick(color);
                                     }}
                                     aria-label={`لون`}
+                                    title={`لون ${color.name || 'متاح'}`}
                                 />
                             ))}
                         </div>

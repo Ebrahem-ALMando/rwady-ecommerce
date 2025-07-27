@@ -42,13 +42,13 @@
 /* Mobile Responsive */
 @media (max-width: 768px) {
     .container {
-        gap: 6px;
-        padding: 3px;
+        /* gap: 6px;
+        padding: 3px; */
     }
     
     .toggleButton {
-        width: 32px;
-        height: 32px;
+        /* width: 32px;
+        height: 32px; */
     }
 }
 
@@ -58,8 +58,8 @@
         padding: 2px;
     }
     
-    .toggleButton {
+    /* .toggleButton {
         width: 28px;
         height: 28px;
-    }
+    } */
 } 

@@ -310,6 +310,150 @@
 @media (max-width: 775px)
 {
     .cardDiv{
+        padding:20px 5px !important;
+
+    }
+    .card {
+        position: relative;
+        width: 165px;
+        min-height: 280px;
+        height: auto;
+
+    }
+    .saveSeller{
+        width: 43px;
+        min-width: max-content;
+        font-size: 10px !important;
+    }
+    .bestSeller{
+        width: 43px;
+        min-width: max-content;
+        font-size: 10px !important;
+    }
+    .timeBox{
+        width: 120px !important;
+        min-width: max-content;
+    }
+    .time {
+        top: 3px;
+        right: 3px;
+        width: 110px !important;
+        min-width: max-content;
+        height: 27px;
+        font-size: 10px !important;
+    }
+    .timeText{
+        font-weight: 400 !important;
+        font-size: 10px !important;
+    }
+    .timeIcon {
+        width: 25px;
+        height: 25px;
+    }
+    .imgCont{
+        margin-top: 0.3rem !important;
+        /*width: 160px !important;*/
+        height: auto !important;
+        display: block;
+        padding: 0px 7px !important;
+    }
+    .productImgDiv {
+        padding: 0px !important;
+        margin: 0 !important;
+    }
+    .productImg {
+        object-fit: cover;
+    }
+    .icons{
+        bottom: 10px !important;
+        left: 7px !important;
+        gap: 5px !important;
+    }
+    .iconImage {
+        width: auto !important;
+        height: 30px!important;
+        min-width: max-content;
+        padding: 17px 5px ;
+
+    }
+    .iconImage  svg{
+        width: 22px;
+    }
+    .slickDot button, .slickActive button {
+        width:  9.5px !important;
+        height:  9.5px !important;
+        background: transparent !important;
+        border: none !important;
+        cursor: pointer;
+        position: absolute;
+        right: 10px !important;
+
+        border-radius: 50%;
+        opacity: 0;
+
+    }
+
+
+
+    .slickDot, .slickActive {
+        width: 9.5px !important;
+        height:  9.5px !important;
+        top: -8px !important;
+    }
+    .slickDot {
+        background-color: #bec8d9;
+    }
+    .slickActive {
+        background-color: #0741ad;
+    }
+    .infoCard {
+        padding:2px 5px !important;
+        background-color: #f7f7f7;
+        width: 160px !important;
+        margin: 0.3rem auto !important;
+    }
+    .categ{
+        font-size: 10px !important;
+        font-weight: 500;
+        min-width: max-content;
+    }
+    .title{
+        font-size: 13.5px !important;
+        font-weight: 500;
+        -webkit-line-clamp: 3;
+        line-height: 1.3rem;
+        max-height: 5.2rem;
+        padding: 0 3px !important;
+    }
+    .price,.oldPrice,.available{
+        font-size: 11px !important;
+        font-weight: 500;
+        margin-top: 0.5rem;
+    }
+  
+    .availableIcon{
+        margin-right: 3px;
+        margin-left:  3px;
+        width: 13px !important;
+        
+    }
+    .available{
+        font-size: 10px !important;
+    }
+    .remaining{
+        font-size: 11px !important;
+        
+    }
+    .outherDetails{
+        margin-right: 4px;
+        margin-left:  4px;
+        margin-bottom: 7px;
+    }
+
+}
+/* @media (max-width: 775px)
+{
+    .cardDiv{
         padding:15px 3px !important;
        
     }
@@ -361,7 +505,7 @@
     .productImgDiv {
         padding: 0px !important;
         margin: 0 !important;
-        max-height: 120px !important;
+        max-height: 100px !important;
     }
     .productImg {
         object-fit: cover;
@@ -408,7 +552,7 @@
         width: 150px !important;
         margin: 0.2rem auto !important;
         height: auto !important;
-        min-height: 210px !important;
+        min-height: 150px !important;
     }
     .categ{
         font-size: 9px !important;
@@ -417,24 +561,24 @@
         padding: 2px 4px !important;
     }
     .title{
-        font-size: 12px !important;
+        font-size: 11px !important;
         font-weight: 500;
-        -webkit-line-clamp: 3;
-        line-height: 1.2rem;
-        max-height: 4.5rem;
+        -webkit-line-clamp: 2;
+        line-height: 1.1rem;
+        max-height: 2.2rem;
         padding: 0 2px !important;
     }
     .price,.oldPrice,.available{
-        font-size: 10px !important;
+        font-size: 9px !important;
         font-weight: 500;
-        margin-top: 0.3rem;
+        margin-top: 0.2rem;
     }
     .availableIcon{
         margin-right: 0.2rem;
-        width: 14px !important;
+        width: 12px !important;
     }
     .remaining{
-        font-size: 10px !important;
+        font-size: 9px !important;
         
     }
     .outherDetails{
@@ -442,14 +586,14 @@
         margin-left:  3px;
     }
     .colorButtons {
-        margin-top: 4px !important;
-        gap: 4px !important;
+        margin-top: 3px !important;
+        gap: 3px !important;
     }
     .colorButton {
-        width: 10px !important;
-        height: 10px !important;
+        width: 8px !important;
+        height: 8px !important;
     }
-}
+} */
 /*@media (max-width: 630px) {*/
 
 /*    .card {*/

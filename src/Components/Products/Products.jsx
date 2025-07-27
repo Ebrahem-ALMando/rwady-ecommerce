@@ -173,8 +173,9 @@ console.log(categoriesData)
                     </FilterSection>
                     <Line/>
                     {(sortValue || Object.keys(searchParams).length > 0) && (
-                        <button className={styles.resetButton} onClick={handleClearFilter}>{t('clearFilter')}</button>
-                    )}
+                                <button className={styles.resetButton}
+                                        onClick={handleClearFilter}>{t('clearFilter')}</button>
+                            )}
                 </div>
 
 
@@ -216,13 +217,14 @@ console.log(categoriesData)
 
             <div className={styles.products}>
                 <div className={styles.header}>
-                   <div className='flex items-center gap-4'>
+                   <div className={`flex items-center gap-4 ${styles.headerIcons}`}>
                        {/* {productHeaderIcon} */}
+                 
+                       <ViewToggle viewMode={viewMode} onViewChange={setViewMode} />
                        {(sortValue || Object.keys(searchParams).length > 0) && (
                            <button onClick={handleClearFilter} className={styles.clearButton} title={t("clearFilter")}>
                                <MdFilterAltOff size={18}/></button>
                        )}
-                       <ViewToggle viewMode={viewMode} onViewChange={setViewMode} />
                    </div>
                     <div className={styles.sort}>
 

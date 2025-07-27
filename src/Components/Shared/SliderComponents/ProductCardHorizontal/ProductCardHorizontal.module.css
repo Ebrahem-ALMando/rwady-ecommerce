@@ -5,74 +5,77 @@
 
 .card {
     background-color: white;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
     border: 1px solid #e5e7eb;
     transition: all 0.3s ease;
     position: relative;
     display: flex;
     align-items: stretch;
     min-height: 200px;
-    overflow: hidden;
+
 }
 
 .card:hover {
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    transform: translateY(-3px);
 }
 
 /* Badges */
 .saveSeller {
     position: absolute;
-    top: 8px;
-    left: 8px;
-    background-color: #ff4444;
+    top: 12px;
+    left: 12px;
+    background-color: #dc2926;
     color: white;
-    padding: 4px 8px;
-    border-radius: 6px;
+    padding: 6px 12px;
+    border-radius: 8px;
     font-size: 12px;
     font-weight: 600;
     z-index: 10;
+    box-shadow: 0 2px 4px rgba(220, 41, 38, 0.3);
 }
 
 .bestSeller {
     position: absolute;
-    top: 8px;
-    right: 8px;
-    background-color: #ff6b35;
+    top: 12px;
+    right: 12px;
+    background-color: #0741ad;
     color: white;
-    padding: 4px 8px;
-    border-radius: 6px;
+    padding: 6px 12px;
+    border-radius: 8px;
     font-size: 12px;
     font-weight: 600;
     z-index: 10;
+    box-shadow: 0 2px 4px rgba(7, 65, 173, 0.3);
 }
 
 /* Timer */
 .timeBox {
     position: absolute;
-    top: -6px;
+    top: -8px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 20;
 }
 
 .time {
-    background-color: #ff6b35;
+    background-color: #0741ad;
     color: white;
-    padding: 3px 8px;
-    border-radius: 8px;
-    font-size: 10px;
+    padding: 4px 12px;
+    border-radius: 5px;
+    font-size: 11px;
     font-weight: 600;
     white-space: nowrap;
+    box-shadow: 0 3px 8px rgba(7, 65, 173, 0.4);
 }
 
 .timeText {
     display: flex;
     align-items: center;
-    gap: 3px;
+    gap: 4px;
     margin: 0;
-    font-size: 10px;
+    font-size: 11px;
 }
 
 .timeIcon {
@@ -83,65 +86,80 @@
 /* Image Container */
 .imageContainer {
     position: relative;
-    width: 200px;
+    width: 230PX;
     min-width: 200px;
-    height: 200px;
+    height: 100%;
     cursor: pointer;
     overflow: hidden;
-    border-radius: 12px 0 0 12px;
+
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
 .productImg {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.3s ease;
+    transition: transform 0.4s ease;
+    aspect-ratio: 5/6;
 }
 
 .imageContainer:hover .productImg {
-    transform: scale(1.05);
+    transform: scale(1.03);
 }
 
 /* Action Icons */
 .actionIcons {
     position: absolute;
-    top: 8px;
-    left: 8px;
+    bottom: 12px;
+    left: 12px;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
     z-index: 15;
 }
 
 .iconContainer {
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 50%;
-    width: 32px;
-    height: 32px;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 15%;
+    padding: 15px;
+    width: 60px;
+    min-width: 70px;
+    height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 12px;
     font-weight: 600;
     color: #0741AD;
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    cursor: pointer;
+ 
+}
+
+.iconContainer:hover {
+    transform: scale(1.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* Product Info */
 .productInfo {
     flex: 1;
-    padding: 16px;
+    padding: 12px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     min-width: 0;
+    background: #f7f7f7;
 }
 
 /* Categories */
 .categories {
     display: flex;
-    gap: 8px;
+    gap: 6px;
     margin-bottom: 8px;
+    margin-top: 10px;
     flex-wrap: wrap;
 }
 
@@ -150,18 +168,19 @@
     color: #1976d2;
     padding: 4px 8px;
     border-radius: 12px;
-    font-size: 11px;
-    font-weight: 500;
+    font-size: 10px;
+    font-weight: 600;
     white-space: nowrap;
+    box-shadow: 0 2px 4px rgba(25, 118, 210, 0.2);
 }
 
 /* Title */
 .title {
-    color: #1a1a1a;
+    color: #0741AD;
     font-weight: 600;
     font-size: 16px;
     margin: 0 0 8px 0;
-    line-height: 1.4;
+    line-height: 1.3;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -175,17 +194,18 @@
 }
 
 .price {
-    color: #ff4444;
+    color: #FF3B30;
     font-size: 18px;
-    font-weight: 700;
+    font-weight: 500;
     margin: 0;
 }
 
 .oldPrice {
-    color: #999;
-    font-size: 14px;
+    color: #0741AD;
+    font-size: 16px;
     text-decoration: line-through;
     margin-left: 8px;
+    font-weight: 400;
 }
 
 /* Installment */
@@ -193,9 +213,12 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    color: #666;
-    font-size: 13px;
-    margin: 0 0 12px 0;
+    color: #fab840;
+    font-size: 12px;
+    font-weight: 500;
+    margin: 0 0 10px 0;
+    padding: 6px 8px;
+    border-radius: 8px;
 }
 
 .installmentIcon {
@@ -206,14 +229,14 @@
 .installmentIcon img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
 }
 
 /* Colors */
 .colorButtons {
     display: flex;
     gap: 6px;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 }
 
 .colorButton {
@@ -221,13 +244,14 @@
     height: 20px;
     border-radius: 50%;
     border: 2px solid #fff;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     cursor: pointer;
-    transition: transform 0.2s ease;
+    transition: all 0.3s ease;
 }
 
 .colorButton:hover {
-    transform: scale(1.2);
+    transform: scale(1.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 /* Stock Info */
@@ -235,9 +259,12 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    color: #666;
+    color: #0741AD;
     font-size: 12px;
-    margin-bottom: 12px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    padding: 4px 6px;
+    border-radius: 6px;
 }
 
 .stockIcon {
@@ -248,7 +275,7 @@
 .stockIcon img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
 }
 
 /* Cart Actions */
@@ -260,50 +287,54 @@
 }
 
 .addToCart {
-    background-color: #0741AD;
+    background-color: #0a58ca;
     color: white;
     border: none;
     border-radius: 8px;
-    padding: 8px 16px;
-    font-size: 14px;
-    font-weight: 600;
+    padding: 8px 12px;
+    font-size: 11px;
+    font-weight: 400;
     cursor: pointer;
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
     gap: 6px;
-    min-width: 100px;
+    min-width: 80px;
     justify-content: center;
+    box-shadow: 0 4px 12px rgba(10, 88, 202, 0.3);
 }
 
 .addToCart:hover {
-    background-color: #052d7a;
-    transform: translateY(-1px);
+    background-color: #004ea8;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(10, 88, 202, 0.4);
 }
 
 .addToCart:disabled {
     background-color: #ccc;
     cursor: not-allowed;
     transform: none;
+    box-shadow: none;
 }
 
 .addToCart.disabled {
     background-color: #ccc;
     cursor: not-allowed;
+    box-shadow: none;
 }
 
 .quantity {
-    margin-left: 8px;
+    margin-left: 6px;
 }
 
 /* Slider Dots */
 .slickDots {
     position: absolute;
-    bottom: 8px;
+    bottom: 12px;
     left: 50%;
     transform: translateX(-50%);
     display: flex !important;
-    gap: 4px;
+    gap: 6px;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -311,10 +342,10 @@
 }
 
 .slickDot button {
-    width: 6px;
-    height: 6px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.6);
     border: none;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -322,57 +353,254 @@
 
 .slickActive button {
     background-color: white;
-    transform: scale(1.2);
+    transform: scale(1.3);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
     .card {
-        flex-direction: column;
-        min-height: auto;
+        flex-direction: row;
+        min-height: 160px;
     }
 
     .imageContainer {
+        width: 200px;
+        min-width: 200px;
+        height: 100%;
+
+       
+        overflow: hidden;
+    }
+    .imageContainer img {
         width: 100%;
-        height: 200px;
-        border-radius: 12px 12px 0 0;
+        height: 100%;
+        object-fit: cover;
+        aspect-ratio: 5/7;
     }
 
     .productInfo {
         padding: 12px;
-        min-height: 200px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
+        min-height: 160px;
     }
 
     .title {
-        font-size: 14px;
-        -webkit-line-clamp: 3;
+        font-size: 16px;
+        font-weight: 600;
+        -webkit-line-clamp: 2;
         line-height: 1.3;
+        margin-bottom: 8px;
+        color: #0741AD;
     }
 
     .price {
-        font-size: 16px;
-    }
-
-    .addToCart {
-        padding: 6px 12px;
-        font-size: 12px;
-        min-width: 80px;
-    }
-
-    .categories {
+        font-size: 18px;
+        font-weight: 700;
         margin-bottom: 6px;
     }
 
+    .oldPrice {
+        font-size: 14px;
+        margin-left: 6px;
+    }
+
+    .addToCart {
+        padding: 10px 16px;
+        font-size: 13px;
+        font-weight: 600;
+        min-width: 100px;
+    }
+
+    .categories {
+        margin-bottom: 8px;
+        gap: 6px;
+    }
+
     .category {
-        font-size: 10px;
-        padding: 3px 6px;
+        font-size: 11px;
+        font-weight: 500;
+        padding: 4px 8px;
+        background-color: #e3f2fd;
+        color: #1976d2;
+        border-radius: 12px;
     }
 
     .colorButtons {
         margin-bottom: 8px;
+        gap: 6px;
+    }
+
+    .colorButton {
+        width: 18px;
+        height: 18px;
+    }
+
+    .installment {
+        font-size: 12px;
+        font-weight: 500;
+        margin-bottom: 8px;
+        padding: 6px 10px;
+        color: #fab840;
+    }
+
+    .stockInfo {
+        font-size: 11px;
+        font-weight: 500;
+        margin-bottom: 8px;
+        color: #0741AD;
+    }
+
+    .actionIcons {
+        bottom: 8px !important;
+        left: 8px;
+        gap: 6px;
+    }
+
+    .iconContainer {
+        width: 32px;
+        height: 32px;
+   
+        padding: 6px;
+        border-radius: 10px;
+        background-color: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(6px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+    .iconContainer svg {
+       width: 25px !important;
+       height: 25px !important;
+    }
+
+    .saveSeller,
+    .bestSeller {
+        font-size: 11px;
+        font-weight: 600;
+        padding: 4px 8px;
+    }
+
+    .time {
+        font-size: 10px;
+        font-weight: 600;
+        padding: 3px 8px;
+    }
+
+    .slickDots {
+        bottom: 6px;
+    }
+
+    .slickDot button {
+        width: 5px;
+        height: 5px;
+    }
+
+    .cartActions {
+        gap: 8px;
+        margin-top: 8px;
+    }
+
+    .quantity {
+        margin-left: 6px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cardContainer {
+        padding: 4px;
+        margin-bottom: 8px;
+    }
+
+    .card {
+        min-height: 140px;
+    }
+
+    .imageContainer {
+        width: 130px;
+        min-width: 130px;
+        height: 100%;
+
+    }
+    .imageContainer img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        aspect-ratio: 5/9.2 !important;
+        
+    }
+
+    .productInfo {
+        padding: 10px;
+        min-height: 140px;
+    }
+
+    .title {
+        font-size: 14px;
+        font-weight: 600;
+        -webkit-line-clamp: 2;
+        line-height: 1.2;
+        margin-bottom: 6px;
+        color: #0741AD;
+    }
+
+    .priceContainer p {
+        font-size: 14px !important;
+        font-weight: 700;
+        margin-bottom: 5px;
+    }
+
+    .oldPrice {
+        font-size: 12px;
+        margin-left: 5px;
+    }
+
+    .addToCart {
+        padding: 8px 12px;
+        font-size: 11px;
+        font-weight: 600;
+        min-width: 80px;
+        display: none;
+    }
+
+    .cartActions {
+        gap: 6px;
+        margin-top: 6px;
+    }
+
+    .quantity {
+        margin-left: 4px;
+    }
+
+    .categories {
+        margin-bottom: 6px;
+        gap: 4px;
+    }
+
+    .category {
+        font-size: 11px;
+        font-weight: 500;
+        padding: 3px 6px;
+        background-color: #e3f2fd;
+        color: #1976d2;
+        border-radius: 10px;
+    }
+
+    .installment {
+        font-size: 12px;
+        font-weight: 500;
+        margin-bottom: 6px;
+        padding: 4px 8px;
+        color: #fab840;
+    }
+
+    .stockInfo {
+        font-size: 12px;
+        font-weight: 500;
+        margin-bottom: 6px;
+        color: #0741AD;
+    }
+
+    .colorButtons {
+        margin-bottom: 6px;
+        gap: 4px;
     }
 
     .colorButton {
@@ -380,37 +608,38 @@
         height: 16px;
     }
 
-    .installment {
-        font-size: 12px;
-        margin-bottom: 8px;
-    }
-
-    .stockInfo {
-        font-size: 11px;
-        margin-bottom: 8px;
-    }
-
-    .actionIcons {
-        top: 6px;
-        left: 6px;
-        gap: 6px;
+    .actionIcons  {
+        bottom: 6px !important;
+        left: 6px !important;
+        gap: 8px;
     }
 
     .iconContainer {
-        width: 28px;
-        height: 28px;
-        font-size: 11px;
+      width: 50px;
+      height: 30px;
+      padding: 10px;
+   
+        background-color: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(5px);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
     }
-
+    .iconContainer svg {
+        width: 25px !important;
+        height: 25px !important;
+     }
     .saveSeller,
     .bestSeller {
+        top: -5px;
+        right: -5px;
         font-size: 11px;
-        padding: 3px 6px;
+        font-weight: 600;
+        padding: 2px 6px;
     }
 
     .time {
-        font-size: 10px;
-        padding: 3px 6px;
+        font-size: 8px;
+        font-weight: 600;
+        padding: 2px 6px;
     }
 
     .slickDots {
@@ -421,108 +650,74 @@
         width: 4px;
         height: 4px;
     }
+} 
+
+/* Badge Icons */
+.badgeIcon {
+    margin-right: 4px;
+    font-size: 12px;
 }
 
-@media (max-width: 480px) {
-    .cardContainer {
-        padding: 4px;
-        margin-bottom: 12px;
-    }
+/* Soon Badge */
+.soonBadge {
+    background-color: #0741AD;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 6px;
+    font-size: 9px;
+    font-weight: 700;
+    margin-left: 6px;
+    text-transform: uppercase;
+}
 
-    .imageContainer {
-        height: 180px;
-    }
+/* Star Icon */
+.starIcon {
+    color: #d4af37;
+    font-weight: 700;
+    margin-left: 4px;
+    font-size: 16px;
+}
 
-    .productInfo {
-        padding: 8px;
-        min-height: 180px;
-    }
+/* Image Overlay */
+.imageOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0,0,0,0.1) 0%, transparent 50%, rgba(0,0,0,0.05) 100%);
+    pointer-events: none;
+    z-index: 5;
+}
 
-    .title {
-        font-size: 13px;
-        -webkit-line-clamp: 3;
-        line-height: 1.2;
-    }
+/* Enhanced Hover Effects */
+.card:hover .imageOverlay {
+    background: linear-gradient(135deg, rgba(0,0,0,0.15) 0%, transparent 50%, rgba(0,0,0,0.08) 100%);
+}
 
-    .price {
-        font-size: 15px;
-    }
+.card:hover .iconContainer {
+    transform: translateY(-2px);
+}
 
-    .oldPrice {
-        font-size: 12px;
-    }
+.card:hover .iconContainer {
+    transform: scale(1.15);
+}
 
-    .addToCart {
-        padding: 5px 10px;
-        font-size: 11px;
-        min-width: 70px;
-    }
+/* Pulse Animation for Timer */
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
 
-    .cartActions {
-        gap: 6px;
-    }
+.time {
+    animation: pulse 2s infinite;
+}
 
-    .quantity {
-        margin-left: 4px;
-    }
-
-    .categories {
-        margin-bottom: 4px;
-    }
-
-    .category {
-        font-size: 9px;
-        padding: 2px 4px;
-    }
-
-    .installment {
-        font-size: 11px;
-        margin-bottom: 6px;
-    }
-
-    .stockInfo {
-        font-size: 10px;
-        margin-bottom: 6px;
-    }
-
-    .colorButtons {
-        margin-bottom: 6px;
-    }
-
-    .colorButton {
-        width: 14px;
-        height: 14px;
-    }
-
-    .actionIcons {
-        top: 4px;
-        left: 4px;
-        gap: 4px;
-    }
-
-    .iconContainer {
-        width: 24px;
-        height: 24px;
-        font-size: 10px;
-    }
-
-    .saveSeller,
-    .bestSeller {
-        font-size: 10px;
-        padding: 2px 4px;
-    }
-
-    .time {
-        font-size: 9px;
-        padding: 2px 4px;
-    }
-
-    .slickDots {
-        bottom: 2px;
-    }
-
-    .slickDot button {
-        width: 3px;
-        height: 3px;
-    }
+/* Price */
+.price {
+    color: #ff4444;
+    font-size: 20px;
+    font-weight: 800;
+    margin: 0;
+    text-shadow: 0 1px 2px rgba(255, 68, 68, 0.1);
 } 
