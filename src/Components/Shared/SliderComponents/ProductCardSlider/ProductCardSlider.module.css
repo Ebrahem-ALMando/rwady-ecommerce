@@ -118,7 +118,9 @@
     border-radius: 50%;
     opacity: 0;
 }
+
 .infoCard {
+
     padding: 16px;
     background-color: #f7f7f7;
     width: 90%;
@@ -128,6 +130,12 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+html[dir="ltr"] .infoCard{
+    direction: ltr;
+}
+html[dir="rtl"] .infoCard{
+    direction: rtl;
 }
 .brand {
     color: #0741AD;
