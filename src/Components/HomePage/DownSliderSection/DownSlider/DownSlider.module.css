@@ -83,7 +83,7 @@
 .img {
     width: 130px;
     height: 130px;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 10px;
     flex-shrink: 0;
     display: block;
