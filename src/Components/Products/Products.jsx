@@ -111,7 +111,7 @@ const Products = ({initError, data, categoriesData, brandsData, searchParams}) =
 
     const handleClearFilter = () => {
         setSortValue("");
-        resetAllQueryParams();
+        resetAllQueryParams(lang);
         // setSelectedFilters([]);
     };
 

@@ -217,13 +217,13 @@
     font-size: 12px;
     font-weight: 500;
     margin: 0 0 10px 0;
-    padding: 6px 8px;
+
     border-radius: 8px;
 }
 
 .installmentIcon {
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
 }
 
 .installmentIcon img {
@@ -260,16 +260,16 @@
     align-items: center;
     gap: 6px;
     color: #0741AD;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 500;
     margin-bottom: 10px;
-    padding: 4px 6px;
+    margin-top: 5px;
     border-radius: 6px;
 }
 
 .stockIcon {
-    width: 14px;
-    height: 14px;
+    width: 20px;
+    height: 20px;
 }
 
 .stockIcon img {
@@ -439,7 +439,6 @@
         font-size: 12px;
         font-weight: 500;
         margin-bottom: 8px;
-        padding: 6px 10px;
         color: #fab840;
     }
 
@@ -567,6 +566,7 @@
 
     .quantity {
         margin-left: 4px;
+        display: none;
     }
 
     .categories {
@@ -587,7 +587,7 @@
         font-size: 12px;
         font-weight: 500;
         margin-bottom: 6px;
-        padding: 4px 8px;
+
         color: #fab840;
     }
 

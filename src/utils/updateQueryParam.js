@@ -47,18 +47,18 @@ export const useQueryFilterUpdater = () => {
         router.push(`/${lang}/products?${params.toString()}`);
     };
 
-    const clearQueryParam = (key) => {
+    const clearQueryParam = (key,lang) => {
         const arrayKey = key.replace('_id', '_ids') + '[]';
         const params = new URLSearchParams(searchParams.toString());
         params.delete(arrayKey);
 
         if (params.toString() === searchParams.toString()) return;
 
-        router.push(`/products?${params.toString()}`);
+        router.push(`/${lang}/products?${params.toString()}`);
     };
 
-    const resetAllQueryParams = () => {
-        router.push(`/products`);
+    const resetAllQueryParams = (lang) => {
+        router.push(`/${lang}/products`);
     };
 
     return {
