@@ -3,7 +3,7 @@ import styles from './CompleteProfile.module.css';
 import NotificationCard from "@/Components/Notification/NotificationCard/NotificationCard";
 import Link from "next/link";
 
-const CompleteProfile = ({ lang }) => {
+const CompleteProfile = ({ lang, onSkip }) => {
     const t = useTranslations("notification");
 
     return (
@@ -26,6 +26,7 @@ const CompleteProfile = ({ lang }) => {
                 <button
                     className={styles.secondaryBtn}
                     aria-label={t("skip")}
+                    onClick={onSkip}
                 >
                     {t("skip")}
                 </button>

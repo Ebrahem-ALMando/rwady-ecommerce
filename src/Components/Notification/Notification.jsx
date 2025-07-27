@@ -1,90 +1,3 @@
-// "use client"
-// import styles from "./Notification.module.css";
-// import CompleteProfile from "@/Components/Notification/Complete-Profile/CompleteProfile";
-// import Line from "@/Components/Shared/Line/Line";
-// import NotificationCard from "@/Components/Notification/NotificationCard/NotificationCard";
-// import {useTranslations} from "next-intl";
-// import {useRouter} from "next/navigation";
-// import React, {useRef, useState} from "react";
-// import useSWR from "swr";
-// import ProfileSkeleton from "@/Components/Profile/ProfileSkeleton/ProfileSkeleton";
-// import ReloadWithError from "@/Components/Shared/ReloadWithError/ReloadWithError";
-// import {getNotifications} from "@/api/services/general/notifications/getNotifications";
-// import NotificationsSkeleton from "@/Components/Notification/NotificationsSkeleton/NotificationsSkeleton";
-// import {getProfile} from "@/api/services/auth/getProfile";
-//
-// const Notification = (props) => {
-//     const t = useTranslations("notification");
-//
-//
-//     const { data, error, isLoading, mutate }
-//         = useSWR("notificationData", getNotifications, {
-//         revalidateOnFocus: false,
-//     });
-//
-//
-//     const { data:profileData} = useSWR("profileData", getProfile, {
-//         revalidateOnFocus: false,
-//     });
-//
-//     const profileDataList=profileData?.data??{}
-//     const userName=profileDataList?.name;
-//     if (isLoading) return <NotificationsSkeleton />;
-//     if (error)
-//         return (
-//             <ReloadWithError/>
-//         );
-//
-//     const notificationList=data?.data??[]
-//
-//
-//     const profile = data?.data ?? {};
-//     return(
-//         <div className={styles.container}>
-//             <div className={styles.items}>
-//                 <div className={styles.notification}>
-//                     {!userName&&
-//                         <>
-//                             <CompleteProfile/>
-//                             <Line/>
-//                         </>
-//                     }
-//
-//                     <NotificationCard
-//                         title={"الطلبات"}
-//                         time={"منذ ساعة"}
-//                         text={"تم قبول طلبك بنجاح من خلال إدارة RWADY "}
-//                         isAnyDetails={true}
-//                     />
-//                     <Line/>
-//                     <NotificationCard
-//                         title={"الطلبات"}
-//                         time={"منذ ساعة"}
-//                         text={"تم قبول طلبك بنجاح من خلال إدارة RWADY "}
-//                         isAnyDetails={true}
-//                     />
-//                     <Line/>
-//                     <NotificationCard
-//                         title={"الطلبات"}
-//                         time={"منذ ساعة"}
-//                         text={"تم قبول طلبك بنجاح من خلال إدارة RWADY "}
-//                         isAnyDetails={true}
-//                     />
-//                     <Line/>
-//                     <NotificationCard
-//                         title={"الطلبات"}
-//                         time={"منذ ساعة"}
-//                         text={"تم قبول طلبك بنجاح من خلال إدارة RWADY "}
-//                         isAnyDetails={true}
-//                     />
-//
-//                 </div>
-//             </div>
-//         </div>
-//     )
-// }
-// export default Notification
-
 "use client"
 import styles from "./Notification.module.css";
 import CompleteProfile from "@/Components/Notification/Complete-Profile/CompleteProfile";
@@ -97,11 +10,14 @@ import {getNotifications} from "@/api/services/general/notifications/getNotifica
 import NotificationsSkeleton from "@/Components/Notification/NotificationsSkeleton/NotificationsSkeleton";
 import {getProfile} from "@/api/services/auth/getProfile";
 import {formatTime} from "@/utils/formatTime";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {readNotification} from "@/api/services/general/notifications/readNotification";
 import { database } from "@/lib/firebase";
 import EmptyNotificationBox from "@/Components/Notification/EmptyNotificationBox/EmptyNotificationBox";
 // import { ref, onChildAdded } from "firebase/database";
+const SKIP_PROFILE_KEY = "rwady_skip_complete_profile";
+const SKIP_PROFILE_MINUTES = 10;
+
 const Notification = () => {
     const t = useTranslations("notification");
     const time = useTranslations("time");
@@ -124,6 +40,20 @@ const Notification = () => {
     const profileDataList = profileData?.data ?? {};
     const userName = profileDataList?.name;
     const notificationList = data?.data ?? [];
+
+    const [hideProfile, setHideProfile] = useState(false);
+
+    useEffect(() => {
+        const skipData = localStorage.getItem(SKIP_PROFILE_KEY);
+        if (skipData) {
+            const { ts } = JSON.parse(skipData);
+            if (Date.now() - ts < SKIP_PROFILE_MINUTES * 60 * 1000) {
+                setHideProfile(true);
+            } else {
+                localStorage.removeItem(SKIP_PROFILE_KEY);
+            }
+        }
+    }, []);
 
     useEffect(() => {
         if (!notificationList || notificationList.length === 0) return;
@@ -154,6 +84,11 @@ const Notification = () => {
     //     return () => unsubscribe();
     // }, [profileDataList?.id, mutate]);
 
+    const handleSkipProfile = () => {
+        localStorage.setItem(SKIP_PROFILE_KEY, JSON.stringify({ ts: Date.now() }));
+        setHideProfile(true);
+    };
+
     if (isLoading) return <NotificationsSkeleton />;
     if (error) return <ReloadWithError />;
 
@@ -164,17 +99,18 @@ const Notification = () => {
         <div className={styles.container}>
             <div className={styles.items}>
                 <div className={styles.notification}>
-                    {!userName && (
+                    {!hideProfile && !userName && (
                         <>
                             <CompleteProfile
                                 lang={lang}
+                                onSkip={handleSkipProfile}
                             />
                             <Line />
                         </>
                     )}
                     {!notificationList||notificationList.length===0
                         ?
-                        <EmptyNotificationBox/>
+                        <EmptyNotificationBox />
                         :
                         <>
                             {notificationList.map((notif) => (
@@ -186,7 +122,6 @@ const Notification = () => {
                                         text={notif.message}
                                         isAnyDetails={!!notif.notificationable_id}
                                         lang={lang}
-
                                     />
                                     <Line />
                                 </div>

@@ -90,7 +90,10 @@
     "complete_now": "Complete Now",
     "skip": "Not Now",
     "emptyTitle": "No Notifications Yet",
-    "emptySubtitle": "You’ll see your updates here when you have notifications."
+    "emptySubtitle": "You’ll see your updates here when you have notifications.",
+    "creativeEmptyTitle": "Your day is calm and notification-free!",
+    "creativeEmptySubtitle": "No new notifications right now. Enjoy your time or explore our top products!",
+    "creativeEmptyAction": "Browse Products Now"
   },
   "time": {
     "ago": "ago",
