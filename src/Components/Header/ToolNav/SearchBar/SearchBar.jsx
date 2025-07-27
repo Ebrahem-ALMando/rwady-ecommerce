@@ -326,21 +326,31 @@ const SearchBar = ({
 
     }, [isModalOpen]);
 
-    useEffect(() => {
-        if (debouncedQuery.trim()) {
-            const newSearches = [debouncedQuery, ...recentSearches.filter(s => s !== debouncedQuery)];
+    // useEffect(() => {
+    //     if (debouncedQuery.trim()) {
+    //         const newSearches = [debouncedQuery, ...recentSearches.filter(s => s !== debouncedQuery)];
+    //         const limitedSearches = newSearches.slice(0, 5);
+    //         setRecentSearches(limitedSearches);
+    //
+    //
+    //         const timeout = setTimeout(() => {
+    //             localStorage.setItem('recentSearches', JSON.stringify(limitedSearches));
+    //         }, 500);
+    //
+    //         return () => clearTimeout(timeout);
+    //     }
+    // }, [debouncedQuery]);
+
+    const handleSaveHistory=(searchQuery)=>{
+
+        if (searchQuery.trim()) {
+            const newSearches = [searchQuery, ...recentSearches.filter(s => s !== searchQuery)];
             const limitedSearches = newSearches.slice(0, 5);
             setRecentSearches(limitedSearches);
-
-
-            const timeout = setTimeout(() => {
-                localStorage.setItem('recentSearches', JSON.stringify(limitedSearches));
-            }, 500);
-
-            return () => clearTimeout(timeout);
+            console.log(newSearches)
+            localStorage.setItem('recentSearches', JSON.stringify(limitedSearches));
         }
-    }, [debouncedQuery]);
-
+    }
     const handleClearHistory = () => {
         localStorage.removeItem('recentSearches');
         setRecentSearches([]);
@@ -403,12 +413,13 @@ const SearchBar = ({
                 tabIndex={0}
                 onClick={() => {
                     if (!searchQuery.trim()) return;
-                    router.push(`/products?search=${searchQuery.trim()}`);
+                    router.push(`/${lang}/products?search=${searchQuery.trim()}`);
                     closeModal();
                 }}
                 onKeyDown={(e) => {
                     if (e.key === "Enter" && searchQuery.trim()) {
-                        router.push(`/products?search=${searchQuery.trim()}`);
+                        router.push(`/${lang}/products?search=${searchQuery.trim()}`);
+                        handleSaveHistory(searchQuery);
                         closeModal();
                     }
                 }}
@@ -440,7 +451,8 @@ const SearchBar = ({
                 }}
                 onKeyDown={(e) => {
                     if (e.key === "Enter" && searchQuery.trim()) {
-                        router.push(`/products?search=${searchQuery.trim()}`);
+                        router.push(`/${lang}/products?search=${searchQuery.trim()}`);
+                        handleSaveHistory(searchQuery);
                         closeModal();
                     }
                 }}

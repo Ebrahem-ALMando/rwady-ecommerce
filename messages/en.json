@@ -399,7 +399,8 @@
     "top-selling": "Top Selling",
     "offers-list": "Offers & Discounts",
     "recommend-list": "Featured",
-    "favourites": "Favourites"
+    "favourites": "Favourites",
+    "empty_products": "No products to display at the moment."
   },
 
   "productCollectionsMeta": {

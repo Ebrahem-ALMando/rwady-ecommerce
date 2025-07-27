@@ -209,7 +209,7 @@ const ProductCollections = ({ initialData, initialError, getData, keyData }) => 
 
             <div className={styles.products}>
                 {pagedData.length === 0 ? (
-                    <EmptyState message="لا توجد منتجات لعرضها حالياً" />
+                    <EmptyState message={t("empty_products")} />
                 ) : (
                     // isClient && (
                     <AnimatePresence mode="wait">

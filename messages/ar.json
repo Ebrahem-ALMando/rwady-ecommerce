@@ -399,7 +399,10 @@
     "top-selling": "الأكثر مبيعًا",
     "offers-list": "العروض والتخفيضات",
     "recommend-list": "المميزة",
-    "favourites": "المفضلة"
+    "favourites": "المفضلة",
+    "empty_products": "لا توجد منتجات لعرضها حالياً"
+
+
   },
   "productCollectionsMeta": {
     "titleSuffix": " - روادي",

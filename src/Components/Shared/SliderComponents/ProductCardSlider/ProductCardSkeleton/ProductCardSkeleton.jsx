@@ -27,7 +27,7 @@ const ProductCardSkeleton = () => {
                 {/*</div>*/}
 
 
-                <div className="relative w-full h-[300px] mt-3">
+                <div className="relative w-full  mt-3">
                     <div className={styles.productImgDiv}>
                         <Skeleton  height={320} width={250} />
                     </div>
