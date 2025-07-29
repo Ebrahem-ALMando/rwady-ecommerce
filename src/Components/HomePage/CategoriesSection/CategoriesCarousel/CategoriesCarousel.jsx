@@ -13,7 +13,7 @@ const  CategoriesCarousel  = ({data,lang}) => {
                 // initialError={initialError}
                 isCategory={true}
                 showName
-                filterKey={"category_id"}
+                filterKey={"category_ids[]"}
             />
         // </Suspense>
     );

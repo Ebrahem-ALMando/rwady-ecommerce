@@ -851,7 +851,8 @@ const DetailsCard = ({ product,lang }) => {
               </span>
                 <div>
                     <p>{t('installmentPlan')}</p>
-                    <p>{t('installmentMonthly')}</p>
+                    {/* <p>{t('installmentMonthly')}</p> */}
+                    <p>{t("pay_monthly", { price: Math.round((product.price_after_discount || product.price) / 10) })}</p>
                 </div>
             </div>
 
@@ -912,7 +913,7 @@ const DetailsCard = ({ product,lang }) => {
                     </motion.svg>
                     <span style={{marginRight: "0.5rem"}}>
 
-                        {liked ? "في المفضلة" : t('addToFavourites')}
+                        {liked ? t('inFavourites') : t('addToFavourites')}
                     </span>
                 </motion.button>
                 <motion.button
@@ -924,7 +925,7 @@ const DetailsCard = ({ product,lang }) => {
                 >
                     <span><Flame  size={20} /></span>
 
-                    شراء مباشر
+                    {t('buyDirectly')}
                 </motion.button>
             </div>
             {isAddToCart &&

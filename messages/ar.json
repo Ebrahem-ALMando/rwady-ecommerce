@@ -206,7 +206,8 @@
       "addToFavourites": "أضف للمفضلة",
       "shareProduct": "مشاركة المنتج",
       "installmentInfo": "معلومات الدفع بالتقسيط",
-      "installmentPlan": "ادفع 6 أقساط شهرية",
+      "installmentPlan": "ادفع 10 أقساط شهرية",
+      "pay_monthly": "متاح قسط  {price} IQD شهرياً *",
       "installmentMonthly": "متاح قسط 500 /شهرياً",
       "youSaved": "وفرت {amount} IQD",
       "discountPercentage": "خصم {percent}%",
@@ -214,7 +215,10 @@
       "imageAlt": "صورة رقم {index}",
       "videoThumbnailAlt": "صورة مصغرة للفيديو {index}",
       "notAvailable": "غير متاح",
-      "maximize": "تكبير الصورة"
+      "maximize": "تكبير الصورة",
+      "inFavourites": "في المفضلة",
+      "buyDirectly": "شراء مباشر"
+
 
     },
   "downSlider": {

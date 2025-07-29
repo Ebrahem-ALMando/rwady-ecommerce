@@ -204,15 +204,18 @@
     "addToFavourites": "Add to Favourites",
     "shareProduct": "Share Product",
     "installmentInfo": "Installment Payment Info",
-    "installmentPlan": "Pay in 6 monthly installments",
+    "installmentPlan": "Pay in 10 monthly installments",
     "installmentMonthly": "Installment available: 500 /month",
+    "pay_monthly": "Installment available: {price} IQD per month *",
     "youSaved": "You saved {amount} IQD",
     "discountPercentage": "Discount {percent}%",
     "mediaAlt": "Media number {index}",
     "imageAlt": "Image number {index}",
     "videoThumbnailAlt": "Thumbnail for video {index}",
     "notAvailable": "Not Available",
-    "maximize": "Maximize"
+    "maximize": "Maximize",
+    "inFavourites": "In Favourites",
+    "buyDirectly": "Buy Directly"
 
 
   },

@@ -32,14 +32,12 @@
     display: flex;
     flex-direction: column;
     margin-left: -5px;
-    /*overflow-y: auto;*/
     scrollbar-width: thin;
     scrollbar-color: #8dacdc #e6ecf3;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
-.thumbnailSwiper:hover {
-    overflow-y: scroll;
-}
 .thumbnailSlide {
     width: 100%;
     height: 110px !important;
@@ -131,12 +129,13 @@
         position: static !important;
     }
     .thumbnailSwiper {
-        width:100%;
+        width: 100%;
         height: auto;
         margin-left: 0;
         gap: 8px;
         flex-direction: row !important;
         overflow-x: auto !important;
+        overflow-y: hidden !important;
     }
     .thumbnailSwiper:hover {
         overflow-y: hidden;

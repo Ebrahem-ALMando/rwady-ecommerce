@@ -285,10 +285,12 @@
 .shop{
     background: #DE1F1F !important;
     width: 130px !important;
+    min-width: max-content !important;
 }
 .shop:hover{
     background: #b60909 !important;
 }
+
 @media (max-width: 1070px) {
 .actionDetails{
     flex-direction: column;

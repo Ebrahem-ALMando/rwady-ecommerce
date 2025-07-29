@@ -57,7 +57,7 @@ const  BrandsSection  = ({sectionResp,lang}) => {
                              data={orderData||[]}
                              lang={lang}
                              // initialError={initialError}
-                             filterKey={"brand_id"}
+                             filterKey={"brand_ids[]"}
              />
         </section>
         );
