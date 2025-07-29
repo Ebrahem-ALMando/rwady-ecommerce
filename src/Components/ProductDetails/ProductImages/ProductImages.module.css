@@ -10,6 +10,7 @@
     margin: 0;
     gap: 20px;
     width: 100% ;
+   
 }
 
 .mainSwiper {
@@ -36,6 +37,7 @@
     scrollbar-color: #8dacdc #e6ecf3;
     overflow-y: auto;
     overflow-x: hidden;
+     direction: ltr;
 }
 
 .thumbnailSlide {
