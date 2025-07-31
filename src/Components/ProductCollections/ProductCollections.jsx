@@ -209,7 +209,9 @@ const ProductCollections = ({ initialData, initialError, getData, keyData }) => 
 
             <div className={styles.products}>
                 {pagedData.length === 0 ? (
-                    <EmptyState message={t("empty_products")} />
+                  <div className="flex justify-center items-center h-full w-[83%] mx-auto">  
+                  <EmptyState message={t("empty_products")} />
+                  </div>
                 ) : (
                     // isClient && (
                     <AnimatePresence mode="wait">

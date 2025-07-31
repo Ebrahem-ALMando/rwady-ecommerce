@@ -3,6 +3,7 @@ import React, {Suspense} from "react";
 import {getHomeSections} from "@/api/services/Home/getHomeSections";
 import HomeSkeleton from "@/Components/HomePage/HomeSkeleton/HomeSkeleton";
 import {useLocale} from "next-intl";
+import EmptyStateHomePage from "@/Components/Shared/EmptyStateHomePage/EmptyStateHomePage";
 
 const Home =() =>
 {
@@ -28,9 +29,19 @@ async function HomePageData ()
     const sections = sectionsResponse?.data && Array.isArray(sectionsResponse.data)
         ? sectionsResponse.data.sort((a, b) => a.orders - b.orders)
         : [];
+        
     if (sectionsResponse.error || sections.length === 0) {
-
-        return <main><div>لم يتم العثور على أقسام لعرضها.</div></main>;
+        return (
+            <main>
+                <EmptyStateHomePage 
+                    title="لا توجد أقسام لعرضها"
+                    subtitle="عذراً، لا توجد أقسام متاحة حالياً. يرجى المحاولة مرة أخرى لاحقاً."
+                    actionText="تحديث الصفحة"
+                    showAction={true}
+                    type="container"
+                />
+            </main>
+        );
     }
 
 
