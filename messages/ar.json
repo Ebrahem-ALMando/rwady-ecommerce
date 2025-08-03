@@ -629,11 +629,35 @@
         "actions": "الإجراءات",
         "download": "تحميل"
       }
-    }
-
-
-
-
+    },
+  "promotions": {
+    "metaTitle": "الحملات الترويجية - روادي",
+    "metaDescription": "اكتشف أحدث الحملات الترويجية والعروض الخاصة في متجر روادي. خصومات على المنتجات والفئات المختلفة.",
+    "metaKeywords": "حملات ترويجية, عروض خاصة, خصومات, روادي, تسوق",
+    "heroTitle": "الحملات الترويجية",
+    "heroSubtitle": "اكتشف أحدث العروض والخصومات الحصرية على منتجاتنا المميزة",
+    "availablePromotions": "الحملات المتاحة",
+    "sectionSubtitle": "استفد من أفضل العروض والخصومات على منتجاتنا",
+    "noPromotions": "لا توجد حملات حالياً",
+    "noPromotionsSubtitle": "تحقق من هذه الصفحة لاحقاً للحصول على أحدث العروض والخصومات",
+    "category": "فئة",
+    "product": "منتج",
+    "active": "نشط",
+    "inactive": "غير نشط",
+    "discount": "خصم",
+    "fixedDiscount": "خصم ثابت",
+    "minCartTotal": "الحد الأدنى للسلة",
+    "startDate": "تاريخ البداية",
+    "endDate": "تاريخ الانتهاء",
+    "noExpiry": "بدون انتهاء صلاحية",
+    "expired": "منتهي الصلاحية",
+    "upcoming": "قريباً",
+    "totalPromotions": "إجمالي الحملات",
+    "activePromotions": "الحملات النشطة",
+    "categoryPromotions": "حملات الفئات",
+    "productPromotions": "حملات المنتجات",
+    "viewDetails": "عرض التفاصيل"
+  }
 
 
 }

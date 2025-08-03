@@ -628,6 +628,34 @@
       "actions": "Actions",
       "download": "Download"
     }
+  },
+  "promotions": {
+    "metaTitle": "Promotions - Rawady",
+    "metaDescription": "Discover the latest promotions and special offers at Rawady store. Discounts on products and different categories.",
+    "metaKeywords": "promotions, special offers, discounts, rawady, shopping",
+    "heroTitle": "Promotions",
+    "heroSubtitle": "Discover the latest exclusive offers and discounts on our premium products",
+    "availablePromotions": "Available Promotions",
+    "sectionSubtitle": "Take advantage of the best offers and discounts on our products",
+    "noPromotions": "No promotions available",
+    "noPromotionsSubtitle": "Check this page later for the latest offers and discounts",
+    "category": "Category",
+    "product": "Product",
+    "active": "Active",
+    "inactive": "Inactive",
+    "discount": "Discount",
+    "fixedDiscount": "Fixed Discount",
+    "minCartTotal": "Minimum Cart Total",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "noExpiry": "No Expiry",
+    "expired": "Expired",
+    "upcoming": "Upcoming",
+    "totalPromotions": "Total Promotions",
+    "activePromotions": "Active Promotions",
+    "categoryPromotions": "Category Promotions",
+    "productPromotions": "Product Promotions",
+    "viewDetails": "View Details"
   }
 
 }

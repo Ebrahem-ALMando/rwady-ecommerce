@@ -1,0 +1,364 @@
+.container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    padding: 2rem 1rem;
+}
+
+/* Hero Skeleton */
+.heroSkeleton {
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    border-radius: 24px;
+    padding: 2rem 2rem;
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.heroContent {
+    position: relative;
+    z-index: 2;
+}
+
+.heroIconSkeleton {
+    width: 64px;
+    height: 64px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    margin: 0 auto 1.5rem;
+}
+
+.heroTitleSkeleton {
+    width: 300px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    margin: 0 auto 1rem;
+}
+
+.heroSubtitleSkeleton {
+    width: 500px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    margin: 0 auto;
+}
+
+/* Section Header Skeleton */
+.sectionHeader {
+    text-align: center;
+    margin-bottom: 3rem;
+   
+}
+
+.sectionTitleSkeleton {
+    width: 250px;
+    height: 32px;
+    background: #e5e7eb;
+    border-radius: 8px;
+    margin: 0 auto 1rem;
+
+}
+
+.sectionSubtitleSkeleton {
+    width: 400px;
+    height: 20px;
+    background: #e5e7eb;
+    border-radius: 8px;
+    margin: 0 auto;
+}
+
+/* Promotions Grid Skeleton - 2 columns */
+.promotionsGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+/* Promotion Card Skeleton - Reduced height */
+.promotionCardSkeleton {
+    background: white;
+    border-radius: 16px;
+    padding: 1rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border: 2px solid #e5e7eb;
+    min-height: 192px; /* Reduced from 320px to 60% */
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* Type Badge Skeleton */
+.typeBadgeSkeleton {
+    position: absolute;
+    top: 0.3rem;
+    right: 0.5rem;
+    width: 80px;
+    height: 24px;
+    background: #e5e7eb;
+    border-radius: 20px;
+}
+
+/* Card Header Skeleton */
+.cardHeaderSkeleton {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    padding-top:1rem;
+    gap: 1rem;
+}
+
+.titleSkeleton {
+    width: 100%;
+    height: 24px;
+    background: #e5e7eb;
+    border-radius: 4px;
+    flex: 1;
+}
+
+.statusSkeleton {
+    width: 60px;
+    height: 24px;
+    background: #e5e7eb;
+    border-radius: 20px;
+}
+
+/* Card Content Skeleton */
+.cardContentSkeleton {
+    margin-bottom: 0.5rem;
+    flex: 1;
+}
+
+.discountSkeleton {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+    padding: 0.75rem;
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    border-radius: 12px;
+    border: 1px solid #bae6fd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.discountIconSkeleton {
+    width: 40px;
+    height: 40px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.discountDetailsSkeleton {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.discountValueSkeleton {
+    width: 60px;
+    height: 18px;
+    background: #e5e7eb;
+    border-radius: 4px;
+}
+
+.discountLabelSkeleton {
+    width: 80px;
+    height: 12px;
+    background: #e5e7eb;
+    border-radius: 4px;
+}
+
+.minCartSkeleton {
+    width: 150px;
+    height: 12px;
+    background: #e5e7eb;
+    border-radius: 4px;
+    margin-top: 0.25rem;
+}
+
+/* Card Footer Skeleton */
+.cardFooterSkeleton {
+    padding-top: 0.75rem;
+    border-top: 1px solid #f3f4f6;
+    margin-top: auto;
+}
+
+.footerContentSkeleton {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 0.75rem;
+}
+
+.dateSectionSkeleton {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.dateItemSkeleton {
+    width: 100%;
+    height: 12px;
+    background: #e5e7eb;
+    border-radius: 4px;
+}
+
+.detailsButtonSkeleton {
+    width: 100px;
+    height: 32px;
+    background: #e5e7eb;
+    border-radius: 8px;
+}
+
+/* Stats Section Skeleton */
+.statsSection {
+    margin-top: 3rem;
+}
+
+.statsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.statCardSkeleton {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.statIconSkeleton {
+    width: 48px;
+    height: 48px;
+    background: #eff6ff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.statContentSkeleton {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.statNumberSkeleton {
+    width: 40px;
+    height: 24px;
+    background: #e5e7eb;
+    border-radius: 4px;
+}
+
+.statLabelSkeleton {
+    width: 80px;
+    height: 16px;
+    background: #e5e7eb;
+    border-radius: 4px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .promotionsGrid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem 0.5rem;
+    }
+
+    .heroSkeleton {
+        padding: 3rem 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .heroTitleSkeleton {
+        width: 250px;
+        height: 32px;
+    }
+
+    .heroSubtitleSkeleton {
+        width: 300px;
+        height: 16px;
+    }
+
+    .promotionCardSkeleton {
+        padding: 1rem;
+        min-height: 180px; /* Reduced for mobile */
+    }
+
+    .statsGrid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .statCardSkeleton {
+        padding: 1.5rem 1.25rem;
+    }
+
+    .footerContentSkeleton {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+    }
+
+    .detailsButtonSkeleton {
+        width: 100%;
+    }
+
+    .typeBadgeSkeleton {
+        position: static;
+        margin-bottom: 0.5rem;
+        align-self: flex-start;
+    }
+
+    .cardHeaderSkeleton {
+        padding-top: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .heroSkeleton {
+        padding: 2rem 1rem;
+    }
+
+    .heroTitleSkeleton {
+        width: 200px;
+        height: 28px;
+    }
+
+    .heroSubtitleSkeleton {
+        width: 250px;
+        height: 14px;
+    }
+
+    .promotionCardSkeleton {
+        padding: 0.75rem;
+        min-height: 160px; /* Further reduced for small screens */
+    }
+
+    .discountSkeleton {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+    }
+
+    .statsGrid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .statCardSkeleton {
+        padding: 1.25rem 1rem;
+    }
+} 
