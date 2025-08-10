@@ -52,6 +52,7 @@
 
 .open .content {
     max-height: 1000px;
+    min-height: max-content;
     opacity: 1;
     padding-bottom: 0;
 }

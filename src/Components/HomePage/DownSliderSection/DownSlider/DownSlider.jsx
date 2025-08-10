@@ -28,6 +28,7 @@ const DownSlider = ({ downSliderData, initialError = false, lang }) => {
             const availableItems = downSliderData.filter(item => item.availability);
             setItems(availableItems);
         }
+        
     }, [downSliderData]);
 
 
@@ -77,14 +78,17 @@ const DownSlider = ({ downSliderData, initialError = false, lang }) => {
                                         </motion.span>
                                     </AnimatePresence>
                                 </h1>
-                                <Image
-                                    className={styles.img}
-                                    src={getImage(currentGroup[i])}
-                                    alt={getTitle(currentGroup[i])}
-                                    width={300}
-                                    height={200}
-                                    loading="lazy"
-                                />
+                
+                            <SafeImage
+                            className={styles.img}
+                            fallback="/FallbackProductImage.png"
+                            src={getImage(currentGroup[i])}
+                            alt={getTitle(currentGroup[i])}
+                            width={300}
+                            height={200}
+                            loading="lazy"
+                            // priority={i === 0}
+                        />
                             </div>
                         </Link>
                     </div>
@@ -106,14 +110,16 @@ const DownSlider = ({ downSliderData, initialError = false, lang }) => {
                                     </motion.span>
                                 </AnimatePresence>
                             </h1>
-                            <Image
-                                className={`${styles.img} ${styles.bottomImg}`}
-                                src={getImage(currentGroup[2])}
-                                alt={getTitle(currentGroup[2])}
-                                width={200}
-                                height={150}
-                                loading="lazy"
-                            />
+                         <SafeImage
+                           className={`${styles.img} ${styles.bottomImg}`}
+                            fallback="/FallbackProductImage.png"
+                            src={getImage(currentGroup[2])}
+                            alt={getTitle(currentGroup[2])}
+                            width={200}
+                            height={150}
+                            loading="lazy"
+                            // priority={i === 0}
+                        />
                         </div>
                     </Link>
                 </div>
