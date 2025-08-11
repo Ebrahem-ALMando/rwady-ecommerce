@@ -347,7 +347,7 @@ const fetchAPI = async (
         clearTimeout(timeoutId);
 
         const duration = Date.now() - startTime;
-        console.log(`⏱️ [${endpoint}] استغرقت ${duration}ms`);
+        console.log(`⏱️ [${endpoint}] Time: ${duration}ms`);
 
         if (!response.ok) {
             // if (response.status === 401 && typeof window !== "undefined") {

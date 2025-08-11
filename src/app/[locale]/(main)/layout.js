@@ -297,6 +297,7 @@ export default  function MainLayout({ children }) {
         <>
             <Navbar/>
             {children}
-            <Footer/></>
+            <Footer/>
+        </>
     );
 }

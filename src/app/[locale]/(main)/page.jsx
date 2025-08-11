@@ -77,22 +77,15 @@
 // }
 
 
-import { useTranslations } from 'next-intl';
-import { Link } from '@/i18n/navigation';
-// import Navbar from "@/Components/Header/Navbar";
-import Home from "@/Components/HomePage/Home";
-// import Footer from "@/Components/Footer/Footer";
 
+import Home from "@/Components/HomePage/Home";
+
+export const revalidate = 300;          
+export const dynamic = 'force-static';   
+export const fetchCache = 'force-cache';  
 export default function HomePage() {
-    const t = useTranslations('HomePage');
 
     return (
-        <div>
-            {/*<Navbar/>*/}
-            {/*<h1>{t('title')}</h1>*/}
-            {/*<Link href="/contact-us">{t('about')}</Link>*/}
             <Home/>
-            {/*<Footer/>*/}
-        </div>
     );
 }

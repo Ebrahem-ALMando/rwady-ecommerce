@@ -6,7 +6,7 @@ import ApiConfig from "@/api/apiConfig";
  */
 export const getHomeSections = async () => {
     const endPointKey = "user/home-sections";
-
+    const startTime = Date.now();
     // await new Promise(resolve => setTimeout(resolve, 3500));
     const res = await fetchAPI(endPointKey, "GET", null, {
         next: {
@@ -14,6 +14,7 @@ export const getHomeSections = async () => {
             tags: [endPointKey],
         },
     });
-    console.log(res);
+    const duration = Date.now() - startTime;
+    console.log(`⏱ HOME PAGE Time: ${duration}ms:${!res.error}`);
     return res ?? [];
 };

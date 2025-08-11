@@ -12,7 +12,6 @@ const EmptyStateHomePage = ({
     type = "sections", // sections, products, categories, search, etc.
     customIcon = null
 }) => {
-    const t = useTranslations('Common');
 
     const getIcon = () => {
         if (customIcon) return customIcon;

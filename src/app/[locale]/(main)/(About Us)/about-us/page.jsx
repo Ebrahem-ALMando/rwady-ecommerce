@@ -1,12 +1,11 @@
 // import Navbar from "@/Components/Header/Navbar";
 // import Footer from "@/Components/Footer/Footer";
-import PageContainer from "@/Components/Shared/PageContainer/PageContainer";
-import { getTranslations } from "next-intl/server";
-import { getSettingData } from "@/utils/getSettingsData";
-import { extractSettingValue } from "@/utils/extractSettingValue";
+// import PageContainer from "@/Components/Shared/PageContainer/PageContainer";
+import { getLocale, getTranslations } from "next-intl/server";
+// import { getSettingData } from "@/utils/getSettingsData";
+// import { extractSettingValue } from "@/utils/extractSettingValue";
 import {Suspense} from "react";
 import PageSkeleton from "@/Components/Shared/PageContainer/Skeleton/PageSkeleton";
-import {useLocale} from "next-intl";
 
 
 
@@ -59,31 +58,35 @@ export async function generateMetadata({ params }) {
 }
 
 export default function AboutUsPage(){
-    const lang=useLocale()
+
+
     return(
-                <Suspense fallback={<PageSkeleton />}>
-                <AboutUsPageData
-                    lang={lang}
-                />
-                </Suspense>
+        <Suspense fallback={<PageSkeleton />}>
+
+
+asss
+        {/* <AboutUsPageData /> */}
+        
+        </Suspense>
     )
 }
-export  async function AboutUsPageData({ lang }) {
-    const  locale  = lang;
-    const t = await getTranslations("about");
+// export  async function AboutUsPageData() {
+//     const  locale  = await getLocale();
+//     // const  locale  = lang;
+//     const t = await getTranslations("about");
 
-    const { settingData, initialError } = await getSettingData();
-    const content = extractSettingValue(settingData, `pages.about_us.${locale}`);
+//     const { settingData, initialError } = await getSettingData();
+//     const content = extractSettingValue(settingData, `pages.about_us.${locale}`);
 
-    return (
-        <>
-            {/*<Navbar />*/}
-                <PageContainer
-                    title={t("title")}
-                    initialError={initialError || !content}
-                    data={content}
-                />
-            {/*<Footer />*/}
-        </>
-    );
-}
+//     return (
+//         <>
+//             {/*<Navbar />*/}
+//                 <PageContainer
+//                     title={t("title")}
+//                     initialError={initialError || !content}
+//                     data={content}
+//                 />
+//             {/*<Footer />*/}
+//         </>
+//     );
+// }

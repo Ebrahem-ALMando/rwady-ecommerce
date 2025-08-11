@@ -1,36 +1,31 @@
-import React, { Suspense } from "react";
-// import Loading from "@/Components/Shared/Loading/Loading";
-// import Navbar from "@/Components/Header/Navbar";
-// import Footer from "@/Components/Footer/Footer";
+import React from "react";
 import { getProductDetails } from "@/api/services/getProductDetails";
 import ProductDetails from "@/Components/ProductDetails/ProductDetails";
-import { notFound } from "next/navigation";
-// import { getProducts } from "@/api/services/listProducts";
+import { getProducts } from "@/api/services/listProducts";
 import { slugify } from "@/utils/slugify";
 import Breadcrumb from "@/Components/Shared/Breadcrumb/Breadcrumb";
 import TitleSection from "@/Components/Shared/TitleSection/TitleSection";
 import EmptyState from "@/Components/Shared/EmptyState/EmptyState";
 import {getTranslations} from "next-intl/server";
-import Loading from "@/Components/Shared/Loading/Loading";
-import ProductSlider from "@/Components/Shared/SliderComponents/ProductSlider/ProductSlider";
-// import Footer from "@/Components/Footer/Footer";
 
-// export async function generateStaticParams() {
-//     // try {
-//     //     // const response = await getProducts();
-//     //     // const products = response?.data || [];
-//     //
-//     //     // return products.map((product) => ({
-//     //     //     id: product.id.toString(),
-//     //     //     slug: slugify(product.name),
-//     //     // }));
-//     // } catch (error) {
-//     //     console.error("Error generating static params:", error.message);
-//     //     return [];
-//     // }
-// }
-//
-//
+import ProductSlider from "@/Components/Shared/SliderComponents/ProductSlider/ProductSlider";
+
+export async function generateStaticParams() {
+    try {
+        const response = await getProducts();
+        const products = response?.data || [];
+    
+        return products.map((product) => ({
+            id: product.id.toString(),
+            slug: slugify(product.name),
+        }));
+    } catch (error) {
+        console.error("Error generating static params:", error.message);
+        return [];
+    }
+}
+
+
 export async function generateMetadata({ params }) {
 
     const { id,slug,locale } = await params;
@@ -100,7 +95,7 @@ export async function ProductDetailsData({id,lang }) {
     let initialError = false;
     const initialData = await getProductDetails(id);
     const data = initialData?.data || []
-
+    
     initialError=initialData?.error
 
     const related_products=data?.related_products||[]
@@ -110,6 +105,8 @@ export async function ProductDetailsData({id,lang }) {
 
     return (
     <section>
+      
+      
         {!data || Object.keys(data).length === 0 ?
             <div style={{width: '87%', margin: '3rem auto 1rem auto'}}>
                 <EmptyState
@@ -145,9 +142,6 @@ export async function ProductDetailsData({id,lang }) {
             }
         </>
         }
-
-
-
     </section>
     );
 }
