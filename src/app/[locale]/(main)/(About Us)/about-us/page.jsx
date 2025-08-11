@@ -4,7 +4,7 @@
 import { getLocale, getTranslations } from "next-intl/server";
 // import { getSettingData } from "@/utils/getSettingsData";
 // import { extractSettingValue } from "@/utils/extractSettingValue";
-import {Suspense} from "react";
+// import {Suspense} from "react";
 import PageSkeleton from "@/Components/Shared/PageContainer/Skeleton/PageSkeleton";
 
 
