@@ -61,13 +61,15 @@ export default function AboutUsPage(){
 
 
     return(
-        <Suspense fallback={<PageSkeleton />}>
+        <>
+        {/* <Suspense fallback={<PageSkeleton />}> */}
 
 
 asss
         {/* <AboutUsPageData /> */}
         
-        </Suspense>
+         {/* </Suspense> */}
+        </>
     )
 }
 // export  async function AboutUsPageData() {
