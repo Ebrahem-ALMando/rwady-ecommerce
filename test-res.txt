@@ -1,6 +1,0 @@
-PAN (Card Number): 5213720304238582
-CVV: 642
-Expiration Date: 01-2032
-
-
-test card
