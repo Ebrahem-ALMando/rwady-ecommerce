@@ -679,15 +679,17 @@ const ProductCardSlider = ({ product, lang, setIsDraggingInsideCard }) => {
 
                 <Link prefetch={true} href={`/${lang}/products/${product.id}/${slugify(product.name?.[lang] || "")}`}>
                     <div className={styles.infoCard}>
-                        <div className="flex flex-wrap gap-2 mt-3 mb-1">
+                        <div className={`flex flex-wrap gap-2 mt-3 mb-1 max-w-[100%]`}>
                             {product.categories?.slice(0, 2).map((ctr, idx) => (
                                 <span
                                     key={idx}
                                     className={`bg-blue-100 text-blue-700 px-3 py-1 text-xs rounded-full whitespace-nowrap ${styles.categ}`}
                                     title={ctr.name?.[lang]}
                                 >
-                          {ctr.name?.[lang]}
-                        </span>
+                          {ctr.name?.[lang]?.length > 20
+                            ? ctr.name?.[lang].slice(0,20) + "..."
+                            : ctr.name?.[lang]}
+                        </span> 
                             ))}
                         </div>
                         {/*{product.brand?.name && (*/}

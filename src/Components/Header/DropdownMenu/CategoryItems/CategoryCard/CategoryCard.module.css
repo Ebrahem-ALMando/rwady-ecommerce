@@ -2,9 +2,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     gap: 14px;
-    padding: 20px 10PX;
+    padding: 20px 10px;
     border-radius: 8px;
     background: linear-gradient(135deg, #ffffff, #f9fafb);
     box-shadow:
@@ -14,11 +14,11 @@
     animation: fadeIn 0.7s ease-in-out both;
     cursor: pointer;
     position: relative;
-    overflow: hidden;
+    overflow: visible;
     z-index: 1;
-    width:190px !important; 
+    width: 190px !important;
     min-height: 260px;
-    
+    height: auto;
 }
 .select{
     border: 1px solid  #0741AD66 ;
@@ -122,14 +122,21 @@
     font-weight: 700;
     text-align: center;
     width: 100%;
-   
     min-height: 20px;
-    text-wrap: wrap;
-  
-    /*overflow: hidden;*/
+    margin-bottom: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
     text-shadow: 0 2px 3px rgba(0, 0, 0, 0.05);
     transition: all 0.4s ease;
     position: relative;
+    line-height: 1.3;
+    padding: 0 5px;
+    word-wrap: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+
 }
 
 /*.name::after {*/
@@ -232,78 +239,81 @@
 }
 
 
-@media (max-width: 630px)
-{
-    .categoryCard{
-        width:130px !important;
-        height: 185px;
+/* تحسين التجاوب للشاشات الصغيرة */
+@media (max-width: 630px) {
+    .categoryCard {
+        width: 160px !important;
+        min-height: 220px;
+        padding: 15px 8px;
+        gap: 12px;
     }
-    .image{
+    
+    .image {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .name {
+        font-size: 0.9rem;
+        min-height: 18px;
+        margin-bottom: 10px !important;
+    }
+}
+
+@media (max-width: 502px) {
+    .categoryCard {
+        width: 140px !important;
+        min-height: 200px;
+        padding: 12px 6px;
+        gap: 10px;
+    }
+    
+    .image {
         width: 100px;
         height: 100px;
     }
-    .name{
-        font-size: 15px;
-        height: 70px;
-    }
-
-}
-@media (max-width: 502px)
-{
-    .categoryCard{
-        width:7rem !important;
-        height: 185px;
-        margin: 0;
-    }
-    .image{
-        width: 5.7rem;
-        height: 5.7rem;
-    }
-    .name{
-        font-size: 14px;
-        height: 70px;
-    }
-
-}
-@media (max-width: 433px)
-{
-    .categoryCard{
-        width:6.5rem !important;
-        padding: 10px 0px;
-        margin: 10px 0px;
-        height: 175px !important;
-    }
-    .image{
-        width: 5.5rem;
-        height: 5.5rem;
-        border-width: 2px;
-    }
-    .name{
-        font-size: 14px;
-        text-wrap: wrap;
-        min-width: 100px;
-        min-height: max-content;
+    
+    .name {
+        font-size: 0.8rem;
+        min-height: 16px;
     }
 }
-@media (max-width: 370px)
-{
-    .categoryCard{
-        width:5.8rem !important;
-        padding: 10px 0px;
-        margin: 10px 2px;
-        height: 175px;
-    }
-    .image{
-        width: 5.2rem;
-        height: 5.2rem;
-        border-width: 2px;
-    }
-    .name{
-        font-size: 13px;
-        text-wrap: wrap;
-        min-width: 100px;
-        min-height: max-content;
-        margin: 5px auto;
 
+@media (max-width: 433px) {
+    .categoryCard {
+        width: 130px !important;
+        min-height: 180px;
+        padding: 10px 5px;
+        gap: 8px;
+    }
+    
+    .image {
+        width: 90px;
+        height: 90px;
+    }
+    
+    .name {
+        font-size: 0.75rem;
+
+        min-height: 15px;
+    }
+}
+
+@media (max-width: 370px) {
+    .categoryCard {
+        width: 120px !important;
+        min-height: 160px;
+        padding: 8px 4px;
+        gap: 6px;
+    }
+    
+    .image {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .name {
+        font-size: 0.7rem;
+        min-height: 14px;
     }
 }

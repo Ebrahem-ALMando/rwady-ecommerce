@@ -4,7 +4,7 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 0.5rem;
     border: 1px solid #e5e7eb;
-    transition: box-shadow 0.3s ease;
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
     position: relative;
     width: 21rem;
     min-height: 655px;
@@ -13,9 +13,12 @@
     flex-direction: column;
     justify-content: space-between;
 }
+
 .card:hover {
     box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
 }
+
 .bestSeller {
     background: #0741ad;
     padding: 7px 10px;
@@ -29,7 +32,10 @@
     z-index: 50;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     border: 1px solid #d2dfef;
+    font-weight: 600;
+    letter-spacing: 0.5px;
 }
+
 .saveSeller {
     background: #dc2926;
     padding: 7px 10px;
@@ -42,18 +48,26 @@
     font-size: 12px;
     z-index: 50;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    font-weight: 600;
+    letter-spacing: 0.5px;
 }
+
 .productImgDiv {
     width: 100%;
     aspect-ratio: 5 / 5;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding:2px 7px;
+    padding: 2px 7px;
     max-height: 340px;
     overflow: hidden;
     position: relative;
     border-radius: 0.4rem;
+    transition: transform 0.3s ease;
+}
+
+.productImgDiv:hover {
+    transform: scale(1.02);
 }
 
 .productImg {
@@ -63,6 +77,11 @@
     border-radius: 0.4rem;
     display: block;
     cursor: pointer;
+    transition: filter 0.3s ease;
+}
+
+.productImg:hover {
+    filter: brightness(1.05);
 }
 
 .iconImage {
@@ -73,13 +92,18 @@
     align-items: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 0.5rem;
-    transition: box-shadow 0.3s ease;
+    transition: all 0.3s ease;
     padding: 10px;
     color: #0741ad;
+    border: 1px solid #f0f0f0;
 }
+
 .iconImage:hover {
     box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+    transform: translateY(-1px);
+    border-color: #0741ad;
 }
+
 .slickDots {
     display: flex !important;
     justify-content: center;
@@ -89,24 +113,37 @@
     width: 100%;
     list-style: none;
     padding: 0;
+    margin: 0;
 }
+
 .slickDot, .slickActive {
     width: 11px !important;
     height: 11px !important;
     border-radius: 50%;
-    transition: background-color 0.3s ease, width 0.3s ease, height 0.3s ease;
+    transition: all 0.3s ease;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
     position: relative;
 }
+
 .slickDot {
     background-color: #bec8d9;
+    border: 2px solid transparent;
 }
+
 .slickActive {
     background-color: #0741ad;
+    border: 2px solid #ffffff;
+    transform: scale(1.2);
 }
+
+.slickDot:hover {
+    background-color: #a0aec0;
+    transform: scale(1.1);
+}
+
 .slickDot button, .slickActive button {
     width: 11px !important;
     height: 11px !important;
@@ -120,7 +157,6 @@
 }
 
 .infoCard {
-
     padding: 16px;
     background-color: #f7f7f7;
     width: 90%;
@@ -130,18 +166,28 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    transition: background-color 0.3s ease;
+    border: 1px solid #e5e7eb;
 }
-html[dir="ltr"] .infoCard{
+
+.infoCard:hover {
+    background-color: #f0f0f0;
+}
+
+html[dir="ltr"] .infoCard {
     direction: ltr;
 }
-html[dir="rtl"] .infoCard{
+
+html[dir="rtl"] .infoCard {
     direction: rtl;
 }
+
 .brand {
     color: #0741AD;
     font-size: 18px;
     font-weight: 400;
 }
+
 .title {
     color: #0741AD;
     font-weight: 600;
@@ -158,6 +204,11 @@ html[dir="rtl"] .infoCard{
     line-height: 1.7rem;
     max-height: 3.2rem;
     cursor: default;
+    transition: color 0.3s ease;
+}
+
+.title:hover {
+    color: #052d7a;
 }
 
 .price {
@@ -167,28 +218,44 @@ html[dir="rtl"] .infoCard{
     font-size: 18px;
     font-weight: 500;
     display: flex;
-
+    align-items: center;
+    gap: 8px;
 }
+
 .oldPrice {
     color: #0741AD;
     font-size: 16px;
     font-weight: 400;
     margin-left: 0.8rem;
+    text-decoration: line-through;
 }
+
 .availableIcon {
     margin-left: 0.1rem;
     width: 18px;
+    transition: transform 0.2s ease;
 }
+
+.availableIcon:hover {
+    transform: scale(1.1);
+}
+
 .available {
     margin-top: 0.8rem;
-    margin-right: -0.4rem;
     color: #FF9C00;
     font-size: 13.3px;
     font-weight: 500;
     width: 350px;
     display: flex;
     align-items: center;
+    gap: 6px;
+    transition: color 0.3s ease;
 }
+
+.available:hover {
+    color: #e68900;
+}
+
 .colorButtons {
     display: flex;
     gap: 7px;
@@ -196,50 +263,63 @@ html[dir="rtl"] .infoCard{
     align-items: center;
     flex-wrap: wrap;
 }
+
 .colorButton {
     width: 15px;
     height: 15px;
     border-radius: 60%;
-    transition: transform 0.3s ease;
+    border: 2px solid #fff;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
 }
+
 .colorButton:hover {
     transform: scale(1.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
+.colorButton:active {
+    transform: scale(0.95);
+}
+
 .noColors {
-    font-size: 13px;
-    color: #999;
-    background: #f1f1f1;
-    padding: 6px 12px;
-    border-radius: 9999px;
-    animation: fadeIn 0.4s ease-in-out;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    display: none;
 }
+
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(4px);
+        transform: translateY(10px);
     }
     to {
         opacity: 1;
         transform: translateY(0);
     }
 }
+
 .outherDetails {
-    display: inline-flex;
-    justify-content: space-between;
-    width: 100%;
+    margin-top: 0.8rem;
+    display: flex;
     align-items: center;
+    gap: 6px;
 }
+
 .remainingIcon {
     margin-left: 0.1rem;
     width: 18px;
+    transition: transform 0.2s ease;
 }
+
+.remainingIcon:hover {
+    transform: scale(1.1);
+}
+
 .remaining {
-    margin-top: 0.8rem;
-    margin-right: -0.4rem;
-    color: #0741AD;
-    font-size: 13px;
+    font-size: 13.3px;
     font-weight: 500;
+    color: #0741AD;
     display: flex;
     gap: 3px;
 }
@@ -253,95 +333,209 @@ html[dir="rtl"] .infoCard{
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 6px;
 }
-.timeText {
-    margin-right: -0.4rem;
-    color: #ffffff;
+
+.time {
+    background: #0741AD;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 20px;
     font-size: 12px;
     font-weight: 500;
-    display: inline-flex;
-    align-items: center;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    border: 1px solid #d2dfef;
+    transition: all 0.3s ease;
 }
-.timeIcon {
-    margin-top: 0.5rem;
-    width: 30px;
-    height: 30px;
-    object-fit: cover;
-    margin-right: 5px;
+
+.time:hover {
+    /* background: #052d7a; */
+    transform: translateY(-1px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
-.addToCart {
-    width: 100%;
-    padding: 10px;
-    background-color: #0a58ca;
-    color: white;
-    font-size: 12px;
-    font-weight: 400;
-    border: none;
-    border-radius: 9999px;
+
+.timeText {
     display: flex;
     align-items: center;
-    justify-content: center;
     gap: 5px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin: 0;
+}
+
+.timeIcon {
+    display: flex;
+    align-items: center;
+    transition: transform 0.2s ease;
+}
+
+.timeIcon:hover {
+    transform: scale(1.1);
+}
+
+.addToCart {
+    background: #0741AD;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
     cursor: pointer;
-    margin-right: 10px;
-    margin-bottom:5px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+    width: 100%;
+    margin-top: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.addToCart::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.addToCart:hover::before {
+    left: 100%;
 }
 
 .addToCart:hover {
-    background-color: #004ea8;
+    background: #052d7a;
     transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(7, 65, 173, 0.3);
+}
+
+.addToCart:active {
+    transform: translateY(0);
 }
 
 .disabled {
-    background-color: #ccc !important;
-    color: #666 !important;
+    background: #9CA3AF;
     cursor: not-allowed;
-}
-.quantity{
-    margin:0px auto !important;
-    padding: 0rem  !important;
+    transform: none !important;
+    box-shadow: none !important;
 }
 
-.quantity .controlButton{
+.disabled:hover {
+    background: #9CA3AF;
+}
+
+.disabled::before {
+    display: none;
+}
+
+.quantity {
+    margin: 0px auto !important;
+    padding: 0rem !important;
+}
+
+.quantity .controlButton {
     width: 32px;
     height: 32px;
 }
-.shop{
+
+.shop {
     position: absolute;
     left: 5px;
     background: #DE1F1F;
 }
-.shop:hover{
+
+.shop:hover {
     background: #b60909;
 }
-@media (max-width: 775px)
-{
-    .cardDiv{
-        padding:20px 5px !important;
 
+/* Large screens */
+@media (min-width: 1200px) {
+    .card {
+        width: 22rem;
+        min-height: 680px;
     }
+    
+    .title {
+        font-size: 20px;
+        line-height: 1.8rem;
+        max-height: 3.6rem;
+    }
+    
+    .price, .oldPrice {
+        font-size: 20px;
+    }
+    
+    .available {
+        font-size: 15px;
+        width: 380px;
+    }
+    
+    .infoCard {
+        height: 280px;
+    }
+}
+
+/* Medium screens */
+@media (max-width: 1024px) {
+    .card {
+        width: 18rem;
+        min-height: 600px;
+    }
+    
+    .title {
+        font-size: 16px;
+        line-height: 1.5rem;
+        max-height: 3rem;
+    }
+    
+    .price, .oldPrice {
+        font-size: 16px;
+    }
+    
+    .available {
+        font-size: 12px;
+        width: 300px;
+    }
+    
+    .infoCard {
+        height: 230px;
+    }
+}
+
+/* Tablet screens */
+@media (max-width: 775px) {
+    .cardDiv {
+        padding: 20px 5px !important;
+    }
+    
     .card {
         position: relative;
         width: 165px;
         min-height: 280px;
         height: auto;
-
     }
-    .saveSeller{
+    
+    .saveSeller {
         width: 43px;
         min-width: max-content;
         font-size: 10px !important;
     }
-    .bestSeller{
+    
+    .bestSeller {
         width: 43px;
         min-width: max-content;
         font-size: 10px !important;
     }
-    .timeBox{
+    
+    .timeBox {
         width: 120px !important;
         min-width: max-content;
     }
+    
     .time {
         top: 3px;
         right: 3px;
@@ -350,82 +544,91 @@ html[dir="rtl"] .infoCard{
         height: 27px;
         font-size: 10px !important;
     }
-    .timeText{
+    
+    .timeText {
         font-weight: 400 !important;
         font-size: 10px !important;
     }
+    
     .timeIcon {
         width: 25px;
         height: 25px;
     }
-    .imgCont{
+    
+    .imgCont {
         margin-top: 0.3rem !important;
         /*width: 160px !important;*/
         height: auto !important;
         display: block;
         padding: 0px 7px !important;
     }
+    
     .productImgDiv {
         padding: 0px !important;
         margin: 0 !important;
     }
+    
     .productImg {
         object-fit: cover;
     }
-    .icons{
+    
+    .icons {
         bottom: 10px !important;
         left: 7px !important;
         gap: 5px !important;
     }
+    
     .iconImage {
         width: auto !important;
-        height: 30px!important;
+        height: 30px !important;
         min-width: max-content;
-        padding: 17px 5px ;
-
+        padding: 17px 5px;
     }
-    .iconImage  svg{
+    
+    .iconImage svg {
         width: 22px;
     }
+    
     .slickDot button, .slickActive button {
-        width:  9.5px !important;
-        height:  9.5px !important;
+        width: 9.5px !important;
+        height: 9.5px !important;
         background: transparent !important;
         border: none !important;
         cursor: pointer;
         position: absolute;
         right: 10px !important;
-
         border-radius: 50%;
         opacity: 0;
-
     }
-
-
-
+    
     .slickDot, .slickActive {
         width: 9.5px !important;
-        height:  9.5px !important;
+        height: 9.5px !important;
         top: -8px !important;
     }
+    
     .slickDot {
         background-color: #bec8d9;
     }
+    
     .slickActive {
         background-color: #0741ad;
     }
+    
     .infoCard {
-        padding:2px 5px !important;
+        padding: 2px 5px !important;
         background-color: #f7f7f7;
         width: 160px !important;
         margin: 0.3rem auto !important;
     }
-    .categ{
+    
+    .categ {
         font-size: 10px !important;
         font-weight: 500;
         min-width: max-content;
     }
-    .title{
+    
+    .title {
         font-size: 13.5px !important;
         font-weight: 500;
         -webkit-line-clamp: 3;
@@ -433,61 +636,73 @@ html[dir="rtl"] .infoCard{
         max-height: 5.2rem;
         padding: 0 3px !important;
     }
-    .price,.oldPrice,.available{
+    
+    .price, .oldPrice, .available {
         font-size: 11px !important;
         font-weight: 500;
         margin-top: 0.5rem;
     }
-  
-    .availableIcon{
-        margin-right: 3px;
-        margin-left:  3px;
-        width: 13px !important;
-        
+    
+    .availableIcon {
+        margin-right: 2px;
+        margin-left: 2px;
+        width: 15px !important;
     }
-    .available{
+    
+    .available {
+        margin-right: -3px;
         font-size: 10px !important;
+        gap: 1px !important;
+        display: flex;
+        align-items: center;
+
+
     }
-    .remaining{
+    
+    .remaining {
         font-size: 11px !important;
-        
+        margin-right: -5px;
     }
-    .outherDetails{
+    
+    .outherDetails {
         margin-right: 4px;
-        margin-left:  4px;
+        margin-left: 4px;
         margin-bottom: 7px;
     }
-
 }
-/* @media (max-width: 775px)
-{
-    .cardDiv{
-        padding:15px 3px !important;
-       
+
+/* Small mobile screens */
+@media (max-width: 350px) {
+    .cardDiv {
+        padding: 15px 3px !important;
     }
+    
     .card {
         position: relative;
         width: 155px;
         min-height: 280px !important;
         height: auto;
-        
     }
-    .saveSeller{
+    
+    .saveSeller {
         width: 40px;
         min-width: max-content;
         font-size: 9px !important;
         padding: 5px 8px !important;
     }
-    .bestSeller{
+    
+    .bestSeller {
         width: 40px;
         min-width: max-content;
         font-size: 9px !important;
         padding: 5px 8px !important;
     }
-    .timeBox{
+    
+    .timeBox {
         width: 110px !important;
         min-width: max-content;
     }
+    
     .time {
         top: 3px;
         right: 3px;
@@ -496,42 +711,51 @@ html[dir="rtl"] .infoCard{
         height: 25px;
         font-size: 9px !important;
     }
-    .timeText{
+    
+    .timeText {
         font-weight: 400 !important;
         font-size: 9px !important;
     }
+    
     .timeIcon {
         width: 22px;
         height: 22px;
     }
-    .imgCont{
+    
+    .imgCont {
         margin-top: 0.2rem !important;
         height: auto !important;
         display: block;
         padding: 0px 5px !important;
     }
+    
     .productImgDiv {
         padding: 0px !important;
         margin: 0 !important;
         max-height: 100px !important;
     }
+    
     .productImg {
         object-fit: cover;
     }
-    .icons{
+    
+    .icons {
         bottom: 8px !important;
         left: 5px !important;
         gap: 4px !important;
     }
+    
     .iconImage {
         width: auto !important;
         height: 25px !important;
         min-width: max-content;
         padding: 12px 4px !important;
     }
-    .iconImage  svg{
+    
+    .iconImage svg {
         width: 18px;
     }
+    
     .slickDot button, .slickActive button {
         width: 8px !important;
         height: 8px !important;
@@ -543,17 +767,21 @@ html[dir="rtl"] .infoCard{
         border-radius: 50%;
         opacity: 0;
     }
+    
     .slickDot, .slickActive {
         width: 8px !important;
         height: 8px !important;
         top: -6px !important;
     }
+    
     .slickDot {
         background-color: #bec8d9;
     }
+    
     .slickActive {
         background-color: #0741ad;
     }
+    
     .infoCard {
         padding: 6px 4px !important;
         background-color: #f7f7f7;
@@ -562,13 +790,15 @@ html[dir="rtl"] .infoCard{
         height: auto !important;
         min-height: 150px !important;
     }
-    .categ{
+    
+    .categ {
         font-size: 9px !important;
         font-weight: 500;
         min-width: max-content;
         padding: 2px 4px !important;
     }
-    .title{
+    
+    .title {
         font-size: 11px !important;
         font-weight: 500;
         -webkit-line-clamp: 2;
@@ -576,80 +806,141 @@ html[dir="rtl"] .infoCard{
         max-height: 2.2rem;
         padding: 0 2px !important;
     }
-    .price,.oldPrice,.available{
+    .price{
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    .price, .oldPrice, .available {
         font-size: 9px !important;
         font-weight: 500;
         margin-top: 0.2rem;
     }
-    .availableIcon{
-        margin-right: 0.2rem;
+    .available{
+        gap: 2px !important;
+    }
+    .availableIcon {
+    
         width: 12px !important;
     }
-    .remaining{
+    
+    .remaining {
         font-size: 9px !important;
-        
     }
-    .outherDetails{
+    
+    .outherDetails {
         margin-right: 3px;
-        margin-left:  3px;
+        margin-left: 3px;
     }
+    
     .colorButtons {
         margin-top: 3px !important;
         gap: 3px !important;
     }
+    
     .colorButton {
         width: 8px !important;
         height: 8px !important;
     }
-} */
-/*@media (max-width: 630px) {*/
+}
 
-/*    .card {*/
-/*        width: 250px !important;    !* يغطي 100% من عرض العمود *!*/
-/*        max-width: none;*/
-/*        min-height: 0;*/
-/*        height: auto;*/
-/*        padding: 0.5rem;*/
-/*    }*/
+/* Extra small screens */
+@media (max-width: 360px) {
+    .card {
+        width: 140px;
+        min-height: 260px;
+    }
+    
+    .infoCard {
+        width: 130px !important;
+        padding: 4px 3px !important;
+    }
+    
+    .title {
+        font-size: 10px !important;
+        line-height: 1rem;
+        max-height: 2rem;
+    }
+    
+    .price, .oldPrice, .available {
+        font-size: 8px !important;
+    }
+    
+    .categ {
+        font-size: 8px !important;
+        padding: 1px 3px !important;
+    }
+    
+    .iconImage {
+        height: 22px !important;
+        padding: 10px 3px !important;
+    }
+}
 
-/*    !* صورة المنتج: تصغير الارتفاع الأقصى *!*/
-/*    .productImgDiv {*/
-/*        max-height: 140px;         !* يقلّص مساحة الصورة *!*/
-/*        padding: 4px;*/
-/*    }*/
+/* Landscape orientation for mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+    .card {
+        width: 180px;
+        min-height: 320px;
+    }
+    
+    .infoCard {
+        height: 200px;
+    }
+    
+    .title {
+        font-size: 14px;
+        line-height: 1.4rem;
+        max-height: 2.8rem;
+    }
+    
+    .price, .oldPrice {
+        font-size: 14px;
+    }
+    
+    .available {
+        font-size: 11px;
+    }
+}
 
-/*    !* صندوق المعلومات: تعبئة ومارجن مصغّرة *!*/
-/*    .infoCard {*/
-/*        padding: 8px;*/
-/*        margin: 0.5rem auto;*/
-/*        height: auto;*/
-/*    }*/
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .productImg {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+    
+    .iconImage {
+        image-rendering: -webkit-optimize-contrast;
+    }
+}
 
-/*    !* نصوص أصغر *!*/
-/*    .title {*/
-/*        font-size: 0.95rem;*/
-/*    }*/
-/*    .price {*/
-/*        font-size: 0.9rem;*/
-/*    }*/
-/*    .oldPrice {*/
-/*        font-size: 0.8rem;*/
-/*    }*/
+/* Print styles */
+@media print {
+    .card {
+        box-shadow: none;
+        border: 1px solid #000;
+        break-inside: avoid;
+    }
+    
+    .icons, .colorButtons {
+        display: none;
+    }
+    
+    .infoCard {
+        background-color: white;
+        border: 1px solid #ccc;
+    }
+}
 
-/*    !* أيقونات التفاعل وزر السلة *!*/
-/*    .iconImage {*/
-/*        padding: 6px;*/
-/*        gap: 4px;*/
-/*    }*/
-/*    .addToCart {*/
-/*        padding: 6px 8px;*/
-/*        font-size: 0.75rem;*/
-/*    }*/
-
-/*    !* نقاط السلايدر *!*/
-/*    .slickDot, .slickActive {*/
-/*        width: 8px !important;*/
-/*        height: 8px !important;*/
-/*    }*/
-/*}*/
+.categ {
+    font-size: 13px;
+    font-weight: 500;
+    min-width: max-content;
+    padding: 4px 6px !important;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-width: 100%;
+    display: block;
+}
 

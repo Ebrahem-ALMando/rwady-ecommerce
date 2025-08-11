@@ -3,7 +3,10 @@
     padding: 15px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    justify-content: space-around  ;
+    height: 100%;
+    gap:10px;
+
 }
 .brandsWrapper {
     display: flex;
