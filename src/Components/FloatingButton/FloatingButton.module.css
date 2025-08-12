@@ -285,7 +285,7 @@
 }
 
 .right.mobile .toggle {
-  right: calc(var(--fab) * -0.5);
+  right: calc(var(--fab) * -0.8);
 }
 
 .left.mobile .toggle {
