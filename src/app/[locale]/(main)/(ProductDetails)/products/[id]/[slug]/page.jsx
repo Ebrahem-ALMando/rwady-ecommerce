@@ -12,7 +12,7 @@ import ProductSlider from "@/Components/Shared/SliderComponents/ProductSlider/Pr
 
 export async function generateStaticParams() {
     try {
-        const response = await getProducts("limit=500");
+        const response = await getProducts("limit=100");
         const products = response?.data || [];
     
         return products.map((product) => ({
