@@ -1,149 +1,305 @@
-
-.floatingButton {
-    position: fixed;
-    bottom: 40px;
-    left: 30px;
-    width: 60px;
-    height: 60px;
-    z-index: 1001;
-    background-color: rgba(218, 213, 213, 0.6);
-    backdrop-filter: blur(5px);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow:
-            0 8px 32px rgba(0, 0, 0, 0.1),
-            0 4px 12px rgba(0, 0, 0, 0.08),
-            inset 0 2px 4px rgba(255,255,255,0.3);
-    transition:
-            transform 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28),
-            background 0.3s ease,
-            box-shadow 0.3s ease;
-    border: 1px solid rgba(255,255,255,0.2);
-    cursor: pointer;
-    overflow: visible;
-    animation:
-            floatEntrance 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards,
-            strongPulse 2s ease-in-out infinite;
+.root {
+  position: fixed;
+  bottom: 18px;
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  --fab: 80px;
+  --icon: 22px;
+  --gap: 12px;
+  --elev: 0 10px 24px rgba(0, 0, 0, 0.22), 0 4px 12px rgba(0, 0, 0, 0.14);
 }
 
-
-.floatingButton::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(
-            circle at 50% 50%,
-            rgba(0, 104, 255, 0.6) 0%,
-            rgba(255, 255, 255, 0) 70%
-    );
-    transform: translate(-50%, -50%) scale(0);
-    animation: rippleWave 1.5s ease-out infinite;
-    border-radius: 50%;
-    z-index: -1;
+.right {
+  right: 18px;
 }
 
-@keyframes rippleWave {
-    0% {
-        transform: translate(-50%, -50%) scale(0);
-        opacity: 0.8;
-    }
-    90% {
-        opacity: 0.4;
-    }
-    100% {
-        transform: translate(-50%, -50%) scale(1.8);
-        opacity: 0;
-    }
+.left {
+  left: 18px;
 }
 
-@keyframes hoverRipple {
-    to {
-        background: radial-gradient(
-                circle at 50% 50%,
-                rgba(255, 255, 255, 1) 0%,
-                rgba(255, 255, 255, 0) 70%
-        );
-        filter: brightness(3);
-    }
+.sm {
+  --fab: 48px;
+  --icon: 20px;
 }
 
-@keyframes strongPulse {
-    0%, 100% {
-        transform: scale(1);
-        box-shadow:
-                0 8px 32px rgba(0, 0, 0, 0.1),
-                0 4px 12px rgba(0, 0, 0, 0.08);
-    }
-    50% {
-        transform: scale(1.05);
-        box-shadow:
-                0 12px 40px rgba(0, 0, 0, 0.2),
-                0 6px 20px rgba(0, 0, 0, 0.15);
-    }
+.md {
+  --fab: 56px;
+  --icon: 22px;
 }
 
-.floatingButton:hover {
-    transform:
-            scale(1.2)
-            translateY(-2px);
-    animation-play-state: paused;
-}
-.floatingButton svg  {
-
+.lg {
+  --fab: 64px;
+  --icon: 26px;
 }
 
-.floatingButton:active {
-    transform: scale(0.9);
-    filter: brightness(0.9);
+/* Overlay (mobile) */
+.overlay {
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(2px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms ease;
 }
 
-.floatingButton svg {
-    fill: #1976D2;
-    width: 40px;
-    height: 40px;
-    transition:
-            transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-            filter 0.3s ease;
-    filter: drop-shadow(0 2px 4px rgba(0, 127, 255, 0.3));
-    animation: slideDown 1.5s infinite ease-in-out;
+.open.mobile .overlay {
+  opacity: 1;
+  pointer-events: auto;
 }
 
-.floatingButton:hover svg {
-    transform: scale(1.1) rotate(10deg);
-    filter: drop-shadow(0 4px 8px rgba(25, 118, 210, 0.5));
-}
-.whatsappIcon {
-    color: #25D366 !important;
-}
-@media (max-width: 768px) {
-    .floatingButton {
-        width: 65px;
-        height: 65px;
-        bottom: 25px;
-        left: 20px;
-    }
-
-    .floatingButton svg {
-        width: 34px;
-        height: 34px;
-    }
+/* Toggle (mobile only, 50% peeking from edge) */
+.toggle {
+  width: var(--fab);
+  height: var(--fab);
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(180deg, #1f2937, #111827);
+  box-shadow: var(--elev), inset 0 2px 6px rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 200ms ease;
+  z-index: 1002;
 }
 
-@keyframes slideDown {
-    0% {
-        transform: translateY(-10px);
-        opacity: 0;
-    }
-    50% {
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(5px);
-        opacity: 0;
-    }
+.chev {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Panel wrapper for smooth slide + background */
+.panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap);
+  transition: transform 220ms ease, opacity 220ms ease;
+}
+
+.mobile .panel {
+  background: rgba(17, 24, 39, 0.55);
+
+
+  padding: 14px 10px;
+  border-radius: 16px;
+}
+
+.closed .panel {
+  transform: translateY(6px) scale(0.98);
+  opacity: 0.0;
+}
+
+.open .panel {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+/* Stack */
+.stack {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap);
+  z-index: 1001;
+}
+
+.item {
+  transform: translateY(6px);
+  opacity: 0;
+  transition: transform 180ms ease, opacity 180ms ease;
+}
+
+.open .item {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Button + Tooltip */
+.btnWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.tip {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%) translateX(8px);
+  padding: 6px 10px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.75);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 180ms ease, transform 180ms ease;
+  pointer-events: none;
+}
+
+.right .tip {
+  right: calc(100% + 8px);
+}
+
+.left .tip {
+  left: calc(100% + 8px);
+}
+
+.btnWrap:hover .tip {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* Button */
+.btn {
+  --brand: #25D366;
+  --iconColor: #cbd5e1;
+  width: var(--fab);
+  height: var(--fab);
+  border-radius: 999px;
+  background: linear-gradient(180deg, #0b1220, #0a0f1a);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: var(--elev), inset 0 2px 6px rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform 180ms ease, background 180ms ease, box-shadow 180ms ease;
+  isolation: isolate;
+}
+
+.icon {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--iconColor);
+}
+
+.icon svg {
+  width: var(--icon);
+  height: var(--icon);
+  color: currentColor;
+  fill: currentColor;
+  stroke: currentColor;
+  transition: color 180ms ease;
+}
+
+.btn:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 10px 24px rgba(0, 0, 0, 0.35), inset 0 -6px 10px rgba(255, 255, 255, 0.06);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.btn:after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  opacity: 0;
+  filter: blur(10px);
+  box-shadow: 0 0 24px 0 var(--brand);
+  transition: opacity 180ms ease;
+  z-index: 0;
+}
+
+/* Internal ripple (brand color only, behind icon) */
+/* .wave {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at center, color-mix(in srgb, var(--brand) 35%, transparent) 0%, transparent 60%);
+  transform: scale(0);
+  opacity: 0;
+  animation: none;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.btn:hover .wave,
+.btn:active .wave {
+  animation: ripple 900ms ease-out forwards;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0.2);
+    opacity: 0.38;
+  }
+  70% {
+    opacity: 0.2;
+  }
+  100% {
+    transform: scale(1.7);
+    opacity: 0;
+  }
+} */
+
+.btn:hover {
+  transform: scale(1.08);
+  background: var(--brand);
+  box-shadow: 0 16px 36px color-mix(in srgb, var(--brand) 45%, transparent), inset 0 2px 6px rgba(255, 255, 255, 0.15);
+}
+
+.btn:hover .icon {
+  color: #ffffff;
+}
+
+.btn:hover:after {
+  opacity: 0.9;
+}
+
+/* Desktop vs Mobile visibility */
+.desktop .toggle {
+  display: none;
+}
+
+.mobile {
+  top: 50%;
+  bottom: auto;
+  transform: translateY(-50%);
+}
+
+.mobile .toggle {
+  top: 50%;
+  bottom: auto;
+  transform: translateY(-50%);
+  display: flex;
+  position: absolute;
+  
+}
+
+.right.mobile .toggle {
+  right: calc(var(--fab) * -0.5);
+}
+
+.left.mobile .toggle {
+  left: calc(var(--fab) * -0.8);
+}
+
+.mobile .tip {
+  display: none;
+}
+
+.closed .stack {
+  pointer-events: none;
+}
+
+.mobile.closed .item {
+  display: none;
 }

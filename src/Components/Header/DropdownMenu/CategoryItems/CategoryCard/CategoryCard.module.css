@@ -239,10 +239,9 @@
 }
 
 
-/* تحسين التجاوب للشاشات الصغيرة */
 @media (max-width: 630px) {
     .categoryCard {
-        width: 160px !important;
+        width: 150px !important;
         min-height: 220px;
         padding: 15px 8px;
         gap: 12px;
@@ -262,7 +261,7 @@
 
 @media (max-width: 502px) {
     .categoryCard {
-        width: 140px !important;
+        width: 110px !important;
         min-height: 200px;
         padding: 12px 6px;
         gap: 10px;
@@ -281,7 +280,7 @@
 
 @media (max-width: 433px) {
     .categoryCard {
-        width: 130px !important;
+        width: 100px !important;
         min-height: 180px;
         padding: 10px 5px;
         gap: 8px;
@@ -301,7 +300,7 @@
 
 @media (max-width: 370px) {
     .categoryCard {
-        width: 120px !important;
+        width: 90px !important;
         min-height: 160px;
         padding: 8px 4px;
         gap: 6px;

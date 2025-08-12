@@ -16,7 +16,6 @@ import FloatingButton from "@/Components/FloatingButton/FloatingButton";
 import ReloadWithError from "@/Components/Shared/ReloadWithError/ReloadWithError";
 const FooterUI = ({t,settings,links,initialError}) => {
 
-
     if(initialError) return <ReloadWithError/>
     return (
         <footer className={styles.footer}>
@@ -65,22 +64,31 @@ const FooterUI = ({t,settings,links,initialError}) => {
             </div>
 
             {settings.client_app_andriod_url && (
-                <FloatingButton
-                    ariaLabel={t("downloadAppAria")}
-                    icon={DownloadIcon}
-                    href={settings.client_app_andriod_url}
-                />
-            )}
+  <FloatingButton
+   
+    position="auto"
+    actions={[
+      settings.whatsapp && {
+        key: "wa",
+        label: "تواصل عبر واتساب",
+        iconKey: "whatsapp",
+        href: `https://wa.me/${(settings.whatsapp || "").replace(/[^0-9]/g, "")}`,
+        brandColor: "#25D366",
+        iconColor: "#25D366",
+      },
+      settings.client_app_andriod_url && {
+        key: "dl",
+        label: "تحميل التطبيق",
+        iconKey: "download",
+        href: settings.client_app_andriod_url,
+        brandColor: "#007BFF",
+        iconColor: "#007BFF",
+      },
+    ].filter(Boolean)}
+  />
+)}
 
-            {settings.whatsapp && (
-                <FloatingButton
-                    ariaLabel={t("whatsappAria")}
-                    className="whatsappIcon"
-                    icon={<PiWhatsappLogo size={26} />}
-                    href={`https://wa.me/${settings.whatsapp.replace(/[^0-9]/g, "")}`}
-                    position="left"
-                />
-            )}
+
         </footer>
     );
 };
