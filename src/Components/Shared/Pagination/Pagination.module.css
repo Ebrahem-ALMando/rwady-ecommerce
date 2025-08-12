@@ -258,6 +258,7 @@
 /* تحسينات للموبايل */
 @media (max-width: 768px) {
     .paginationContainer {
+        flex-direction: column;
         padding: 1rem;
         gap: 0.75rem;
         margin: 1rem 0;
@@ -297,7 +298,15 @@
         font-size: 0.8rem;
         padding: 0.4rem 0.8rem;
     }
+    .perPageSelector,.paginationControls,.pageInfo{
+        width: 98% !important;
+    }
+    .infoText{
+        width: 100%;
+    }
 }
+
+
 
 @media (max-width: 480px) {
     .paginationContainer {
