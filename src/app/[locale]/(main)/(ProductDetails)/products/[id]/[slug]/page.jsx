@@ -130,7 +130,7 @@ export async function ProductDetailsData({id,lang }) {
             <>
                 <TitleSection
                     initTitle={title}
-                    initLink={`/${lang}/products`}
+                    initLink={`./${lang}/products`}
                     can_show_more={true}
                     // show_more={`/${lang}/products`}
                     show_title={true}
