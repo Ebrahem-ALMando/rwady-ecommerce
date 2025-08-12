@@ -396,7 +396,7 @@ const ProductOrderDetails = () => {
                             </div>
                         </div>
 
-                        <div className={styles.box}>
+                        {/* <div className={styles.box}>
                             <div className={styles.rateTitle}>
                                 <p>{t("details.shareExperience")}</p>
                             </div>
@@ -417,7 +417,7 @@ const ProductOrderDetails = () => {
                                     buttonText={t("details.rate.sellerBtn")}
                                 />
                             </div>
-                        </div>
+                        </div> */}
 
                         <div className={styles.box}>
                             <div className={styles.productDetails}>
