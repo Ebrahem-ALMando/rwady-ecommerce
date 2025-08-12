@@ -740,7 +740,7 @@ const DetailsCard = ({ product,lang }) => {
             toast.success("تم نسخ رابط المنتج");
         }
     }
-
+   
     return (
         <div className={styles.detailsCard}>
 
@@ -786,7 +786,7 @@ const DetailsCard = ({ product,lang }) => {
                 </motion.div>
             )}
 
-            {product.description.length>0&&
+            {product.description?.[lang]?.length>0&&
                 <ProductDescription description={product.description} lang={lang}/>
             }
 
