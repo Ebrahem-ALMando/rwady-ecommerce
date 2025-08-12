@@ -33,8 +33,10 @@ import BrandsData from "@/Components/Products/FilterSectionData/BrandData";
 import ProductCardSkeleton from "@/Components/Shared/SliderComponents/ProductCardSlider/ProductCardSkeleton/ProductCardSkeleton";
 import EmptyState from "@/Components/Shared/EmptyState/EmptyState";
 import ViewToggle from "@/Components/Shared/ViewToggle/ViewToggle";
+import Pagination from "@/Components/Shared/Pagination";
+import { useRouter } from "next/navigation";
 
-const Products = ({initError, data, categoriesData, brandsData, searchParams}) => {
+const Products = ({initError, data, categoriesData, brandsData, searchParams, meta}) => {
     // const [loading1, setLoading] = useState(false);
     const [sortValue, setSortValue] = useState("");
     const [isMobileFilterVisible, setIsMobileFilterVisible] = useState(false);
@@ -44,13 +46,13 @@ const Products = ({initError, data, categoriesData, brandsData, searchParams}) =
     const lang = useLocale();
     const t = useTranslations("products");
 
-    // const router = useRouter();
+    const router = useRouter();
     const { toggleQueryParam, resetAllQueryParams, setPriceRange } = useQueryFilterUpdater();
     const [isPendingUpdate, setIsPendingUpdate] = useState(false);
+    const [loadingPage,setIsLoadingPage]=useState(false);
 
     useEffect(() => {
         if (isPendingUpdate) {
-
             setIsPendingUpdate(false);
         }
     }, [data]);
@@ -73,8 +75,9 @@ const Products = ({initError, data, categoriesData, brandsData, searchParams}) =
         search: searchParams["search"] || "",
     };
     
-    console.log('Products.jsx - searchParams:', searchParams);
-    console.log('Products.jsx - filtersData:', filtersData);
+    // console.log('Products.jsx - searchParams:', searchParams);
+    // console.log('Products.jsx - filtersData:', filtersData);
+    // console.log('Products.jsx - meta:', meta);
     
     useEffect(() => {
         setSelectedFilters(filtersData);
@@ -106,7 +109,6 @@ const Products = ({initError, data, categoriesData, brandsData, searchParams}) =
         });
 
         debouncedToggleFilter(section, id);
-
     };
 
     const handleClearFilter = () => {
@@ -136,8 +138,25 @@ const Products = ({initError, data, categoriesData, brandsData, searchParams}) =
         };
     }, [isMobileFilterVisible]);
 
+    const handlePageChange = async (page) => {
+        try {
+            setIsLoadingPage(true);
+            
+      
+            const params = new URLSearchParams(searchParams);
+            params.set("page", page.toString());
+            
+      
+            router.push(`?${params.toString()}`, { scroll: false });
+    
+        } catch (error) {
+            console.error('Error changing page:', error);
+        } finally {
+       
+            setTimeout(() => setIsLoadingPage(false), 250);
+        }
+    };
 
-console.log(categoriesData)
 
     return (
         <div className={styles.container}>
@@ -241,23 +260,55 @@ console.log(categoriesData)
                 }     
                 {sortedData.length>0&&
                 <div className={`${styles.items} ${viewMode === 'list' ? styles.listView : ''}`}>
-                    {isPendingUpdate ? (
+                    {isPendingUpdate  ? (
                         <>
                             <ProductCardSkeleton/>
                             <ProductCardSkeleton/>
                             <ProductCardSkeleton/>
                         </>
                     ) : (
-                        <ProductsItem
-                            key={JSON.stringify(selectedFilters)}
-                            data={sortedData}
-                            lang={lang}
-                            t={t}
-                            viewMode={viewMode}
-                        />
+                        <>
+                        {loadingPage?
+                        
+                        <>
+                       
+                         {Array.from({ length: meta?.per_page || 20 }, (_, index) => (
+                             <ProductCardSkeleton key={`skeleton-${index}`} />
+                         ))}
+                        </>
+                    :
+                    <ProductsItem
+                    key={JSON.stringify(selectedFilters)}
+                    data={sortedData}
+                    lang={lang}
+                    t={t}
+                    viewMode={viewMode}
+                />
+                    }
+                     
+                        </>
+                     
                     )}
                 </div>
                 }
+
+                {/* Pagination Component */}
+                {meta && meta.last_page > 1 && (
+                    <>
+                        {console.log('Rendering Pagination with meta:', meta)}
+                        <Pagination
+                            currentPage={meta.current_page}
+                            lastPage={meta.last_page}
+                            perPage={meta.per_page}
+                            total={meta.total}
+                            showInfo={true}
+                            showPerPage={true}
+                            onPageChange={handlePageChange}
+                            loadingPage={loadingPage}
+                            setIsLoadingPage={setIsLoadingPage}
+                        />
+                    </>
+                )}
             </div>
         </div>
     );

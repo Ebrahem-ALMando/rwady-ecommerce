@@ -107,6 +107,20 @@
     color: #6A6E83 !important;
     line-height: 1.8;
     padding: 0.25rem 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.descriptionText p {
+    margin: 0.5rem 0;
+}
+
+.descriptionText p:first-child {
+    margin-top: 0;
+}
+
+.descriptionText p:last-child {
+    margin-bottom: 0;
 }
 .color{
     display: flex;

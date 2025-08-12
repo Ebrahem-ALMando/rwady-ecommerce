@@ -10,16 +10,33 @@ const ProductDescription = ({ description, lang }) => {
     const [showToggle, setShowToggle] = useState(false);
     const [contentHeight, setContentHeight] = useState(0);
     const descriptionRef = useRef(null);
-    const COLLAPSED_HEIGHT = 60;
+    const COLLAPSED_HEIGHT = 65;
 
     useEffect(() => {
         if (descriptionRef.current) {
             const el = descriptionRef.current;
             const scrollHeight = el.scrollHeight;
-            setContentHeight(scrollHeight);
-            setShowToggle(scrollHeight > COLLAPSED_HEIGHT -5);
+            const clientHeight = el.clientHeight;
+            const actualHeight = Math.max(scrollHeight, clientHeight);
+            setContentHeight(actualHeight);
+            setShowToggle(actualHeight > COLLAPSED_HEIGHT-5);
         }
     }, [description]);
+
+    const cleanDescription = (htmlContent) => {
+        if (!htmlContent) return t("noDescription");
+        
+   
+        let cleaned = htmlContent
+            .replace(/<details[^>]*>/gi, '')
+            .replace(/<\/details>/gi, '')
+            .replace(/<summary[^>]*>/gi, '')
+            .replace(/<\/summary>/gi, '')
+            .replace(/<section[^>]*>/gi, '')
+            .replace(/<\/section>/gi, '');
+        
+        return cleaned;
+    };
 
     return (
         <>
@@ -29,13 +46,13 @@ const ProductDescription = ({ description, lang }) => {
                 className={styles.descriptionWrapper}
                 animate={{ height: expanded ? contentHeight : COLLAPSED_HEIGHT }}
                 initial={false}
-                transition={{ duration: 0.4 }}
+                transition={{ duration: 0.4, ease: "easeInOut" }}
             >
                 <div
                     ref={descriptionRef}
                     className={styles.descriptionText}
                     dangerouslySetInnerHTML={{
-                        __html: description?.[lang] || `<p>${t("noDescription")}</p>`,
+                        __html: cleanDescription(description?.[lang]),
                     }}
                 />
             </motion.div>

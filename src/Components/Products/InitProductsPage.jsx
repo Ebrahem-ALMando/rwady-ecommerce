@@ -100,11 +100,11 @@
         const productsData = products?.data || [];
         const categories = categoriesRes?.data || [];
         const brands = brandsRes?.data || [];
-
+        
         if (!productsData || products.error||categoriesRes.error||brandsRes.error)  initError=true;
 
         // const dataPromiseColor=getColors()
-
+        
         return(
             <>
                 {/*<FullScreenLoader/>*/}
@@ -115,6 +115,7 @@
                         searchParams={searchParams}
                         categoriesData={categories}
                         brandsData={brands}
+                        meta={products?.meta||{}}
                     />
                 </Suspense>
 

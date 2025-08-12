@@ -365,6 +365,7 @@ const fetchAPI = async (
         return {
             error: false,
             data: responseData?.data ?? responseData,
+            meta:responseData?.meta??{}
         };
     } catch (error) {
         if (config.showError) console.warn(error.message || "حدث خطأ في الاتصال");

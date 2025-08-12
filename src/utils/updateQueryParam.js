@@ -23,8 +23,11 @@ export const useQueryFilterUpdater = () => {
         updated.forEach(v => params.append(arrayKey, v));
 
         if (params.toString() === searchParams.toString()) return;
-
-        router.push(`/${lang}/products?${params.toString()}`);
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+        router.push(`/${lang}/products?${params.toString()}`, { scroll: false });
     };
 
     const setPriceRange = (min, max, lang) => {
@@ -43,8 +46,11 @@ export const useQueryFilterUpdater = () => {
         }
 
         if (params.toString() === searchParams.toString()) return;
-
-        router.push(`/${lang}/products?${params.toString()}`);
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+        router.push(`/${lang}/products?${params.toString()}`, { scroll: false });
     };
 
     const clearQueryParam = (key,lang) => {
@@ -53,12 +59,20 @@ export const useQueryFilterUpdater = () => {
         params.delete(arrayKey);
 
         if (params.toString() === searchParams.toString()) return;
-
-        router.push(`/${lang}/products?${params.toString()}`);
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+        router.push(`/${lang}/products?${params.toString()}`, { scroll: false });
     };
 
     const resetAllQueryParams = (lang) => {
-        router.push(`/${lang}/products`);
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+        router.push(`/${lang}/products`, { scroll: false });
+
     };
 
     return {

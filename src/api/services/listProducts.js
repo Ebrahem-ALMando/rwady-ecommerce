@@ -13,7 +13,7 @@ export const getProducts = async (queryString = "") => {
             tags: [endpoint],
         },
     });
-
+    
     return res ?? [];
 };
 
