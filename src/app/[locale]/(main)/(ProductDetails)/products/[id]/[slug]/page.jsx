@@ -12,7 +12,7 @@ import ProductSlider from "@/Components/Shared/SliderComponents/ProductSlider/Pr
 
 export async function generateStaticParams() {
     try {
-        const response = await getProducts("limit=700");
+        const response = await getProducts("limit=500");
         const products = response?.data || [];
     
         return products.map((product) => ({
@@ -130,7 +130,7 @@ export async function ProductDetailsData({id,lang }) {
             <>
                 <TitleSection
                     initTitle={title}
-                    initLink={`./${lang}/products`}
+                    initLink={`./products`}
                     can_show_more={true}
                     // show_more={`/${lang}/products`}
                     show_title={true}
