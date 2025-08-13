@@ -33,6 +33,7 @@ export async function generateMetadata({ params }) {
     try {
         const productInfo = await getProductDetails(id);
         const product=productInfo?.data
+        const images = productInfo?.data.media?.filter(m => m.type === "image").slice(0, 1) || [];
         return {
             title: `${product?.name?.[locale] || "تفاصيل المنتج"} - روادي`,
             description: product?.description?.[locale] || "صفحة عرض تفاصيل المنتج على متجر روادي.",
@@ -41,7 +42,7 @@ export async function generateMetadata({ params }) {
                 description: product?.description?.[locale] || "تفاصيل المنتج على متجر روادي",
                 images: [
                     {
-                        url: product?.main_img || "/images/Products/p5.jpeg",
+                        url: images || "/images/Products/p5.jpeg",
                         width: 800,
                         height: 600,
                         alt: product?.name?.[locale],
@@ -52,7 +53,7 @@ export async function generateMetadata({ params }) {
                 card: "summary_large_image",
                 title: product?.name?.[locale] || "تفاصيل المنتج - روادي",
                 description: product?.description?.[locale] || "تفاصيل المنتج على متجر روادي",
-                images: [product?.main_img || "/images/Products/p5.jpeg"],
+                images: [images || "/images/Products/p5.jpeg"],
             },
         };
     } catch {

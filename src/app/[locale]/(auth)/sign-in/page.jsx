@@ -28,11 +28,11 @@ export async function generateMetadata({ params }) {
                 ? "ادخل إلى حسابك الآن وابدأ بالتسوق من أفضل المتاجر الإلكترونية في العراق."
                 : "Access your account now and start shopping from Iraq’s best online store.",
 
-            url: "https://rwady.com/sign-in",
+            url: "https://rwady.com/logo.png",
             siteName: "Rwady العراق",
             images: [
                 {
-                    url: "https://rwady.com/og-signin.jpg",
+                    url: "https://rwady.com/logo.png",
                     width: 1200,
                     height: 630,
                     alt: "تسجيل الدخول إلى Rwady",
@@ -52,7 +52,7 @@ export async function generateMetadata({ params }) {
                 ? "أدخل إلى حسابك في Rwady للاستفادة من ميزات الحساب الكامل والتسوق بسهولة."
                 : "Log in to your Rwady account for full access and smooth shopping.",
 
-            images: ["https://rwady.com/twitter-signin.jpg"],
+            images: ["https://rwady.com/logo.png"],
             creator: "@rwady_iq"
         },
 
