@@ -3,14 +3,15 @@ import React, {Suspense} from "react";
 import {getHomeSections} from "@/api/services/Home/getHomeSections";
 import HomeSkeleton from "@/Components/HomePage/HomeSkeleton/HomeSkeleton";
 import EmptyStateHomePage from "@/Components/Shared/EmptyStateHomePage/EmptyStateHomePage";
-import { getLocale } from "next-intl/server";
+import { useLocale } from "next-intl";
 const Home =() =>
 {
-
+    const lang=  useLocale()
     return(
         <>
         <Suspense fallback={<HomeSkeleton />}>
             <HomePageData
+            lang={lang}
             />
             
         </Suspense>
@@ -23,9 +24,9 @@ export default Home;
 
 
 
-async function HomePageData ()
+async function HomePageData ({lang})
 {
-    const lang= await getLocale()
+
     const sectionsResponse = await getHomeSections();
 
     // console.log(sectionsResponse);
