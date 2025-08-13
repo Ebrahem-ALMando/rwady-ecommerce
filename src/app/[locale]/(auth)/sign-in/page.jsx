@@ -28,14 +28,16 @@ export async function generateMetadata({ params }) {
                 ? "ادخل إلى حسابك الآن وابدأ بالتسوق من أفضل المتاجر الإلكترونية في العراق."
                 : "Access your account now and start shopping from Iraq’s best online store.",
 
-            url: "https://rwady.com/logo.png",
+                url: isArabic 
+                ? "https://rwady.com/ar/sign-in"
+                : "https://rwady.com/en/sign-in",
             siteName: "Rwady العراق",
             images: [
                 {
                     url: "https://rwady.com/logo.png",
                     width: 1200,
                     height: 630,
-                    alt: "تسجيل الدخول إلى Rwady",
+                    alt: isArabic ? "تسجيل الدخول إلى Rwady" : "Sign In to Rwady",
                 }
             ],
             locale: isArabic ? "ar_IQ" : "en_US",
