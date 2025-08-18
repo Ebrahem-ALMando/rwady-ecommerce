@@ -49,13 +49,23 @@ const Products = ({initError, data, categoriesData, brandsData, searchParams, me
     const router = useRouter();
     const { toggleQueryParam, resetAllQueryParams, setPriceRange } = useQueryFilterUpdater();
     const [isPendingUpdate, setIsPendingUpdate] = useState(false);
-    const [loadingPage,setIsLoadingPage]=useState(false);
+    const [loadingPage, setIsLoadingPage] = useState(false);
+    const [loadingPerPage, setLoadingPerPage] = useState(false);
 
     useEffect(() => {
         if (isPendingUpdate) {
             setIsPendingUpdate(false);
         }
     }, [data]);
+
+    // إضافة useEffect لمراقبة تغييرات الـ limit
+    useEffect(() => {
+        const currentLimit = meta?.per_page || 20;
+        if (currentLimit !== (searchParams.limit ? parseInt(searchParams.limit) : 20)) {
+            setLoadingPerPage(true);
+            setTimeout(() => setLoadingPerPage(false), 300);
+        }
+    }, [meta?.per_page, searchParams.limit]);
 
     const sortedData = useMemo(() => getSortedProducts(data, sortValue, lang), [data, sortValue, lang]);
 
@@ -141,19 +151,17 @@ const Products = ({initError, data, categoriesData, brandsData, searchParams, me
     const handlePageChange = async (page) => {
         try {
             setIsLoadingPage(true);
-            
-      
+            // إزالة scroll behavior من هنا لأنه موجود في Pagination
             const params = new URLSearchParams(searchParams);
             params.set("page", page.toString());
             
-      
             router.push(`?${params.toString()}`, { scroll: false });
     
         } catch (error) {
             console.error('Error changing page:', error);
         } finally {
-       
-            setTimeout(() => setIsLoadingPage(false), 250);
+            // تقليل وقت التحميل لتحسين الأداء
+            setTimeout(() => setIsLoadingPage(false), 200);
         }
     };
 
@@ -268,7 +276,7 @@ const Products = ({initError, data, categoriesData, brandsData, searchParams, me
                         </>
                     ) : (
                         <>
-                        {loadingPage?
+                        {loadingPage || loadingPerPage ?
                         
                         <>
                        
@@ -278,7 +286,7 @@ const Products = ({initError, data, categoriesData, brandsData, searchParams, me
                         </>
                     :
                     <ProductsItem
-                    key={JSON.stringify(selectedFilters)}
+                    // key={JSON.stringify(selectedFilters)}
                     data={sortedData}
                     lang={lang}
                     t={t}
@@ -304,7 +312,7 @@ const Products = ({initError, data, categoriesData, brandsData, searchParams, me
                             showInfo={true}
                             showPerPage={true}
                             onPageChange={handlePageChange}
-                            loadingPage={loadingPage}
+                            loadingPage={loadingPage || loadingPerPage}
                             setIsLoadingPage={setIsLoadingPage}
                         />
                     </>

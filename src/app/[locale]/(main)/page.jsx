@@ -83,9 +83,11 @@ import Home from "@/Components/HomePage/Home";
 export const revalidate = 300;          
 export const dynamic = 'force-static';   
 export const fetchCache = 'force-cache';  
-export default function HomePage() {
-
+export default function HomePage({params}) {
+    const {locale}=params
     return (
-            <Home/>
+            <Home
+            lang={locale}
+            />
     );
 }

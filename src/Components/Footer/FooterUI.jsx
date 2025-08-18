@@ -14,8 +14,14 @@ import Link from "next/link";
 import Image from "next/image";
 import FloatingButton from "@/Components/FloatingButton/FloatingButton";
 import ReloadWithError from "@/Components/Shared/ReloadWithError/ReloadWithError";
-const FooterUI = ({t,settings,links,initialError}) => {
+import { useLocale, useTranslations } from "next-intl";
+import { getStaticLinks } from "./pagesLinks";
+const FooterUI = ({settings,initialError}) => {
+    const lang = useLocale();
 
+    const t = useTranslations("footer");
+
+    const links = getStaticLinks(lang, t);
     if(initialError) return <ReloadWithError/>
     return (
         <footer className={styles.footer}>

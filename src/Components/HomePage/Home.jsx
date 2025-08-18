@@ -4,9 +4,11 @@ import {getHomeSections} from "@/api/services/Home/getHomeSections";
 import HomeSkeleton from "@/Components/HomePage/HomeSkeleton/HomeSkeleton";
 import EmptyStateHomePage from "@/Components/Shared/EmptyStateHomePage/EmptyStateHomePage";
 import { useLocale } from "next-intl";
-const Home =() =>
+import { getLocale } from "next-intl/server";
+const Home =({lang}) =>
 {
-    const lang=  useLocale()
+    
+    
     return(
         <>
         <Suspense fallback={<HomeSkeleton />}>
@@ -28,7 +30,7 @@ async function HomePageData ({lang})
 {
 
     const sectionsResponse = await getHomeSections();
-
+   
     // console.log(sectionsResponse);
     
     const sections = sectionsResponse?.data && Array.isArray(sectionsResponse.data)
@@ -48,7 +50,6 @@ async function HomePageData ({lang})
             </main>
         );
     }
-
 
     return (
         <main>

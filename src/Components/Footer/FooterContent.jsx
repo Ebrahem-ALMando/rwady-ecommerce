@@ -1,16 +1,7 @@
-import styles from "./Footer.module.css";
 import { getSettingData } from "@/utils/getSettingsData";
 import { extractSettingValue } from "@/utils/extractSettingValue";
-import { getStaticLinks } from "./pagesLinks";
-import { useLocale, useTranslations } from "next-intl";
-
 import FooterUI from "./FooterUI";
-import {getLocale} from "next-intl/server";
-
 export default async function FooterContent() {
-    const lang = await getLocale();
-    const t = await (await import("next-intl/server")).getTranslations("footer");
-
     const { settingData,initialError } = await getSettingData();
     const settings = {
         snapchat_url: extractSettingValue(settingData, "social_media.snapchat"),
@@ -25,7 +16,5 @@ export default async function FooterContent() {
         client_app_ios_url: extractSettingValue(settingData, "app.ios"),
     };
 
-    const links = getStaticLinks(lang, t);
-
-    return <FooterUI t={t} settings={settings} links={links} initialError={initialError} />;
+    return <FooterUI settings={settings} initialError={initialError} />;
 }

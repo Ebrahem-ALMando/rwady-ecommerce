@@ -13,7 +13,7 @@ import EmptyState from "@/Components/Shared/EmptyState/EmptyState";
 
 
 const ProductsItem = ({data,isLoading=false,isError=false,lang,categoryPage=false,t,viewMode='grid'}) => {
-    // const [isDataFresh, setIsDataFresh] = useState(false);
+        // const [isDataFresh, setIsDataFresh] = useState(false);
     // const {data, error, isLoading, mutate} = useSWR(
     //     props.keyData,
     //     props.getData,
@@ -74,4 +74,5 @@ const ProductsItem = ({data,isLoading=false,isError=false,lang,categoryPage=fals
     );
 };
 
-export default ProductsItem;
+export default React.memo(ProductsItem);
+

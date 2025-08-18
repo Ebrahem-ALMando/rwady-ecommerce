@@ -281,3 +281,49 @@
         padding: 8px 6px;
     }
 }
+/* 
+.items {
+    position: relative;
+  }
+  
+
+  .overlay {
+    position: absolute;
+    inset: 0;
+  
+
+    display: grid;
+    grid-template-columns: inherit;
+    grid-auto-rows: inherit;
+    gap: inherit;
+    padding: inherit;
+  
+
+    background: rgba(255, 255, 255, 0.6);
+  
+
+    pointer-events: none;
+  
+
+    opacity: 1;
+    transition: opacity 120ms ease;
+  }
+  
+
+  .overlayHidden {
+    opacity: 0;
+  }
+  
+
+  .items.listView .overlay {
+    grid-template-columns: inherit; 
+  }
+  
+
+  @media (prefers-reduced-motion: reduce) {
+    .overlay * {
+      animation-duration: 1.2s !important;
+      animation-iteration-count: 1 !important;
+    }
+  }
+   */

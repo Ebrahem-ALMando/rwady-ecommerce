@@ -62,6 +62,11 @@ const Pagination = ({
     const handlePageChange = useCallback((page) => {
         if (page < 1 || page > lastPage || page === currentPage || loadingPage) return;
         
+        // تحسين scroll behavior
+        setTimeout(() => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }, 50);
+        
         if (onPageChange) {
             onPageChange(page);
         } else {
@@ -73,14 +78,16 @@ const Pagination = ({
 
     const handlePerPageChange = useCallback((newPerPage) => {
         if (loadingPage) return;
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
+         requestAnimationFrame(() => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
         });
-        const params = new URLSearchParams(searchParams);
-        params.set("limit", newPerPage.toString());
-        params.set("page", "1");
+        // تحسين scroll behavior لتجنب الـ lag
+        setTimeout(() => {
+            const params = new URLSearchParams(searchParams);
+            params.set("limit", newPerPage.toString());
+            params.set("page", "1");
         router.push(`?${params.toString()}`, { scroll: false });
+    }, 250);
     }, [router, searchParams, loadingPage]);
 
     if (lastPage <= 1) return null;
@@ -163,8 +170,10 @@ const Pagination = ({
                     >
                         <option value={10}>10</option>
                         <option value={20}>20</option>
-                        <option value={50}>50</option>
-                        <option value={100}>100</option>
+                        <option value={30}>30</option>
+
+                        {/* <option value={50}>50</option>
+                        <option value={100}>100</option> */}
                     </select>
                 </div>
             )}
