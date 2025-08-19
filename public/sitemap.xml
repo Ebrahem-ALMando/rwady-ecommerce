@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    
+    <!-- Homepage -->
+    <url>
+        <loc>https://rwady.com/</loc>
+        <lastmod>2024-01-15</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://rwady.com/ar"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://rwady.com/en"/>
+    </url>
+    
+    <!-- Products -->
+    <url>
+        <loc>https://rwady.com/products</loc>
+        <lastmod>2024-01-15</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://rwady.com/ar/products"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://rwady.com/en/products"/>
+    </url>
+    
+    <!-- About Us -->
+    <url>
+        <loc>https://rwady.com/about-us</loc>
+        <lastmod>2024-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://rwady.com/ar/about-us"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://rwady.com/en/about-us"/>
+    </url>
+    
+    <!-- Contact Us -->
+    <url>
+        <loc>https://rwady.com/contact-us</loc>
+        <lastmod>2024-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://rwady.com/ar/contact-us"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://rwady.com/en/contact-us"/>
+    </url>
+    
+    <!-- FAQ -->
+    <url>
+        <loc>https://rwady.com/faq</loc>
+        <lastmod>2024-01-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://rwady.com/ar/faq"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://rwady.com/en/faq"/>
+    </url>
+    
+    <!-- Terms and Conditions -->
+    <url>
+        <loc>https://rwady.com/terms-and-conditions</loc>
+        <lastmod>2024-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://rwady.com/ar/terms-and-conditions"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://rwady.com/en/terms-and-conditions"/>
+    </url>
+    
+    <!-- Return Policy -->
+    <url>
+        <loc>https://rwady.com/return-policy</loc>
+        <lastmod>2024-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://rwady.com/ar/return-policy"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://rwady.com/en/return-policy"/>
+    </url>
+    
+    <!-- Shipment Policies -->
+    <url>
+        <loc>https://rwady.com/shipment-policies</loc>
+        <lastmod>2024-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://rwady.com/ar/shipment-policies"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://rwady.com/en/shipment-policies"/>
+    </url>
+    
+    <!-- Promotions -->
+    <url>
+        <loc>https://rwady.com/promotions</loc>
+        <lastmod>2024-01-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://rwady.com/ar/promotions"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://rwady.com/en/promotions"/>
+    </url>
+    
+    <!-- Profile (lower priority as it's user-specific) -->
+    <url>
+        <loc>https://rwady.com/profile</loc>
+        <lastmod>2024-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.3</priority>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://rwady.com/ar/profile"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://rwady.com/en/profile"/>
+    </url>
+    
+    <!-- Orders (lower priority as it's user-specific) -->
+    <url>
+        <loc>https://rwady.com/orders</loc>
+        <lastmod>2024-01-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.3</priority>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://rwady.com/ar/orders"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://rwady.com/en/orders"/>
+    </url>
+    
+</urlset>

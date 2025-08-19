@@ -81,7 +81,7 @@ const Pagination = ({
          requestAnimationFrame(() => {
             window.scrollTo({ top: 0, behavior: "smooth" });
         });
-        // تحسين scroll behavior لتجنب الـ lag
+
         setTimeout(() => {
             const params = new URLSearchParams(searchParams);
             params.set("limit", newPerPage.toString());

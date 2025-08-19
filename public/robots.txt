@@ -1,0 +1,29 @@
+# Robots.txt for Rwady E-commerce
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_next/
+Disallow: /check-api-time/
+Disallow: /favicon.ico
+
+# Allow important pages
+Allow: /products
+Allow: /categories
+Allow: /brands
+Allow: /about-us
+Allow: /contact-us
+Allow: /faq
+Allow: /terms-and-conditions
+Allow: /return-policy
+Allow: /shipment-policies
+Allow: /promotions
+
+# Sitemap location
+Sitemap: https://rwady.com/sitemap.xml
+
+# Crawl delay (optional - be respectful to server)
+Crawl-delay: 1
