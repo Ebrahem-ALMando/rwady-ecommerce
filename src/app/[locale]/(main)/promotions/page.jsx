@@ -1,7 +1,9 @@
 import { getTranslations } from "next-intl/server";
-import Promotions from "@/Components/Promotions/Promotions";
+import PromotionsWrapper from "@/Components/Promotions/PromotionsWrapper";
 
-export async function generateMetadata({ params: { locale } }) {
+
+export async function generateMetadata({ params }) {
+    const { locale } = await params;
     const t = await getTranslations({ locale, namespace: "promotions" });
 
     return {
@@ -31,5 +33,8 @@ export async function generateMetadata({ params: { locale } }) {
 }
 
 export default function PromotionsPage() {
-    return <Promotions />;
-} 
+    return (
+            <PromotionsWrapper />
+    );
+}
+

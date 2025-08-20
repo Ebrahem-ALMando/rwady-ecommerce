@@ -92,7 +92,7 @@ const ProductSlider = ({ initialData, initialError }) => {
 
 
     return (
-        <div style={{ margin: "auto auto 2rem auto", width: "95%", paddingTop: "20px" }}>
+        <div style={{ margin: "auto auto 2rem auto", width: "96%", paddingTop: "20px" }}>
             <AnimatePresence>
                 {isClient ?
                     <motion.div variants={containerVariants} initial="hidden" animate="visible">

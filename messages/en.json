@@ -110,11 +110,12 @@
     "links": {
       "home": "home",
       "categories": "Categories",
-      "offers": "Offers / Discounts",
+      "promotions_offers": "Promotions / Offers",
       "brands": "Brands",
       "groups": "Collections",
       "topSelling": "Top Selling",
-      "featured": "Featured"
+      "featured": "Featured",
+      "promotions": "Promotions"
     }
   },
   "footer": {
@@ -186,7 +187,9 @@
   {
     "home": "Home",
     "all_products": "All Products",
-    "product_details": "Product Details"
+    "product_details": "Product Details",
+    "promotions": "Promotions",
+    "promotion_details": "Promotion Details"
   },
   "ProductDetails": {
     "descriptionTitle": "Product Description",
@@ -641,6 +644,10 @@
     "noPromotionsSubtitle": "Check this page later for the latest offers and discounts",
     "category": "Category",
     "product": "Product",
+    "shipping": "Shipping",
+    "cart_total": "Cart Total",
+    "fixed": "Fixed",
+    "percentage": "Percentage",
     "active": "Active",
     "inactive": "Inactive",
     "discount": "Discount",
@@ -655,7 +662,26 @@
     "activePromotions": "Active Promotions",
     "categoryPromotions": "Category Promotions",
     "productPromotions": "Product Promotions",
-    "viewDetails": "View Details"
+    "shippingPromotions": "Shipping Promotions",
+    "cartTotalPromotions": "Cart Total Promotions",
+    "viewDetails": "View Details",
+    "feature1": "Regular and seasonal offers",
+    "feature2": "Exclusive product discounts",
+    "feature3": "Special shipping offers",
+    "exploreProducts": "Explore Products Now",
+    "promotionType": "Promotion Type",
+    "discountType": "Discount Type",
+    "discountValue": "Discount Value",
+    "minimumCartTotal": "Minimum Cart Total",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "minCartTotal": "Minimum Cart Total",
+    "untitled": "Untitled Promotion",
+    "errorLoading": "Error Loading Promotion",
+    "errorMessage": "An error occurred while loading promotion details. Please try again.",
+    "loading": "Loading...",
+    "orders": "Orders",
+    "available": "Available"
   }
 
 }

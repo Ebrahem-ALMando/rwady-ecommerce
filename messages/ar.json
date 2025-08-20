@@ -112,11 +112,12 @@
     "links": {
       "home": "الرئيسية",
       "categories": "الأقسام",
-      "offers": "العروض / التخفيضات",
+      "promotions_offers": "العروض / الحملات الترويجية",
       "brands": "الماركات",
       "groups": "المجموعات",
       "topSelling": "الأكثر مبيعاً",
-      "featured": "المميزة"
+      "featured": "المميزة",
+      "promotions": "الحملات الترويجية"
     }
   },
   "footer": {
@@ -188,7 +189,9 @@
   {
     "home": "الرئيسية",
   "all_products": "كل المنتجات",
-  "product_details": "تفاصيل المنتج"
+  "product_details": "تفاصيل المنتج",
+  "promotions": "الحملات الترويجية",
+  "promotion_details": "تفاصيل الحملة"
   },
     "ProductDetails": {
       "descriptionTitle": "وصف المنتج",
@@ -642,6 +645,10 @@
     "noPromotionsSubtitle": "تحقق من هذه الصفحة لاحقاً للحصول على أحدث العروض والخصومات",
     "category": "فئة",
     "product": "منتج",
+    "shipping": "الشحن",
+    "cart_total": "إجمالي قيمة السلة",
+    "fixed": "ثابت",
+    "percentage": "نسبة مئوية",
     "active": "نشط",
     "inactive": "غير نشط",
     "discount": "خصم",
@@ -656,7 +663,26 @@
     "activePromotions": "الحملات النشطة",
     "categoryPromotions": "حملات الفئات",
     "productPromotions": "حملات المنتجات",
-    "viewDetails": "عرض التفاصيل"
+    "shippingPromotions": "حملات الشحن",
+    "cartTotalPromotions": "حملات إجمالي السلة",
+    "viewDetails": "عرض التفاصيل",
+    "feature1": "عروض دورية وموسمية",
+    "feature2": "خصومات حصرية على المنتجات",
+    "feature3": "عروض خاصة على الشحن",
+    "exploreProducts": "تصفح المنتجات الآن",
+    "promotionType": "نوع الحملة",
+    "discountType": "نوع الخصم",
+    "discountValue": "قيمة الخصم",
+    "minimumCartTotal": "الحد الأدنى للسلة",
+    "startDate": "تاريخ البداية",
+    "endDate": "تاريخ الانتهاء",
+    "minCartTotal": "الحد الأدنى للسلة",
+    "untitled": "حملة بدون عنوان",
+    "errorLoading": "خطأ في تحميل الحملة",
+    "errorMessage": "حدث خطأ أثناء تحميل تفاصيل الحملة. يرجى المحاولة مرة أخرى.",
+    "loading": "جاري التحميل...",
+    "orders": "طلبات",
+    "available": "متاح"
   }
 
 

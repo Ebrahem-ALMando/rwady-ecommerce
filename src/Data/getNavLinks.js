@@ -1,8 +1,9 @@
 export const getNavLinks = (lang) => [
     { href: `/${lang}/section/categories`, label: "categories" },
-    { href: `/${lang}/collections/offers-list`, label: "offers" },
+    // { href: `/${lang}/collections/offers-list`, label: "offers" },
+    { href: `/${lang}/promotions`, label: "promotions_offers" },
     { href: `/${lang}/section/brands`, label: "brands" },
     // { href: `/${lang}/#`, label: "groups" },
-    { href: `/${lang}/collections/top-selling`, label: "topSelling" },
-    { href: `/${lang}/collections/recommend-list`, label: "featured" }
+    { href: `/${lang}/products?most_sold=1`, label: "topSelling" },
+    { href: `/${lang}/products?is_recommended=1`, label: "featured" },
 ];

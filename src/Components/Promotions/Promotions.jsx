@@ -1,7 +1,4 @@
 "use client"
-import { useState, useEffect } from "react";
-import { useParams } from "next/navigation";
-import { getPromotions } from "@/api/services/promotions";
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { 
@@ -20,57 +17,44 @@ import {
     Target,
     Package,
     FolderOpen,
-    CheckCircle
+    CheckCircle,
+    Truck,
+    Package2
 } from "lucide-react";
-import Error from "@/Components/Shared/Error/Error";
-import PromotionsSkeleton from "./PromotionsSkeleton";
+
 import styles from "./Promotions.module.css";
+import { formatDate } from "@/utils/formatDate";
+import ReloadWithError from "../Shared/ReloadWithError/ReloadWithError";
+import Pagination from "../Shared/Pagination";
+import PromotionsEmptyState from "./PromotionsEmptyState";
+import Link from "next/link";
+import { slugify } from "@/utils/slugify";
+import { useLocale } from "next-intl";
+    
 
-export default function Promotions() {
-    const { lang } = useParams();
+export default function Promotions({promotions, error, meta}) {
+    const lang = useLocale();
     const t = useTranslations("promotions");
-    const [promotions, setPromotions] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-
-    const fetchPromotions = async () => {
-        try {
-            setLoading(true);
-            setError(null);
-            const response = await getPromotions();
-            
-            if (response?.data) {
-                setPromotions(response.data);
-            } else {
-                setPromotions([]);
-            }
-        } catch (err) {
-            setError(err.message || "حدث خطأ في تحميل الحملات الترويجية");
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    useEffect(() => {
-        fetchPromotions();
-    }, []);
-
-    const formatDate = (dateString) => {
-        if (!dateString) return null;
-        const date = new Date(dateString);
-        return date.toLocaleDateString(lang === "ar" ? "ar-SA" : "en-US", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-        });
-    };
-
     const getDiscountIcon = (discountType) => {
         return discountType === "percentage" ? <Percent size={20} /> : <DollarSign size={20} />;
     };
 
+
+
+
     const getTypeIcon = (type) => {
-        return type === "category" ? <Tag size={20} /> : <ShoppingCart size={20} />;
+        switch (type) {
+            case "category":
+                return <Tag size={20} />;
+            case "product":
+                return <Package2 size={20} />;
+            case "shipping":
+                return <Truck size={20} />;
+            case "cart_total":
+                return <ShoppingCart size={20} />;
+            default:
+                return <Tag size={20} />;
+        }
     };
 
     const getStatusColor = (status) => {
@@ -88,32 +72,32 @@ export default function Promotions() {
     };
 
     const handlePromotionDetails = (promotion) => {
-        // يمكن إضافة منطق الانتقال لصفحة تفاصيل الحملة
         console.log("تفاصيل الحملة:", promotion);
-        // router.push(`/${lang}/promotions/${promotion.id}`);
     };
 
-    if (loading) {
-        return <PromotionsSkeleton />;
-    }
+    // const handlePageChange = async (page) => {
+    //     try {
+    //         const params = new URLSearchParams(window.location.search);
+    //         params.set("page", page.toString());
+    //         window.location.href = `?${params.toString()}`;
+    //     } catch (error) {
+    //         console.error('Error changing page:', error);
+    //     }
+    // };
 
-    if (error) {
-        return (
-            <Error 
-                onRetry={fetchPromotions}
-                message={error}
-            />
-        );
-    }
+   
+    if (error)  return  <ReloadWithError />
+
+    if (promotions.length === 0) return <ReloadWithError message="لا يوجد حملات ترويجية" />
 
     return (
         <div className={styles.container}>
             {/* Hero Section */}
             <motion.div 
                 className={styles.hero}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0.8, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
+                transition={{ duration: 0.2 }}
             >
                 <div className={styles.heroContent}>
                     <div className={styles.heroIcon}>
@@ -133,9 +117,9 @@ export default function Promotions() {
             </motion.div>
             <motion.div 
                 className={styles.statsSection}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0.8, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
+                transition={{ duration: 0.2, delay: 0.4 }}
             >
                 <div className={styles.statsGrid}>
                     <div className={styles.statCard} style={{ backgroundColor: "#ecfdf5" }}>
@@ -164,12 +148,30 @@ export default function Promotions() {
                         </div>
                     </div>
                     <div className={styles.statCard} style={{ backgroundColor: "#f5f3ff" }}>
-                        <Package size={32} className={styles.statIcon} style={{ color: "#7c3aed" }} />
+                        <Package2 size={32} className={styles.statIcon} style={{ color: "#7c3aed" }} />
                         <div className={styles.statContent}>
                             <span className={styles.statNumber}>
                                 {promotions.filter(p => p.type === "product").length}
                             </span>
                             <span className={styles.statLabel}>{t("productPromotions")}</span>
+                        </div>
+                    </div>
+                    <div className={styles.statCard} style={{ backgroundColor: "#fef3c7" }}>
+                        <Truck size={32} className={styles.statIcon} style={{ color: "#f59e0b" }} />
+                        <div className={styles.statContent}>
+                            <span className={styles.statNumber}>
+                                {promotions.filter(p => p.type === "shipping").length}
+                            </span>
+                            <span className={styles.statLabel}>{t("shippingPromotions")}</span>
+                        </div>
+                    </div>
+                    <div className={styles.statCard} style={{ backgroundColor: "#dbeafe" }}>
+                        <ShoppingCart size={32} className={styles.statIcon} style={{ color: "#1d4ed8" }} />
+                        <div className={styles.statContent}>
+                            <span className={styles.statNumber}>
+                                {promotions.filter(p => p.type === "cart_total").length}
+                            </span>
+                            <span className={styles.statLabel}>{t("cartTotalPromotions")}</span>
                         </div>
                     </div>
                 </div>
@@ -179,9 +181,9 @@ export default function Promotions() {
                 {promotions.length > 0 && (
                     <motion.div 
                         className={styles.sectionHeader}
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={{ opacity: 0.8, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.2 }}
+                        transition={{ duration: 0.2, delay: 0.2 }}
                     >
                         <h2 className={styles.sectionTitle}>
                             {t("availablePromotions")}
@@ -193,20 +195,7 @@ export default function Promotions() {
                 )}
 
                 {promotions.length === 0 ? (
-                    <motion.div 
-                        className={styles.emptyState}
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.5, delay: 0.3 }}
-                    >
-                        <Gift size={64} className={styles.emptyIcon} />
-                        <h3 className={styles.emptyTitle}>
-                            {t("noPromotions")}
-                        </h3>
-                        <p className={styles.emptySubtitle}>
-                            {t("noPromotionsSubtitle")}
-                        </p>
-                    </motion.div>
+                    <PromotionsEmptyState />
                 ) : (
                     <div className={styles.promotionsGrid}>
                         {promotions.map((promotion, index) => (
@@ -217,10 +206,10 @@ export default function Promotions() {
                                 } ${
                                     isUpcoming(promotion.start_at) ? styles.upcoming : ""
                                 }`}
-                                initial={{ opacity: 0, y: 20 }}
+                                initial={{ opacity: 0.8, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ 
-                                    duration: 0.5, 
+                                    duration: 0.2, 
                                     delay: 0.1 * index 
                                 }}
                                 whileHover={{ 
@@ -231,7 +220,7 @@ export default function Promotions() {
                                 {/* Type Badge */}
                                 <div className={styles.typeBadge}>
                                     {getTypeIcon(promotion.type)}
-                                    <span>{promotion.type === "category" ? t("category") : t("product")}</span>
+                                    <span>{t(promotion.type)}</span>
                                 </div>
 
                                 {/* Card Header */}
@@ -256,7 +245,7 @@ export default function Promotions() {
                                         <div className={styles.discountDetails}>
                                             <span className={styles.discountValue}>
                                                 {promotion.discount_value}
-                                                {promotion.discount_type === "percentage" ? "%" : " د.ع"}
+                                                {promotion.discount_type === "percentage" ? "%" : " IQD "}
                                             </span>
                                             <span className={styles.discountLabel}>
                                                 {promotion.discount_type === "percentage" ? t("discount") : t("fixedDiscount")}
@@ -296,15 +285,13 @@ export default function Promotions() {
                                                 </div>
                                             )}
                                         </div>
-                                        
-                                        <button 
+                                            <Link prefetch={true} href={`/${lang}/promotions/${promotion.id}/${slugify(promotion.title?.[lang] || "")}`}
                                             className={styles.detailsButton}
-                                            onClick={() => handlePromotionDetails(promotion)}
                                         >
                                             <Eye size={16} />
                                             <span>{t("viewDetails")}</span>
                                             <ArrowRight size={16} />
-                                        </button>
+                                        </Link>
                                     </div>
                                 </div>
 
@@ -325,8 +312,24 @@ export default function Promotions() {
                 )}
             </div>
 
-            {/* Stats Section */}
-         
+            {/* Pagination */}
+            {meta && meta.last_page > 1 && (
+                <motion.div 
+                    initial={{ opacity: 0.8, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.2, delay: 0.8 }}
+                >
+                    <Pagination
+                        currentPage={meta.current_page}
+                        lastPage={meta.last_page}
+                        perPage={meta.per_page}
+                        total={meta.total}
+                        showInfo={true}
+                        showPerPage={true}
+                        onPageChange={handlePageChange}
+                    />
+                </motion.div>
+            )}
         </div>
     );
 } 

@@ -37,3 +37,15 @@
     color: #666666;
     font-weight: 400;
 }
+
+@media (max-width: 768px) {
+    .link{
+        font-size: 16px;
+    }
+    .current{
+        font-size: 14px;
+    }
+        .separator{
+            font-size: 14px;
+        }
+}

@@ -378,7 +378,7 @@ import CartActionButton from "@/Components/Shared/Buttons/CartActionButton/CartA
 import FavouriteToggleButton from "@/Components/Shared/Buttons/FavouriteToggleButton/FavouriteToggleButton";
 import useFavourites from "@/hooks/useFavourites";
 import SafeImage from "@/Components/Shared/SafeImage/SafeImage";
-
+import { Sparkles } from 'lucide-react';
 const settings = {
     ...sliderSetting,
     infinite: false,
@@ -562,6 +562,21 @@ const ProductCardSlider = ({ product, lang, setIsDraggingInsideCard }) => {
                     </div>
                 )}
 
+                {/* Promotion Badge */}
+                {product.promotion && product.promotion.status === "active" && (
+                    <div className={`absolute ${product.discount_percentage_text?.[lang] && isDiscountValid && time!=="NaNH : NaN M : NaN S" ? "top-[55px]" : "top-3"} left-0 text-white font-bold ${styles.promotionBadge}`}>
+                        <span className={styles.promotionIcon}>
+                            <Sparkles size={16} />
+                        </span>
+                        <span className={styles.promotionText}>
+                            {product.promotion.discount_type === "percentage" 
+                                ? `${product.promotion.discount_value}%`
+                                : `${product.promotion.discount_value} IQD`
+                            }
+                        </span>
+                    </div>
+                )}
+
 
                 {discountValue > 0 && isDiscountValid && time!=="NaNH : NaN M : NaN S"&&(
                     <div className={`absolute top-[-17px] left-1/2 -translate-x-1/2 z-50 ${styles.timeBox}`}>
@@ -705,9 +720,9 @@ const ProductCardSlider = ({ product, lang, setIsDraggingInsideCard }) => {
                         </h3>
 
                         <p className={styles.price}>
-                            {product.price_after_discount || product.price} - IQD
+                            {product.final_price_after_promotion || product.price_after_discount || product.price} - IQD
                             <span className={styles.priceText}>&nbsp;</span>
-                            {product.price_after_discount && (
+                            {(product.final_price_after_promotion || product.price_after_discount) && (
                                 <del className={styles.oldPrice}>{product.price} - IQD</del>
                             )}
                         </p>
@@ -718,7 +733,7 @@ const ProductCardSlider = ({ product, lang, setIsDraggingInsideCard }) => {
                               <span className={styles.availableIcon}>
                                 <img src={'/images/img_6.png'} alt="available"/>
                               </span>
-                                {t("pay_monthly", { price: Math.round((product.price_after_discount || product.price) / 10) })
+                                {t("pay_monthly", { price: Math.round((product.final_price_after_promotion || product.price_after_discount || product.price) / 10) })
                             }
                             </p>
                         {/* )} */}
