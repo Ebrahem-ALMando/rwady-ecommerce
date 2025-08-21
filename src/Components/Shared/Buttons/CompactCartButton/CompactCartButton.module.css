@@ -363,120 +363,6 @@
     transform: rotate(360deg);
   }
 }
-
-/* Desktop Layout - Above 775px */
-@media (min-width: 776px) {
-    .defaultContainer,
-    .compactContainer,
-    .minimalButton {
-    flex-direction: column;
-    }
-  .buttonWrapper {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  
-  .quantityWrapper {
-    display: flex !important;
-  }
-  
-  .quantityWrapperMobile {
-    display: none !important;
-  }
-  
-  .defaultContainer {
-    flex-direction: row;
-    align-items: center;
-  }
-}
-
-/* Mobile Layout - 775px and below */
-@media (max-width: 775px) {
-  .buttonWrapper {
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-  }
-  
-  .quantityWrapper {
-    display: none !important;
-  }
-  
-  .quantityWrapperMobile {
-    display: flex !important;
-  }
-  
-  .defaultContainer {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .defaultButton {
-    padding: 0.625rem 0.875rem;
-    min-width: 100px;
-    font-size: 0.75rem;
-  }
-  
-  .compactButton {
-    padding: 0.375rem 0.625rem;
-    min-width: 70px;
-    font-size: 0.6875rem;
-  }
-  
-
-  
-  .quantityButton,
-  .quantityBtn {
-    width: 24px;
-    height: 24px;
-  }
-  
-  .quantityValue,
-  .quantityDisplay {
-    min-width: 28px;
-    height: 24px;
-    font-size: 0.75rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .defaultButton {
-    padding: 0.5rem 0.75rem;
-    min-width: 90px;
-    gap: 0.375rem;
-  }
-  
-  .compactButton {
-    padding: 0.25rem 0.5rem;
-    min-width: 65px;
-  }
-  
-
-  
-  .quantityWrapper,
-  .quantityControls {
-    gap: 0.25rem;
-    padding: 0.25rem;
-  }
-}
-
-/* RTL Support */
-[dir="rtl"] .defaultButton,
-[dir="rtl"] .compactButton {
-  flex-direction: row-reverse;
-}
-
-[dir="rtl"] .buttonContent {
-  flex-direction: row-reverse;
-}
-
-[dir="rtl"] .syncIndicator {
-  right: auto;
-  left: -2px;
-}
-
-/* Animation Enhancements */
 .defaultButton,
 .compactButton,
 .minimalButton {
@@ -513,3 +399,91 @@
     border-width: 2px;
   }
 }
+
+/* Desktop Layout - Above 775px */
+
+
+/* Mobile Layout - 775px and below */
+@media (max-width: 776px) {
+  .buttonWrapper {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .quantityWrapper {
+    display: none !important;
+  }
+  
+  .quantityWrapperMobile {
+    display: flex !important;
+  }
+  
+  .defaultContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .defaultButton {
+    padding: 0.625rem 0.875rem;
+    min-width: 100px;
+    font-size: 0.75rem;
+  }
+  
+  .compactButton {
+    padding: 0.375rem 0.625rem;
+    min-width: 70px;
+    font-size: 0.6875rem;
+  }
+  
+  .quantityButton,
+  .quantityBtn {
+    width: 22px;
+    height: 22px;
+  }
+  
+  .quantityValue,
+  .quantityDisplay {
+    min-width: 28px;
+    height: 22px;
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .defaultButton {
+    padding: 0.5rem 0.75rem;
+    min-width: 90px;
+    gap: 0.375rem;
+  }
+  
+  .compactButton {
+    padding: 0.25rem 0.5rem;
+    min-width: 65px;
+  }
+  
+
+  
+  .quantityWrapper,
+  .quantityControls {
+    gap: 0.25rem;
+    padding: 0.25rem;
+  }
+}
+
+/* RTL Support */
+/* [dir="rtl"] .defaultButton,
+[dir="rtl"] .compactButton {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .buttonContent {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .syncIndicator {
+  right: auto;
+  left: -2px;
+} */
+
+/* Animation Enhancements */
