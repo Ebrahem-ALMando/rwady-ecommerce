@@ -14,6 +14,22 @@
     justify-content: space-between;
 }
 
+/* Cart Button Wrapper */
+.cartButtonWrapper {
+    padding: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid #f3f4f6;
+    background: linear-gradient(to bottom, #ffffff 0%, #f9fafb 100%);
+    min-height: 62px;
+}
+
+.compactCartBtn {
+    width: 100%;
+    max-width: 200px;
+}
+
 .card:hover {
     box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
     transform: translateY(-2px);
@@ -491,6 +507,12 @@ html[dir="rtl"] .infoCard {
     background: #b60909;
 }
 
+.mobileCartButton {
+    display: none;
+}
+.desktopCartButton {
+    display: block;
+}
 /* Large screens */
 @media (min-width: 1200px) {
     .card {
@@ -547,6 +569,16 @@ html[dir="rtl"] .infoCard {
 
 /* Tablet screens */
 @media (max-width: 775px) {
+    .desktopCartButton {
+        display: none;
+    }
+    .mobileCartButton {
+        display: block;
+    }
+    .cartButtonWrapper {
+        padding: 0.5rem !important;
+        min-height: 52px !important;
+    }
     .cardDiv {
         padding: 20px 5px !important;
     }
@@ -1031,5 +1063,37 @@ html[dir="rtl"] .infoCard {
     text-overflow: ellipsis !important;
     max-width: 100%;
     display: block;
+}
+
+/* Mobile responsive styles for cart button */
+@media (max-width: 768px) {
+    .cartButtonWrapper {
+        padding: 0.5rem;
+        min-height: 52px;
+    }
+    
+    .compactCartBtn {
+        max-width: 180px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cartButtonWrapper {
+        padding: 0.375rem;
+    }
+    
+    .compactCartBtn {
+        max-width: 160px;
+    }
+}
+
+@media (max-width: 360px) {
+    .cartButtonWrapper {
+        padding: 0.25rem;
+    }
+    
+    .compactCartBtn {
+        max-width: 130px;
+    }
 }
 

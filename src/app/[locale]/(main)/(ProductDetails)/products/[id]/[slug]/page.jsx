@@ -167,7 +167,7 @@ const LOCALES = ["ar", "en"];
 export async function generateStaticParams() {
   try {
 
-    const response = await getProducts("limit=70");
+    const response = await getProducts("limit=10");
     const products = response?.data || [];
 
     const params = [];

@@ -1,12 +1,62 @@
 'use client';
 
 import { motion } from "framer-motion";
+import { checkAuthClient } from "@/utils/checkAuthClient";
+import { toast } from "react-hot-toast";
+import CustomToast from "@/Components/Shared/CustomToast/CustomToast";
+import { useLocale, useTranslations } from "next-intl";
+import Link from "next/link";
 
-const FavouriteToggleButton = ({ liked, likedCount, onToggle }) => {
+    const FavouriteToggleButton = ({ liked, likedCount=0, onToggle ,showcount=true
+        ,className=null,t=null,showtext=false,divClassName=null}) => {
+
+ const lang=useLocale()
+const tFavourite=useTranslations('favouriteToggleButton')
+
+const checkIsLogin = () => {
+    if (!checkAuthClient()) {
+        toast.custom(
+            <CustomToast
+                type="error"
+                title={tFavourite('login')}
+                message={
+                    <>
+                        {tFavourite('loginMessage')}
+                        <br/>
+                        <Link href={`/${lang}/sign-in`} className="text-blue-600 underline font-semibold">
+                            {tFavourite('loginLink')}
+                        </Link>
+                        .
+                    </>
+                }
+            />,
+            {
+                position: "top-center",
+                duration: 3000,
+            }
+        );
+        return false;
+    }
+    return true;
+};
+const handleToggle = () => {
+    if (!checkIsLogin()) return;
+    onToggle();
+}
     return (
-        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <p>({likedCount})</p>
-            <motion.button onClick={onToggle} whileTap={{ scale: 1.2 }} transition={{ type: "spring", stiffness: 300 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}
+        className={divClassName}
+        >
+            {showcount&&<p>({likedCount})</p>}
+            <motion.button
+             className={className}
+             onClick={handleToggle}
+             whileTap={{ scale: 1.2 }}
+             transition={{ type: "spring", stiffness: 300 }}
+             aria-label={liked ? t('inFavourites') : t('addToFavourites')}
+             aria-pressed={liked}
+          
+             >
                 <motion.svg
                     width="24"
                     height="24"
@@ -28,6 +78,9 @@ const FavouriteToggleButton = ({ liked, likedCount, onToggle }) => {
                         strokeWidth="1"
                     />
                 </motion.svg>
+                {showtext&&<span style={{marginRight: "0.5rem"}}>
+                {liked ? t('inFavourites') : t('addToFavourites')}
+                </span>}
             </motion.button>
         </div>
     );

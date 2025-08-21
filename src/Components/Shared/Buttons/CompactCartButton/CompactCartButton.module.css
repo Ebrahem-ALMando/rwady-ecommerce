@@ -1,0 +1,515 @@
+/* Base Styles */
+.defaultContainer,
+.compactContainer,
+.minimalButton {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  flex-direction: row !important;
+}
+
+/* Icon Wrapper for animations */
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+/* Button Wrapper for desktop horizontal layout */
+.buttonWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+/* Button Sizes */
+.small {
+  font-size: 0.75rem;
+}
+
+.medium {
+  font-size: 0.875rem;
+}
+
+.large {
+  font-size: 1rem;
+}
+
+/* Default Button */
+.defaultButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  background: white;
+  color: #374151;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  min-width: 120px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transform: scale(1);
+}
+
+.defaultButton:hover:not(:disabled) {
+  transform: scale(1.05) translateY(-1px);
+}
+
+.defaultButton:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.defaultButton.animating {
+  transform: scale(0.98);
+}
+
+.defaultButton:hover:not(:disabled):not(.animating) {
+  border-color: #0741AD;
+  color: #0741AD;
+  box-shadow: 0 4px 12px rgba(7, 65, 173, 0.15);
+}
+
+.defaultButton.active {
+  background: linear-gradient(135deg, #0741AD 0%, #1d4ed8 100%);
+  border-color: #0741AD;
+  color: white;
+  box-shadow: 0 4px 16px rgba(7, 65, 173, 0.3);
+}
+
+.defaultButton.active:hover {
+  background: linear-gradient(135deg, #1d4ed8 0%, #0741AD 100%);
+  box-shadow: 0 6px 20px rgba(7, 65, 173, 0.4);
+}
+
+.defaultButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Button Content */
+.buttonIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  transform: scale(1);
+}
+
+.buttonIcon.iconActive {
+  transform: scale(1.1);
+}
+
+.buttonIcon.animating {
+  animation: rotateIcon 0.5s ease;
+}
+
+@keyframes rotateIcon {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.1); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+.buttonText {
+  white-space: nowrap;
+  transition: opacity 0.3s ease;
+}
+
+/* Compact Button */
+.compactButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: white;
+  color: #374151;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  font-size: 0.75rem;
+  min-width: 80px;
+  transform: scale(1);
+}
+
+.compactButton:hover:not(:disabled) {
+  transform: scale(1.02);
+}
+
+.compactButton:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.compactButton.animating {
+  transform: scale(0.95);
+}
+
+.compactButton:hover {
+  border-color: #0741AD;
+  color: #0741AD;
+  background: #f8fafc;
+}
+
+.compactButton.active {
+  background: #0741AD;
+  border-color: #0741AD;
+  color: white;
+}
+
+.buttonContent {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* Minimal Button */
+.minimalButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid #e5e7eb;
+  border-radius: 50%;
+  background: white;
+  color: #6b7280;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transform: scale(1);
+}
+
+.minimalButton:hover:not(:disabled) {
+  transform: scale(1.05);
+}
+
+.minimalButton:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.minimalButton.animating {
+  transform: scale(0.9);
+}
+
+.minimalButton:hover {
+  border-color: #0741AD;
+  color: #0741AD;
+  box-shadow: 0 2px 8px rgba(7, 65, 173, 0.15);
+}
+
+.minimalButton.active {
+  background: #0741AD;
+  border-color: #0741AD;
+  color: white;
+  box-shadow: 0 2px 12px rgba(7, 65, 173, 0.25);
+}
+
+/* Quantity Controls */
+.quantityWrapper {
+  display: none; /* Hidden by default, shown on desktop */
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background: #f8fafc;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.3s ease;
+}
+
+.quantityWrapper.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Mobile Quantity Controls - Vertical */
+.quantityWrapperMobile {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  background: #f8fafc;
+  border-radius: 6px;
+  border: 1px solid #e5e7eb;
+  margin-top: 0.25rem;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+}
+
+.quantityWrapperMobile.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.quantityControls {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  background: #f8fafc;
+  border-radius: 6px;
+  border: 1px solid #e5e7eb;
+  margin-top: 0.25rem;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+}
+
+.quantityControls.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.quantityButton,
+.quantityBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: white;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  transform: scale(1);
+}
+
+.quantityButton:hover:not(:disabled),
+.quantityBtn:hover:not(:disabled) {
+  transform: scale(1.1);
+}
+
+.quantityButton:active:not(:disabled),
+.quantityBtn:active:not(:disabled) {
+  transform: scale(0.9);
+}
+
+.quantityButton:hover,
+.quantityBtn:hover {
+  border-color: #0741AD;
+  color: #0741AD;
+  background: #f0f9ff;
+}
+
+.quantityButton:disabled,
+.quantityBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.quantityValue,
+.quantityDisplay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 28px;
+  font-weight: 600;
+  color: #0741AD;
+  background: white;
+  border-radius: 4px;
+  border: 1px solid #e5e7eb;
+}
+
+/* Loading States */
+.loadingSpinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.syncIndicator {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 12px;
+  height: 12px;
+  background: #10b981;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.syncSpinner {
+  width: 6px;
+  height: 6px;
+  border: 1px solid transparent;
+  border-top: 1px solid white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Desktop Layout - Above 775px */
+@media (min-width: 776px) {
+    .defaultContainer,
+    .compactContainer,
+    .minimalButton {
+    flex-direction: column;
+    }
+  .buttonWrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .quantityWrapper {
+    display: flex !important;
+  }
+  
+  .quantityWrapperMobile {
+    display: none !important;
+  }
+  
+  .defaultContainer {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+/* Mobile Layout - 775px and below */
+@media (max-width: 775px) {
+  .buttonWrapper {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .quantityWrapper {
+    display: none !important;
+  }
+  
+  .quantityWrapperMobile {
+    display: flex !important;
+  }
+  
+  .defaultContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .defaultButton {
+    padding: 0.625rem 0.875rem;
+    min-width: 100px;
+    font-size: 0.75rem;
+  }
+  
+  .compactButton {
+    padding: 0.375rem 0.625rem;
+    min-width: 70px;
+    font-size: 0.6875rem;
+  }
+  
+
+  
+  .quantityButton,
+  .quantityBtn {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .quantityValue,
+  .quantityDisplay {
+    min-width: 28px;
+    height: 24px;
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .defaultButton {
+    padding: 0.5rem 0.75rem;
+    min-width: 90px;
+    gap: 0.375rem;
+  }
+  
+  .compactButton {
+    padding: 0.25rem 0.5rem;
+    min-width: 65px;
+  }
+  
+
+  
+  .quantityWrapper,
+  .quantityControls {
+    gap: 0.25rem;
+    padding: 0.25rem;
+  }
+}
+
+/* RTL Support */
+[dir="rtl"] .defaultButton,
+[dir="rtl"] .compactButton {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .buttonContent {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .syncIndicator {
+  right: auto;
+  left: -2px;
+}
+
+/* Animation Enhancements */
+.defaultButton,
+.compactButton,
+.minimalButton {
+  transform-origin: center;
+  will-change: transform;
+}
+
+.quantityWrapper,
+.quantityControls {
+  transform-origin: top center;
+  will-change: transform, opacity;
+}
+
+/* Focus States */
+.defaultButton:focus,
+.compactButton:focus,
+.minimalButton:focus,
+.quantityButton:focus,
+.quantityBtn:focus {
+  outline: 2px solid #0741AD;
+  outline-offset: 2px;
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .defaultButton,
+  .compactButton,
+  .minimalButton {
+    border-width: 2px;
+  }
+  
+  .quantityButton,
+  .quantityBtn {
+    border-width: 2px;
+  }
+}

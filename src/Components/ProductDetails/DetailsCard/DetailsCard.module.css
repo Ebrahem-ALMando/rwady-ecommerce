@@ -361,4 +361,7 @@
         width: 90% !important;
         margin: 0 auto;
     }
+     .favBtnDiv{
+        width: 100% !important;
+    }
 }

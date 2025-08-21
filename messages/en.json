@@ -295,6 +295,9 @@
     "removeSuccessTitle": "Removed from cart",
     "removeSuccessMessage": "{name} was removed successfully",
     "discount": "Save {percentage}%",
+    "addToCart": "Add to Cart",
+    "removeFromCart": "Remove from Cart",
+    "added": "Added",
     "freeDelivery": "Free delivery",
     "shippingCost": "Shipping cost: {cost} IQD",
     "shippingUnknown": "Shipping info not available",
@@ -584,7 +587,9 @@
   "productCard":{
     "stock_unlimited": "Unlimited quantity",
     "stock_limited": "Only {count} items left",
-    "pay_monthly": "Pay in {price} IQD per month *"
+    "pay_monthly": "Pay in {price} IQD per month *",
+    "addToFavourites": "Add to favourites",
+    "inFavourites": "In favourites"
   },
   "PaymentProof": {
     "uploadTitle": "Upload Payment Proof",
@@ -673,15 +678,17 @@
     "discountType": "Discount Type",
     "discountValue": "Discount Value",
     "minimumCartTotal": "Minimum Cart Total",
-    "startDate": "Start Date",
-    "endDate": "End Date",
-    "minCartTotal": "Minimum Cart Total",
     "untitled": "Untitled Promotion",
     "errorLoading": "Error Loading Promotion",
     "errorMessage": "An error occurred while loading promotion details. Please try again.",
     "loading": "Loading...",
     "orders": "Orders",
     "available": "Available"
+  },
+  "favouriteToggleButton": {
+    "login": "You must be logged in",
+    "loginMessage": "You cannot add the product to favourites without logging in",
+    "loginLink": "Login"
   }
 
 }

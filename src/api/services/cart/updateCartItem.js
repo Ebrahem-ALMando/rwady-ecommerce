@@ -4,12 +4,12 @@ import ApiConfig from "@/api/apiConfig";
 /**
  *
  * @param {Object} data -
- * @param {bigint} productId -
+ * @param {bigint} cartItemId -
  * @returns {Promise<{ error: boolean, data?: any, message?: string }>}
  */
 
-export const updateCartItem = async (productId,data) => {
-    const endPointKey = `user/cart-items/${productId}`;
+export const updateCartItem = async (cartItemId,data) => {
+    const endPointKey = `user/cart-items/${cartItemId}`;
 
     const res = await fetchAPI(endPointKey, "PUT", data, {
         next: {

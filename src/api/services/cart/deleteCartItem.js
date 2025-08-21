@@ -3,12 +3,12 @@ import ApiConfig from "@/api/apiConfig";
 
 /**
  *
- * @param {bigint} productId -
+ * @param {bigint} cartItemId -
  * @returns {Promise<{ error: boolean, data?: any, message?: string }>}
  */
 
-export const deleteCartItem = async (productId) => {
-    const endPointKey = `user/cart-items/${productId}`;
+export const deleteCartItem = async (cartItemId) => {
+    const endPointKey = `user/cart-items/${cartItemId}`;
 
     const res = await fetchAPI(endPointKey, "DELETE", null, {
         next: {

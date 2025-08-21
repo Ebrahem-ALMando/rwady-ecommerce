@@ -108,6 +108,7 @@ const ProductSlider = ({ initialData, initialError }) => {
                                     .map((slide, index) => (
                                         <motion.div key={slide.id + "-" + index} variants={itemVariants}>
                                             <ProductCardSlider
+                                            key={slide.id + "-" + index}
                                                 product={slide}
                                                 lang={lang}
                                                 setIsDraggingInsideCard={setIsDraggingInsideCard}

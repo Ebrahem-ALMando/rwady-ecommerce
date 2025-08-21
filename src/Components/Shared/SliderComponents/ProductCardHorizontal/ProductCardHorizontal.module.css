@@ -38,8 +38,8 @@
 
 .bestSeller {
     position: absolute;
-    top: 12px;
-    right: 12px;
+   
+    right: -8px;
     background-color: #0741ad;
     color: white;
     padding: 6px 12px;
@@ -161,6 +161,9 @@
     margin-bottom: 8px;
     margin-top: 10px;
     flex-wrap: wrap;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
 }
 
 .category {
@@ -286,6 +289,11 @@
     margin-top: auto;
 }
 
+.horizontalCartBtn {
+    width: 100%;
+    max-width: 200px;
+}
+
 .addToCart {
     background-color: #0a58ca;
     color: white;
@@ -357,6 +365,45 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+
+.promotionBadge {
+    background: linear-gradient(135deg, #f9b808 0%, #f9b808 100%);
+    padding: 7px 10px;
+    border-radius: 20px;
+    min-width: max-content;
+    width: 83px;
+    text-align: center;     
+    font-size: 12px;
+    z-index: 50;
+    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    right: -8px;
+}
+
+.promotionIcon {
+    font-size: 14px;
+    animation: pulse 2s infinite;
+}
+
+.promotionText {
+    font-size: 11px;
+    font-weight: 800;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
 /* Mobile Responsive */
 @media (max-width: 768px) {
     .card {
@@ -474,7 +521,8 @@
     .bestSeller {
         font-size: 11px;
         font-weight: 600;
-        padding: 4px 8px;
+        padding: 7px 10px !important;
+
     }
 
     .time {
@@ -720,4 +768,25 @@
     font-weight: 800;
     margin: 0;
     text-shadow: 0 1px 2px rgba(255, 68, 68, 0.1);
+}
+
+/* Responsive styles for horizontal cart button */
+@media (max-width: 768px) {
+    .horizontalCartBtn {
+        max-width: 180px;
+    }
+    
+    .cartActions {
+        gap: 6px;
+    }
+}
+
+@media (max-width: 480px) {
+    .horizontalCartBtn {
+        max-width: 160px;
+    }
+    
+    .cartActions {
+        gap: 4px;
+    }
 } 

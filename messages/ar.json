@@ -297,6 +297,9 @@
     "removeSuccessTitle": "تم الحذف من السلة",
     "removeSuccessMessage": "تم إزالة {name} بنجاح",
     "discount": "خصم {percentage}%",
+    "addToCart": "أضف للسلة",
+    "removeFromCart": "حذف من السلة",
+    "added": "مُضاف",
     "freeDelivery": "توصيل مجاني",
     "shippingCost": "تكلفة توصيل: {cost} IQD",
     "shippingUnknown": "تفاصيل التوصيل غير محددة",
@@ -586,7 +589,9 @@
   "productCard":{
     "stock_unlimited": "كمية غير محدودة",
     "stock_limited": "مُتبقي: {count} عناصر",
-    "pay_monthly": "اشتر مقابل {price} د.ع في الشهر *"
+    "pay_monthly": "اشتر مقابل {price} د.ع في الشهر *",
+    "addToFavourites": "أضف للمفضلة",
+    "inFavourites": "في المفضلة"
   },
   "PaymentProof": {
     "uploadTitle": "رفع إثبات الدفع",
@@ -674,15 +679,18 @@
     "discountType": "نوع الخصم",
     "discountValue": "قيمة الخصم",
     "minimumCartTotal": "الحد الأدنى للسلة",
-    "startDate": "تاريخ البداية",
-    "endDate": "تاريخ الانتهاء",
-    "minCartTotal": "الحد الأدنى للسلة",
     "untitled": "حملة بدون عنوان",
     "errorLoading": "خطأ في تحميل الحملة",
     "errorMessage": "حدث خطأ أثناء تحميل تفاصيل الحملة. يرجى المحاولة مرة أخرى.",
     "loading": "جاري التحميل...",
     "orders": "طلبات",
     "available": "متاح"
+  },
+  
+  "favouriteToggleButton": {
+    "login": "يجب تسجيل الدخول",
+    "loginMessage": "لا يمكنك إضافة المنتج للمفضلة بدون تسجيل الدخول",
+    "loginLink": "تسجيل الدخول"
   }
 
 

@@ -86,7 +86,7 @@ const fetchWithSenderAPI = async (endpoint, method = "GET", data = null, options
             if (typeof window !== "undefined") {
                 toast.error("انتهت الجلسة، يرجى تسجيل الدخول من جديد");
                 setTimeout(() => {
-                    window.location.href = "/sign-in";
+                    window.location.href = `/${lang}/sign-in`;
                 }, 2000);
             }
         }
@@ -350,10 +350,12 @@ const fetchAPI = async (
         console.log(`⏱️ [${endpoint}] Time: ${duration}ms`);
 
         if (!response.ok) {
-            // if (response.status === 401 && typeof window !== "undefined") {
-            //     if (config.showError) toast.error("انتهت الجلسة، يرجى تسجيل الدخول من جديد");
-            //     setTimeout(() => (window.location.href = "/sign-in"), 2000);
-            // }
+            if (response.status === 401 && typeof window !== "undefined") {
+                Cookies.remove("token");
+                Cookies.remove("user_id");
+                if (config.showError) toast.error(`${lang==="ar"?"انتهت الجلسة، يرجى تسجيل الدخول من جديد":"Session expired, please login again"}`);
+                setTimeout(() => (window.location.href = `/${lang}/sign-in`), 2000);
+            }
 
             const errorData = await response.json().catch(() => ({}));
             const message = errorData.message || response.statusText || "حدث خطأ غير معروف";

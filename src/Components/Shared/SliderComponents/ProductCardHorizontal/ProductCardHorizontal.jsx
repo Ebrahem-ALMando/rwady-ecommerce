@@ -14,10 +14,10 @@ import {salesNumIcon, shoppeIcon} from "@/utils/Icons";
 import useCart from "@/hooks/useCart";
 import {checkAuthClient} from "@/utils/checkAuthClient";
 import QuantityControl from "@/Components/ProductDetails/QuantityControl/QuantityControl";
-import { Flame  } from 'lucide-react'
+import { Sparkles } from 'lucide-react'
 import {useLocale, useTranslations} from "next-intl";
 import {slugify} from "@/utils/slugify";
-import CartActionButton from "@/Components/Shared/Buttons/CartActionButton/CartActionButton";
+import CompactCartButton from "@/Components/Shared/Buttons/CompactCartButton/CompactCartButton";
 import FavouriteToggleButton from "@/Components/Shared/Buttons/FavouriteToggleButton/FavouriteToggleButton";
 import useFavourites from "@/hooks/useFavourites";
 import SafeImage from "@/Components/Shared/SafeImage/SafeImage";
@@ -51,11 +51,8 @@ const ProductCardHorizontal = ({ product, lang, setIsDraggingInsideCard }) => {
     const [liked, setLiked] = useState(false);
     const [likedCount, setLikedCount] = useState(product.fav_num || 0);
     const t=useTranslations('productCard')
-    const [isAddToCart,setIsAddToCart] = useState(false);
     const cartRef = useRef();
-    const { getItemQuantity} = useCart();
-    const initialQty = getItemQuantity(product?.id) || 1;
-    const [selectedQty, setSelectedQty] = useState(initialQty);
+    const { getItemQuantity, addItem, removeItem, updateQuantity, getIsItemExisting, cart, isSyncing } = useCart();
 
     useEffect(() => {
         if (!product?.id || !Array.isArray(favourites)) return;
@@ -144,6 +141,20 @@ const ProductCardHorizontal = ({ product, lang, setIsDraggingInsideCard }) => {
                     </div>
                 )}
 
+                {/* Promotion Badge */}
+                {product.promotion && product.promotion.status === "active" && (
+                    <div className={`absolute ${product.ribbon_text?.[lang] ? "top-[35px]" : "top-3.5"} right-0 text-white font-bold ${styles.promotionBadge}`}>
+                        <span className={styles.promotionIcon}>
+                            <Sparkles size={16} />
+                        </span>
+                        <span className={styles.promotionText}>
+                            {product.promotion.discount_type === "percentage" 
+                                ? `${product.promotion.discount_value}%`
+                                : `${product.promotion.discount_value} IQD`
+                            }
+                        </span>
+                    </div>
+                )}
                 {/* Timer */}
                 {discountValue > 0 && isDiscountValid && time!=="NaNH : NaN M : NaN S"&&(
                     <div className={styles.timeBox}>
@@ -221,10 +232,13 @@ const ProductCardHorizontal = ({ product, lang, setIsDraggingInsideCard }) => {
                                 handleToggle();
                             }}
                         >
-                            <FavouriteToggleButton
+                          <FavouriteToggleButton
                                 liked={liked}
                                 likedCount={likedCount}
                                 onToggle={handleToggle}
+                                showcount={true}
+                                showtext={false}
+                                t={t}
                             />
                         </div>
                         <div className={styles.iconContainer}>
@@ -248,7 +262,9 @@ const ProductCardHorizontal = ({ product, lang, setIsDraggingInsideCard }) => {
                                 className={styles.category}
                                 title={ctr.name?.[lang]}
                             >
-                                {ctr.name?.[lang]}
+                                   {ctr.name?.[lang]?.length > 20
+                            ? ctr.name?.[lang].slice(0,20) + "..."
+                            : ctr.name?.[lang]}
                             </span>
                         ))}
                     </div>
@@ -311,29 +327,22 @@ const ProductCardHorizontal = ({ product, lang, setIsDraggingInsideCard }) => {
 
                     {/* Cart Actions */}
                     <div className={styles.cartActions}>
-                        <CartActionButton
-                            icon={shoppeIcon}
-                            styles={styles}
-                            btnClassName={styles.addToCart}
-                            product={product}
-                            setAddToCart={setIsAddToCart}
-                            isAddToCart={isAddToCart}
-                            selectedQty={selectedQty}
-                            setSelectedQty={setSelectedQty}
+                        <CompactCartButton
                             ref={cartRef}
+                            product={product}
                             lang={lang}
+                            addItem={addItem}
+                            removeItem={removeItem}
+                            updateQuantity={updateQuantity}
+                            getItemQuantity={getItemQuantity}
+                            getIsItemExisting={getIsItemExisting}
+                            cart={cart}
+                            isSyncing={isSyncing}
+                            variant="compact"
+                            size="medium"
+                            showQuantityControls={true}
+                            className={styles.horizontalCartBtn}
                         />
-                        {isAddToCart && (
-                            <QuantityControl
-                                className={styles.quantity}
-                                stockUnlimited={product.stock_unlimited}
-                                max={!product.stock_unlimited ? product.stock : 999}
-                                productQTU={product.stock}
-                                quantity={selectedQty}
-                                onIncrement={() => cartRef.current?.increment()}
-                                onDecrement={() => cartRef.current?.decrement()}
-                            />
-                        )}
                     </div>
                 </div>
             </div>
