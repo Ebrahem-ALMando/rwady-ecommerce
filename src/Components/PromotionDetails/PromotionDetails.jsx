@@ -119,7 +119,7 @@ const PromotionDetails = ({ id, lang, initialData, initialError, keyData }) => {
                 transition={{ duration: 0.2 }}
             >
                 <div className={styles.heroContent}>
-                    {/* Left Side - Details */}
+                    {/* Desktop Layout */}
                     <div className={styles.heroLeft}>
                         <div className={styles.detailsColumn}>
                             <div className={styles.typeBadge}>
@@ -133,8 +133,12 @@ const PromotionDetails = ({ id, lang, initialData, initialError, keyData }) => {
                             
                             {data.min_cart_total > 0 && (
                                 <div className={styles.minCartInfo}>
-                                    <span>{t("minCartTotal")}: </span>
-                                    <strong>{data.min_cart_total}</strong>
+                                    <span className={styles.typeBadge}>{t("minCartTotal")}:
+                                        
+                                    <strong>
+                                         {data.min_cart_total} IQD
+                                    </strong>
+                                         </span>
                                 </div>
                             )}
                             
@@ -192,7 +196,7 @@ const PromotionDetails = ({ id, lang, initialData, initialError, keyData }) => {
                             </div>
                         </div>
                     </div>
-                </div>
+                    </div>
                 
                 <div className={styles.heroDecoration}>
                     <div className={styles.floatingElement}></div>

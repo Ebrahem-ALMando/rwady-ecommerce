@@ -678,7 +678,7 @@ import QuantityControl from "@/Components/ProductDetails/QuantityControl/Quantit
 import {getDiscountPercentage} from "@/utils/ProductsProc";
 import {useTranslations} from "next-intl";
 import ProductDescription from "@/Components/ProductDetails/ProductDescription/ProductDescription";
-import { Flame  } from 'lucide-react'
+import { Flame, Sparkles  } from 'lucide-react'
 import CartActionButton from "@/Components/Shared/Buttons/CartActionButton/CartActionButton";
 const DetailsCard = ({ product,lang }) => {
     const [liked, setLiked] = useState(false);
@@ -765,6 +765,42 @@ const DetailsCard = ({ product,lang }) => {
                 {product.name?.[lang] || "...."}
             </h1>
 
+           
+            {product.promotion && (
+                <div
+                    className={styles.promotion}
+                >
+                    <span
+                        className={styles.promotionIcon}
+                        aria-label="promotion"
+                    >
+                       <Sparkles size={20} />
+                    </span>
+                    <div className={styles.promotionContent}>
+                        <div className={styles.promotionTitle}>
+                            {product.promotion.title?.[lang] || product.promotion.title?.ar || product.promotion.title?.en}
+                        </div>
+                        <div className={styles.promotionDiscount}>
+                            {product.promotion.discount_type === 'fixed' ? (
+                                <>
+                               
+                                    {lang === 'ar' ? 'خصم مباشر بقيمة' : 'Direct discount of'}{' '}
+                                    <span style={{fontWeight: 700}}>
+                                        {product.promotion.discount_value.toLocaleString()} IQD
+                                    </span>
+                                </>
+                            ) : product.promotion.discount_type === 'percentage' ? (
+                                <>
+                                    {lang === 'ar' ? 'خصم' : 'Discount'}{' '}
+                                    <span style={{fontWeight: 700}}>
+                                        {product.promotion.discount_value}%
+                                    </span>
+                                </>
+                            ) : null}
+                        </div>
+                    </div>
+                </div>
+            )}
             <motion.div
                 className={styles.price}
                 initial={{scale: 0.9, opacity: 0.7}}

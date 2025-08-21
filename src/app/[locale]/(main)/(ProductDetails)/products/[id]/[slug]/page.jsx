@@ -189,7 +189,7 @@ export async function generateStaticParams() {
 
 // ----- Metadata -----
 export async function generateMetadata({ params }) {
-  const { id, locale } = params;
+  const { id, locale } = await params;
 
   try {
     const productInfo = await getProductDetails(id);
@@ -234,7 +234,7 @@ export async function generateMetadata({ params }) {
 
 // ----- Page -----
 const DynamicProductDetailsPage = async ({ params }) => {
-  const { id, locale } = params;
+  const { id, locale } = await params;
   const t = await getTranslations({ locale, namespace: "Breadcrumb" });
 
   return (

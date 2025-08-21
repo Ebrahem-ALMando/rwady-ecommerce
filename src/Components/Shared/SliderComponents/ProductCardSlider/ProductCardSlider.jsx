@@ -564,7 +564,7 @@ const ProductCardSlider = ({ product, lang, setIsDraggingInsideCard }) => {
 
                 {/* Promotion Badge */}
                 {product.promotion && product.promotion.status === "active" && (
-                    <div className={`absolute ${product.discount_percentage_text?.[lang] && isDiscountValid && time!=="NaNH : NaN M : NaN S" ? "top-[55px]" : "top-3"} left-0 text-white font-bold ${styles.promotionBadge}`}>
+                    <div className={`absolute ${product.discount_percentage_text?.[lang] && isDiscountValid && time!=="NaNH : NaN M : NaN S" ? "top-[55px]" : "top-3.5"} left-0 text-white font-bold ${styles.promotionBadge}`}>
                         <span className={styles.promotionIcon}>
                             <Sparkles size={16} />
                         </span>
@@ -635,15 +635,17 @@ const ProductCardSlider = ({ product, lang, setIsDraggingInsideCard }) => {
                                         animate={{ opacity: 1 }}
                                         transition={{ duration: 0.3 }}
                                     >
-                                        <SafeImage
-                                            fallback="/FallbackProductImage.png"
-                                            src={image.url}
+                                        <Image
+                                            // fallback="/FallbackProductImage.png"
+                                            src={image.url || "/FallbackProductImage.png"}
                                             alt={product.name?.[lang] ? `${product.name[lang]} - ${index + 1}` : `Product Image ${index + 1}`}
                                             loading="lazy"
                                             className={styles.productImg}
                                             draggable={false}
                                             width={300}
                                             height={300}
+                                            quality={100}
+                                          
                                         />
                                     </motion.div>
                                 </div>
@@ -685,7 +687,7 @@ const ProductCardSlider = ({ product, lang, setIsDraggingInsideCard }) => {
                         </div>
                         <div className={styles.iconImage}>
                             <p>
-                                {product.total_orders || 0}
+                                ({product.total_orders || 0})
                             </p>
                             {salesNumIcon}
                         </div>

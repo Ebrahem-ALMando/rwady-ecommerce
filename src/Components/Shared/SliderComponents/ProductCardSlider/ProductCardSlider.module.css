@@ -570,7 +570,7 @@ html[dir="rtl"] .infoCard {
         font-size: 10px !important;
     }
     .promotionBadge{
-        top: 40px !important;
+        /* top: 40px !important; */
     }
 
     .timeBox {
@@ -682,9 +682,11 @@ html[dir="rtl"] .infoCard {
     .price, .oldPrice, .available {
         font-size: 11px !important;
         font-weight: 500;
-        margin-top: 0.5rem;
+        /* margin-top: 0.5rem; */
     }
-    
+    .oldPrice{
+        margin-left: 0!important;
+    }
     .availableIcon {
         margin-right: 2px;
         margin-left: 2px;

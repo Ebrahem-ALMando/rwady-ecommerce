@@ -119,7 +119,7 @@ export default function Promotions({promotions, error, meta}) {
                 className={styles.statsSection}
                 initial={{ opacity: 0.8, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.2, delay: 0.4 }}
+                transition={{ duration: 0.2 }}
             >
                 <div className={styles.statsGrid}>
                     <div className={styles.statCard} style={{ backgroundColor: "#ecfdf5" }}>
@@ -183,7 +183,7 @@ export default function Promotions({promotions, error, meta}) {
                         className={styles.sectionHeader}
                         initial={{ opacity: 0.8, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.2, delay: 0.2 }}
+                        transition={{ duration: 0.2 }}
                     >
                         <h2 className={styles.sectionTitle}>
                             {t("availablePromotions")}
