@@ -171,6 +171,7 @@
   display: flex;
   align-items: center;
   gap: 0.25rem;
+  min-width: max-content;
 }
 
 /* Minimal Button */
@@ -485,5 +486,58 @@
   right: auto;
   left: -2px;
 } */
+
+/* Disabled State for Mobile and Desktop */
+.disabled{
+  background: #f6f3f3;
+  border-color: #d1d5db;
+}
+.disabled svg{
+  
+  fill: #d1d5db;
+  stroke: #d1d5db;
+}
+
+.quantityWrapperMobile.disabled,
+.quantityControls.disabled,
+.quantityWrapper.disabled {
+  background: #f6f3f3;
+  border-color: #d1d5db;
+}
+
+.quantityWrapperMobile.disabled .quantityButton,
+.quantityWrapperMobile.disabled .quantityBtn,
+.quantityControls.disabled .quantityButton,
+.quantityControls.disabled .quantityBtn,
+.quantityWrapper.disabled .quantityButton,
+.quantityWrapper.disabled .quantityBtn {
+  background: #f9fafb;
+  color: #9ca3af;
+  border-color: #e5e7eb;
+  cursor: not-allowed;
+}
+
+.quantityWrapperMobile.disabled .quantityValue,
+.quantityWrapperMobile.disabled .quantityDisplay,
+.quantityControls.disabled .quantityValue,
+.quantityControls.disabled .quantityDisplay,
+.quantityWrapper.disabled .quantityValue,
+.quantityWrapper.disabled .quantityDisplay {
+  background: #f9fafb;
+  color: #9ca3af;
+  border-color: #e5e7eb;
+}
+
+.quantityWrapperMobile.disabled .quantityButton:hover,
+.quantityWrapperMobile.disabled .quantityBtn:hover,
+.quantityControls.disabled .quantityButton:hover,
+.quantityControls.disabled .quantityBtn:hover,
+.quantityWrapper.disabled .quantityButton:hover,
+.quantityWrapper.disabled .quantityBtn:hover {
+  background: #f9fafb;
+  color: #9ca3af;
+  border-color: #e5e7eb;
+  transform: none;
+}
 
 /* Animation Enhancements */

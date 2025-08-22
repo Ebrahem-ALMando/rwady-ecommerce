@@ -18,6 +18,7 @@ import useFavourites from "@/hooks/useFavourites";
 import SafeImage from "@/Components/Shared/SafeImage/SafeImage";
 import { Sparkles } from 'lucide-react';
 import CompactCartButton from "@/Components/Shared/Buttons/CompactCartButton/CompactCartButton";
+import CartActionButton from "@/Components/Shared/Buttons/CartActionButton/CartActionButton";
 const settings = {
     ...sliderSetting,
     infinite: false,
@@ -413,7 +414,7 @@ const ProductCardSlider = ({ product, lang, setIsDraggingInsideCard }) => {
 
                     </div>
                 </Link>
-                
+              
                 <div className={styles.cartButtonWrapper}>
                     <div className={styles.desktopCartButton}>
                     <CompactCartButton
@@ -450,6 +451,7 @@ const ProductCardSlider = ({ product, lang, setIsDraggingInsideCard }) => {
                         showQuantityControls={true}
                         className={styles.compactCartBtn}
                     />
+                  
                      </div>
                 </div>
                 {/*    <CartActionButton*/}
