@@ -179,8 +179,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 36px !important;
+  height: 36px !important;
   border: 1px solid #e5e7eb;
   border-radius: 50%;
   background: white;
@@ -399,6 +399,10 @@
   .quantityBtn {
     border-width: 2px;
   }
+  .minimalButton{
+    width: 36px !important;
+    height: 36px !important;
+  }
 }
 
 /* Desktop Layout - Above 775px */
@@ -410,6 +414,10 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
+  }
+   .minimalButton{
+    width: 36px !important;
+    height: 36px !important;
   }
   
   .quantityWrapper {
@@ -469,6 +477,10 @@
   .quantityControls {
     gap: 0.25rem;
     padding: 0.25rem;
+  }
+  .minimalButton{
+    width: 36px !important;
+    height: 36px !important;
   }
 }
 
