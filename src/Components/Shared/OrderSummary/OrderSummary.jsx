@@ -172,6 +172,7 @@ const OrderSummary = (props) => {
           },
           ...(uploadedPaymentProof && { attached: uploadedPaymentProof }),
           ...(props.paymentType === "installment" && { identity }),
+          direct_order: false,
         };
 
         const result = await saveOrder(body);
@@ -199,20 +200,20 @@ const OrderSummary = (props) => {
               }
               break;
             case "cash":
-              router.push(`/checkout?state=success`);
+              router.push(`/${props.lang}/checkout?state=success`);
               break;
             case "installment":
-              router.push(`/checkout?state=installment`);
+              router.push(`/${props.lang}/checkout?state=installment`);
               break;
             case "transfer":
-              router.push(`/checkout?state=externel`);
+              router.push(`/${props.lang}/checkout?state=externel`);
               break;
             default:
               toast.custom(
                 <CustomToast type="success" title={t("successTitle")} message={t("successMsg")} />,
                 { position: 'top-center', duration: 2500 }
               );
-              router.push(`/checkout?state=success`);
+              router.push(`/${props.lang}/checkout?state=success`);
               break;
           }
         } else {

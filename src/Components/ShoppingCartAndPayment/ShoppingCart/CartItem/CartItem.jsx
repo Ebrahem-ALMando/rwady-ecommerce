@@ -82,7 +82,7 @@ const CartItem = ({ item,cart, updateQuantity,getItemQuantity,removeItem,lang,t 
             <div className={styles.productImg}>
                 <SafeImage
                     fallback="/images/Shopping/img.png"
-                    src={item.media?.find(m => m.type === "image")?.url}
+                    src={item.image_url}
                     alt={item?.name?.[lang] || "منتج"}
                     width={100}
                     height={100}

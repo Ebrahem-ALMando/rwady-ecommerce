@@ -28,7 +28,7 @@ const CompactCartButton = forwardRef(({
   size = 'medium',     // 'small', 'medium', 'large'
   showQuantityControls = true,
   debounceMs = 700,    // <— المدة قبل تفريغ التحديث للسلة
-  className = ''
+  className = '',
 }, ref) => {
   const t = useTranslations('Cart');
 
@@ -82,22 +82,26 @@ const CompactCartButton = forwardRef(({
     pendingQtyRef.current = null;
     if (q == null) return;
     if (!isAddToCart) return; 
-
+ 
     if (typeof updateQuantityRaf === 'function') {
       updateQuantityRaf(product.id, q);
     } else if (typeof updateQuantity === 'function') {
       updateQuantity(product.id, q);
     }
+   
+ 
   };
 
   const scheduleDebouncedFlush = () => {
     
     clearDebounce();
     debounceIdRef.current = setTimeout(flushQty, debounceMs);
+  
   };
 
  
   useEffect(() => {
+
     const onPointerUp = () => flushQty();
     const onVisibility = () => { if (document.hidden) flushQty(); };
 
@@ -108,7 +112,8 @@ const CompactCartButton = forwardRef(({
       window.removeEventListener('visibilitychange', onVisibility);
       flushQty(); 
     };
-  }, []);
+ 
+  }, []); 
 
 
   const showAddedToast = () => {
@@ -139,6 +144,7 @@ const CompactCartButton = forwardRef(({
 
 
   const handleToggleCart = () => {
+
     if (isAnimating) return;
     setIsAnimating(true);
 
@@ -158,10 +164,11 @@ const CompactCartButton = forwardRef(({
       showAddedToast();
     }
 
-    setTimeout(() => setIsAnimating(false), 220);
+    setIsAnimating(false);
   };
 
   const handleIncrement = () => {
+
     const next = Math.min(
       (selectedQty || minQty) + 1,
       maxQty === Infinity ? Number.MAX_SAFE_INTEGER : maxQty
@@ -187,6 +194,7 @@ const CompactCartButton = forwardRef(({
         scheduleDebouncedFlush();
       }
     }
+
   };
 
   const isDisabled = (!product?.availability || ((product?.stock ?? 0) <= 0 && !product?.stock_unlimited));
@@ -194,13 +202,14 @@ const CompactCartButton = forwardRef(({
   // ======= عناصر مساعدة للرسم =======
   const QtyControls = (
     <div className={`${styles.quantityWrapper} ${isAddToCart ? styles.show : ''} ${isDisabled ? styles.disabled : ''}`}>
-      <button onClick={handleDecrement} disabled={selectedQty <= minQty || isDisabled} className={styles.quantityButton}>
+      <button onClick={handleDecrement} disabled={selectedQty <= minQty || isDisabled} aria-label='decrement' className={styles.quantityButton}>
         <Minus size={14} />
       </button>
       <div className={styles.quantityValue}>{selectedQty}</div>
       <button
         onClick={handleIncrement}
         disabled={(maxQty !== Infinity && selectedQty >= maxQty) || isDisabled}
+        aria-label='increment'
         className={styles.quantityButton}
       >
         <Plus size={14} />
@@ -254,7 +263,7 @@ const CompactCartButton = forwardRef(({
           className={`${styles.compactButton} ${isAddToCart ? styles.active : ''} ${isAnimating ? styles.animating : ''}`}
         >
           <div className={styles.buttonContent}>
-            {isAnimating ? (
+            {isAnimating  ? (
               <div className={styles.loadingSpinner} />
             ) : isDisabled ? (
               <>
@@ -271,13 +280,14 @@ const CompactCartButton = forwardRef(({
         </button>
         {isAddToCart && showQuantityControls && (
           <div className={`${styles.quantityControls} ${isAddToCart ? styles.show : ''} ${isDisabled ? styles.disabled : ''}`}>
-            <button onClick={handleDecrement} disabled={selectedQty <= minQty || isDisabled} className={styles.quantityBtn}>
+            <button onClick={handleDecrement} disabled={selectedQty <= minQty || isDisabled} aria-label='decrement' className={styles.quantityBtn}>
               <Minus size={12} />
             </button>
             <span className={styles.quantityDisplay}>{selectedQty}</span>
             <button
               onClick={handleIncrement}
               disabled={(maxQty !== Infinity && selectedQty >= maxQty) || isDisabled}
+              aria-label='increment'
               className={styles.quantityBtn}
             >
               <Plus size={12} />
@@ -323,14 +333,15 @@ const CompactCartButton = forwardRef(({
       {/* Quantity Controls - Mobile Vertical */}
       {isAddToCart && showQuantityControls && (
         <div className={`${styles.quantityWrapperMobile} ${isAddToCart ? styles.show : ''} ${isDisabled ? styles.disabled : ''}`}>
-          <button onClick={handleDecrement} disabled={selectedQty <= minQty || isDisabled} className={styles.quantityButton}>
+          <button onClick={handleDecrement} disabled={selectedQty <= minQty || isDisabled} aria-label='decrement' className={styles.quantityButton}>
             <Minus size={14} />
           </button>
           <div className={styles.quantityValue}>{selectedQty}</div>
           <button
             onClick={handleIncrement}
-            disabled={(maxQty !== Infinity && selectedQty >= maxQty) || isDisabled}
-            className={styles.quantityButton}
+                  disabled={(maxQty !== Infinity && selectedQty >= maxQty) || isDisabled}
+                  aria-label='increment'
+              className={styles.quantityButton}
           >
             <Plus size={14} />
           </button>

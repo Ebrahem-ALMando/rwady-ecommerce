@@ -74,7 +74,7 @@ const ProductCardSlider = ({ product, lang, setIsDraggingInsideCard }) => {
 
 
     const cartRef = useRef();
-    const { getItemQuantity, addItem, removeItem, updateQuantity, getIsItemExisting, cart, isSyncing } = useCart();
+    const { getItemQuantity, addItem, removeItem, updateQuantity, getIsItemExisting, cart, isSyncing, updateQuantityRaf } = useCart();
 
     useEffect(() => {
         const timerId = setInterval(() => {
@@ -424,6 +424,7 @@ const ProductCardSlider = ({ product, lang, setIsDraggingInsideCard }) => {
                         addItem={addItem}
                         removeItem={removeItem}
                         updateQuantity={updateQuantity}
+                        updateQuantityRaf={updateQuantityRaf}
                         getItemQuantity={getItemQuantity}
                         getIsItemExisting={getIsItemExisting}
                         cart={cart}
@@ -442,6 +443,7 @@ const ProductCardSlider = ({ product, lang, setIsDraggingInsideCard }) => {
                         addItem={addItem}
                         removeItem={removeItem}
                         updateQuantity={updateQuantity}
+                        updateQuantityRaf={updateQuantityRaf}
                         getItemQuantity={getItemQuantity}
                         getIsItemExisting={getIsItemExisting}
                         cart={cart}
