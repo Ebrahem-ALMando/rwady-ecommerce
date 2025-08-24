@@ -15,9 +15,10 @@ import ProductDescription from "@/Components/ProductDetails/ProductDescription/P
 import { Flame, Sparkles  } from 'lucide-react'
 import CartActionButton from "@/Components/Shared/Buttons/CartActionButton/CartActionButton";
 import FavouriteToggleButton from "@/Components/Shared/Buttons/FavouriteToggleButton/FavouriteToggleButton";
+import { useRouter } from "next/navigation";
 const DetailsCard = ({ product,lang }) => {
     const { toggle, isFavourite, favourites } = useFavourites(true);
-
+    const router = useRouter();
     const [liked, setLiked] = useState(false);
     const [isAddToCart,setIsAddToCart] = useState(false);
     const cartRef = useRef();
@@ -50,6 +51,19 @@ const DetailsCard = ({ product,lang }) => {
         const isNowFav = res?.data?.is_favorite;
         setLiked(isNowFav);
     };
+    const handleBuyDirectly = () => {
+      const data ={
+        product_id: product.id,
+        quantity: 1,
+        color: product.colors?.[0]?.color || null,
+      }
+      sessionStorage.setItem('buyDirectly', JSON.stringify(data));
+      toast.success(t("buyDirectlySuccess"));
+      router.push(`/${lang}/checkout?mode=direct_order`);
+    }
+useEffect(()=>{
+    console.log((product.stock <= 0  && !product.stock_unlimited ) || (!product.stock && !product.stock_unlimited));
+},[]);
     return (
         <div className={styles.detailsCard}>
 
@@ -231,9 +245,9 @@ const DetailsCard = ({ product,lang }) => {
                             />
                 <motion.button
 
-                    disabled={product.stock <= 0 || !product.stock}
-
-                    className={`${styles.addToCart} ${product.stock <= 0 ? styles.disabled : ""} ${styles.shop}`}
+                    disabled={(product.stock <= 0  && !product.stock_unlimited ) || (!product.stock && !product.stock_unlimited)}
+                    onClick={handleBuyDirectly}
+                    className={`${styles.addToCart} ${product.stock <= 0 && !product.stock_unlimited ? styles.disabled : ""} ${styles.shop}`}
                     aria-label={t('buyDirectly')}
                 >
                     <span><Flame  size={20} /></span>

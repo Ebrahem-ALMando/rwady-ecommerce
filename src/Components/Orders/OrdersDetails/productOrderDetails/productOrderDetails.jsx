@@ -322,11 +322,12 @@ import React from "react";
 import {useLocale, useTranslations} from "next-intl";
 import {getProfile} from "@/api/services/auth/getProfile";
 import EmptyState from "@/Components/Shared/EmptyState/EmptyState";
-
+import { useRouter } from "next/navigation";
 
 const ProductOrderDetails = () => {
     const {orderId, productId} = useParams();
     const locale = useLocale();
+    const router = useRouter();
     const t = useTranslations("Orders");
     const {data: profileData, isLoading: isLoadingProf} = useSWR("profileData", getProfile, {
         revalidateOnFocus: false,
@@ -392,7 +393,7 @@ const ProductOrderDetails = () => {
                             <Line/>
                             <div className={styles.contact}>
                                 <p>{t("details.haveProblem")}</p>
-                                <button className={styles.contactBtn}>{t("details.contactUs")}</button>
+                                <a className={styles.contactBtn} href={`/${locale}/contact-us`} target="_blank" >{t("details.contactUs")}</a>
                             </div>
                         </div>
 

@@ -46,7 +46,10 @@ const OrderSummary = (props) => {
     couponCode,
     runCheckDetails,
     orderSummary, // <-- مباشرة من الهوك
-  } = useCart();
+    runCheckDetailsDirectOrder ,
+    setIsDirectOrder,
+    setDirectOrder,
+    } = useCart();
 
   // Prefetch
   useEffect(() => {
@@ -58,6 +61,7 @@ const OrderSummary = (props) => {
   // حدث تغيّر الملخص القادم من الهوك -> ثبّته في displaySummary (أو صفّره إن كان null)
   useEffect(() => {
     if (orderSummary) {
+    
       setDisplaySummary(prev =>
         JSON.stringify(prev) !== JSON.stringify(orderSummary) ? orderSummary : prev
       );
@@ -77,6 +81,15 @@ const OrderSummary = (props) => {
     if (props.paymentType) setPaymentMethod(props.paymentType);
   }, [props.paymentType, setPaymentMethod]);
 
+  useEffect(()=>{
+ 
+   
+    if(props.isDirectOrder && props.mode === 'direct_order'){  
+        setIsDirectOrder(true);
+        setDirectOrder(props.directOrder);
+        runCheckDetailsDirectOrder( props.directOrder);
+    }
+  },[props.isDirectOrder,props.mode,props.directOrder]);
   const handleCheckCoupon = async () => {
     if (!couponCode?.trim()) {
       toast.custom(
@@ -126,8 +139,13 @@ const OrderSummary = (props) => {
       setCouponCode('');
     }
 
-    // حدّث الملخص بعد تطبيق/رفض الكوبون
-    runCheckDetails();
+    if(!props.isDirectOrder){
+      runCheckDetails();
+    }
+    else if(props.isDirectOrder && props.mode === 'direct_order'){
+      runCheckDetailsDirectOrder(props.directOrder);
+    }
+
   };
 
   const handleCompleteOrder = async () => {
@@ -141,24 +159,33 @@ const OrderSummary = (props) => {
         setShowUploadModal(true);
         return;
       }
-
+      if (props.step === 1 ) { 
+        props.next(); 
+        return;
+      }
       const isValid = validateOrderData({
         addressId: props.addressId,
         paymentType: props.paymentType,
         identity,
         cart,
         uploadedFile: uploadedPaymentProof,
+        directOrder: props.directOrder,
         t
       });
       if (!isValid) return;
-
+      if (props.step === 2 ) {
+        props.next();
+        return;
+      }
       try {
         setIsProcessing(true);
 
         const body = {
-          products: cart.map(item => ({
+          products: (props.isDirectOrder && props.mode === 'direct_order') ? [props.directOrder] : 
+          cart.map(item => ({
             product_id: item.id,
             quantity: item.quantity,
+            color: item?.color_id ?? null,
           })),
           success_url: `${window.location.origin}/${props.lang}/orders/`,
           fail_url: `${window.location.origin}/${props.lang}/checkout?state=failure`,
@@ -172,14 +199,24 @@ const OrderSummary = (props) => {
           },
           ...(uploadedPaymentProof && { attached: uploadedPaymentProof }),
           ...(props.paymentType === "installment" && { identity }),
-          direct_order: false,
+            direct_order: props.isDirectOrder && props.mode === 'direct_order',
         };
 
         const result = await saveOrder(body);
         sessionStorage.setItem('orderPlaced', 'true');
 
         if (!result.error) {
+         if(!props.isDirectOrder){
           clearCart();
+         }
+         else if(props.isDirectOrder && props.mode === 'direct_order'){
+          sessionStorage.removeItem('buyDirectly');
+          props.setIsDirectOrder(false);
+          props.setDirectOrder({});
+          props.setMode(null);
+          setIsDirectOrder(false);
+          setDirectOrder({});
+         }
           clearCouponFromStorage();
           sessionStorage.setItem('placedOrderId', result?.data?.id);
           setDisplaySummary(null);
@@ -225,7 +262,8 @@ const OrderSummary = (props) => {
           } else {
             toast.error(t("failMsg"));
           }
-          router.push(`/${props.lang}/checkout?state=failure`);
+          router.push(`/${props.lang}/checkout?state=failure&mode=${props.mode}`);
+         
         }
       } catch (error) {
         console.error("Order Error:", error.message);
@@ -305,17 +343,26 @@ const OrderSummary = (props) => {
       </AnimatePresence>
 
       <RowTextWithNumber
-        title={t("shippingCost")}
+        title={displaySummary?.promotion_free_shipping ? t("freeShipping") : t("shippingCost")}
         value={displaySummary ? `${displaySummary.shipping_fees} IQD` : '...'}
-        colorValue="#0741AD"
+        colorValue={displaySummary?.promotion_free_shipping ? "#f9b808" : "#0741AD"}
       />
+  {
+      props.isDirectOrder && props.mode === 'direct_order'&&(
+        <RowTextWithNumber
+          title={t("order_type")}
+          value={props.isDirectOrder && props.mode === 'direct_order' ? t("direct_order") : t("normal_order")}
+          colorValue="#0741AD"
+        />
+        )
+  }
 
       <button onClick={() => setShowDetails(prev => !prev)} className={styles.toggleDetails}>
         {showDetails ? t("hideDetails") : t("showDetails")}
         <span className={showDetails ? styles.arrowUp : styles.arrowDown} />
       </button>
 
-      <AnimatePresence>
+      <AnimatePresence>   
         {showDetails && (
           <motion.div
             initial={{ height: 0, opacity: 0 }}
@@ -338,13 +385,63 @@ const OrderSummary = (props) => {
               value={displaySummary ? `${displaySummary.payment_fees_value || 0} IQD` : '...'}
               colorValue="#0741AD"
             />
-            {displaySummary?.installment_count > 1 && (
+              {displaySummary?.installment_count > 1 && (
               <RowTextWithNumber
                 title={t("monthlyInstallment")}
                 value={`${Math.round(displaySummary.amount_with_shipping_after_coupon_and_payment_fees / displaySummary.installment_count)} IQD × ${displaySummary.installment_count}`}
                 colorValue="#0741AD"
               />
             )}
+       
+            {displaySummary?.promotion_cart_total && (
+              <div className={styles.promotionSection}>
+                <p className={styles.promotionDetailsTitle}>{t("promotionDetailsTitle")}</p>
+                <RowTextWithNumber
+              
+                  title={t("promotionCartTotal")}
+                  value={`${displaySummary.promotion_cart_total_discount_value || 0} IQD`}
+                  colorValue="#f9b808"
+
+                />
+                <div className={styles.promotionDetails}>
+                  <p className={styles.promotionTitle}>
+                    {displaySummary.promotion_cart_total.title?.[props.lang] || displaySummary.promotion_cart_total.title?.ar || t("promotionTitle")}
+                  </p>
+                  <p className={styles.promotionType}>
+                    {displaySummary.promotion_cart_total.discount_type === "percentage" 
+                      ? `${t("promotionPercentage")}: ${displaySummary.promotion_cart_total.discount_value}%`
+                      : `${t("promotionFixed")}: ${displaySummary.promotion_cart_total.discount_value} IQD`
+                    }
+                  </p>
+                </div>
+              </div>
+            )}
+
+         
+            {displaySummary?.promotion_free_shipping && (
+              <div className={styles.promotionSection}>
+                <p className={styles.promotionDetailsTitle}>{t("promotionDetailsTitle")}</p>
+                <RowTextWithNumber
+                  title={t("promotionShipping")}
+                  value={`${displaySummary.shipping_fees || 0} IQD`}
+                  colorValue="#f9b808"
+           
+                />
+                <div className={styles.promotionDetails}>
+                  <p className={styles.promotionTitle}>
+                    {displaySummary.promotion_free_shipping.title?.[props.lang] || displaySummary.promotion_free_shipping.title?.ar || t("promotionTitle")}
+                  </p>
+                  <p className={styles.promotionType}>
+                    {displaySummary.promotion_free_shipping.discount_type === "percentage" 
+                      ? `${t("promotionPercentage")}: ${displaySummary.promotion_free_shipping.discount_value}%`
+                      : `${t("promotionFixed")}: ${displaySummary.promotion_free_shipping.discount_value} IQD`
+                    }
+                  </p>
+                </div>
+              </div>
+            )}
+            
+        
           </motion.div>
         )}
       </AnimatePresence>

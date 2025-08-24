@@ -110,15 +110,15 @@ const OrderDetailsBox = ({
             {/*</div>*/}
 
             <div className={styles.row}>
-                <DollarSign size={16} /> <span>{t("details.paymentFees") || "رسوم الدفع:"}</span> <strong>{paymentFees ?? 0} IQD</strong>
+                <DollarSign size={16} /> <span>{t("details.paymentFees") || "رسوم الدفع:"}</span> <strong>{paymentFees ?? "..."} IQD</strong>
             </div>
 
             <div className={styles.row}>
-                <DollarSign size={16} /> <span>{t("details.totalAmount") || "المبلغ الكلي:"}</span> <strong>{totalAmount} IQD</strong>
+                <DollarSign size={16} /> <span>{t("details.totalAmount") || "المبلغ الكلي:"}</span> <strong>{totalAmount ?? "..."} IQD</strong>
             </div>
 
             <div className={styles.row}>
-                <DollarSign size={16} /> <span>{t("details.totalPaid") || "المبلغ المدفوع:"}</span> <strong>{totalAmountPaid} IQD</strong>
+                <DollarSign size={16} /> <span>{t("details.totalPaid") || "المبلغ المدفوع:"}</span> <strong>{totalAmountPaid ?? "..."} IQD</strong>
             </div>
 
             {notes && (

@@ -30,6 +30,7 @@ const slimProductForCart = (p) => ({
   shipping_rate_single: p.shipping_rate_single ?? 0,
   color_id: p.color_id ?? null,
   image_url: firstImageUrl(p),
+  cartItemId: p.cartItemId ?? null,
   brands: p.brands || null,
 });
 const unitPrice = (it) => (it.final_price_after_promotion ?? it.price_after_discount ?? it.price) || 0;
@@ -67,8 +68,8 @@ export default function useCart() {
   const [isCheckingDetails, setIsCheckingDetails] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState('cash');
   const [couponCode, setCouponCode] = useState(null);
-
-
+  const [isDirectOrder, setIsDirectOrder] = useState(false);
+  const [directOrder, setDirectOrder] = useState({});
   // keep a signature ref for lightweight equality
   const sigRef = useRef('');
   const setCart = useCallback((next) => {
@@ -116,13 +117,29 @@ export default function useCart() {
 
   // 4) check-details guard
   const buildPayload = useCallback(() => ({
+    
     products: cart.map((item) => ({ product_id: item.id, quantity: item.quantity, color: item.color_id ?? null })),
     payment_method: paymentMethod,
     coupon_code: getCouponFromStorage()?.code || null,
   }), [cart, paymentMethod]);
+  const buildPayloadDirectOrder = useCallback((directOrder) => ({
+    products: [directOrder],
+    payment_method: paymentMethod,
+    coupon_code: getCouponFromStorage()?.code || null,
+  }), [directOrder, paymentMethod]);
   const prevPayloadRef = useRef('');
   useEffect(() => {
-    if (!cart || cart.length === 0) { _setOrderSummary(null); notifyOrderSummary(null); prevPayloadRef.current = ''; return; }
+    if(isDirectOrder && directOrder){
+  
+      const payload = buildPayloadDirectOrder(directOrder);
+      const key = JSON.stringify(payload);
+      if (key === prevPayloadRef.current) return;
+      prevPayloadRef.current = key;
+      (async () => { setIsCheckingDetails(true); await coalescedCheckDetails(payload); setIsCheckingDetails(false); })();
+      
+      return;
+    }
+    if (!cart || cart.length === 0 && !isDirectOrder) { _setOrderSummary(null); notifyOrderSummary(null); prevPayloadRef.current = ''; return; }
     const isCartOrCheckout = pathname.endsWith('/shopping-cart') || pathname.endsWith('/checkout');
     if (!isCartOrCheckout) return;
     const payload = buildPayload();
@@ -130,10 +147,10 @@ export default function useCart() {
     if (key === prevPayloadRef.current) return;
     prevPayloadRef.current = key;
     (async () => { setIsCheckingDetails(true); await coalescedCheckDetails(payload); setIsCheckingDetails(false); })();
-  }, [cart, paymentMethod, buildPayload, pathname]);
+  }, [cart, paymentMethod, buildPayload, pathname, buildPayloadDirectOrder,isDirectOrder,directOrder]);
 
   // 5) RAF-scheduled quantity updates (NEW)
-  const rafRef = useRef(null);
+  const rafRef = useRef(null); 
   const pendingMapRef = useRef(new Map()); // id -> qty
 
   const flushPending = useCallback(() => {
@@ -159,7 +176,7 @@ export default function useCart() {
     rafRef.current = requestAnimationFrame(flushPending);
   }, [flushPending]);
 
-  
+
 
 
 
@@ -265,12 +282,12 @@ export default function useCart() {
       _setCart((prev) => {
         // Find the cart item to get its cartItemId
         const itemToUpdate = prev.find((item) => item.id === id);
-        const cartItemId = itemToUpdate?.cartItemId ?? null;
-
+        const cartItemId = itemToUpdate?.cartItemId || null;
         // If authenticated and cartItemId exists, update on server
         if (isAuthenticated && cartItemId) {
+
           (async () => {
-            try {
+            try { 
               const res = await updateCartItem(cartItemId, { quantity: val });
               if (res?.error) {
                 // toast.error(res?.message || 'حدث خطأ أثناء تحديث الكمية في السيرفر');
@@ -323,9 +340,20 @@ export default function useCart() {
       setIsCheckingDetails(true);
       return coalescedCheckDetails(payload).finally(() => setIsCheckingDetails(false));
     },
+    runCheckDetailsDirectOrder: (directOrder) => {
+   
+      const payload = buildPayloadDirectOrder(directOrder);
+      // prevPayloadRef.current = JSON.stringify(payload);
+      setIsCheckingDetails(true);
+      return coalescedCheckDetails(payload).finally(() => setIsCheckingDetails(false));
+    },
     paymentMethod,
     setPaymentMethod,
     couponCode,
     setCouponCode,
+    directOrder,
+    setDirectOrder,
+    isDirectOrder,  
+    setIsDirectOrder,
   };
 }

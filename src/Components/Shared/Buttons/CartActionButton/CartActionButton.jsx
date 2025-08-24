@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useImperativeHandle, forwardRef} from 'react';
+import { useEffect, useImperativeHandle, forwardRef, useRef} from 'react';
 import { useTranslations } from 'next-intl';
 import useCart from "@/hooks/useCart";
 import QuantityControl from "@/Components/ProductDetails/QuantityControl/QuantityControl";
@@ -43,10 +43,20 @@ const CartActionButton = ({ product, className = '',btnClassName='',styles ,icon
             t("removeSuccessTitle")
         );
     };
+ 
+
+
+    const quantityTimeoutRef = useRef();
+
     const handleQuantityChange = (val) => {
         setSelectedQty(val);
         if (getIsItemExisting(product.id)) {
-            updateQuantity(product.id, val);
+            if (quantityTimeoutRef.current) {
+                clearTimeout(quantityTimeoutRef.current);
+            }
+            quantityTimeoutRef.current = setTimeout(() => {
+                updateQuantity(product.id, val);
+            }, 700);
         }
     };
 

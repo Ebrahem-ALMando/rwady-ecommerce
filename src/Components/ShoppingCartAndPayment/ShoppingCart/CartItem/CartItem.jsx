@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useRef      } from "react";
 import Image from "next/image";
 import Select from "react-select";
 import styles from '../ShoppingCart.module.css';
@@ -16,6 +16,7 @@ import {useRouter} from "next/navigation";
 import CustomToast from "@/Components/Shared/CustomToast/CustomToast";
 import QuantityControl from "@/Components/ProductDetails/QuantityControl/QuantityControl";
 import {useTranslations} from "next-intl";
+import FavouriteToggleButton from "@/Components/Shared/Buttons/FavouriteToggleButton/FavouriteToggleButton";
 
 const CartItem = ({ item,cart, updateQuantity,getItemQuantity,removeItem,lang,t }) => {
     const { favourites, toggle, isFavourite, mutateFavourites } = useFavourites();
@@ -23,28 +24,24 @@ const CartItem = ({ item,cart, updateQuantity,getItemQuantity,removeItem,lang,t 
     const router = useRouter();
     const initialQty = getItemQuantity(item.id) || 1;
     const tCart = useTranslations("Cart");
-
+    const tFav=useTranslations('productCard')
     const [selectedQty, setSelectedQty] = useState(initialQty);
     useEffect(() => {
+        if (!item?.id || !Array.isArray(favourites)) return;
 
-        setLiked(isFavourite(item.id));
+      
+        const currentlyFav = isFavourite(item.id);
+
+        setLiked(currentlyFav);
+
 
     }, [favourites, item.id]);
 
-    const checkIsLogin = () => {
-        if (!checkAuthClient()) {
-            toast.error("يرجى تسجيل الدخول لتنفيذ هذا الاجراء");
-            router.push("/sign-in");
-            return false;
-        }
-        return true;
-    };
 
-    const handleToggleFavourites = async () => {
-        if (!checkIsLogin()) return;
-        setLiked(prev => !prev);
-        await toggle(item.id);
-        await mutateFavourites();
+    const handleToggle = async () => {
+        const res = await toggle(item.id);
+        const isNowFav = res?.data?.is_favorite;
+        setLiked(isNowFav);
     };
 
     const handleRemoveCartItem = () => {
@@ -58,7 +55,7 @@ const CartItem = ({ item,cart, updateQuantity,getItemQuantity,removeItem,lang,t 
 
             />,
             {
-                position: 'bottom-left',
+                position: 'top-left',
                 duration: 2500,
             }
         );
@@ -66,16 +63,28 @@ const CartItem = ({ item,cart, updateQuantity,getItemQuantity,removeItem,lang,t 
 
     useEffect(() => {
         const qty = getItemQuantity(item?.id);
-
         setSelectedQty(qty > 0 ? qty : 1);
-
     }, [cart, item.id]);
 
-    useEffect(() => {
-        if (selectedQty > 0&&cart.length>0) {
-            updateQuantity(item.id, selectedQty);
+  
+    const quantityTimeoutRef = useRef();
+
+    useEffect(() => {   
+        if (selectedQty > 0 && cart.length > 0) {
+            if (quantityTimeoutRef.current) {
+                clearTimeout(quantityTimeoutRef.current);
+            }
+            quantityTimeoutRef.current = setTimeout(() => {
+                updateQuantity(item.id, selectedQty);
+            }, 700);
         }
-    }, [selectedQty, item.id]);
+      
+        return () => {
+            if (quantityTimeoutRef.current) {
+                clearTimeout(quantityTimeoutRef.current);
+            }
+        };
+    }, [selectedQty, item.id, cart.length]);
 
     return (
         <div className={styles.productCard}>
@@ -100,41 +109,18 @@ const CartItem = ({ item,cart, updateQuantity,getItemQuantity,removeItem,lang,t 
 
                 <div className={styles.actionButton}>
                     <DeleteButton icon={DeleteIcon} onClick={handleRemoveCartItem}/>
-                    <motion.button
-                        onClick={handleToggleFavourites}
-                        className={`${styles.heart} ${liked ? styles.active : ""}`}
-                        whileTap={{scale: 0.9}}
-                        transition={{type: "spring", stiffness: 300}}
-                        aria-pressed={liked}
-                        aria-label={liked ? "إزالة من المفضلة" : "أضف للمفضلة"}
-                    >
-                        <motion.svg
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                            animate={liked ? {scale: [1, 1.2, 1]} : {scale: 1}}
-                            transition={
-                                liked
-                                    ? {
-                                        rotate: [0],
-                                        duration: 0.6,
-                                        repeat: Infinity,
-                                        repeatType: "loop",
-                                        ease: "easeInOut",
-                                    }
-                                    : {duration: 0.2}
-                            }
-                        >
-                            <motion.path
-                                d="M16.44 3.1C14.63 3.1 13.01 3.98 12 5.33C10.99 3.98 9.37 3.1 7.56 3.1C4.49 3.1 2 5.6 2 8.69C2 9.88 2.19 10.98 2.52 12C4.1 17 8.97 19.99 11.38 20.81C11.72 20.93 12.28 20.93 12.62 20.81C15.03 19.99 19.9 17 21.48 12C21.81 10.98 22 9.88 22 8.69C22 5.6 19.51 3.1 16.44 3.1Z"
-                                fill={liked ? "#E41E1E" : "none"}
-                                stroke={liked ? "#E41E1E" : "#0741AD"}
-                                strokeWidth="1"
+                    <FavouriteToggleButton
+                                liked={liked}
+                                likedCount={item.fav_num || 0}
+                                onToggle={handleToggle}
+                                showcount={false}
+                                showtext={false}
+                                t={tFav}
+                                isShoppingCart={true}
+                                className={styles.heart}
+                                divClassName={styles.heartDiv}
+                                svgStyle={styles.heartSVG}
                             />
-                        </motion.svg>
-                    </motion.button>
                 </div>
             </div>
 
@@ -147,7 +133,7 @@ const CartItem = ({ item,cart, updateQuantity,getItemQuantity,removeItem,lang,t 
                     <p className={styles.oldPrice}>
                           <span className={styles.discount}>
                             {item.discount_percentage_text?.[lang] || t("discount", {
-                                percentage: getDiscountPercentage(item.price, item.price_after_discount)
+                                    percentage: getDiscountPercentage(item.price, item.final_price_after_promotion||item.price_after_discount)
                             })}
                           </span>
                         <del>{item.price} IQD</del>
@@ -167,21 +153,16 @@ const CartItem = ({ item,cart, updateQuantity,getItemQuantity,removeItem,lang,t 
                     <label htmlFor={`quantity-${item.id}`}>{t("quantity")}</label>
                 </div>
                 <div className={styles.quantityControl}>
-                    <QuantityControl
-                        productQTU={item.stock_unlimited ? 999 : item.stock}
-                        quantity={selectedQty}
+                {item.stock_unlimited &&
+                <QuantityControl
+                    stockUnlimited={item.stock_unlimited}
+                    max={!item.stock_unlimited?item.stock:999}
+                    productQTU={item.stock}
+                    quantity={selectedQty}
+                    onIncrement={() => setSelectedQty(prev => Math.min(prev + 1, item.maximum_purchase?item.maximum_purchase:item.stock_unlimited?999:item.stock))}
+                    onDecrement={() => setSelectedQty(prev => Math.max(item.minimum_purchase ||1, prev - 1 ))}
 
-                        // onIncrement={() =>
-                        //     setSelectedQty(prev => Math.min(prev + 1, item.maximum_purchase))
-                        // }
-                        // onDecrement={() =>
-                        //     setSelectedQty(prev => Math.max(item.minimum_purchase, prev - 1))}
-                        onIncrement={() =>
-                            setSelectedQty(prev => Math.min(prev + 1, item.maximum_purchase))
-                        }
-                        onDecrement={() =>
-                            setSelectedQty(prev => Math.max(1, prev - 1))}
-                    />
+                />}
 
                 </div>
             </div>

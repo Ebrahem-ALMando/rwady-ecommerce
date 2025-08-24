@@ -1,13 +1,11 @@
 import createMiddleware from 'next-intl/middleware';
 import {routing} from '@/i18n/routing';
 import {NextResponse} from 'next/server';
-import {getTokenWithServer} from "@/utils/getTokenWithServer";
-
 const intlMiddleware = createMiddleware(routing);
 
 export function middleware(request) {
     const token = request.cookies.get("token")?.value;
-
+  
     const user_id = request.cookies.get("user_id")?.value;
     const pathname = request.nextUrl.pathname;
 
@@ -24,14 +22,19 @@ export function middleware(request) {
         params.has('paymentType') &&
         params.has('status');
 
-    if ((token && user_id) && ["/sign-in", "/verify"].some((p) => path.includes(p))) {
+    if ((token && user_id 
+        // || tokenWithOutSideRequest
+    ) && ["/sign-in", "/verify"].some((p) => path.includes(p))) {
         return NextResponse.redirect(new URL(`/${locale}/`, request.url));
     }
 
     // startsWith
-    if (!(token && user_id) &&
-        !isPaymentCallback &&
+    if (!(token && user_id ) &&
+        !isPaymentCallback 
+        // || !tokenWithOutSideRequest
+        &&
         ["/orders", "/profile", "/checkout", "/favourites", "/addresses-list", "/transaction-and-payment-history"]
+       
             .some((p) => path.includes(p))) {
         return NextResponse.redirect(new URL(`/${locale}/sign-in`, request.url));
     }

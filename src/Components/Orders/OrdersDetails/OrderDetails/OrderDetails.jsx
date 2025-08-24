@@ -305,6 +305,7 @@ const OrderDetails = () => {
                                 handleVerifyOtp={handleVerifyOtp}
                                 otpError={otpError}
                                 t={t}
+                                isOneInput={true}
                             />
                         )}
                         <div className={styles.boxDetails}>

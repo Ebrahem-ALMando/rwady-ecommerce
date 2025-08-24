@@ -74,7 +74,7 @@ const ProductCardSlider = ({ product, lang, setIsDraggingInsideCard }) => {
 
 
     const cartRef = useRef();
-    const { getItemQuantity, addItem, removeItem, updateQuantity, getIsItemExisting, cart, isSyncing, updateQuantityRaf } = useCart();
+    const { getItemQuantity, addItem, removeItem, updateQuantity, getIsItemExisting, cart, isSyncing } = useCart();
 
     useEffect(() => {
         const timerId = setInterval(() => {
@@ -85,46 +85,7 @@ const ProductCardSlider = ({ product, lang, setIsDraggingInsideCard }) => {
 
 
 
-    // const [isAddToCart,setIsAddToCart] = useState(false);
-
-
-    // const { addItem,getItemQuantity,getIsItemExisting,removeItem ,updateQuantity,cart} = useCart();
-    // const initialQty = getItemQuantity(product.id) || 1;
-    // const [selectedQty, setSelectedQty] = useState(initialQty);
-
-
-    // const [selectedQty, setSelectedQty] = useState(initialQty);
-
-    //
-    // useEffect(() => {
-    //     const qty = getItemQuantity(product.id);
-    //
-    //     setSelectedQty(qty > 0 ? qty : 1);
-    //
-    //
-    //     setIsAddToCart(getIsItemExisting(product.id));
-    //
-    // }, [cart, product.id]);
-
-    // const handleQuantityChange = (newQty) => {
-    //     const numericQty = Number(newQty);
-    //     if (numericQty > 0 && numericQty <= product.quantity) {
-    //         setSelectedQty(numericQty);
-    //         if (getIsItemExisting(product.id)) {
-    //             updateQuantity(product.id, numericQty);
-    //         }
-    //     }
-    // };
-
-    // useEffect(() => {
-    //     if (selectedQty > 0&&cart.length>0) {
-    //         updateQuantity(product.id, selectedQty);
-    //     }
-    // }, [selectedQty, product.id]);
-
-    // const handleToggleToCart = () => {
-    //     handleToggleCart(isAddToCart,removeItem,product,addItem,selectedQty,lang)
-    // }
+   
 
 
     const handleColorClick = (color) => {
@@ -424,7 +385,6 @@ const ProductCardSlider = ({ product, lang, setIsDraggingInsideCard }) => {
                         addItem={addItem}
                         removeItem={removeItem}
                         updateQuantity={updateQuantity}
-                        updateQuantityRaf={updateQuantityRaf}
                         getItemQuantity={getItemQuantity}
                         getIsItemExisting={getIsItemExisting}
                         cart={cart}
@@ -443,7 +403,6 @@ const ProductCardSlider = ({ product, lang, setIsDraggingInsideCard }) => {
                         addItem={addItem}
                         removeItem={removeItem}
                         updateQuantity={updateQuantity}
-                        updateQuantityRaf={updateQuantityRaf}
                         getItemQuantity={getItemQuantity}
                         getIsItemExisting={getIsItemExisting}
                         cart={cart}

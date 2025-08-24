@@ -7,16 +7,16 @@ import { clientLogin } from "@/api/services/auth/clientLogin";
 import Cookies from "js-cookie";
 import { getTokenWithClient } from "@/utils/getTokenWithClient";
 import { toast } from "react-hot-toast";
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { useAuth } from "@/hooks/useAuth";
 import { getProfile } from "@/api/services/auth/getProfile";
 import {syncCartWithServerOnLogin} from "@/utils/syncCartWithServer";
-
+import Link from 'next/link';
 const Verify = () => {
     const t = useTranslations("verify");
     const router = useRouter();
     const searchParams = useSearchParams();
-
+    const lang = useLocale();
     const phone = searchParams.get('phone');
 
     const [otp, setOtp] = useState(['', '', '', '', '']);
@@ -37,9 +37,56 @@ const Verify = () => {
             const newOtp = [...otp];
             newOtp[index] = value;
             setOtp(newOtp);
+            
+            // إذا تم إدخال رقم، انتقل للحقل التالي
             if (value && index < otp.length - 1) {
-                document.getElementById(`otp-${index + 1}`)?.focus();
+                setTimeout(() => {
+                    document.getElementById(`otp-${index + 1}`)?.focus();
+                }, 50);
             }
+            
+            // إذا تم حذف رقم، انتقل للحقل السابق
+            if (!value && index > 0) {
+                setTimeout(() => {
+                    document.getElementById(`otp-${index - 1}`)?.focus();
+                }, 50);
+            }
+        }
+    };
+
+    const handleKeyDown = (index, e) => {
+        // دعم الحذف
+        if (e.key === 'Backspace' && !otp[index] && index > 0) {
+            document.getElementById(`otp-${index - 1}`)?.focus();
+        }
+    };
+
+    const handlePaste = (e) => {
+        e.preventDefault();
+        const pastedData = e.clipboardData.getData('text/plain');
+        const numbers = pastedData.replace(/\D/g, '').slice(0, 5);
+        
+        if (numbers.length > 0) {
+            const newOtp = [...otp];
+            numbers.split('').forEach((digit, index) => {
+                if (index < 5) {
+                    newOtp[index] = digit;
+                }
+            });
+            setOtp(newOtp);
+            
+            // التركيز على آخر حقل مملوء أو الحقل التالي
+            const nextIndex = Math.min(numbers.length, 4);
+            document.getElementById(`otp-${nextIndex}`)?.focus();
+        }
+    };
+
+    const handleCopy = (e) => {
+        e.preventDefault();
+        const code = otp.join('');
+        if (code.length === 5) {
+            navigator.clipboard.writeText(code);
+            toast.success(t("otpCopied"));
         }
     };
 
@@ -126,20 +173,47 @@ const Verify = () => {
                         {t("instruction")} <span className="font-bold text-black">{phone}</span>
                     </p>
 
-                    <div className="flex justify-center gap-3 mb-8 ltr">
+                    <motion.div 
+                        className="flex justify-center gap-3 mb-8 ltr"
+                        animate={{
+                            scale: otp.every(digit => digit !== '') ? [1, 1.02, 1] : 1
+                        }}
+                        transition={{
+                            duration: 0.5,
+                            ease: "easeInOut"
+                        }}
+                    >
                         {otp.map((digit, index) => (
-                            <input
+                            <motion.input
                                 key={index}
                                 id={`otp-${index}`}
                                 type="text"
                                 maxLength={1}
                                 value={digit}
                                 onChange={(e) => handleOtpChange(index, e.target.value)}
-                                className="w-16 h-16 text-3xl text-center border-2 border-gray-200 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all"
+                                onKeyDown={(e) => handleKeyDown(index, e)}
+                                onPaste={handlePaste}
+                                onCopy={handleCopy}
+                                onClick={(e) => e.target.select()}
+                                className={`w-16 h-16 text-3xl text-center border-2 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-300 ${
+                                    digit 
+                                        ? 'border-green-500 bg-green-50 text-green-700' 
+                                        : 'border-gray-200 bg-white text-gray-700'
+                                }`}
                                 inputMode="numeric"
+                                animate={{
+                                    scale: digit ? [1, 1.05, 1] : 1,
+                                    backgroundColor: digit ? '#f0fdf4' : '#ffffff',
+                                    borderColor: digit ? '#22c55e' : '#e5e7eb',
+                                    boxShadow: digit ? '0 4px 12px rgba(34, 197, 94, 0.2)' : '0 0 0 rgba(0, 0, 0, 0)'
+                                }}
+                                transition={{
+                                    duration: 0.3,
+                                    ease: "easeInOut"
+                                }}
                             />
                         ))}
-                    </div>
+                    </motion.div>
 
                     <div className="text-center text-gray-600 font-arabic mb-6">
                         {timeLeft > 0 ? (
@@ -169,7 +243,14 @@ const Verify = () => {
 
                     <div className="text-start">
                         <p className="text-gray-600">
-                            {t("problem")} <span className="mr-1 text-blue-600 font-bold">{t("support")}</span>
+                           {t("problem")}    
+                            <span className="mr-1 text-blue-600 font-bold">
+                            <Link href={`/${lang}/contact-us`} prefetch={true}>
+                                {t("support")}
+                                </Link>
+                                </span>
+                              
+
                         </p>
                     </div>
                 </div>

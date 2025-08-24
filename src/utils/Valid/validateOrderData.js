@@ -7,6 +7,7 @@ import { toast } from "react-hot-toast";
  *  addressId: number|null,
  *  paymentMethodId?: number|null,
  *  cart: any[],
+ *  directOrder: any|null,
  *  paymentType: string,
  *  uploadedFile?: string|null,
  *  identity?: string|null,
@@ -14,8 +15,8 @@ import { toast } from "react-hot-toast";
  * }} param0
  * @returns {boolean}
  */
-export const validateOrderData = ({ addressId, cart, paymentType, uploadedFile, identity, t }) => {
-    if (cart.length === 0) {
+export const validateOrderData = ({ addressId, cart,directOrder, paymentType, uploadedFile, identity, t  }) => {
+    if (cart.length === 0 && Object.keys(directOrder).length === 0) {
         toast.custom(
             <CustomToast
                 type="warning"

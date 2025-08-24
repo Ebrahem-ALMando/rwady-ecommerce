@@ -83,7 +83,7 @@ export const useAuth = () => {
             color_id: item.color_id ?? p.color_id ?? null,
             image_url: firstImageUrl(p),
             brands: p.brands || null,
-            cartItemId: item.id ?? item.cartItemId ?? null, // server cart item id
+            cartItemId: item.id  || null,
             quantity: item.quantity ?? 1,
         };
     };

@@ -95,7 +95,7 @@
     color: #6A6E83;
 }
 
-.contact button {
+.contact a {
     background-color: #0741AD1A;
     color: #0741AD;
     border: none;
@@ -106,7 +106,7 @@
     transition: all 0.3s ease;
 }
 
-.contact button:hover {
+.contact a:hover {
     background-color: #0741ad2d;
     transform: translateY(-2px);
 }

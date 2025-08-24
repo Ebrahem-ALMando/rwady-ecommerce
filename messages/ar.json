@@ -36,7 +36,8 @@
     "loginError": "فشل في العملية. حاول لاحقًا",
     "logoutSuccess": "تم تسجيل الخروج بنجاح",
     "logoutFailed": "فشل في تسجيل الخروج",
-    "logoutError": "حدث خطأ أثناء تسجيل الخروج"
+    "logoutError": "حدث خطأ أثناء تسجيل الخروج",
+    "otpCopied": "تم نسخ الرمز بنجاح"
   },
 
   "navBar": {
@@ -220,7 +221,8 @@
       "notAvailable": "غير متاح",
       "maximize": "تكبير الصورة",
       "inFavourites": "في المفضلة",
-      "buyDirectly": "شراء مباشر"
+      "buyDirectly": "شراء مباشر",
+      "buyDirectlySuccess": "جاري تحويلك لصفحة الدفع لإكمال عملية الشراء"
 
 
     },
@@ -326,6 +328,17 @@
     "monthlyInstallment": "القسط الشهري",
     "grandTotal": "الإجمالي بعد كل الرسوم",
     "taxNote": "الأسعار شاملة للضريبة",
+    "promotionCartTotal": "خصم حملة السلة",
+    "promotionShipping": "خصم حملة الشحن",
+    "promotionDiscount": "خصم الحملة الترويجية",
+    "promotionDetailsTitle": "تفاصيل الحملة",
+    "promotionTitle": "عنوان الحملة",
+    "promotionType": "نوع الحملة",
+    "promotionValue": "قيمة الخصم",
+    "promotionPercentage": "نسبة الخصم",
+    "promotionFixed": "خصم ثابت",
+    "freeShipping": "شحن مجاني",
+    "shippingDiscount": "خصم الشحن",
     "completeOrder": "إتمام الطلب",
     "sending": "جاري الإرسال...",
     "successTitle": "تم إرسال الطلب بنجاح",
@@ -349,6 +362,9 @@
 
     "invalidIdentityNumber": "رقم البطاقة أو المعرّف غير صحيح",
     "invalidIdentityTitle": "تعذر التحقق",
+    "order_type": "نوع الطلب",
+    "direct_order": "شراء مباشر",
+    "normal_order": "شراء عادي",
     "validation": {
       "emptyCartTitle": "لا يوجد منتجات",
       "emptyCartMsg": "سلة التسوق فارغة، لا يمكن إتمام الطلب.",
@@ -376,8 +392,8 @@
     "confirmText": "هل أنت مستعد لإتمام طلبك؟ تأكد من صحة العنوان وطريقة الدفع، ثم اضغط على زر",
     "completeOrder": "إتمام الطلب",
     "reviewNote": "يرجى مراجعة",
-    "shippingPolicy": "طريقة الشحن",
-    "terms": "سياسة التعامل",
+    "shippingPolicy": "سياسة الشحن والتوصيل",
+    "terms": "سياسة الاستبدال والاسترجاع",
     "notesLabel": "ملاحظات إضافية (اختياري):",
     "notesPlaceholder": "مثلاً: الاتصال قبل التوصيل...",
     "paymentTitle": "الدفع",

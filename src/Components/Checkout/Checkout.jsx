@@ -54,12 +54,32 @@ const Checkout = () => {
     const router = useRouter();
     const lang=useLocale()
     const tAddresses=useTranslations('Addresses')
-    const t = useTranslations("Checkout");
+    const [directOrder, setDirectOrder] = useState({});
+    const [isDirectOrder, setIsDirectOrder] = useState(false);
+    const [mode, setMode] = useState(null);
+    const t = useTranslations("Checkout");  
+    const { runCheckDetailsDirectOrder } = useCart();
     useEffect(() => {
         const state = searchParams.get('state');
         const orderPlaced = sessionStorage.getItem('orderPlaced');
         const orderId = sessionStorage.getItem('placedOrderId');
-
+        const mode = searchParams.get('mode');
+        const data = JSON.parse(sessionStorage.getItem('buyDirectly'));
+                
+        if(mode === 'direct_order' && data){
+            setDirectOrder(data);
+            setIsDirectOrder(true);
+            setMode(mode);  
+            runCheckDetailsDirectOrder( data);
+            
+        }
+        if(!mode){
+            setIsDirectOrder(false);
+            setDirectOrder({});
+            setMode(null);
+            sessionStorage.removeItem('buyDirectly');   
+        }
+    
         if (['success', 'failure', 'externel', 'installment'].includes(state)) {
             if (orderPlaced) {
                 setPaymentState(state);
@@ -67,7 +87,7 @@ const Checkout = () => {
                 sessionStorage.removeItem('orderPlaced');
                 sessionStorage.removeItem('placedOrderId');
             } else {
-                router.push(`/${lang}/checkout`);
+                router.push(`/${lang}/checkout?mode=${mode}`);
             }
         }
     }, [searchParams, router]);
@@ -163,7 +183,7 @@ const Checkout = () => {
                             type={paymentState}
                             onClose={() => {
                                 setPaymentState(null);
-                                router.push(`/${lang}/checkout`);
+                                router.push(`/${lang}/checkout?${mode ? `mode=${mode}` : ''}`);
                             }}
                             lang={lang}
                             orderId={orderId}
@@ -247,9 +267,9 @@ const Checkout = () => {
                                             <div className={styles.policyLinks}>
                                                 <p>📄 {t("reviewNote")}:</p>
                                                 <ul>
-                                                    <li><a href="/shipping-policy"
+                                                    <li><a href={`/${lang}/shipment-policies`}
                                                            target="_blank">{t("shippingPolicy")}</a></li>
-                                                    <li><a href="/terms" target="_blank">{t("terms")}</a></li>
+                                                    <li><a href={`/${lang}/return-policy`} target="_blank">{t("terms")}</a></li>
                                                 </ul>
                                             </div>
 
@@ -317,6 +337,14 @@ const Checkout = () => {
                             longitude={defaultAddress?.longitude || ""}
                             identity={paymentData?.method === "installment" ? profileData?.data?.identity : null}
                             lang={lang}
+                            directOrder={directOrder}
+                            isDirectOrder={isDirectOrder}
+                            mode={mode}
+                            setIsDirectOrder={setIsDirectOrder}
+                            setDirectOrder={setDirectOrder}
+                            setMode={setMode}
+                            next={next}
+                            step={step}
                         />
 
                     </div>

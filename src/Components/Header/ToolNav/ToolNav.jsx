@@ -41,7 +41,7 @@ const ToolNav = ({ toggleMenu, isScrolled,getCartCount }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isSearchOpen, setIsSearchOpen] = useState(false);
-
+   
     const openSearchModal = () => setIsModalOpen(true);
     const closeSearchModal = () => setIsModalOpen(false);
     const lang=useLocale()
@@ -86,14 +86,15 @@ const ToolNav = ({ toggleMenu, isScrolled,getCartCount }) => {
     }, []);
 
 
-    // const { data, error, isLoading, mutate }
-    //     = useSWR(
-    //     `notificationDataCount`,
-    //     getUnreadCountNotifications,
-    //     {
-    //         revalidateOnFocus: false,
-    //     }
-    // );
+    const { data: notificationCount, error, isLoading, mutate }
+        = useSWR(
+        `notificationDataCount`,
+        getUnreadCountNotifications,
+        {
+            revalidateOnFocus: false,
+        }
+    );
+ 
 
     return (
         <div>
@@ -115,7 +116,8 @@ const ToolNav = ({ toggleMenu, isScrolled,getCartCount }) => {
                                      element={FavouriteIcon} aria={t("favourites")}/>
                             <TopIcon link={`/${lang}/shopping-cart`}
                                      count={cartCount} element={ShoppingCartIcon} aria={t("cart")}/>
-                            <TopIcon setIsOpen={() => setNotificationVisible(prev => !prev)} count={9}
+                            <TopIcon setIsOpen={() => setNotificationVisible(prev => !prev)} 
+                            count={notificationCount??0}
                                      element={NotificationIcon} aria={t("notifications")}/>
 
 
