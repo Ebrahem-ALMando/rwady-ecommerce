@@ -12,7 +12,6 @@ import {getProfile} from "@/api/services/auth/getProfile";
 import {formatTime} from "@/utils/formatTime";
 import {useEffect, useState} from "react";
 import {readNotification} from "@/api/services/general/notifications/readNotification";
-import { database } from "@/lib/firebase";
 import EmptyNotificationBox from "@/Components/Notification/EmptyNotificationBox/EmptyNotificationBox";
 // import { ref, onChildAdded } from "firebase/database";
 const SKIP_PROFILE_KEY = "rwady_skip_complete_profile";

@@ -1,40 +1,41 @@
-import { useState, useEffect } from 'react';
-import { messaging } from "@/hooks/firebase";
-import { getToken, onMessage } from 'firebase/messaging';
-import { toast } from 'react-hot-toast';
 
 export const useNotification = () => {
+    // تأكد من أن الكود يعمل فقط في المتصفح
+    if (typeof window === "undefined") return {};
+
+    // الاستيرادات بعد التحقق من window
+    const { getToken, onMessage } = require('firebase/messaging');
+    const { toast } = require('react-hot-toast');
+    const { mutate } = require('swr');
+    const { useLocale } = require('next-intl');
+    const CustomToast = require('@/Components/Shared/CustomToast/CustomToast').default;
+
     const [deviceToken, setDeviceToken] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-
+    const lang = useLocale();
+    
     // طلب إذن الإشعارات وجلب توكن الجهاز
     const requestNotificationPermission = async () => {
-        console.log('🔔 [useNotification] Starting notification permission request...');
+        if(typeof window === "undefined") return null;  
+        
         try {
             if (!messaging) {
                 console.warn('⚠️ [useNotification] Firebase messaging is not available');
                 return null;
             }
 
-            console.log('🔔 [useNotification] Requesting notification permission...');
             const permission = await Notification.requestPermission();
-            console.log('🔔 [useNotification] Permission result:', permission);
             
             if (permission === 'granted') {
                 try {
-                    console.log('🔔 [useNotification] Getting Firebase token...');
                     const token = await getToken(messaging, {
                         vapidKey: process.env.NEXT_PUBLIC_FIREBASE_VAPID_KEY
                     });
-                    console.log('✅ [useNotification] Firebase token obtained:', token ? 'Token exists' : 'No token');
-                    console.log('🔔 [useNotification] Firebase token:', token);
                     return token;
                 } catch (tokenError) {
-                    console.error('❌ [useNotification] Error getting Firebase token:', tokenError);
                     return null;
                 }
             } else {
-                console.warn('⚠️ [useNotification] Notification permission denied:', permission);
                 return null;
             }
         } catch (error) {
@@ -45,30 +46,25 @@ export const useNotification = () => {
 
     // إعداد الاستماع للإشعارات
     useEffect(() => {
-        console.log('🚀 [useNotification] Setting up notification listener...');
+        if(typeof window === "undefined") return null;  
+            
         
         if (!messaging) {
             console.warn('⚠️ [useNotification] Firebase messaging not available for message listener');
             return;
         }
 
-        console.log('🔔 [useNotification] Setting up message listener...');
         const unsubscribe = onMessage(messaging, (payload) => {
-            console.log('📨 [useNotification] Received notification:', payload);
             
-            // عرض الإشعار باستخدام toast
+            // تحديث بيانات الإشعارات
+            mutate(["notificationData", lang]);
+            mutate("notificationDataCount");
+            
+            // عرض الإشعار باستخدام toast محسن
             if (payload.notification?.title) {
-                console.log('📨 [useNotification] Showing notification with title:', payload.notification.title);
-                toast.success(payload.notification.title, {
-                    description: payload.notification.body,
-                    duration: 5000,
-                });
+                showEnhancedToast(payload.notification.title, payload.notification.body, payload.notification.image);
             } else if (payload.notification?.body) {
-                console.log('📨 [useNotification] Showing notification with body only');
-                toast.success('إشعار جديد', {
-                    description: payload.notification.body,
-                    duration: 5000,
-                });
+                showEnhancedToast('إشعار جديد', payload.notification.body, payload.notification.image);
             }
         });
 
@@ -77,7 +73,7 @@ export const useNotification = () => {
             console.log('🧹 [useNotification] Cleaning up message listener...');
             unsubscribe();
         };
-    }, []);
+    }, [lang]);
 
     return {
         deviceToken,
@@ -86,4 +82,55 @@ export const useNotification = () => {
         setIsLoading,
         requestNotificationPermission
     };
+};
+
+// دالة عرض توست محسن باستخدام CustomToast
+export const showEnhancedToast = (title, message, imageUrl) => {
+    if(typeof window === "undefined") return null;  
+
+    // الاستيرادات بعد التحقق من window
+    const { toast } = require('react-hot-toast');
+    const CustomToast = require('@/Components/Shared/CustomToast/CustomToast').default;
+    
+    // تحديد نوع التوست بناءً على المحتوى
+    let type = 'success';
+    
+    // إذا كان العنوان يحتوي على كلمات معينة، نحدد النوع
+    const titleLower = title.toLowerCase();
+    if (titleLower.includes('نجح') || titleLower.includes('تم') || titleLower.includes('success')) {
+        type = 'success';
+    } else if (titleLower.includes('خطأ') || titleLower.includes('فشل') || titleLower.includes('error')) {
+        type = 'error';
+    } else if (titleLower.includes('تحذير') || titleLower.includes('warning')) {
+        type = 'warning';
+    }
+    
+    // إنشاء أيقونة مخصصة إذا كانت هناك صورة
+    const customIcon = imageUrl ? (
+        <img 
+            src={imageUrl} 
+            alt="Notification"
+            style={{
+                width: '24px',
+                height: '24px',
+                borderRadius: '4px',
+                objectFit: 'cover'
+            }}
+            onError={(e) => {
+                e.target.style.display = 'none';
+            }}
+        />
+    ) : null;
+    
+    toast.custom((t) => (
+        <CustomToast
+            type={type}
+            title={title}
+            message={message}
+            icon={customIcon}
+        />
+    ), {
+        duration: 5000,
+        position: 'top-left',
+    });
 };

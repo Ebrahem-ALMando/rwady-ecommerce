@@ -65,6 +65,7 @@
     font-size: 1.1rem;
     margin-bottom: 0.3rem;
     font-weight: 600;
+    text-align: right;
 }
 
 .toastMessage {
@@ -72,6 +73,13 @@
     font-size: 0.9rem;
     margin: 0;
     line-height: 1.4;
+    text-align: right;
+}
+
+/* RTL support for Arabic */
+[dir="rtl"] .toastTitle,
+[dir="rtl"] .toastMessage {
+    text-align: right;
 }
 
 

@@ -1,7 +1,6 @@
 
 import Verify from "@/Components/Auth/Verify/Verify";
-import {Suspense} from "react";
-import Loading from "@/Components/Shared/Loading/Loading";
+import {Suspense} from "react";  
 import VerifySkeleton from "@/Components/Auth/Verify/VerifySkeleton/VerifySkeleton";
 export async function generateMetadata({ params }) {
     const { locale } =await params;

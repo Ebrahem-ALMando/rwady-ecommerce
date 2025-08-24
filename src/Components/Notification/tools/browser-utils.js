@@ -272,61 +272,6 @@ export const canUseNotifications = () => {
     return 'Notification' in window && 'serviceWorker' in navigator && 'PushManager' in window;
 };
 
-// دالة جديدة لفحص دعم Firebase Cloud Messaging
-export const canUseFCM = () => {
-    if (typeof window === 'undefined' || typeof navigator === 'undefined') return false;
-
-    const browserInfo = getBrowserInfo();
-    
-    // فحص الشروط الأساسية
-    if (!browserInfo.isFCMSupported || !browserInfo.isPushSupported) {
-        return false;
-    }
-
-    // فحص إذا كان WebView
-    if (browserInfo.isWebView || browserInfo.isInstagramWebView || 
-        browserInfo.isFacebookWebView || browserInfo.isSnapchatWebView) {
-        return false;
-    }
-
-    // فحص إذا كان mobile
-    if (browserInfo.isMobile) {
-        return false;
-    }
-
-    return true;
-};
-
-// دالة جديدة لطلب إذن الإشعارات مع معالجة أفضل للأخطاء
-export const requestNotificationPermission = async () => {
-    try {
-        if (typeof window === 'undefined') {
-            throw new Error('Window is not available');
-        }
-
-        if (!('Notification' in window)) {
-            throw new Error('Notifications are not supported in this browser');
-        }
-
-        const browserInfo = getBrowserInfo();
-        
-        if (!canUseFCM()) {
-            throw new Error(browserInfo.supportMessage);
-        }
-
-        // طلب الإذن
-        const permission = await Notification.requestPermission();
-        
-        if (permission === 'granted') {
-            return { success: true, permission };
-        } else {
-            return { success: false, permission, error: 'Permission denied by user' };
-        }
-    } catch (error) {
-        return { success: false, permission: 'denied', error: error.message };
-    }
-};
-
 // دالة فحص دعم التخزين
 export const canUseStorage = () => {
     if (typeof window === 'undefined') return false;

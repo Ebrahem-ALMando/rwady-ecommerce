@@ -8,11 +8,11 @@ import { Geist, Geist_Mono, IBM_Plex_Sans_Arabic } from "next/font/google";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../../styles/globals.css";
+import "../../styles/toast.css";
 import { Toaster } from "react-hot-toast";
 import ProgressBar from "@/Components/Shared/ProgressBar/ProgressBar";
 import NetworkStatus from "@/Components/Shared/NetworkStatus/NetworkStatus";
-import ForegroundNotificationListenerProvider from "@/Components/Notification/tools/foreground-notification-listener-provider";
-import { NotificationToastProvider } from "@/Components/Shared/NotificationToastProvider/NotificationToastProvider";
+import NotificationProvider from "@/Components/Shared/NotificationProvider/NotificationProvider";
 const geistSans = Geist({
     variable: "--font-geist-sans",
     subsets: ["latin"],
@@ -112,19 +112,34 @@ export default async function LocaleLayout({ children, params }) {
     return (
         <html lang={locale} dir={dir}>
         <body className={`${geistSans.variable} ${geistMono.variable} ${ibmArabic.variable} antialiased`}>
-        <Toaster position="top-center" reverseOrder={false} duration={3000}/>
+        <Toaster 
+            position="top-right" 
+            reverseOrder={false} 
+            duration={5000}
+            containerStyle={{
+                top: 20,
+                right: 20,
+            }}
+            toastOptions={{
+                style: {
+                    background: 'transparent',
+                    padding: 0,
+                    margin: 0,
+                    boxShadow: 'none',
+                },
+            }}
+        />
         <main >
         <div className="mainContainer">
             <ProgressBar/>
             <div className="child">
                 <NetworkStatus/>
                 <NextIntlClientProvider locale={locale} messages={messages}>
-                    <NotificationToastProvider>
-                        {children}
-                        {/*<ScrollToTop/>*/}
-                        <ForegroundNotificationListenerProvider/>
-                    </NotificationToastProvider>
-                </NextIntlClientProvider>
+                    <NotificationProvider />
+                    {children}
+                     {/*<ScrollToTop/>*/}
+                 
+              </NextIntlClientProvider>
              </div>
          </div>
          </main>

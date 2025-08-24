@@ -1,14 +1,21 @@
-import { getBrowserInfo, canUseFCM, requestNotificationPermission as requestPermission } from './browser-utils';
+import { getBrowserInfo } from './browser-utils';
 import { messaging } from './firebase';
+// import { useAppDispatch } from '@/lib/redux/hooks';
+// import { fetchNotifications } from '@/lib/redux/slices/notificationsSlice';
 import { deleteToken, getToken, onMessage } from 'firebase/messaging';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
+
+// تم تعطيل الكاش في الموقع
+
+
 
 export const useFirebaseMessaging = () => {
     const [permission, setPermission] = useState('default');
     const [token, setToken] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
+    const dispatch = useAppDispatch();
     
     // فحص دعم المتصفح
     const browserInfo = getBrowserInfo();
@@ -59,18 +66,19 @@ export const useFirebaseMessaging = () => {
         setError(null);
 
         try {
-            // فحص دعم FCM
-            if (!canUseFCM()) {
-                const browserInfo = getBrowserInfo();
-                setError(browserInfo.supportMessage);
+            const support = checkBrowserSupport();
+
+            // فحص إذا كان المتصفح مدعوم
+            if (!support.canRequestPermission) {
+                setError(support.supportMessage);
                 return null;
             }
 
-            // طلب الإذن باستخدام الدالة المحسنة
-            const result = await requestPermission();
-            setPermission(result.permission);
+            // طلب الإذن
+            const permissionResult = await Notification.requestPermission();
+            setPermission(permissionResult);
 
-            if (result.success) {
+            if (permissionResult === 'granted') {
                 // الحصول على token
                 const vapidKey = process.env.NEXT_PUBLIC_FIREBASE_VAPID_KEY;
                 if (!vapidKey) {
@@ -93,7 +101,7 @@ export const useFirebaseMessaging = () => {
                     return null;
                 }
             } else {
-                setError(result.error || 'تم رفض إذن الإشعارات');
+                setError('تم رفض إذن الإشعارات');
                 return null;
             }
         } catch (err) {
@@ -159,6 +167,10 @@ export const useFirebaseMessaging = () => {
         if (typeof window === 'undefined') return;
 
         const unsubscribe = onMessage(messaging, (payload) => {
+            
+            // إضافة الإشعار إلى Redux store
+            dispatch(fetchNotifications({}));
+            
             // عرض toast notification
             toast.success(payload.notification?.title || 'إشعار جديد', {
                 description: payload.notification?.body,
@@ -167,7 +179,7 @@ export const useFirebaseMessaging = () => {
         });
 
         return () => unsubscribe();
-    }, []);
+    }, [dispatch]);
 
     // التحقق من حالة الإذن عند التحميل
     useEffect(() => {

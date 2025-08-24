@@ -3,7 +3,7 @@
 import { getBrowserInfo } from "./browser-utils";
 import { useEffect, useState } from "react";
 
-export default function ForegroundNotificationListenerProvider(props) {
+export default function ForegroundNotificationListenerProvider() {
     const [Component, setComponent] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -27,7 +27,7 @@ export default function ForegroundNotificationListenerProvider(props) {
         setError(null);
 
         // Dynamic import للمكون
-        import("./foreground-notification-listener.jsx")
+        import("./foreground-notification-listener.js")
             .then((module) => {
                 setComponent(() => module.default);
                 setIsLoading(false);
