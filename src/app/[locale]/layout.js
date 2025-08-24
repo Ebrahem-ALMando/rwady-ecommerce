@@ -11,7 +11,8 @@ import "../../styles/globals.css";
 import { Toaster } from "react-hot-toast";
 import ProgressBar from "@/Components/Shared/ProgressBar/ProgressBar";
 import NetworkStatus from "@/Components/Shared/NetworkStatus/NetworkStatus";
-
+import ForegroundNotificationListenerProvider from "@/Components/Notification/tools/foreground-notification-listener-provider";
+import { NotificationToastProvider } from "@/Components/Shared/NotificationToastProvider/NotificationToastProvider";
 const geistSans = Geist({
     variable: "--font-geist-sans",
     subsets: ["latin"],
@@ -118,9 +119,12 @@ export default async function LocaleLayout({ children, params }) {
             <div className="child">
                 <NetworkStatus/>
                 <NextIntlClientProvider locale={locale} messages={messages}>
-                     {/*<ScrollToTop/>*/}
-                            {children}
-              </NextIntlClientProvider>
+                    <NotificationToastProvider>
+                        {children}
+                        {/*<ScrollToTop/>*/}
+                        <ForegroundNotificationListenerProvider/>
+                    </NotificationToastProvider>
+                </NextIntlClientProvider>
              </div>
          </div>
          </main>

@@ -37,7 +37,9 @@
     "logoutSuccess": "تم تسجيل الخروج بنجاح",
     "logoutFailed": "فشل في تسجيل الخروج",
     "logoutError": "حدث خطأ أثناء تسجيل الخروج",
-    "otpCopied": "تم نسخ الرمز بنجاح"
+    "otpCopied": "تم نسخ الرمز بنجاح",
+    "newNotification": "إشعار جديد",
+    "notificationPermissionRequest": "يرجى السماح بالإشعارات للحصول على آخر التحديثات"
   },
 
   "navBar": {

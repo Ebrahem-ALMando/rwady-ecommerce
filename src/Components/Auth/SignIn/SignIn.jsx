@@ -12,15 +12,35 @@ import { PhoneNumberUtil } from 'google-libphonenumber';
 import styles from './SignIn.module.css';
 import {useLocale, useTranslations} from 'next-intl';
 import {clientLogin} from "@/api/services/auth/clientLogin";
-import {ArrowRightToLine,ArrowLeftToLine} from 'lucide-react'
-const phoneUtil = PhoneNumberUtil.getInstance();
+import {ArrowRightToLine,ArrowLeftToLine} from 'lucide-react';
 
+// Firebase imports for notifications
+import { useToast } from "@/hooks/useToast";
+
+const phoneUtil = PhoneNumberUtil.getInstance();
+    
 const SignIn = () => {
     const t = useTranslations("signin");
     const [phone, setPhone] = useState('');
-
     const [isSubmitting, setIsSubmitting] = useState(false);
     const router = useRouter();
+        const { requestPermission } = useToast();
+    const [deviceToken, setDeviceToken] = useState(null);
+
+
+        useEffect(() => {
+        console.log('🚀 [SignIn] Component mounted, initializing notifications...');
+        
+        const getDeviceToken = async () => {
+            console.log('🔔 [SignIn] Getting device token...');
+            const token = await requestPermission();
+            console.log('🔔 [SignIn] Device token result:', token ? 'Token obtained' : 'No token');
+            setDeviceToken(token);
+        };
+
+        getDeviceToken();
+    }, [requestPermission]);
+
     const validatePhoneNumber = (phone) => {
         try {
             const parsed = phoneUtil.parse(`+${phone}`);
@@ -30,29 +50,49 @@ const SignIn = () => {
         }
     };
 
-    const handleSubmit = async (e) => {
+        const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log('📱 [SignIn] Form submitted, phone:', phone);
         setIsSubmitting(true);
 
         if (!validatePhoneNumber(phone)) {
+            console.warn('⚠️ [SignIn] Invalid phone number:', phone);
             toast.error(t("invalidPhone"));
             setIsSubmitting(false);
             return;
         }
 
         try {
-            let fullPhone=phone.startsWith('+') ? phone : `+${phone}`
-            const response = await clientLogin({ phone: fullPhone });
-            console.log(response)
-            if (!response.error) {
-                toast.success(t("otpSent"));
+            // Request notification permission and get device token
+            let finalDeviceToken = deviceToken;
+            console.log('🔔 [SignIn] Current device token:', deviceToken ? 'Exists' : 'None');
+            
+            if (!deviceToken) {
+                console.log('🔔 [SignIn] Requesting new device token...');
+                finalDeviceToken = await requestPermission();
+                console.log('🔔 [SignIn] New device token result:', finalDeviceToken ? 'Obtained' : 'Failed');
+            }
 
+            let fullPhone = phone.startsWith('+') ? phone : `+${phone}`;
+            console.log('📱 [SignIn] Sending login request with phone:', fullPhone);
+            console.log('🔔 [SignIn] Device token being sent:', finalDeviceToken ? 'Token included' : 'No token');
+            
+            const response = await clientLogin({ 
+                phone: fullPhone,
+                device_token: finalDeviceToken 
+            });
+            
+            console.log('📱 [SignIn] Login response:', response);
+            if (!response.error) {
+                console.log('✅ [SignIn] Login successful, redirecting to verify...');
+                toast.success(t("otpSent"));
                 router.push(`/verify?phone=${encodeURIComponent('+' + phone)}`);
             } else {
+                console.error('❌ [SignIn] Login failed:', response);
                 toast.error(t("otpFailed"));
             }
         } catch (e) {
-            console.error("Error while sending OTP:", e.message);
+            console.error("❌ [SignIn] Error while sending OTP:", e.message);
             toast.error(t("genericError"));
         } finally {
             setIsSubmitting(false);

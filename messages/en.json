@@ -37,7 +37,9 @@
       "logoutSuccess": "Logged out successfully",
     "logoutFailed": "Logout failed",
     "logoutError": "An error occurred during logout",
-    "otpCopied": "OTP code copied successfully"
+    "otpCopied": "OTP code copied successfully",
+    "newNotification": "New Notification",
+    "notificationPermissionRequest": "Please allow notifications to receive the latest updates"
     },
   "navBar": {
     "title": "Deals on All Products",

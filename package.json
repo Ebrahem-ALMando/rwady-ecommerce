@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "set NODE_OPTIONS=--enable-source-maps && next dev",
+    "dev": "next dev",
     "build": "next build --no-lint",
     "start": "next start",
     "lint": "next lint"
@@ -22,6 +22,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "embla-carousel-react": "^8.6.0",
+    "firebase": "^12.1.0",
     "framer-motion": "^12.4.7",
     "google-libphonenumber": "^3.2.42",
     "i18next": "^25.0.2",
