@@ -88,7 +88,7 @@ export default function Promotions({promotions, error, meta}) {
    
     if (error)  return  <ReloadWithError />
 
-    if (promotions.length === 0) return <ReloadWithError message="لا يوجد حملات ترويجية" />
+    if (promotions.length === 0) return <PromotionsEmptyState />
 
     return (
         <div className={styles.container}>

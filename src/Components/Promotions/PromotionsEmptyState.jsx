@@ -10,12 +10,13 @@ import {
     Heart,
     Zap
 } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import styles from "./PromotionsEmptyState.module.css";
+import Link from "next/link";
 
 export default function PromotionsEmptyState() {
     const t = useTranslations("promotions");
-
+    const  locale  = useLocale();
     const floatingIcons = [
         { icon: <Gift size={24} />, delay: 0 },
         { icon: <Sparkles size={20} />, delay: 0.5 },
@@ -142,7 +143,8 @@ export default function PromotionsEmptyState() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.9 }}
                 >
-                    <motion.button 
+                  <Link href={`/${locale}/products`} prefetch={true}>
+                  <motion.button 
                         className={styles.ctaButton}
                         whileHover={{ 
                             scale: 1.05,
@@ -150,10 +152,12 @@ export default function PromotionsEmptyState() {
                         }}
                         whileTap={{ scale: 0.95 }}
                         transition={{ duration: 0.2 }}
+
                     >
                         <Sparkles size={20} />
                         <span>{t("exploreProducts")}</span>
                     </motion.button>
+                  </Link>
                 </motion.div>
             </motion.div>
 

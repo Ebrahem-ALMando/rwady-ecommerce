@@ -310,7 +310,12 @@
     "quantity": "الكمية",
     "cartTitle": "عربة التسوق",
     "items": "عناصر",
-    "emptyCart": "لا توجد منتجات في السلة"
+    "emptyCart": "لا توجد منتجات في السلة",
+    "defaultShipping": "الشحن الافتراضي",
+    "fixedShipping": "شحن ثابت: {cost} IQD",
+    "freeShipping": "شحن مجاني",
+    "shippingRateSingle": "شحن فردي: {cost} IQD",
+    "shippingRateMulti": "شحن متعدد: {cost} IQD"
   },
   "OrderSummary": {
     "summaryTitle": "ملخص الطلب",
@@ -325,6 +330,7 @@
     "couponDiscount": "قيمة الخصم",
     "invalidCoupon": "كوبون غير صالح",
     "shippingCost": "رسوم الشحن",
+   
     "totalWithShipping": "الإجمالي بعد الشحن",
     "paymentFees": "رسوم الدفع",
     "monthlyInstallment": "القسط الشهري",

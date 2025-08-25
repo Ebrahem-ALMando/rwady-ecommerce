@@ -24,6 +24,12 @@ const nextConfig = {
             },
             {
                 protocol: 'https',
+                hostname: 'backend.rwady.com',
+                port: '',
+                pathname: '/**',
+            },
+            {
+                protocol: 'https',
                 hostname: 'img.youtube.com',
                 port: '',
                 pathname: '/vi/**',

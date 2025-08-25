@@ -126,10 +126,10 @@ const CartItem = ({ item,cart, updateQuantity,getItemQuantity,removeItem,lang,t 
 
             <div className={styles.productDetails}>
                 <p className={styles.price}>
-                    {item.price_after_discount} IQD
+                    {item.final_price_after_promotion || item.price_after_discount || item.price} IQD
                 </p>
 
-                {item.price > item.price_after_discount && (
+                {item.price > item.final_price_after_promotion || item.price_after_discount && (
                     <p className={styles.oldPrice}>
                           <span className={styles.discount}>
                             {item.discount_percentage_text?.[lang] || t("discount", {
@@ -141,12 +141,31 @@ const CartItem = ({ item,cart, updateQuantity,getItemQuantity,removeItem,lang,t 
                 )}
                 <p className={styles.freeDelivery}>
                     {deliveryIcon}
-                    {item.shipping_type === "free_shipping"
-                        ? t("freeDelivery")
-                        : item.shipping_rate_single
-                            ? t("shippingCost", {cost: item.shipping_rate_single})
-                            : t("shippingUnknown")
-                    }
+                    {(() => {
+                        switch (item.shipping_type) {
+                            case "free_shipping":
+                                return t("freeShipping");
+                            
+                            case "fixed_shipping":
+                                if (item.shipping_rate_single) {
+                                    return t("fixedShipping", { cost: item.shipping_rate_single });
+                                } else if (item.shipping_rate_multi) {
+                                    return t("fixedShipping", { cost: item.shipping_rate_multi });
+                                } else {
+                                    return t("shippingUnknown");
+                                }
+                            
+                            case "default":
+                            default:
+                                if (item.shipping_rate_single) {
+                                    return t("shippingRateSingle", { cost: item.shipping_rate_single });
+                                } else if (item.shipping_rate_multi) {
+                                    return t("shippingRateMulti", { cost: item.shipping_rate_multi });
+                                } else {
+                                    return t("defaultShipping");
+                                }
+                        }
+                    })()}
                 </p>
 
                 <div className={styles.quenty}>

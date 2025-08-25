@@ -307,7 +307,12 @@
     "quantity": "Quantity",
     "cartTitle": "Shopping Cart",
     "items": "items",
-    "emptyCart": "No products in the cart"
+    "emptyCart": "No products in the cart",
+    "defaultShipping": "Default Shipping",
+    "fixedShipping": "Fixed Shipping: {cost} IQD",
+    "freeShipping": "Free Shipping",
+    "shippingRateSingle": "Single Shipping: {cost} IQD",
+    "shippingRateMulti": "Multi Shipping: {cost} IQD"
   },
   "OrderSummary": {
     "summaryTitle": "Order Summary",
@@ -318,10 +323,11 @@
     "couponExample": "Example: SAVE10",
     "inProgress": "In Progress",
     "productsTotal": "Products Total",
-    "coupon": "Coupon",
+    "coupon": "Coupon", 
     "couponDiscount": "Coupon Discount",
     "invalidCoupon": "Invalid Coupon",
     "shippingCost": "Shipping Cost",
+   
     "grandTotal": "Total After All Fees",
     "totalWithShipping": "Total with Shipping",
     "paymentFees": "Payment Fees",
