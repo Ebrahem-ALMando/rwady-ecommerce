@@ -109,14 +109,14 @@ self.addEventListener('notificationclick', (event) => {
             // Check if the app is already open
             for (let i = 0; i < clientList.length; i++) {
                 const client = clientList[i];
-                if (client.url.includes('/dashboard') && 'focus' in client) {
+                if (client.url.includes('/') && 'focus' in client) {
                     return client.focus();
                 }
             }
 
             // If not open, open a new window
             if (clients.openWindow) {
-                return clients.openWindow('/dashboard');
+                return clients.openWindow('/');
             }
         })
     );
