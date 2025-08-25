@@ -33,6 +33,7 @@ import NewAddressButton from "@/Components/Shared/Buttons/NewAddressButton/NewAd
 import {useLocale, useTranslations} from "next-intl";
 import {getProfile} from "@/api/services/auth/getProfile";
 import ReloadWithError from "@/Components/Shared/ReloadWithError/ReloadWithError";
+import CustomToast from '@/Components/Shared/CustomToast/CustomToast';
 
 const Checkout = () => {
     const [defaultAddress,setDefaultAddress]=useState({})
@@ -148,11 +149,25 @@ const Checkout = () => {
         }
 
         if (res.error) {
-            toast.error(tAddresses("submitFail"));
+            toast.custom(() => (
+                <CustomToast
+                    title={tAddresses("submitFail")}
+                    type="error"
+                />
+            ) ,{
+                duration: 3000,
+                position: 'top-center',
+            });
         } else {
-            toast.success(
-                selectedAddress ? tAddresses("updateSuccess") : tAddresses("addSuccess")
-            );
+                toast.custom(() => (
+                <CustomToast
+                    title={selectedAddress ? tAddresses("updateSuccess") : tAddresses("addSuccess")}
+                    type="success"
+                />
+            ) ,{
+                duration: 3000,
+                position: 'top-center',
+            });
             setIsOpen(false);
             setSelectedAddress(null);
             // await mutate();

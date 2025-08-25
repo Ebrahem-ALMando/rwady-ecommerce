@@ -28,7 +28,15 @@ const AddressForm = ({
             onSelectAddress?.(selectedAddress);
             setIsOpen(false);
         } else {
-            toast.error('يرجى اختيار عنوان أولاً');
+            toast.custom(() => (
+                <CustomToast
+                    title="يرجى اختيار عنوان أولاً"
+                    type="error"
+                />
+            ) ,{
+                duration: 3000,
+                position: 'top-center',
+            });
         }
     };
 

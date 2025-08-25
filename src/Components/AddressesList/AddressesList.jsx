@@ -200,17 +200,41 @@ const AddressesList = () => {
     const handleDeleteAddress = async (id) => {
             const res = await deleteAddress(id);
             if (!res?.error) {
-                toast.success(t("deleteSuccess"));
+                toast.custom(() => (
+                    <CustomToast
+                        title={t("deleteSuccess")}
+                        type="success"
+                    />
+                ) ,{
+                    duration: 3000,
+                    position: 'top-center',
+                });
                 mutate();
             } else {
-                toast.error(t("deleteFail"));
+                toast.custom(() => (
+                    <CustomToast
+                        title={t("deleteFail")}
+                        type="error"
+                    />
+                ) ,{
+                    duration: 3000,
+                    position: 'top-center',
+                });
             }
 
 
     };
     const handleSetDefaultAddress = async (address) => {
         if (address.is_default) {
-            toast.success(t("alreadyDefault"));
+            toast.custom(() => (
+                <CustomToast
+                    title={t("alreadyDefault")}
+                    type="success"
+                />
+            ) ,{
+                duration: 3000,
+                position: 'top-center',
+            });
             return;
         }
         const data={
@@ -218,10 +242,16 @@ const AddressesList = () => {
         }
         const res = await updateAddress(address.id,data);
         if (!res?.error) {
-            toast.success(t("setDefaultSuccess"));
+            toast.custom(() => (
+                <CustomToast
+                    title={t("setDefaultSuccess")}
+                    type="success"
+                />
+            ) ,{
+                duration: 3000,
+                position: 'top-center',
+            });
             mutate();
-        } else {
-            toast.error(t("setDefaultFail"));
         }
     };
 
@@ -242,12 +272,26 @@ const AddressesList = () => {
                 res = await addAddress(formData);
             }
             if (res.error) {
-                toast.error(t("submitFail"));
+                toast.custom(() => (
+                    <CustomToast
+                        title={t("submitFail")}
+                        type="error"
+                    />
+                ) ,{
+                    duration: 3000,
+                    position: 'top-center',
+                });
             }
             if(!res.error){
-                toast.success(
-                    selectedAddress ? t("updateSuccess") : t("addSuccess")
-                );
+                toast.custom(() => (
+                    <CustomToast
+                        title={selectedAddress ? t("updateSuccess") : t("addSuccess")}
+                        type="success"
+                    />
+                ) ,{
+                    duration: 3000,
+                    position: 'top-center',
+                });
                 mutate();
                 setIsOpen(false);
 

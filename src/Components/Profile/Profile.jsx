@@ -196,6 +196,7 @@ import ApiConfig from "@/api/apiConfig";
 import ProfileSkeleton from "@/Components/Profile/ProfileSkeleton/ProfileSkeleton";
 import ReloadWithError from "@/Components/Shared/ReloadWithError/ReloadWithError";
 import ProfileImage from "@/Components/Profile/ProfileImage/ProfileImage";
+import CustomToast from '@/Components/Shared/CustomToast/CustomToast';
 
 const Profile=(props)=> {
     const t = useTranslations("Profile");
@@ -227,7 +228,15 @@ const Profile=(props)=> {
         if (!file) return;
 
         if (file.size > 10 * 1024 * 1024) {
-            toast.error(t("errors.imageTooLarge"));
+            toast.custom(() => (
+                <CustomToast
+                    title={t("errors.imageTooLarge")}
+                    type="error"
+                />
+            ) ,{
+                duration: 3000,
+                position: 'top-center',
+            });
             return;
         }
 
@@ -235,7 +244,15 @@ const Profile=(props)=> {
             const imageRes = await uploadImage(file, 'users');
 
             if (imageRes.error) {
-                toast.error(t("errors.updateFail"));
+                toast.custom(() => (
+                    <CustomToast
+                        title={t("errors.updateFail")}
+                        type="error"
+                    />
+                ) ,{
+                    duration: 3000,
+                    position: 'top-center',
+                });
                 return;
             }
 
@@ -245,7 +262,15 @@ const Profile=(props)=> {
             const res = await updateProfile(data);
 
             if (!res.error) {
-                toast.success(t("errors.uploadSuccess"));
+                toast.custom(() => (
+                    <CustomToast
+                        title={t("errors.uploadSuccess")}
+                        type="success"
+                    />
+                ) ,{
+                    duration: 3000,
+                    position: 'top-center',
+                });
                 let fullPathImage=`${ApiConfig.USER_IMAGE_BASE_URL}${imageName}`
                 await mutate(prev => ({
                     ...prev,
@@ -256,10 +281,26 @@ const Profile=(props)=> {
                 }), false);
 
             } else {
-                toast.error(t("errors.updateFail"));
+                toast.custom(() => (
+                    <CustomToast
+                        title={t("errors.updateFail")}
+                        type="error"
+                    />
+                ) ,{
+                    duration: 3000,
+                    position: 'top-center',
+                });
             }
         } catch {
-            toast.error(t("errors.uploadError"));
+            toast.custom(() => (
+                <CustomToast
+                    title={t("errors.uploadError")}
+                    type="error"
+                />
+            ) ,{
+                duration: 3000,
+                position: 'top-center',
+            });
         }
     };
 
@@ -311,7 +352,15 @@ const Profile=(props)=> {
                                         const res = await updateProfile({avatar: ""});
 
                                         if (!res.error) {
-                                            toast.success(t("imageRemovedSuccess"));
+                                            toast.custom(() => (
+                                                <CustomToast
+                                                    title={t("imageRemovedSuccess")}
+                                                    type="success"
+                                                />
+                                            ) ,{
+                                                duration: 3000,
+                                                position: 'top-center',
+                                            });
                                             await mutate(prev => ({
                                                 ...prev,
                                                 data: {
@@ -320,10 +369,26 @@ const Profile=(props)=> {
                                                 }
                                             }), false);
                                         } else {
-                                            toast.error(t("errors.updateFail"));
+                                            toast.custom(() => (
+                                                <CustomToast
+                                                    title={t("errors.updateFail")}
+                                                    type="error"
+                                                />
+                                            ) ,{
+                                                duration: 3000,
+                                                position: 'top-center',
+                                            });
                                         }
                                     } catch {
-                                        toast.error(t("errors.uploadError"));
+                                        toast.custom(() => (
+                                            <CustomToast
+                                                title={t("errors.uploadError")}
+                                                type="error"
+                                            />
+                                        ) ,{
+                                            duration: 3000,
+                                            position: 'top-center',
+                                        });
                                     }
                                 }}
                             >

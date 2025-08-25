@@ -233,7 +233,15 @@ const OrderSummary = (props) => {
               if (result.data?.metadata?.formUrl) {
                 window.location.href = result.data.metadata.formUrl;
               } else {
-                toast.error(t("failMsg"));
+                 toast.custom(() => (
+                  <CustomToast
+                      title={t("failMsg")}
+                      type="error"
+                  />
+                ) ,{
+                  duration: 3000,
+                  position: 'top-center',
+                });
               }
               break;
             case "cash":
@@ -260,7 +268,10 @@ const OrderSummary = (props) => {
               { position: 'top-center', duration: 2500 }
             );
           } else {
-            toast.error(t("failMsg"));
+            toast.custom(
+              <CustomToast type="error" title={t("failMsg")} />,
+              { position: 'top-center', duration: 2500 }
+            );
           }
           router.push(`/${props.lang}/checkout?state=failure&mode=${props.mode}`);
          
@@ -516,7 +527,15 @@ const OrderSummary = (props) => {
           onUploadSuccess={(url) => {
             setUploadedPaymentProof(url);
             setShowUploadModal(false);
-            toast.success(t("paymentProofUploaded"));
+            toast.custom(() => (
+              <CustomToast
+                  title={t("paymentProofUploaded")}
+                  type="success"
+              />
+            ) ,{
+              duration: 3000,
+              position: 'top-center',
+            });
           }}
         />
       )}

@@ -151,6 +151,7 @@ import { useTranslations } from 'next-intl';
 import {CloseIcon} from "@/utils/Icons";
 import {toast} from "react-hot-toast";
 import {uploadImage} from "@/api/services/general/images/uploadImage";
+import CustomToast from '@/Components/Shared/CustomToast/CustomToast';
 
 
 const UploadPaymentModal = ({ onClose, onUploadSuccess }) => {
@@ -169,7 +170,15 @@ const UploadPaymentModal = ({ onClose, onUploadSuccess }) => {
         if (!file) return;
 
         if (file.size > 10 * 1024 * 1024) {
-            toast.error(t("errors.imageTooLarge"));
+            toast.custom(() => (
+                <CustomToast
+                    title={t("errors.imageTooLarge")}
+                    type="error"
+                />
+            ) ,{
+                duration: 3000,
+                position: 'top-center',
+            });
             return;
         }
 
@@ -180,7 +189,15 @@ const UploadPaymentModal = ({ onClose, onUploadSuccess }) => {
             const imageRes = await uploadImage(file, 'users');
 
             if (imageRes.error) {
-                toast.error(t("errors.updateFail"));
+                toast.custom(() => (
+                    <CustomToast
+                        title={t("errors.updateFail")}
+                        type="error"
+                    />
+                ) ,{
+                    duration: 3000,
+                    position: 'top-center',
+                });
                 return;
             }
 
@@ -190,7 +207,15 @@ const UploadPaymentModal = ({ onClose, onUploadSuccess }) => {
             setPreviewUrl(image_url);
 
         } catch {
-            toast.error(t("errors.uploadError"));
+            toast.custom(() => (
+                <CustomToast
+                    title={t("errors.uploadError")}
+                    type="error"
+                />
+            ) ,{
+                duration: 3000,
+                position: 'top-center',
+            });
             setIsUploading(false);
             setImageName(null);
             setPreviewUrl(null);

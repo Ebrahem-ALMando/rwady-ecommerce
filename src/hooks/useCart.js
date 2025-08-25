@@ -15,6 +15,7 @@ import { usePathname } from 'next/navigation';
 import { addToCart } from '@/api/services/cart/addToCart';
 import { deleteCartItem } from '@/api/services/cart/deleteCartItem';
 import { updateCartItem } from '@/api/services/cart/updateCartItem';
+import CustomToast from '@/Components/Shared/CustomToast/CustomToast';
 
 // --- helpers (unchanged from your slim version) ---
 const firstImageUrl = (p) => p?.image_url || p?.media?.find?.(m => m.type === 'image')?.url || null;
@@ -191,7 +192,15 @@ export default function useCart() {
       const currentQty = existing ? existing.quantity : 0;
       const maxQty = product.stock;
       if ((currentQty + quantity > maxQty) && !product.stock_unlimited) {
-        toast.error(`لا يمكنك إضافة أكثر من ${maxQty} قطعة من هذا المنتج`);
+        toast.custom(() => (
+          <CustomToast
+              title={`لا يمكنك إضافة أكثر من ${maxQty} قطعة من هذا المنتج`}
+              type="error"
+          />
+        ) ,{
+          duration: 3000,
+          position: 'top-center',
+        });
         return prev;
       }
       // If already exists, keep cartItemId if present
@@ -234,7 +243,15 @@ export default function useCart() {
             )
           );
         } catch (e) {
-          toast.error('حدث خطأ أثناء مزامنة المنتج مع السيرفر');
+          toast.custom(() => (
+            <CustomToast
+                title={"حدث خطأ أثناء مزامنة المنتج مع السيرفر"}
+                type="error"
+            />
+          ) ,{
+            duration: 3000,
+            position: 'top-center',
+          });
         }
       })();
     }
@@ -259,7 +276,15 @@ export default function useCart() {
                 return;
               }
             } catch (e) {
-              toast.error('حدث خطأ أثناء حذف المنتج من السيرفر');
+              toast.custom(() => (
+                <CustomToast
+                    title={"حدث خطأ أثناء حذف المنتج من السيرفر"}
+                    type="error"
+                />
+              ) ,{
+                duration: 3000,
+                position: 'top-center',
+              });
             }
           })();
         }
@@ -294,7 +319,15 @@ export default function useCart() {
                 return;
               }
             } catch (e) {
-              toast.error('حدث خطأ أثناء تحديث الكمية في السيرفر');
+                toast.custom(() => (
+                <CustomToast
+                    title={"حدث خطأ أثناء تحديث الكمية في السيرفر"}
+                    type="error"
+                />
+              ) ,{
+                duration: 3000,
+                position: 'top-center',
+              });
             }
           })();
         }

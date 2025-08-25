@@ -541,6 +541,7 @@ import Line from '@/Components/Shared/Line/Line';
 import { CloseIcon } from '@/utils/Icons';
 import { toast } from 'react-hot-toast';
 import { useTranslations } from 'next-intl';
+import CustomToast from '@/Components/Shared/CustomToast/CustomToast';
 
 const LocationPickerMap = dynamic(
     () => import('@/Components/AddressesList/AddressFormAction/LocationPickerMap/LocationPickerMap'),
@@ -584,11 +585,27 @@ const AddressFormAction = ({ isOpen, setIsOpen, title, mutate, addressData, onSu
 
     const validateForm = () => {
         if (!formData.name.trim()) {
-            toast.error(t('enterName'));
+            toast.custom(() => (
+                <CustomToast
+                    title={t('enterName')}
+                    type="error"
+                />
+            ) ,{
+                duration: 3000,
+                position: 'top-center',
+            });
             return false;
         }
         if (!addressData&&(!formData.latitude || !formData.longitude)) {
-            toast.error(t('selectLocation'));
+            toast.custom(() => (
+                <CustomToast
+                    title={t('selectLocation')}
+                    type="error"
+                />
+            ) ,{
+                duration: 3000,
+                position: 'top-center',
+            });
             return false;
         }
         return true;

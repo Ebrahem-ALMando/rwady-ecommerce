@@ -2,7 +2,8 @@ import axios from "axios";
 import ApiConfig from "@/api/apiConfig";
 import Cookies from "js-cookie";
 import {toast} from "react-hot-toast";
-// axios.defaults.withXSRFToken = true;
+import CustomToast from "@/Components/Shared/CustomToast/CustomToast";
+        // axios.defaults.withXSRFToken = true;
 const baseUrl = ApiConfig.API_BASE_URL;
 const api = axios.create({
     baseURL:baseUrl,
@@ -84,7 +85,15 @@ const fetchWithSenderAPI = async (endpoint, method = "GET", data = null, options
             Cookies.remove("token");
             Cookies.remove("user_id");
             if (typeof window !== "undefined") {
-                toast.error("انتهت الجلسة، يرجى تسجيل الدخول من جديد");
+                toast.custom(() => (
+                    <CustomToast
+                        title="انتهت الجلسة، يرجى تسجيل الدخول من جديد"
+                        type="error"
+                    />
+                ) ,{
+                    duration: 3000,
+                    position: 'top-center',
+                });
                 setTimeout(() => {
                     window.location.href = `/${lang}/sign-in`;
                 }, 2000);
@@ -150,7 +159,15 @@ const checkServerStatus = async () => {
         if (!res.ok) throw new Error("Server not available");
         return true;
     } catch (error) {
-        toast.error(" لا يمكن الاتصال بالخادم. يرجى التحقق من الاتصال ");
+        toast.custom(() => (
+            <CustomToast
+                title=" لا يمكن الاتصال بالخادم. يرجى التحقق من الاتصال "
+                type="error"
+            />
+        ) ,{
+            duration: 3000,
+            position: 'top-center',
+        });
         console.error(" اتصال الخادم فشل:", error.message);
         return false;
     }
@@ -353,7 +370,15 @@ const fetchAPI = async (
             if (response.status === 401 && typeof window !== "undefined") {
                 Cookies.remove("token");
                 Cookies.remove("user_id");
-                if (config.showError) toast.error(`${lang==="ar"?"انتهت الجلسة، يرجى تسجيل الدخول من جديد":"Session expired, please login again"}`);
+                if (config.showError) toast.custom(() => (
+                    <CustomToast
+                        title={lang==="ar"?"انتهت الجلسة، يرجى تسجيل الدخول من جديد":"Session expired, please login again"}
+                        type="error"
+                    />
+                ) ,{
+                    duration: 3000,
+                    position: 'top-center',
+                });
                 setTimeout(() => (window.location.href = `/${lang}/sign-in`), 2000);
             }
 

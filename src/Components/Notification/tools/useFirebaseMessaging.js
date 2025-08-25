@@ -5,6 +5,7 @@ import { messaging } from './firebase';
 import { deleteToken, getToken, onMessage } from 'firebase/messaging';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
+import CustomToast from '@/Components/Shared/CustomToast/CustomToast';
 
 // تم تعطيل الكاش في الموقع
 
@@ -93,7 +94,15 @@ export const useFirebaseMessaging = () => {
                     // إرسال token إلى الخادم
                     await sendTokenToServer(fcmToken);
                     
-                    toast.success('تم تفعيل الإشعارات بنجاح');
+                    toast.custom(() => (
+                        <CustomToast
+                            title="تم تفعيل الإشعارات بنجاح"
+                            type="success"
+                        />
+                    ) ,{
+                        duration: 3000,
+                        position: 'top-center',
+                    });
                     return fcmToken;
                 } catch (tokenError) {
                     console.error('Error getting FCM token:', tokenError);
@@ -139,7 +148,15 @@ export const useFirebaseMessaging = () => {
             await deleteToken(messaging);
             setToken(null);
             setPermission('default');
-            toast.success('تم إلغاء تفعيل الإشعارات');
+            toast.custom(() => (
+                <CustomToast
+                    title="تم إلغاء تفعيل الإشعارات"
+                    type="success"
+                />
+            ) ,{
+                duration: 3000,
+                position: 'top-center',
+            });
         } catch (err) {
             console.error('Error deleting FCM token:', err);
             setError('فشل في إلغاء تفعيل الإشعارات');
@@ -156,9 +173,25 @@ export const useFirebaseMessaging = () => {
                 icon: '/logo.png',
                 badge: '/logo.png'
             });
-            toast.success('تم إرسال إشعار تجريبي');
+            toast.custom(() => (
+                <CustomToast
+                    title="تم إرسال إشعار تجريبي"
+                    type="success"
+                />
+            ) ,{
+                duration: 3000,
+                position: 'top-center',
+            });
         } else {
-            toast.error('يجب السماح بالإشعارات أولاً');
+            toast.custom(() => (
+                <CustomToast
+                    title="يجب السماح بالإشعارات أولاً"
+                    type="error"
+                />
+            ) ,{
+                duration: 3000,
+                position: 'top-center',
+            });
         }
     };
 
@@ -172,9 +205,14 @@ export const useFirebaseMessaging = () => {
             dispatch(fetchNotifications({}));
             
             // عرض toast notification
-            toast.success(payload.notification?.title || 'إشعار جديد', {
-                description: payload.notification?.body,
+            toast.custom(() => (
+                <CustomToast
+                    title={payload.notification?.title || 'إشعار جديد'}
+                    type="success"
+                />
+            ) ,{
                 duration: 5000,
+                position: 'top-center',
             });
         });
 

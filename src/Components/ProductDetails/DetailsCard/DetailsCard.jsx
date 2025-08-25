@@ -16,6 +16,7 @@ import { Flame, Sparkles  } from 'lucide-react'
 import CartActionButton from "@/Components/Shared/Buttons/CartActionButton/CartActionButton";
 import FavouriteToggleButton from "@/Components/Shared/Buttons/FavouriteToggleButton/FavouriteToggleButton";
 import { useRouter } from "next/navigation";
+import CustomToast from '@/Components/Shared/CustomToast/CustomToast';
 const DetailsCard = ({ product,lang }) => {
     const { toggle, isFavourite, favourites } = useFavourites(true);
     const router = useRouter();
@@ -37,7 +38,15 @@ const DetailsCard = ({ product,lang }) => {
             }).catch((err) => console.error("Sharing failed", err));
         } else {
             navigator.clipboard.writeText(window.location.href);
-            toast.success("تم نسخ رابط المنتج");
+            toast.custom(() => (
+                <CustomToast
+                    title="تم نسخ رابط المنتج"
+                    type="success"
+                />
+            ) ,{
+                duration: 3000,
+                position: 'top-center',
+            });
         }
     }
     useEffect(() => {
@@ -58,7 +67,15 @@ const DetailsCard = ({ product,lang }) => {
         color: product.colors?.[0]?.color || null,
       }
       sessionStorage.setItem('buyDirectly', JSON.stringify(data));
-      toast.success(t("buyDirectlySuccess"));
+      toast.custom(() => (
+        <CustomToast
+          title={t("buyDirectlySuccess")}
+          type="success"
+        />
+      ) ,{
+        duration: 3000,
+        position: 'top-center',
+      });
       router.push(`/${lang}/checkout?mode=direct_order`);
     }
 useEffect(()=>{

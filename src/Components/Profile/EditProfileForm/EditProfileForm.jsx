@@ -188,6 +188,7 @@ import { toast } from "react-hot-toast";
 import { updateProfile } from "@/api/services/auth/updateProfile";
 import { handleChangeForm } from "@/utils/handleChangeForm";
 import { useTranslations } from 'next-intl';
+import CustomToast from '@/Components/Shared/CustomToast/CustomToast';
 
 const EditProfileForm = ({ isOpen, setIsOpen, profileData, mutate }) => {
     const t = useTranslations('editProfile');
@@ -203,7 +204,15 @@ const EditProfileForm = ({ isOpen, setIsOpen, profileData, mutate }) => {
 
     const validateForm = () => {
         if (!formData.fullName.trim() || formData.fullName.length < 3) {
-            toast.error(t("formError"));
+            toast.custom(() => (
+                <CustomToast
+                    title={t("formError")}
+                    type="error"
+                />
+            ) ,{
+                duration: 3000,
+                position: 'top-center',
+            });
             return false;
         }
         return true;
@@ -217,7 +226,15 @@ const EditProfileForm = ({ isOpen, setIsOpen, profileData, mutate }) => {
             const data = { name: formData.fullName };
             const res = await updateProfile(data);
             if (!res.error) {
-                toast.success(t("successUpdate"));
+                toast.custom(() => (
+                    <CustomToast
+                        title={t("successUpdate")}
+                        type="success"
+                    />
+                ) ,{
+                    duration: 3000,
+                    position: 'top-center',
+                });
                 await mutate(prev => ({
                     ...prev,
                     data: {
@@ -227,10 +244,26 @@ const EditProfileForm = ({ isOpen, setIsOpen, profileData, mutate }) => {
                 }), false);
                 setIsOpen(false);
             } else {
-                toast.error(t("errorUpdate"));
+                    toast.custom(() => (
+                    <CustomToast
+                        title={t("errorUpdate")}
+                        type="error"
+                    />
+                ) ,{
+                    duration: 3000,
+                    position: 'top-center',
+                });
             }
         } catch {
-            toast.error(t("unknownError"));
+            toast.custom(() => (
+                <CustomToast
+                    title={t("unknownError")}
+                    type="error"
+                />
+            ) ,{
+                duration: 3000,
+                position: 'top-center',
+            });
         }
     };
 

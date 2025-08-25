@@ -157,7 +157,8 @@ import {toast} from "react-hot-toast";
 import {confirmOtp} from "@/api/services/orders/confirmOtp";
 import OtpInput from "@/Components/Orders/OrdersDetails/OrderDetails/OtpInput/OtpInput";
 import {getProfile} from "@/api/services/auth/getProfile";
-
+import CustomToast from '@/Components/Shared/CustomToast/CustomToast';
+    
 
 const OrderDetails = () => {
     const { orderId } = useParams();
@@ -208,7 +209,15 @@ const OrderDetails = () => {
             if (result.error) {
                 setOtpError(result.message || t("otp.failed"));
             } else {
-                toast.success(t("otp.success"));
+                toast.custom(() => (
+                    <CustomToast
+                        title={t("otp.success")}
+                        type="success"
+                    />
+                ) ,{
+                    duration: 3000,
+                    position: 'top-center',
+                });
                 mutate();
             }
         } catch (e) {

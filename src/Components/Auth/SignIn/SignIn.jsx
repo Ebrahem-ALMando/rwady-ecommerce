@@ -80,7 +80,7 @@ const SignIn = () => {
             }
 
             let fullPhone = phone.startsWith('+') ? phone : `+${phone}`;
-            
+            console.log('🔔 [handleSubmit] Final device token:', finalDeviceToken);
             const response = await clientLogin({ 
                 phone: fullPhone,
                 device_token: finalDeviceToken 

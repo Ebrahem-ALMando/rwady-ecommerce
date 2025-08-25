@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { toast } from "react-hot-toast";
 import { mutate } from "swr";
 import { useLocale } from "next-intl";
-
+import CustomToast from "@/Components/Shared/CustomToast/CustomToast";
 /**
  * هذا الكمبوننت يستمع لأي إشعار وارد في foreground
  * ويعرض Toast وNotification API (إذا كان الإذن granted)
@@ -45,8 +45,12 @@ export default function ForegroundNotificationListener() {
 
     function showNotification(payload) {
         // Toast UI
-        toast.success(payload.notification?.title || "إشعار جديد", {
-            // description: payload.notification?.body,
+        toast.custom(() => (
+            <CustomToast
+                title={payload.notification?.title || "إشعار جديد"}
+                type="success"
+            />
+        ) ,{
             duration: 5000,
         });
         // Native Notification API
