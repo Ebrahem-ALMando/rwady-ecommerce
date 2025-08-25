@@ -192,7 +192,7 @@ export default function useCart() {
       const currentQty = existing ? existing.quantity : 0;
       const maxQty = product.stock;
       if ((currentQty + quantity > maxQty) && !product.stock_unlimited) {
-        toast.custom(() => (
+          toast.custom(() => (
           <CustomToast
               title={`لا يمكنك إضافة أكثر من ${maxQty} قطعة من هذا المنتج`}
               type="error"

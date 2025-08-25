@@ -158,8 +158,8 @@ import {confirmOtp} from "@/api/services/orders/confirmOtp";
 import OtpInput from "@/Components/Orders/OrdersDetails/OrderDetails/OtpInput/OtpInput";
 import {getProfile} from "@/api/services/auth/getProfile";
 import CustomToast from '@/Components/Shared/CustomToast/CustomToast';
-    
 
+    
 const OrderDetails = () => {
     const { orderId } = useParams();
     const locale = useLocale();
@@ -171,6 +171,8 @@ const OrderDetails = () => {
     const [verifying, setVerifying] = useState(false);
     const [otpError, setOtpError] = useState(null);
     const t = useTranslations("Orders");
+    
+
 
     if (isLoading) return <Loading />;
     if  (error || !data?.data) return <Error message={t("error_loading")} />;
