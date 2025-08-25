@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 
-import { onMessage } from 'firebase/messaging';
+
 import { mutate } from 'swr';
 import { useLocale } from 'next-intl';
 import { showEnhancedToast } from '@/hooks/useNotification';
@@ -13,11 +13,11 @@ import { showEnhancedToast } from '@/hooks/useNotification';
  */
 export default function NotificationProvider() {
     const lang = useLocale();
-    if(typeof window === "undefined") return null;  
-    const { messaging } = require('@/hooks/firebase');
-    
+   
     useEffect(() => {
-        
+        if(typeof window !== "undefined") {
+        const { messaging } = require('@/hooks/firebase');
+        const { onMessage } = require('firebase/messaging');
         if (!messaging) {
             console.warn('⚠️ [NotificationProvider] Firebase messaging not available');
             return;
@@ -50,8 +50,9 @@ export default function NotificationProvider() {
             console.log('🧹 [NotificationProvider] Cleaning up message listener...');
             unsubscribe();
         };
+        }
+      
     }, [lang]);
 
-    // هذا المكون لا يعرض أي UI
     return null;
 }

@@ -11,6 +11,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { getProfile } from "@/api/services/auth/getProfile";
 import Link from 'next/link';
 import { useNotification } from "@/hooks/useNotification";
+import CustomToast from '@/Components/Shared/CustomToast/CustomToast';
 
 const Verify = () => {
     const t = useTranslations("verify");
@@ -101,7 +102,15 @@ const Verify = () => {
         
         if (code.length === 5) {
             navigator.clipboard.writeText(code);
-            toast.success(t("otpCopied"));
+            toast.custom(() => (
+                <CustomToast
+                    title={t("otpCopied")}
+                    type="success"
+                />
+            ) ,{
+                duration: 3000,
+                position: 'top-center',
+            });
         }
     };
 
@@ -122,13 +131,27 @@ const Verify = () => {
             });
             
             if (!response.error) {
-                toast.success(t("otpSent"));
+                toast.custom(() => (
+                    <CustomToast
+                        title={t("otpSent")}
+                        type="success"
+                    />
+                ) ,{
+                    duration: 3000,
+                    position: 'top-center',
+                });
                 setTimeLeft(60);
-            } else {
-                toast.error(t("otpFailed"));
             }
         } catch (e) {
-            toast.error(t("genericError"));
+            toast.custom(() => (
+                <CustomToast
+                    title={t("genericError")}
+                    type="error"
+                />
+            ) ,{
+                duration: 3000,
+                position: 'top-center',
+            });
         } finally {
             setIsResending(false);
         }
@@ -139,7 +162,15 @@ const Verify = () => {
         const code = otp.join("");
         
         if (code.length !== 5) {
-            toast.error(t("enter5Digits"));
+                toast.custom(() => (
+                <CustomToast
+                    title={t("enter5Digits")}
+                    type="error"
+                />
+            ) ,{
+                duration: 3000,
+                position: 'top-center',
+            });
             return;
         }
 
@@ -148,7 +179,15 @@ const Verify = () => {
             const response = await verifyOtp(phone, code);
             
             if (!response?.error) {
-                toast.success(t("loginSuccess"));
+                toast.custom(() => (
+                    <CustomToast
+                        title={t("loginSuccess")}
+                        type="success"
+                    />
+                ) ,{
+                    duration: 3000,
+                    position: 'top-center',
+                });
                 Cookies.set("token", response.data.token);
 
                 const userData = await getProfile();
@@ -167,16 +206,40 @@ const Verify = () => {
 
                 } else {
 
-                    toast.error("فشل في تحميل بيانات المستخدم");
+                    toast.custom(() => (
+                        <CustomToast
+                            title={t("loginFailed")}
+                            type="error"
+                        />
+                    ) ,{
+                        duration: 3000,
+                        position: 'top-center',
+                    });
                     Cookies.remove("token");
                 }
             }
             else {
-                toast.error(response.message || t("loginFailed"));
+                toast.custom(() => (
+                    <CustomToast
+                        title={response.message || t("loginFailed")}
+                        type="error"
+                    />
+                ) ,{
+                    duration: 3000,
+                    position: 'top-center',
+                });
             }
         } catch (error) {
             console.error("❌ [Verify] Login error:", error.message);
-            // toast.error(t("loginError"));
+            toast.custom(() => (
+                <CustomToast
+                    title={t("loginError")}
+                    type="error"
+                />
+            ) ,{
+                duration: 3000,
+                position: 'top-center',
+            });
         } finally {
             setIsSubmitting(false);
         }

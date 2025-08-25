@@ -13,6 +13,7 @@ import styles from './SignIn.module.css';
 import {useLocale, useTranslations} from 'next-intl';
 import {clientLogin} from "@/api/services/auth/clientLogin";
 import {ArrowRightToLine,ArrowLeftToLine} from 'lucide-react';
+import CustomToast from '@/Components/Shared/CustomToast/CustomToast';
 
 // Firebase imports for notifications
 
@@ -20,11 +21,11 @@ import {ArrowRightToLine,ArrowLeftToLine} from 'lucide-react';
 const phoneUtil = PhoneNumberUtil.getInstance();
     
 const SignIn = () => {
-        const t = useTranslations("signin");
+    const t = useTranslations("signin");
     const [phone, setPhone] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const router = useRouter();
-    if(typeof window === "undefined") return null;  
+   
     const { useNotification } = require('@/hooks/useNotification');
     const { deviceToken, setDeviceToken, requestNotificationPermission } = useNotification();
 
@@ -53,10 +54,22 @@ const SignIn = () => {
         setIsSubmitting(true);
 
         if (!validatePhoneNumber(phone)) {
-            toast.error(t("invalidPhone"));
+           toast.custom(() => (
+            <CustomToast
+                title={t("invalidPhone")}
+                type="error"
+                
+            />
+
+           )
+           ,{
+            duration: 3000,
+            position: 'top-center',
+           }
+        );
             setIsSubmitting(false);
             return;
-        }
+        };
 
         try {
             // Request notification permission and get device token
@@ -74,13 +87,37 @@ const SignIn = () => {
             });
             
             if (!response.error) {
-                toast.success(t("otpSent"));
+                toast.custom(() => (
+                    <CustomToast
+                        title={t("otpSent")}
+                        type="success"
+                    />
+                ) ,{
+                    duration: 3000,
+                    position: 'top-center',
+                   });
                 router.push(`/verify?phone=${encodeURIComponent('+' + phone)}`);
             } else {
-                toast.error(t("otpFailed"));
+                toast.custom(() => (
+                    <CustomToast
+                        title={t("otpFailed")}
+                        type="error"
+                    />
+                    ) ,{
+                    duration: 3000,
+                    position: 'top-center',
+                   });
             }
         } catch (e) {
-            toast.error(t("genericError"));
+            toast.custom(() => (
+                <CustomToast
+                    title={t("genericError")}
+                    type="error"
+                />
+            ) ,{
+                duration: 3000,
+                position: 'top-center',
+            });
         } finally {
             setIsSubmitting(false);
         }

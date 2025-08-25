@@ -8,7 +8,6 @@ import { Geist, Geist_Mono, IBM_Plex_Sans_Arabic } from "next/font/google";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../../styles/globals.css";
-import "../../styles/toast.css";
 import { Toaster } from "react-hot-toast";
 import ProgressBar from "@/Components/Shared/ProgressBar/ProgressBar";
 import NetworkStatus from "@/Components/Shared/NetworkStatus/NetworkStatus";
