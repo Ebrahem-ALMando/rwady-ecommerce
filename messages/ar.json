@@ -79,7 +79,7 @@
     "aria": "تحميل تطبيق روادي",
     "homeLabel": "العودة إلى الصفحة الرئيسية",
     "logoAlt": "شعار موقع روادي"
-  },
+  },  
   "notification": {
     "dialog": "نافذة الإشعارات",
     "close": "إغلاق الإشعارات",
@@ -259,7 +259,11 @@
     "cancel": "إلغاء",
     "extraAddress": "تفاصيل إضافية",
     "placeholderExtra_address": "مثل اسم الشارع، المبنى، أو أي ملاحظات أخرى",
-    "noExtra_address": "-"
+    "noExtra_address": "-",
+    "deleteAddress": "حذف العنوان",
+    "deleteAddressMessage": "هل أنت متأكد من حذف هذا العنوان؟",
+    "deleteAddressConfirm": "حذف",
+    "deleteAddressCancel": "إلغاء"
 
 
   },
@@ -365,10 +369,9 @@
     "paymentProofUploaded": "تم رفع إثبات الدفع بنجاح",
     "paymentDetails": "تفاصيل الدفع",
     "selectedMethod": "طريقة الدفع المحددة",
-    "identityNumberLabel": "رقم الهوية الوطنية",
-    "identityNumberPlaceholder": "أدخل رقم الهوية",
-
-    "invalidIdentityNumber": "رقم البطاقة أو المعرّف غير صحيح",
+    "identityNumberLabel": "رقم حساب الهوية الوطنية",
+    "identityNumberPlaceholder": "أدخل رقم حساب الهوية الوطنية",
+    "invalidIdentityNumber": "رقم حساب الهوية الوطنية غير صحيح",
     "invalidIdentityTitle": "تعذر التحقق",
     "order_type": "نوع الطلب",
     "direct_order": "شراء مباشر",

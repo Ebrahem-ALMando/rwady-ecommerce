@@ -34,7 +34,7 @@ import {getNotifications} from "@/api/services/general/notifications/getNotifica
 import {getUnreadCountNotifications} from "@/api/services/general/notifications/getUnreadCountNotifications";
 
 
-const ToolNav = ({ toggleMenu, isScrolled,getCartCount }) => {
+const ToolNav = ({ toggleMenu, isScrolled,getCartCount,downloadApp }) => {
     const t = useTranslations("toolNav");
     const notificationRef = useRef(null);
     const [isNotificationVisible, setNotificationVisible] = useState(false);
@@ -207,6 +207,7 @@ const ToolNav = ({ toggleMenu, isScrolled,getCartCount }) => {
                     <div className={styles.toolsDiv}>
                         <DownloadAppWithLogo
                             lang={lang}
+                            downloadApp={downloadApp}
                         />
                     </div>
                 </div>

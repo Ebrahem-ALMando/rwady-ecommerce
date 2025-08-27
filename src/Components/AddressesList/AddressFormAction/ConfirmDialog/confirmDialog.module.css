@@ -1,0 +1,51 @@
+.dangerButton {
+    background-color: #dc3545 !important;
+    color: white !important;
+    border: 1px solid #dc3545 !important;
+}
+
+.dangerButton:hover {
+    background-color: #c82333 !important;
+    border-color: #bd2130 !important;
+}
+
+.warningButton {
+    background-color: #ffc107 !important;
+    color: #212529 !important;
+    border: 1px solid #ffc107 !important;
+}
+
+.warningButton:hover {
+    background-color: #e0a800 !important;
+    border-color: #d39e00 !important;
+}
+
+.infoButton {
+    background-color: #17a2b8 !important;
+    color: white !important;
+    border: 1px solid #17a2b8 !important;
+}
+
+.infoButton:hover {
+    background-color: #138496 !important;
+    border-color: #117a8b !important;
+}
+
+.confirmDialogContainer {
+    max-width: 500px;
+    max-height: 300px;
+    padding: 20px;
+}
+
+.messageText {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #666;
+    margin: 0;
+    text-align: center;
+}
+
+.messageContainer {
+    text-align: center;
+    margin-bottom: 20px;
+}

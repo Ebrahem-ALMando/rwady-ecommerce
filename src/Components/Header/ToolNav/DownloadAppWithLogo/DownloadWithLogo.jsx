@@ -1,4 +1,4 @@
-"use client";
+'use client'
 import styles from './DownloadWithLogo.module.css';
 import Image from 'next/image';
 import Link from "next/link";
@@ -6,10 +6,12 @@ import { DownloadIcon } from "@/utils/Icons";
 import React from "react";
 import {useTranslations} from "next-intl";
 
-const DownloadAppWithLogo = ({ hideLogo,lang }) => {
-    const  t  = useTranslations("downloadApp");
 
-    return (
+
+const DownloadAppWithLogo =  ({ hideLogo,lang,downloadApp }) => {
+    const  t  = useTranslations("downloadApp");
+   
+        return (
         <div className={styles.mainDiv}>
             {!hideLogo && (
                 <div className={styles.logoContainer}>
@@ -28,6 +30,12 @@ const DownloadAppWithLogo = ({ hideLogo,lang }) => {
                 type="button"
                 className={styles.downloadButton}
                 aria-label={t("aria")}
+                onClick={() => {
+                    console.log(downloadApp);
+                    if(downloadApp){
+                        window.open(downloadApp, "_blank");
+                    }
+                }}
             >
                 {DownloadIcon}
                 {t("button")}
@@ -37,3 +45,4 @@ const DownloadAppWithLogo = ({ hideLogo,lang }) => {
 };
 
 export default DownloadAppWithLogo;
+

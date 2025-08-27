@@ -6,12 +6,13 @@ import Language from "@/Components/Shared/Language/Language";
 import DownloadAppWithLogo from "@/Components/Header/ToolNav/DownloadAppWithLogo/DownloadWithLogo";
 import { getNavLinks } from "@/Data/getNavLinks";
 import {useLocale, useTranslations} from 'next-intl';
+    
 
-
-const MainNavigation = ({ isMenuOpen, isOpenDropdown, toggleMenu, setIsOpenDropdown }) => {
+const MainNavigation = ({ isMenuOpen, isOpenDropdown, toggleMenu, setIsOpenDropdown,downloadApp }) => {
     const  t  = useTranslations("mainNav");
     const locale = useLocale();
     const navLinks = getNavLinks(locale);
+  
     return (
         <div className={styles.mainDiv}>
             <div className={styles.contDiv}>
@@ -36,7 +37,7 @@ const MainNavigation = ({ isMenuOpen, isOpenDropdown, toggleMenu, setIsOpenDropd
 
                     <div className={styles.logoWithLang}>
                         <Language />
-                        <DownloadAppWithLogo hideLogo />
+                        <DownloadAppWithLogo hideLogo downloadApp={downloadApp} />
                     </div>
                 </nav>
             </div>

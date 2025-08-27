@@ -168,11 +168,13 @@ import AddressFormAction from "@/Components/AddressesList/AddressFormAction/Addr
 import {getProfile} from "@/api/services/auth/getProfile";
 import {useTranslations} from "next-intl";
 import ReloadWithError from "@/Components/Shared/ReloadWithError/ReloadWithError";
-
+import CustomToast from "@/Components/Shared/CustomToast/CustomToast";
+import ConfirmDialog from "@/Components/AddressesList/AddressFormAction/ConfirmDialog/confirmDialog";
 const AddressesList = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedAddress, setSelectedAddress] = useState(null);
-
+    const [isOpenDelete, setIsOpenDelete] = useState(false);
+    const [idToDelete, setIdToDelete] = useState(null);
     const { data, error, isLoading, mutate } = useSWR(
         "userAddresses",
         getAddressesList,{
@@ -197,32 +199,31 @@ const AddressesList = () => {
     };
 
 
-    const handleDeleteAddress = async (id) => {
-            const res = await deleteAddress(id);
-            if (!res?.error) {
-                toast.custom(() => (
-                    <CustomToast
-                        title={t("deleteSuccess")}
-                        type="success"
-                    />
-                ) ,{
-                    duration: 3000,
-                    position: 'top-center',
-                });
-                mutate();
-            } else {
-                toast.custom(() => (
-                    <CustomToast
-                        title={t("deleteFail")}
-                        type="error"
-                    />
-                ) ,{
-                    duration: 3000,
-                    position: 'top-center',
-                });
-            }
-
-
+    const handleDeleteAddress = async () => {
+        setIsOpenDelete(false);
+        const res = await deleteAddress(idToDelete);
+        if (!res?.error) {
+            toast.custom(() => (
+                <CustomToast
+                    title={t("deleteSuccess")}
+                    type="success"
+                />
+            ) ,{
+                duration: 3000,
+                position: 'top-center',
+            });
+            mutate();
+        } else {
+            toast.custom(() => (
+                <CustomToast
+                    title={t("deleteFail")}
+                    type="error"
+                />
+            ) ,{
+                duration: 3000,
+                position: 'top-center',
+            });
+        }
     };
     const handleSetDefaultAddress = async (address) => {
         if (address.is_default) {
@@ -315,6 +316,16 @@ const AddressesList = () => {
                 onSubmit={handleSubmit}
 
             />
+            <ConfirmDialog
+                isOpen={isOpenDelete}
+                setIsOpen={setIsOpenDelete}
+                title={t("deleteAddress")}
+                message={t("deleteAddressMessage")}
+                confirmText={t("deleteAddressConfirm")}
+                cancelText={t("deleteAddressCancel")}
+                onConfirm={() => handleDeleteAddress()}
+                t={t}
+            />  
             <div className={styles.sidebar}>
                 <ProfileSidebar userData={profileData?.data ?? {}} />
             </div>
@@ -332,7 +343,10 @@ const AddressesList = () => {
                             id={address.id}
                             isDefault={address.is_default}
                             addressData={address}
-                            onDelete={handleDeleteAddress}
+                            onDelete={() => {
+                                setIdToDelete(address.id);
+                                setIsOpenDelete(true);
+                            }}
                             onEdit={() => handleEditAddress(address)}
                             onSetDefault={() => handleSetDefaultAddress(address)}
                             headerType="form"

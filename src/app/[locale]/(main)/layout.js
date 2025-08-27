@@ -289,13 +289,13 @@
 // }
 
 
-import Navbar from "@/Components/Header/Navbar";
+import Header from "@/Components/Header/Header";
 import Footer from "@/Components/Footer/Footer";
 
 export default  function MainLayout({ children }) {
     return (
         <>
-            <Navbar/>
+            <Header/>   
             {children}
             <Footer/>
         </>

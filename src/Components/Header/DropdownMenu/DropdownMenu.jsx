@@ -417,6 +417,7 @@ const DropdownMenu = ({ isShow, initialData, initialError, keyData, arSection })
                                     lang={lang}
                                     title={lang === 'ar' ? arSection : keyData}
                                     data={dataList}
+                                    // isBrand={true}
                                 />
                             )}
                         </div>

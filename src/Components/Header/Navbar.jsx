@@ -8,7 +8,7 @@ import StepProgressBar from "@/Components/Shared/StepProgressBar/StepProgressBar
 import useCart from "@/hooks/useCart";
 import {CartProvider} from "@/hooks/CartContext";
 
-const Navbar = () => {
+const Navbar = ({downloadApp}) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isOpenDropdown, setIsOpenDropdown] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
@@ -16,6 +16,7 @@ const Navbar = () => {
     const handleToggleMenu = () => {
         setIsMenuOpen(prev => !prev);
     };
+ 
 
     // useEffect(() => {
     //     let lastScrollY = window.scrollY;
@@ -78,6 +79,7 @@ const Navbar = () => {
                         getCartCount={getCartCount}
                         isScrolled={!isVisible}
                         toggleMenu={handleToggleMenu}
+                        downloadApp={downloadApp}
                     />
                 </CartProvider>
 
@@ -88,6 +90,7 @@ const Navbar = () => {
                     toggleMenu={handleToggleMenu}
                     isOpenDropdown={isOpenDropdown}
                     setIsOpenDropdown={setIsOpenDropdown}
+                    downloadApp={downloadApp}
                 />
 
 
