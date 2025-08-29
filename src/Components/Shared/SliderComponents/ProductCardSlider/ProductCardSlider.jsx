@@ -225,8 +225,8 @@ const ProductCardSlider = ({ product, lang, setIsDraggingInsideCard }) => {
                                         animate={{ opacity: 1 }}
                                         transition={{ duration: 0.3 }}
                                     >
-                                        <Image
-                                            // fallback="/FallbackProductImage.png"
+                                        <SafeImage 
+                                            fallback="/FallbackProductImage.png"
                                             src={image.url || "/FallbackProductImage.png"}
                                             alt={product.name?.[lang] ? `${product.name[lang]} - ${index + 1}` : `Product Image ${index + 1}`}
                                             loading="lazy"
@@ -234,9 +234,10 @@ const ProductCardSlider = ({ product, lang, setIsDraggingInsideCard }) => {
                                             draggable={false}
                                             width={300}
                                             height={300}
-                                            quality={100}
+
+                                        
                                           
-                                        />
+                                        />  
                                     </motion.div>
                                 </div>
                             ))
@@ -258,6 +259,7 @@ const ProductCardSlider = ({ product, lang, setIsDraggingInsideCard }) => {
                                         draggable={false}
                                         width={300}
                                         height={300}
+                                      
                                     />
                                 </motion.div>
                             </div>

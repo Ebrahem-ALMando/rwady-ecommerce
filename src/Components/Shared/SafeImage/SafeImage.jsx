@@ -11,6 +11,7 @@ const SafeImage = ({
                        fallback = "/images/fallback.png",
                        alt = "صورة",
                        offOnerror = false,
+                  
                        ...props
                    }) => {
     const [imgSrc, setImgSrc] = useState(isValidSrc(src) ? src : fallback);
@@ -20,6 +21,7 @@ const SafeImage = ({
         if (!hasError) {
             setImgSrc(fallback);
             setHasError(true);
+            
         }
     };
 
@@ -43,6 +45,7 @@ const SafeImage = ({
             decoding="async"
             {...props}
             {...(!offOnerror && { onError: handleError })}
+    
         />
     );
 };
