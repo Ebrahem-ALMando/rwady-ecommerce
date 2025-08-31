@@ -1,133 +1,6 @@
-// 'use client'
-//
-// import React, { useState } from "react";
-// import useSWR from "swr";
-// import { getOrders } from "@/api/services/listOrders";
-//
-// import TransactionsTable from "@/Components/TransactionAndPaymentHistory/TransactionsTable/TransactionsTable";
-// import ProfileSidebar from "@/Components/Shared/ProfileSidebar/ProfileSidebar";
-// import Line from "@/Components/Shared/Line/Line";
-// import Error from "@/Components/Shared/Error/Error";
-// import styles from "./TransactionAndPaymentHistory.module.css";
-// import {getTransaction} from "@/api/services/transaction/getTransaction";
-//
-// const TransactionAndPaymentHistory = () => {
-//     const { data, isLoading, error, mutate } = useSWR("transactionList", getTransaction);
-//     const [selectedDate, setSelectedDate] = useState("");
-//     const [selectedStatus, setSelectedStatus] = useState("");
-//
-//     const handleDateChange = (e) => {
-//         setSelectedDate(e.target.value);
-//     };
-//
-//     const handleStatusChange = (e) => {
-//         setSelectedStatus(e.target.value);
-//     };
-//
-//     const formatDate = (dateStr) => {
-//         if (!dateStr) return "—";
-//         const date = new Date(dateStr);
-//         return date.toLocaleDateString("en-CA");
-//     };
-//
-//     const filteredOrders = (data?.data || []).filter(order => {
-//         const matchesDate = selectedDate ? formatDate(order.orderdate) === selectedDate : true;
-//         const matchesStatus = selectedStatus ? order.statuslabel === selectedStatus : true;
-//         return matchesDate && matchesStatus;
-//     });
-//
-//     const formatOrders = (orders) => {
-//         return orders.map(order => ({
-//             id: order.id,
-//             date: formatDate(order.orderdate),
-//             amount: "—",
-//             paymentMethod: order.payment_method?.name ?? "غير معروف",
-//             status:
-//                 order.payment_status === 0 ? "قيد التنفيذ"
-//                     : order.payment_status === 1 ? "ناجحة"
-//                         : order.payment_status === 2 ? "فاشلة"
-//                             : "مرفوضة",
-//             downloadLink: `/orders/${order.id}`
-//         }));
-//     };
-//
-//     if (error) {
-//         return (
-//             <Error
-//                 onRetry={() => {
-//                     mutate(undefined, { revalidate: true });
-//                 }}
-//             />
-//         );
-//     }
-//
-//     return (
-//         <div className={styles.container}>
-//             <div className={styles.sidebar}>
-//                 <ProfileSidebar />
-//             </div>
-//             <div className={styles.transactions}>
-//                 <div className={styles.header}>
-//                     <h3>الحركة المالية / الدفعات</h3>
-//                 </div>
-//                 <Line />
-//                 <div className={styles.filterSection}>
-//                     <div className={styles.selectWrapper}>
-//                         <label className={styles.inputLabel}>حالة الطلب</label>
-//                         <select
-//                             name="orderStatus"
-//                             className={styles.selectInput}
-//                             value={selectedStatus}
-//                             onChange={handleStatusChange}
-//                         >
-//                             <option value="">كل الحالات</option>
-//                             {[...new Set(data?.data?.map(order => order.statuslabel))]
-//                                 .filter(Boolean)
-//                                 .map(status => (
-//                                     <option key={status} value={status}>
-//                                         {status}
-//                                     </option>
-//                                 ))}
-//                         </select>
-//                     </div>
-//                     <div className={styles.selectWrapper}>
-//                         <label className={styles.inputLabel}>الفترة</label>
-//                         <select
-//                             name="orderDate"
-//                             className={styles.selectInput}
-//                             value={selectedDate}
-//                             onChange={handleDateChange}
-//                         >
-//                             <option value="">كل التواريخ</option>
-//                             {[...new Set(data?.data?.map(order => formatDate(order.orderdate)))]
-//                                 .filter(Boolean)
-//                                 .map(dateStr => (
-//                                     <option key={dateStr} value={dateStr}>
-//                                         {new Date(dateStr).toLocaleDateString("ar-EG", {
-//                                             year: 'numeric',
-//                                             month: 'long',
-//                                             day: 'numeric',
-//                                             weekday: 'long'
-//                                         })}
-//                                     </option>
-//                                 ))}
-//                         </select>
-//                     </div>
-//                 </div>
-//
-//                 {isLoading ? (
-//                     <div>جاري التحميل...</div>
-//                 ) : (
-//                     <TransactionsTable orders={formatOrders(filteredOrders)} />
-//                 )}
-//             </div>
-//         </div>
-//     );
-// };
-//
-// export default TransactionAndPaymentHistory;
+
 "use client";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import useSWR from "swr";
 import { useTranslations, useLocale } from "next-intl";
 import TransactionsTable from "@/Components/TransactionAndPaymentHistory/TransactionsTable/TransactionsTable";
@@ -138,27 +11,77 @@ import {getTransaction} from "@/api/services/transaction/getTransaction";
 import ReloadWithError from "@/Components/Shared/ReloadWithError/ReloadWithError";
 import {getProfile} from "@/api/services/auth/getProfile";
 import Loading from "@/Components/Shared/Loading/Loading";
+import { FiX } from "react-icons/fi";
+import DateRangePicker from "@/Components/Orders/DateRangePicker";
+import EmptyState from "@/Components/Shared/EmptyState/EmptyState";
 
 
 const TransactionAndPaymentHistory = () => {
     const t = useTranslations("Transactions");
     const locale = useLocale();
+    
+    // حالات الفلترة
+    const [selectedStatus, setSelectedStatus] = useState("");
+    const [dateRange, setDateRange] = useState("");
+    const [currentPage, setCurrentPage] = useState(1);
+    const [perPage] = useState(20);
+    
+    // بناء معاملات الطلب
+    const requestParams = useMemo(() => {
+        const params = {
+            current_page: currentPage,
+            per_page: perPage
+        };
+        
+        if (selectedStatus) {
+            params.status = selectedStatus;
+        }
+        
+        if (dateRange) {
+            const [startDate, endDate] = dateRange.split(' to ');
+            if (startDate) {
+                params.start_date = startDate;
+            }
+            if (endDate) {
+                params.end_date = endDate;
+            }
+        }
+        
+        return params;
+    }, [selectedStatus, dateRange, currentPage, perPage]);
+
     const { data: profileData,isLoading:isLoadingProf } = useSWR("profileData", getProfile, {
         revalidateOnFocus: false,
     });
-    const { data, isLoading, error } = useSWR("transactionList", getTransaction, {
-        revalidateOnFocus: false,
-    });
-    const [selectedDate, setSelectedDate] = useState("");
-    const [selectedStatus, setSelectedStatus] = useState("");
+    
+    // طلب البيانات مع الفلترة
+    const { data, isLoading, error } = useSWR(
+        ["transactionList", requestParams], 
+        () => getTransaction(requestParams),
+        {
+            revalidateOnFocus: false,
+        }
+    );
 
-    const handleDateChange = (e) => {
-        setSelectedDate(e.target.value);
-    };
-
+    // دوال معالجة الفلترة
     const handleStatusChange = (e) => {
         setSelectedStatus(e.target.value);
+        setCurrentPage(1); // إعادة تعيين الصفحة عند تغيير الفلتر
     };
+
+    const handleDateRangeChange = (e) => {
+        setDateRange(e.target.value);
+        setCurrentPage(1);
+    };
+
+    const handleResetFilters = () => {
+        setSelectedStatus("");
+        setDateRange("");
+        setCurrentPage(1);
+    };
+
+    // التحقق من وجود فلترة مطبقة
+    const hasActiveFilters = selectedStatus || dateRange;
 
     const formatDate = (dateStr) => {
         if (!dateStr) return "—";
@@ -166,13 +89,18 @@ const TransactionAndPaymentHistory = () => {
         return date.toLocaleDateString(locale === "ar" ? "ar-EG" : "en-US");
     };
 
+    // حالات الدفع المتاحة
+    const paymentStatusOptions = [
+        { value: "paid", label: t("status.paid") },
+        { value: "unpaid", label: t("status.unpaid") },
+        { value: "failed", label: t("status.failed") },
+        { value: "pending", label: t("status.pending") },
+        { value: "completed", label: t("status.completed") }
+    ];
 
-    const filteredTransactions = (data?.data || []).filter((transaction) => {
-        const matchesDate = selectedDate ? formatDate(transaction.created_at) === selectedDate : true;
-        const matchesStatus = selectedStatus ? transaction.status === selectedStatus : true;
-        return matchesDate && matchesStatus;
-    });
+    if (error || data?.error) return <ReloadWithError />;
 
+    const transactions = data?.data || [];
 
     const formatTransactions = (transactions) =>
         transactions.map((item) => ({
@@ -185,17 +113,6 @@ const TransactionAndPaymentHistory = () => {
             downloadLink: `/${locale}/orders/${item.order_id}`,
         }));
 
-
-    if (error) return <ReloadWithError />;
-
-
-    // const uniqueStatuses = [...new Set(data?.data?.map((item) => item.status))].filter(Boolean);
-    const uniqueStatuses = [];
-
-
-    // const uniqueDates = [...new Set(data?.data?.map((item) => formatDate(item.created_at)))].filter(Boolean);
-    const uniqueDates = []
-
     return (
         <div className={styles.container}>
             <div className={styles.sidebar}>
@@ -205,58 +122,79 @@ const TransactionAndPaymentHistory = () => {
             <div className={styles.transactions}>
                 <div className={styles.header}>
                     <h3>{t("title")}</h3>
-                </div>
+                    </div>
+                {/* <Line /> */}
+                    <div className={styles.filterSection}>
+                        <div className={styles.selectWrapper}>
+                            <label className={styles.inputLabel}>{t("filter.status")}</label>
+                            <select
+                                name="transactionStatus"
+                                className={styles.selectInput}
+                                value={selectedStatus}
+                                onChange={handleStatusChange}
+                            >
+                                <option value="">{t("filter.allStatuses")}</option>
+                                {paymentStatusOptions.map((status) => (
+                                    <option key={status.value} value={status.value}>
+                                        {status.label}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className={styles.dateWrapper}>
+                            <label className={styles.inputLabel}>{t("filter.date")}</label>
+                            <DateRangePicker
+                                value={dateRange}
+                                onChange={handleDateRangeChange}
+                                placeholder={t("date_range_placeholder")}
+                                locale={locale}
+                            />
+                        </div>
+                        {hasActiveFilters && (
+                            <button
+                                type="button"
+                                className={styles.resetButton}
+                                onClick={handleResetFilters}
+                                title={t("reset_filters")}
+                            >
+                                <FiX className={styles.resetIcon} />
+                                <span>{t("reset_filters")}</span>
+                            </button>
+                        )}
+                    </div>
+               
                 <Line />
-                <div className={styles.filterSection}>
-                    <div className={styles.selectWrapper}>
-                        <label className={styles.inputLabel}>{t("filter.status")}</label>
-                        <select
-                            name="transactionStatus"
-                            className={styles.selectInput}
-                            value={selectedStatus}
-                            onChange={handleStatusChange}
-                        >
-                            <option value="">{t("filter.allStatuses")}</option>
-                            {uniqueStatuses.map((status) => (
-                                <option key={status} value={status}>
-                                    {status === "pending"
-                                        ? t("status.pending")
-                                        : status === "completed"
-                                            ? t("status.completed")
-                                            : status === "failed"
-                                                ? t("status.failed")
-                                                : status}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-                    <div className={styles.selectWrapper}>
-                        <label className={styles.inputLabel}>{t("filter.date")}</label>
-                        <select
-                            name="transactionDate"
-                            className={styles.selectInput}
-                            value={selectedDate}
-                            onChange={handleDateChange}
-                        >
-                            <option value="">{t("filter.allDates")}</option>
-                            {uniqueDates.map((dateStr) => (
-                                <option key={dateStr} value={dateStr}>
-                                    {new Date(dateStr).toLocaleDateString(locale === "ar" ? "ar-EG" : "en-US", {
-                                        year: "numeric",
-                                        month: "long",
-                                        day: "numeric",
-                                        weekday: "long",
-                                    })}
-                                </option>
-                            ))}
-                        </select>
+                {isLoading ? (
+                <div style={{ marginTop: "2rem" }}>
+                    <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+                        {[...Array(8)].map((_, idx) => (
+                            <div key={idx} style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
+                                <div style={{ flex: 1 }}>
+                                    <div style={{ height: "24px", background: "#e5e7eb", borderRadius: "4px", width: "100%" }} />
+                                </div>
+                                <div style={{ flex: 1 }}>
+                                    <div style={{ height: "24px", background: "#e5e7eb", borderRadius: "4px", width: "100%" }} />
+                                </div>
+                                <div style={{ flex: 1 }}>
+                                    <div style={{ height: "24px", background: "#e5e7eb", borderRadius: "4px", width: "100%" }} />
+                                </div>
+                                <div style={{ flex: 1 }}>
+                                    <div style={{ height: "24px", background: "#e5e7eb", borderRadius: "4px", width: "100%" }} />
+                                </div>
+                                <div style={{ flex: 1 }}>
+                                    <div style={{ height: "24px", background: "#e5e7eb", borderRadius: "4px", width: "100%" }} />
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 </div>
-
-                {isLoading ? (
-                    <Loading/>
                 ) : (
-                    <TransactionsTable orders={formatTransactions(filteredTransactions)} />
+                    
+                    transactions?.length > 0 ? (
+                        <TransactionsTable orders={formatTransactions(transactions)} />
+                    ) : (
+                       <EmptyState message={t("no_transactions")}/>
+                    )
                 )}
             </div>
         </div>

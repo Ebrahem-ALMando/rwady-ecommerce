@@ -54,6 +54,11 @@
     width: 43%;
     min-width: 250px;
 }
+.dateWrapper {
+    position: relative;
+    width: 43%;
+    min-width: 250px;
+}
 .selectInput {
     color: #424242;
     width: 100%;
@@ -86,6 +91,31 @@
     border-color: #4299e1;
 }
 
+.resetButton {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background-color: #f3f4f6;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    color: #6b7280;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 1.7rem;
+}
+
+.resetButton:hover {
+    background-color: #e5e7eb;
+    color: #374151;
+}
+
+.resetIcon {
+    width: 16px;
+    height: 16px;
+}
+
 @media (max-width: 1120px) {
     .container {
         flex-direction: column;
@@ -107,6 +137,17 @@
     }
     .filterSection .selectWrapper:nth-child(2){
         width: 100%;
+    }
+    .dateWrapper {
+        width: 100%;
+    }
+    .filterSection .resetButton{
+     width: 100%;
+     margin-top: 10px;
+     text-align: center;
+     display: flex;
+     justify-content: center;
+     align-items: center;
     }
 
 }

@@ -173,6 +173,7 @@ const SearchModal = ({ isOpen, onClose }) => {
     useEffect(() => {
         if (isOpen) {
             mutate();
+            console.log(productsData);
             const savedSearches = JSON.parse(localStorage.getItem('recentSearches') || '[]');
             setRecentSearches(savedSearches);
         }

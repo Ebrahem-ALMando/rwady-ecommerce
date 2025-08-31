@@ -616,7 +616,8 @@
       "completed": "Completed",
       "cancelled": "Cancelled",
       "in_progress": "In Progress",
-      "shipping": "Shipping"  
+      "shipping": "Shipping" 
+       
     },
     "paymentMethods": {
       "installment": "Installment",
@@ -662,8 +663,10 @@
       "allDates": "All Dates"
     },
     "status": {
+      "paid": "Paid",
+      "unpaid": "Unpaid",
       "pending": "Pending",
-      "completed": "Successful",
+      "completed": "Completed",
       "failed": "Failed",
       "unknown": "Unknown"
     },
@@ -675,6 +678,9 @@
     "unknownMethod": "Unknown Payment Method",
     "noDescription": "No description available",
     "loading": "Loading transactions...",
+    "date_range_placeholder": "Select date range",
+    "reset_filters": "Reset Filters",
+    "no_transactions": "No transactions found",
     "table": {
       "orderId": "Order Number",
       "date": "Date",

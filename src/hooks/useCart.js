@@ -19,7 +19,7 @@ import CustomToast from '@/Components/Shared/CustomToast/CustomToast';
 
 // --- helpers (unchanged from your slim version) ---
 const firstImageUrl = (p) => p?.image_url || p?.media?.find?.(m => m.type === 'image')?.url || null;
-const slimProductForCart = (p) => ({
+export const slimProductForCart = (p) => ({
   id: p.id,
   name: p.name,
   price: p.price,

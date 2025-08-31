@@ -664,8 +664,10 @@
         "allDates": "كل التواريخ"
       },
       "status": {
+        "paid": "مدفوع",
+        "unpaid": "غير مدفوع",
         "pending": "قيد التنفيذ",
-        "completed": "ناجحة",
+        "completed": "مكتمل",
         "failed": "فاشلة",
         "unknown": "غير معروف"
       },
@@ -676,6 +678,9 @@
       },
       "unknownMethod": "طريقة دفع غير معروفة",
       "noDescription": "لا يوجد وصف",
+      "date_range_placeholder": "اختر نطاق التاريخ",
+      "reset_filters": "إعادة تعيين الفلاتر",
+      "no_transactions": "لا يوجد عمليات دفع",
       "table": {
         "orderId": "رقم الطلب",
         "date": "التاريخ",

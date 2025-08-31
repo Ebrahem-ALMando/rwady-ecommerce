@@ -19,6 +19,10 @@ import { useRouter } from "next/navigation";
 import { checkCoupon } from "@/api/services/checkCoupon";
 import UploadPaymentModal from "@/Components/Checkout/Payment/UploadPaymentModal/UploadPaymentModal";
 import { formatDiscount } from "@/utils/formatDiscount";
+import { slimProductForCart } from "@/utils/slimProductForCart";
+import { saveCartToStorage } from "@/utils/cartStorage";
+import { getCartItems } from "@/api/services/cart/getCartItems";
+import { CART_UPDATED_EVENT } from "@/utils/cartStorage";
 
 const OrderSummary = (props) => {
   const t = useTranslations("OrderSummary");
@@ -208,6 +212,11 @@ const OrderSummary = (props) => {
         if (!result.error) {
          if(!props.isDirectOrder){
           clearCart();
+          const serverCartRes = await getCartItems();
+          const serverCartRaw = Array.isArray(serverCartRes?.data) ? serverCartRes.data : [];
+          const serverCart = serverCartRaw.map((item) => slimProductForCart(item));
+          saveCartToStorage(serverCart);
+          window.dispatchEvent(new Event(CART_UPDATED_EVENT));
          }
          else if(props.isDirectOrder && props.mode === 'direct_order'){
           sessionStorage.removeItem('buyDirectly');
