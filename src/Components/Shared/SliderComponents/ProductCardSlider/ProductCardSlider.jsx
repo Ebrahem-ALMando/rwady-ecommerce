@@ -259,7 +259,7 @@ const ProductCardSlider = ({ product, lang, setIsDraggingInsideCard }) => {
                                         draggable={false}
                                         width={300}
                                         height={300}
-                                      
+                                        unoptimized={true}                                      
                                     />
                                 </motion.div>
                             </div>

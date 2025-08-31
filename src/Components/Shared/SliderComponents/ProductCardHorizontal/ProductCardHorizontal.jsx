@@ -198,13 +198,14 @@ const ProductCardHorizontal = ({ product, lang, setIsDraggingInsideCard }) => {
                                 <div key={index}>
                                     <SafeImage
                                         fallback="/FallbackProductImage.png"
-                                        src={image.url}
+                                        src={image.url || "/FallbackProductImage.png"}
                                         alt={product.name?.[lang] ? `${product.name[lang]} - ${index + 1}` : `Product Image ${index + 1}`}
                                         loading="lazy"
                                         className={styles.productImg}
                                         draggable={false}
                                         width={280}
                                         height={240}
+                                        unoptimized={true}
                                     />
                                 </div>
                             ))}
@@ -219,6 +220,7 @@ const ProductCardHorizontal = ({ product, lang, setIsDraggingInsideCard }) => {
                             draggable={false}
                             width={280}
                             height={240}
+                            unoptimized={true}
                         />
                     )}
 
