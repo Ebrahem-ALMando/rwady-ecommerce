@@ -431,7 +431,8 @@
     "close": "إغلاق",
     "showCategories": "عرض الأقسام",
     "closeCategories": "إغلاق الأقسام",
-    "noProducts": "لا توجد منتجات في قسم {name}"
+    "noProducts": "لا توجد منتجات في قسم {name}",
+    "noSubCategories": "لا توجد اقسام فرعية لعرضها حالياً"
 
   },
   "productCollections": {
@@ -527,13 +528,26 @@
     "title": "الطلبات",
     "all_statuses": "كل الحالات",
     "all_dates": "كل التواريخ",
+    "start_date": "تاريخ البداية",
+    "end_date": "تاريخ النهاية",
+    "date_range_placeholder": "اختر مجال التاريخ",
+    "date_range_picker": {
+      "title": "اختر مجال التاريخ",
+      "from_date": "من تاريخ:",
+      "to_date": "إلى تاريخ:",
+      "apply": "تطبيق",
+      "cancel": "إلغاء"
+    },
+    "reset_filters": "إعادة تعيين",
     "no_orders": "لا توجد طلبات مطابقة للفلاتر",
     "statusesType": {
       "pending": "قيد الانتظار",
       "paid": "تم الدفع",
       "cancelled": "تم الإلغاء",
       "unpaid": "غير مدفوع",
-      "CREATED": "تم الانشاء"
+      "completed": "مكتمل",
+      "in_progress": "قيد التنفيذ",
+      "shipping": "تم الشحن"
     },
     "order_number": "رقم الطلب",
     "order_date": "بتاريخ",
@@ -594,12 +608,19 @@
     "statuses": {
       "pending": "قيد الانتظار",
       "completed": "مكتمل",
-      "cancelled": "تم الإلغاء"
+      "cancelled": "تم الإلغاء",
+      "in_progress": "قيد التنفيذ",
+      "shipping": "تم الشحن"
     },
     "paymentStatuses": {
       "paid": "تم الدفع",
       "unpaid": "غير مدفوع",
-      "failed": "فشل الدفع"
+      "failed": "فشل الدفع",
+      "pending": "قيد التنفيذ",
+      "completed": "مكتمل",
+      "cancelled": "تم الإلغاء",
+      "in_progress": "قيد التنفيذ",
+      "shipping": "تم الشحن"
     },
     "paymentMethods": {
       "installment": "تقسيط",

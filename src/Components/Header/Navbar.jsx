@@ -7,7 +7,7 @@ import ToolNav from "@/Components/Header/ToolNav/ToolNav";
 import StepProgressBar from "@/Components/Shared/StepProgressBar/StepProgressBar";
 import useCart from "@/hooks/useCart";
 import {CartProvider} from "@/hooks/CartContext";
-
+import { Suspense } from "react";
 const Navbar = ({downloadApp}) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isOpenDropdown, setIsOpenDropdown] = useState(false);
@@ -83,7 +83,8 @@ const Navbar = ({downloadApp}) => {
                     />
                 </CartProvider>
 
-                <MainNavigation
+               <Suspense fallback={<></>}>
+               <MainNavigation
                     isScrolled={!isVisible}
                     isMenuOpen={isMenuOpen}
                     setIsMenuOpen={setIsMenuOpen}
@@ -92,6 +93,7 @@ const Navbar = ({downloadApp}) => {
                     setIsOpenDropdown={setIsOpenDropdown}
                     downloadApp={downloadApp}
                 />
+               </Suspense>
 
 
             </header>

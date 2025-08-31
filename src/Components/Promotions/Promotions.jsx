@@ -178,7 +178,7 @@ export default function Promotions({promotions, error, meta}) {
             </motion.div>
             {/* Promotions Grid */}
             <div className={styles.promotionsSection}>
-                {promotions.length > 0 && (
+                {/* {promotions.length > 0 && (
                     <motion.div 
                         className={styles.sectionHeader}
                         initial={{ opacity: 0.8, y: 20 }}
@@ -192,7 +192,7 @@ export default function Promotions({promotions, error, meta}) {
                             {t("sectionSubtitle")}
                         </p>
                     </motion.div>
-                )}
+                )} */}
 
                 {promotions.length === 0 ? (
                     <PromotionsEmptyState />

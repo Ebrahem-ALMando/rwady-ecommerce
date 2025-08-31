@@ -313,7 +313,7 @@ const EditProfileForm = ({ isOpen, setIsOpen, profileData, mutate }) => {
                             id="phone"
                             type="tel"
                             name="phone"
-                            value={"00"+formData.phone}
+                            value={"+"+formData.phone}
                             className={styles.textInput}
                             disabled
                             aria-disabled="true"

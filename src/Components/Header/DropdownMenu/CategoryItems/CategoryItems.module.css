@@ -58,8 +58,24 @@
     justify-content: center;
     flex-wrap: wrap;
     gap: 5px;
-    margin-top: 2rem;
+    margin-top: 0.2rem;
     overflow-x: hidden;
+    width:100%;
+    height: auto;
+    gap: 5px;
+    overflow-x: hidden;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, max-content));
+    justify-content: center;
+}
+@media (max-width: 775px) {
+    .items {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(165px, max-content));
+        justify-content: center;
+        gap: 8px;
+        padding: 8px 4px;
+    }
 }
 @media (max-width: 630px)
 {
@@ -70,3 +86,13 @@
     }
 }
 
+@media (max-width: 400px) {
+
+    .items {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(165px, max-content));
+        justify-content: center;
+        gap: 6px;
+        padding: 8px 2px;
+    }
+}

@@ -14,7 +14,9 @@ const Pagination = ({
     className = "",
     showInfo = true,
     showPerPage = false,
-    loadingPage = false
+    loadingPage = false,
+    nameAr="منتج",
+    nameEn="Product"
 }) => {
     const locale = useLocale();
     const router = useRouter();
@@ -98,9 +100,9 @@ const Pagination = ({
                 <div className={styles.pageInfo}>
                     <span className={styles.infoText}>
                         {isRTL ? (
-                            `عرض ${startItem}-${endItem} من ${total} منتج`
+                            `عرض ${startItem}-${endItem} من ${total} ${nameAr}`
                         ) : (
-                            `Showing ${startItem}-${endItem} of ${total} products`
+                            `Showing ${startItem}-${endItem} of ${total} ${nameEn}`
                         )}
                     </span>
                 </div>

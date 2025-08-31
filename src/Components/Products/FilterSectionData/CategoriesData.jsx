@@ -10,12 +10,12 @@ const CategoriesData = ({ data, onChange, selected, lang, isPendingUpdate, t }) 
     const [isExpanded, setIsExpanded] = useState(false);
     const ITEMS_TO_SHOW = 5;
 
-    console.log('CategoriesData received:', {
-        selected,
-        selectedType: typeof selected,
-        selectedLength: selected?.length,
-        dataLength: data?.length
-    });
+    // console.log('CategoriesData received:', {
+    //     selected,
+    //     selectedType: typeof selected,
+    //     selectedLength: selected?.length,
+    //     dataLength: data?.length
+    // });
 
     // Auto-expand "Show More" if any selected category is in hidden items
     useEffect(() => {
@@ -40,15 +40,15 @@ const CategoriesData = ({ data, onChange, selected, lang, isPendingUpdate, t }) 
                 return checkChildren(item.children);
             });
             
-            console.log('CategoriesData auto-expand check:', {
-                hasSelectedInHidden,
-                selected,
-                hiddenItemsCount: hiddenItems.length,
-                visibleItemsCount: visibleItems.length
-            });
+            // console.log('CategoriesData auto-expand check:', {
+            //     hasSelectedInHidden,
+            //     selected,
+            //     hiddenItemsCount: hiddenItems.length,
+            //     visibleItemsCount: visibleItems.length
+            // });
             
             if (hasSelectedInHidden) {
-                console.log('Auto-expanding "Show More" because selected category is in hidden items');
+                // console.log('Auto-expanding "Show More" because selected category is in hidden items');
                 setIsExpanded(true);
             }
         }

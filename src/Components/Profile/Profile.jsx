@@ -201,7 +201,7 @@ import CustomToast from '@/Components/Shared/CustomToast/CustomToast';
 const Profile=(props)=> {
     const t = useTranslations("Profile");
     const router = useRouter();
-
+    const lang = useLocale();
 
     const [isOpen, setIsOpen] = useState(false);
     const fileInputRef = useRef(null);
@@ -410,8 +410,9 @@ const Profile=(props)=> {
                             value={profile.name || "—"}
                         />
                         <TextSection
+                            direction="ltr"
                             title={t("phoneNumber")}
-                            value={profile.phone ? `00${profile.phone}` : "—"}
+                            value={profile.phone ? `${lang==="ar" ? `${profile.phone}+` : `+${profile.phone}`}` : "—"}
                         />
                     </div>
                 </div>

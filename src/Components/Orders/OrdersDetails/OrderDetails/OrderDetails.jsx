@@ -200,8 +200,10 @@ const OrderDetails = () => {
     const orderStatus = order.status;
     const shouldShowOtpInput = order.payment_method === "installment" &&
         order.metadata?.validate_plan &&
-        !order.metadata?.verify_otp &&
-        !order.metadata?.otp_verified;
+        !(
+            order.metadata?.confirm_otp?.success === true ||
+            order.metadata?.confirm_otp?.succeeded === true
+        );
 
     const handleVerifyOtp = async () => {
         setVerifying(true);

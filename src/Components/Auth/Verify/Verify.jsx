@@ -263,7 +263,7 @@ const Verify = () => {
                     </h1>
 
                     <p className="text-start text-gray-600 mb-8 font-arabic">
-                        {t("instruction")} <span className="font-bold text-black">{phone}</span>
+                        {t("instruction")} <span className="font-bold text-black " dir="ltr">{phone}</span>
                     </p>
 
                     <motion.div 

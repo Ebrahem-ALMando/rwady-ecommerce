@@ -411,6 +411,7 @@ const DropdownMenu = ({ isShow, initialData, initialError, keyData, arSection })
                                     data={childrenData}
                                     setSelectedChild={setSelectedChild}
                                     selectedChild={selectedChild}
+                                    selectedCategoryId={selectedCategoryId}
                                 />
                             ) : (
                                 <CategoryItems

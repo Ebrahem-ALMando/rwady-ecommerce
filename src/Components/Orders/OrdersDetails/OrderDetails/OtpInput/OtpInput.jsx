@@ -114,7 +114,7 @@ const OtpInput = ({
             </div>
 
             {otpError && (
-                <p className="text-red-500 text-sm mb-2">{otpError}</p>
+                <p className="text-red-500 text-sm mb-2 mr-3 ml-3">{otpError}</p>
             )}
 
             <button

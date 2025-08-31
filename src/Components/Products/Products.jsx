@@ -98,7 +98,7 @@ const Products = ({initError, data, categoriesData, brandsData, searchParams, me
         brand_id: filtersData.brand_id,
     });
     
-    console.log('Products.jsx - selectedFilters:', selectedFilters);
+    // console.log('Products.jsx - selectedFilters:', selectedFilters);
 
     if (initError) return <ReloadWithError/>;
 
@@ -303,7 +303,7 @@ const Products = ({initError, data, categoriesData, brandsData, searchParams, me
                 {/* Pagination Component */}
                 {meta && meta.last_page > 1 && (
                     <>
-                        {console.log('Rendering Pagination with meta:', meta)}
+                        {/* {console.log('Rendering Pagination with meta:', meta)} */}
                         <Pagination
                             currentPage={meta.current_page}
                             lastPage={meta.last_page}

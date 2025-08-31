@@ -111,7 +111,7 @@
   "mainNav": {
     "label": "Main navigation",
     "links": {
-      "home": "home",
+      "home": "Home",
       "categories": "Categories",
       "promotions_offers": "Promotions / Offers",
       "brands": "Brands",
@@ -429,7 +429,8 @@
     "close": "Close",
     "showCategories": "Show Categories",
     "closeCategories": "Close Categories",
-    "noProducts": "No products available in {name}"
+    "noProducts": "No products available in {name}",
+    "noSubCategories": "No subcategories available to display"
 
   },
   "productCollections":{
@@ -524,12 +525,26 @@
     "title": "Orders",
     "all_statuses": "All statuses",
     "all_dates": "All dates",
+    "start_date": "Start Date",
+    "end_date": "End Date",
+    "date_range_placeholder": "Select date range",
+    "date_range_picker": {
+      "title": "Select Date Range",
+      "from_date": "From Date:",
+      "to_date": "To Date:",
+      "apply": "Apply",
+      "cancel": "Cancel"
+    },
+    "reset_filters": "Reset Filters",
     "no_orders": "No matching orders found",
     "statusesType": {
       "pending": "Pending",
       "paid": "Paid",
       "cancelled": "Cancelled",
-      "unpaid": "Unpaid"
+      "unpaid": "Unpaid",
+      "completed": "Completed",
+      "in_progress": "In Progress",
+      "shipping": "Shipping"
     },
     "order_number": "Order No.",
     "order_date": "Date",
@@ -589,12 +604,19 @@
     "statuses": {
       "pending": "Pending",
       "completed": "Completed",
-      "cancelled": "Cancelled"
+      "cancelled": "Cancelled",
+      "in_progress": "In Progress",
+      "shipping": "Shipping"
     },
     "paymentStatuses": {
       "paid": "Paid",
       "unpaid": "Unpaid",
-      "failed": "Failed"
+      "failed": "Failed",
+      "pending": "Pending",
+      "completed": "Completed",
+      "cancelled": "Cancelled",
+      "in_progress": "In Progress",
+      "shipping": "Shipping"  
     },
     "paymentMethods": {
       "installment": "Installment",

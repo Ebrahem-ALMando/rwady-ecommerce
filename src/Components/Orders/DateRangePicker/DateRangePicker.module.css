@@ -1,0 +1,217 @@
+.container {
+    position: relative;
+    width: 100%;
+}
+
+.inputContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background-color: #f8f9fb;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    padding: 10px 16px;
+    cursor: pointer;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.inputContainer:hover {
+    border-color: #0741ad;
+}
+
+.inputContainer:focus-within {
+    border-color: #0741ad;
+    box-shadow: 0 0 0 2px rgba(7, 65, 173, 0.2);
+}
+
+.icon {
+    color: #666;
+    margin-inline-end: 8px;
+    flex-shrink: 0;
+}
+
+.input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    outline: none;
+}
+
+.input::placeholder {
+    color: #999;
+}
+
+.clearButton {
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.clearButton:hover {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.picker {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    margin-top: 4px;
+    padding: 16px;
+    min-width: 300px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #eee;
+}
+
+.header h4 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+.closeButton {
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.closeButton:hover {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.dateInputs {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.dateInput {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.dateInput label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #555;
+}
+
+.dateField {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #333;
+    background-color: #f8f9fb;
+    transition: border-color 0.3s ease;
+}
+
+.dateField:focus {
+    outline: none;
+    border-color: #0741ad;
+    box-shadow: 0 0 0 2px rgba(7, 65, 173, 0.1);
+}
+
+.actions {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
+.applyButton {
+    padding: 8px 16px;
+    background-color: #0741ad;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.applyButton:hover:not(:disabled) {
+    background-color: #063a9a;
+}
+
+.applyButton:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.cancelButton {
+    padding: 8px 16px;
+    background-color: #f8f9fb;
+    color: #666;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cancelButton:hover {
+    background-color: #e9ecef;
+    color: #333;
+}
+
+/* للجوال */
+@media (max-width: 768px) {
+    .picker {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90%;
+        max-width: 400px;
+        margin: 0;
+    }
+    
+    .dateInputs {
+        flex-direction: column;
+    }
+    
+    .actions {
+        flex-direction: column;
+    }
+    
+    .applyButton,
+    .cancelButton {
+        width: 100%;
+    }
+}

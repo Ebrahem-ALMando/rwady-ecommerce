@@ -21,14 +21,14 @@ const CategoryTreeItem = ({
     
     // Auto-expand if any children are selected
     useEffect(() => {
-        console.log('CategoryTreeItem useEffect triggered:', {
-            itemId: item.id,
-            itemName: item.name?.[lang],
-            hasChildren,
-            selected,
-            selectedLength: selected?.length,
-            children: item.children?.map(child => ({ id: child.id, name: child.name?.[lang] }))
-        });
+        // console.log('CategoryTreeItem useEffect triggered:', {
+        //     itemId: item.id,
+        //     itemName: item.name?.[lang],
+        //     hasChildren,
+        //     selected,
+        //     selectedLength: selected?.length,
+        //     children: item.children?.map(child => ({ id: child.id, name: child.name?.[lang] }))
+        // });
 
         if (hasChildren && selected && Array.isArray(selected) && selected.length > 0) {
             // Convert selected to strings for comparison
@@ -52,18 +52,18 @@ const CategoryTreeItem = ({
                 return false;
             });
             
-            console.log('Expansion check:', {
-                itemId: item.id,
-                selectedStrings,
-                isCurrentSelected,
-                hasSelectedChild,
-                hasSelectedGrandchild,
-                shouldExpand: isCurrentSelected || hasSelectedChild || hasSelectedGrandchild
-            });
+            // console.log('Expansion check:', {
+            //     itemId: item.id,
+            //     selectedStrings,
+            //     isCurrentSelected,
+            //     hasSelectedChild,
+            //     hasSelectedGrandchild,
+            //     shouldExpand: isCurrentSelected || hasSelectedChild || hasSelectedGrandchild
+            // });
             
             // Expand if current item is selected, has selected children, or has selected grandchildren
             if (isCurrentSelected || hasSelectedChild || hasSelectedGrandchild) {
-                console.log(`Auto-expanding category: ${item.name?.[lang]} (ID: ${item.id})`);
+                // console.log(`Auto-expanding category: ${item.name?.[lang]} (ID: ${item.id})`);
                 setIsExpanded(true);
             }
         }
