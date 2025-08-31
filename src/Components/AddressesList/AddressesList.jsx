@@ -170,6 +170,7 @@ import {useTranslations} from "next-intl";
 import ReloadWithError from "@/Components/Shared/ReloadWithError/ReloadWithError";
 import CustomToast from "@/Components/Shared/CustomToast/CustomToast";
 import ConfirmDialog from "@/Components/AddressesList/AddressFormAction/ConfirmDialog/confirmDialog";
+import EmptyState from '../Shared/EmptyState/EmptyState';
 const AddressesList = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedAddress, setSelectedAddress] = useState(null);
@@ -337,7 +338,8 @@ const AddressesList = () => {
                 </div>
                 <Line />
                 <div className={styles.mainInfo}>
-                    {addressList.map(address => (
+                    {addressList.length > 0 ? (
+                        addressList.map(address => (    
                         <Address
                             key={address.id}
                             id={address.id}
@@ -354,7 +356,10 @@ const AddressesList = () => {
                             phone={phone}
                             t={t}
                         />
-                    ))}
+                    ))
+                    ) : (
+                        <EmptyState message={t("noAddresses")} />
+                    )}
                 </div>
             </div>
         </div>

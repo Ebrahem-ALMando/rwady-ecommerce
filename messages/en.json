@@ -260,7 +260,8 @@
     "deleteAddress": "Delete Address",
     "deleteAddressMessage": "Are you sure you want to delete this address?",
     "deleteAddressConfirm": "Delete",
-    "deleteAddressCancel": "Cancel"
+    "deleteAddressCancel": "Cancel",
+    "noAddresses": "No addresses available"
 
   },
   "Buttons": {

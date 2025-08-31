@@ -263,7 +263,8 @@
     "deleteAddress": "حذف العنوان",
     "deleteAddressMessage": "هل أنت متأكد من حذف هذا العنوان؟",
     "deleteAddressConfirm": "حذف",
-    "deleteAddressCancel": "إلغاء"
+    "deleteAddressCancel": "إلغاء",
+    "noAddresses": "لا يوجد عناوين متاحة"
 
 
   },
