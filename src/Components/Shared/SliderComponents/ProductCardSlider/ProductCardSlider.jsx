@@ -18,7 +18,7 @@ import useFavourites from "@/hooks/useFavourites";
 import SafeImage from "@/Components/Shared/SafeImage/SafeImage";
 import { Sparkles } from 'lucide-react';
 import CompactCartButton from "@/Components/Shared/Buttons/CompactCartButton/CompactCartButton";
-import CartActionButton from "@/Components/Shared/Buttons/CartActionButton/CartActionButton";
+import { getFinalPrice, getIsShowPrice } from "@/utils/priceCul";
 const settings = {
     ...sliderSetting,
     infinite: false,
@@ -100,8 +100,7 @@ const ProductCardSlider = ({ product, lang, setIsDraggingInsideCard }) => {
     };
 
 
-    const discountValue = getDiscount(product.price, product.price_after_discount);
-    const isDiscountValid = product.price_after_discount < product.price;
+  
 
     useEffect(() => {
         const images = product.media?.filter(m => m.type === "image").slice(0, 3) || [];
@@ -130,11 +129,16 @@ const ProductCardSlider = ({ product, lang, setIsDraggingInsideCard }) => {
 
 
 
-const finalPrice = (product.final_price_after_promotion < product.price_after_discount? product.final_price_after_promotion : product.price_after_discount) || product.price;
-    return (
+   
+        const finalPrice = getFinalPrice(product);
+        const isShowPrice = getIsShowPrice(product);
+        const discountValue = getDiscount(product.price, finalPrice);
+        const isDiscountValid = finalPrice < product.price    ; 
+
+return (
         <div className={`p-2 pt-5 ${styles.cardDiv}`}>
             <div className={styles.card}>
-                {product.discount_percentage_text?.[lang] && isDiscountValid && (
+                {product.discount_percentage_text?.[lang] && isDiscountValid && finalPrice < product.price && (
                     <div className={`absolute top-2 left-0 text-white font-bold ${styles.saveSeller}`}>
                         {product.discount_percentage_text[lang]}
                     </div>
@@ -168,14 +172,14 @@ const finalPrice = (product.final_price_after_promotion < product.price_after_di
                 )}
 
 
-                {discountValue > 0 && isDiscountValid && time!=="NaNH : NaN M : NaN S"&&(
+                {discountValue > 0 && isDiscountValid && finalPrice < product.price && time!=="NaNH : NaN M : NaN S"&& product.price_discount_start!==null && product.price_discount_end!==null && (
                     <div className={`absolute top-[-17px] left-1/2 -translate-x-1/2 z-50 ${styles.timeBox}`}>
                         <div className={styles.time}>
                             <p className={styles.timeText}>
                                 <span className={styles.timeIcon}>
                                     <Image width={25} height={25} src={'/images/img_8.png'} alt={'time'} />
                                 </span>
-                                {time}
+                                {time}  
                             </p>
                         </div>
                     </div>
@@ -319,7 +323,7 @@ const finalPrice = (product.final_price_after_promotion < product.price_after_di
                         <p className={styles.price}>
                             {finalPrice} - IQD
                             <span className={styles.priceText}>&nbsp;</span>
-                            {(product.final_price_after_promotion || product.price_after_discount) && (
+                            {isShowPrice && (
                                 <del className={styles.oldPrice}>{product.price} - IQD</del>
                             )}
                         </p>

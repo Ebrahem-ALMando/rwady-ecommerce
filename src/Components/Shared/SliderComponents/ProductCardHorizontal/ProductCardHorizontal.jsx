@@ -23,6 +23,7 @@ import useFavourites from "@/hooks/useFavourites";
 import SafeImage from "@/Components/Shared/SafeImage/SafeImage";
 import Slider from 'react-slick';
 import { sliderSetting } from "@/Components/Shared/SliderComponents/ProductCardSlider/config";
+import { getFinalPrice, getIsShowPrice } from "@/utils/priceCul";
 
 const settings = {
     ...sliderSetting,
@@ -54,6 +55,8 @@ const ProductCardHorizontal = ({ product, lang, setIsDraggingInsideCard }) => {
     const cartRef = useRef();
     const { getItemQuantity, addItem, removeItem, updateQuantity, getIsItemExisting, cart, isSyncing } = useCart();
 
+  
+
     useEffect(() => {
         if (!product?.id || !Array.isArray(favourites)) return;
 
@@ -65,10 +68,12 @@ const ProductCardHorizontal = ({ product, lang, setIsDraggingInsideCard }) => {
 
     }, [favourites, product.id]);
 
+
     const handleToggle = async () => {
         const res = await toggle(product.id);
         const isNowFav = res?.data?.is_favorite;
         setLiked(isNowFav);
+
         setLikedCount(isNowFav?1:0);
     };
 
@@ -90,8 +95,7 @@ const ProductCardHorizontal = ({ product, lang, setIsDraggingInsideCard }) => {
         }
     };
 
-    const discountValue = getDiscount(product.price, product.price_after_discount);
-    const isDiscountValid = product.price_after_discount < product.price;
+
 
     useEffect(() => {
         const images = product.media?.filter(m => m.type === "image").slice(0, 3) || [];
@@ -116,12 +120,15 @@ const ProductCardHorizontal = ({ product, lang, setIsDraggingInsideCard }) => {
     };
     const isDraggingNowRef = useRef(false);
     const router = useRouter();
-    const finalPrice = (product.final_price_after_promotion < product.price_after_discount? product.final_price_after_promotion : product.price_after_discount) || product.price;
+    const finalPrice = getFinalPrice(product);
+    const isShowPrice = getIsShowPrice(product);
+    const discountValue = getDiscount(product.price, finalPrice);
+    const isDiscountValid = finalPrice < product.price;
     return (
         <div className={styles.cardContainer}>
             <div className={styles.card}>
                 {/* Discount Badge */}
-                {product.discount_percentage_text?.[lang] && isDiscountValid && (
+                {product.discount_percentage_text?.[lang] && isDiscountValid && finalPrice < product.price && (
                     <div className={styles.saveSeller}>
                         {/* <span className={styles.badgeIcon}>🔥</span> */}
                         {product.discount_percentage_text[lang]}
@@ -156,7 +163,7 @@ const ProductCardHorizontal = ({ product, lang, setIsDraggingInsideCard }) => {
                     </div>
                 )}
                 {/* Timer */}
-                {discountValue > 0 && isDiscountValid && time!=="NaNH : NaN M : NaN S"&&(
+                {discountValue > 0 && isDiscountValid && finalPrice < product.price && time!=="NaNH : NaN M : NaN S"&& product.price_discount_start!==null && product.price_discount_end!==null &&(
                     <div className={styles.timeBox}>
                         <div className={styles.time}>
                             <p className={styles.timeText}>
@@ -234,7 +241,7 @@ const ProductCardHorizontal = ({ product, lang, setIsDraggingInsideCard }) => {
                                 handleToggle();
                             }}
                         >
-                          <FavouriteToggleButton
+                           <FavouriteToggleButton
                                 liked={liked}
                                 likedCount={likedCount}
                                 onToggle={handleToggle}
@@ -281,7 +288,7 @@ const ProductCardHorizontal = ({ product, lang, setIsDraggingInsideCard }) => {
                         <p className={styles.price}>
                             {finalPrice} - IQD
                         </p>
-                        {product.price_after_discount && (
+                        {isShowPrice && (
                             <del className={styles.oldPrice}>{product.price} - IQD</del>
                         )}
                     </div>

@@ -17,6 +17,8 @@ import CustomToast from "@/Components/Shared/CustomToast/CustomToast";
 import QuantityControl from "@/Components/ProductDetails/QuantityControl/QuantityControl";
 import {useTranslations} from "next-intl";
 import FavouriteToggleButton from "@/Components/Shared/Buttons/FavouriteToggleButton/FavouriteToggleButton";
+import { getFinalPrice, getIsShowPrice } from "@/utils/priceCul";
+
 
 const CartItem = ({ item,cart, updateQuantity,getItemQuantity,removeItem,lang,t }) => {
     const { favourites, toggle, isFavourite, mutateFavourites } = useFavourites();
@@ -85,7 +87,10 @@ const CartItem = ({ item,cart, updateQuantity,getItemQuantity,removeItem,lang,t 
             }
         };
     }, [selectedQty, item.id, cart.length]);
-
+    const isShowPrice = getIsShowPrice(item);
+  
+    const finalPrice = getFinalPrice(item);
+    const isDiscountValid = finalPrice < item.price; 
     return (
         <div className={styles.productCard}>
             <div className={styles.productImg}>
@@ -126,17 +131,19 @@ const CartItem = ({ item,cart, updateQuantity,getItemQuantity,removeItem,lang,t 
 
             <div className={styles.productDetails}>
                 <p className={styles.price}>
-                    {item.final_price_after_promotion || item.price_after_discount || item.price} IQD
+                    {finalPrice} IQD
                 </p>
 
-                {item.price > item.final_price_after_promotion || item.price_after_discount && (
+                {isShowPrice && (
                     <p className={styles.oldPrice}>
+                        {isDiscountValid && finalPrice < item.price && (
                           <span className={styles.discount}>
                             {item.discount_percentage_text?.[lang] || t("discount", {
-                                    percentage: getDiscountPercentage(item.price, item.final_price_after_promotion||item.price_after_discount)
+                                percentage: getDiscountPercentage(item.price, finalPrice)
                             })}
                           </span>
-                        <del>{item.price} IQD</del>
+                        )}
+                            <del>{item.price} IQD</del>
                     </p>
                 )}
                 <p className={styles.freeDelivery}>

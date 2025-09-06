@@ -17,6 +17,8 @@ import CartActionButton from "@/Components/Shared/Buttons/CartActionButton/CartA
 import FavouriteToggleButton from "@/Components/Shared/Buttons/FavouriteToggleButton/FavouriteToggleButton";
 import { useRouter } from "next/navigation";
 import CustomToast from '@/Components/Shared/CustomToast/CustomToast';
+import { getFinalPrice, getIsShowPrice } from "@/utils/priceCul";
+
 const DetailsCard = ({ product,lang }) => {
     const { toggle, isFavourite, favourites } = useFavourites(true);
     const router = useRouter();
@@ -25,7 +27,7 @@ const DetailsCard = ({ product,lang }) => {
     const cartRef = useRef();
     const { getItemQuantity,addItem,removeItem,updateQuantity,getIsItemExisting,cart} = useCart();
     const t = useTranslations('ProductDetails');
-    const isDiscountValid = product.price_after_discount < product.price;
+  
     const initialQty = getItemQuantity(product.id) || 1;
     const [selectedQty, setSelectedQty] = useState(initialQty);
 
@@ -78,7 +80,9 @@ const DetailsCard = ({ product,lang }) => {
       });
       router.push(`/${lang}/checkout?mode=direct_order`);
     }
-    const finalPrice = (product.final_price_after_promotion < product.price_after_discount? product.final_price_after_promotion : product.price_after_discount) || product.price;
+    const finalPrice = getFinalPrice(product);
+    const isShowPrice = getIsShowPrice(product);
+    const isDiscountValid = finalPrice < product.price;   
     return (
         <div className={styles.detailsCard}>
 
@@ -145,18 +149,18 @@ const DetailsCard = ({ product,lang }) => {
                 animate={{scale: 1, opacity: 1}}
                 transition={{duration: 0.4, ease: "easeInOut"}}
             >
-                {product.price_after_discount !== product.price && (
+                {isShowPrice && (
                     <del>{product.price} IQD</del>
                 )}
                 <p>{finalPrice} IQD</p>
             </motion.div>
 
 
-            {isDiscountValid && (
+            {isDiscountValid &&finalPrice < product.price && (
                 <motion.div className={styles.discount} initial={{opacity: 0.7}} animate={{opacity: 1}}
                             transition={{delay: 0.2}}>
-                    <p>{t("youSaved", {amount: Number(product.price - product.price_after_discount).toFixed(0)})}</p>
-                    <p>{t("discountPercentage", {percent: getDiscountPercentage(product.price, product.price_after_discount)})}</p>
+                    <p>{t("youSaved", {amount: Number( product.price - finalPrice).toFixed(0)})}</p>
+                    <p>{t("discountPercentage", {percent: getDiscountPercentage(product.price, finalPrice)})}</p>
                 </motion.div>
             )}
 
