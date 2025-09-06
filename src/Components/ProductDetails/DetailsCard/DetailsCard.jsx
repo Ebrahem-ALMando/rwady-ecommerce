@@ -78,9 +78,7 @@ const DetailsCard = ({ product,lang }) => {
       });
       router.push(`/${lang}/checkout?mode=direct_order`);
     }
-useEffect(()=>{
-    console.log((product.stock <= 0  && !product.stock_unlimited ) || (!product.stock && !product.stock_unlimited));
-},[]);
+    const finalPrice = (product.final_price_after_promotion < product.price_after_discount? product.final_price_after_promotion : product.price_after_discount) || product.price;
     return (
         <div className={styles.detailsCard}>
 
@@ -150,7 +148,7 @@ useEffect(()=>{
                 {product.price_after_discount !== product.price && (
                     <del>{product.price} IQD</del>
                 )}
-                <p>{product.price_after_discount || product.price} IQD</p>
+                <p>{finalPrice} IQD</p>
             </motion.div>
 
 
@@ -228,7 +226,7 @@ useEffect(()=>{
                 <div>
                     <p>{t('installmentPlan')}</p>
                     {/* <p>{t('installmentMonthly')}</p> */}
-                    <p>{t("pay_monthly", { price: Math.round((product.price_after_discount || product.price) / 10) })}</p>
+                    <p>{t("pay_monthly", { price: Math.round((finalPrice) / 10) })}</p>
                 </div>
             </div>
 

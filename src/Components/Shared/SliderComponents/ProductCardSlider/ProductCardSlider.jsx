@@ -130,7 +130,7 @@ const ProductCardSlider = ({ product, lang, setIsDraggingInsideCard }) => {
 
 
 
-
+const finalPrice = (product.final_price_after_promotion < product.price_after_discount? product.final_price_after_promotion : product.price_after_discount) || product.price;
     return (
         <div className={`p-2 pt-5 ${styles.cardDiv}`}>
             <div className={styles.card}>
@@ -317,7 +317,7 @@ const ProductCardSlider = ({ product, lang, setIsDraggingInsideCard }) => {
                         </h3>
 
                         <p className={styles.price}>
-                            {product.final_price_after_promotion || product.price_after_discount || product.price} - IQD
+                            {finalPrice} - IQD
                             <span className={styles.priceText}>&nbsp;</span>
                             {(product.final_price_after_promotion || product.price_after_discount) && (
                                 <del className={styles.oldPrice}>{product.price} - IQD</del>
@@ -330,7 +330,7 @@ const ProductCardSlider = ({ product, lang, setIsDraggingInsideCard }) => {
                               <span className={styles.availableIcon}>
                                 <img src={'/images/img_6.png'} alt="available"/>
                               </span>
-                                {t("pay_monthly", { price: Math.round((product.final_price_after_promotion || product.price_after_discount || product.price) / 10) })
+                                {t("pay_monthly", { price: Math.round((finalPrice) / 10) })
                             }
                             </p>
                         {/* )} */}

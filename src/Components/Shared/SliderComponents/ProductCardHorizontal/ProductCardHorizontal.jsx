@@ -116,7 +116,7 @@ const ProductCardHorizontal = ({ product, lang, setIsDraggingInsideCard }) => {
     };
     const isDraggingNowRef = useRef(false);
     const router = useRouter();
-
+    const finalPrice = (product.final_price_after_promotion < product.price_after_discount? product.final_price_after_promotion : product.price_after_discount) || product.price;
     return (
         <div className={styles.cardContainer}>
             <div className={styles.card}>
@@ -196,7 +196,7 @@ const ProductCardHorizontal = ({ product, lang, setIsDraggingInsideCard }) => {
                         <Slider {...settings}>
                             {activeImages.map((image, index) => (
                                 <div key={index}>
-                                    <SafeImage
+                                      <SafeImage
                                         fallback="/FallbackProductImage.png"
                                         src={image.url || "/FallbackProductImage.png"}
                                         alt={product.name?.[lang] ? `${product.name[lang]} - ${index + 1}` : `Product Image ${index + 1}`}
@@ -279,7 +279,7 @@ const ProductCardHorizontal = ({ product, lang, setIsDraggingInsideCard }) => {
                     {/* Price */}
                     <div className={styles.priceContainer}>
                         <p className={styles.price}>
-                            {product.price_after_discount || product.price} - IQD
+                            {finalPrice} - IQD
                         </p>
                         {product.price_after_discount && (
                             <del className={styles.oldPrice}>{product.price} - IQD</del>
@@ -291,7 +291,7 @@ const ProductCardHorizontal = ({ product, lang, setIsDraggingInsideCard }) => {
                         <span className={styles.installmentIcon}>
                             <img src={'/images/img_6.png'} alt="installment"/>
                         </span>
-                        {t("pay_monthly", { price: Math.round((product.price_after_discount || product.price) / 10) })}
+                        {t("pay_monthly", { price: Math.round((finalPrice) / 10) })}
                         {/* <span className={styles.starIcon}>*</span> */}
                     </p>
 
