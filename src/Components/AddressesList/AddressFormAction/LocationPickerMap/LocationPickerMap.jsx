@@ -51,7 +51,7 @@ function ClickHandler({ onSelect }) {
     return null;
 }
 
-const LocationPickerMap = ({ defaultPosition, onSelect }) => {
+const LocationPickerMap = ({ defaultPosition, onSelect, height = '330px' }) => {
     // const mapRef = useRef();
     const [position, setPosition]   = useState(defaultPosition);
     const [mapInstance, setMapInstance] = useState(null);
@@ -89,7 +89,7 @@ const LocationPickerMap = ({ defaultPosition, onSelect }) => {
                 key={`${position.lat}-${position.lng}`}
                 center={[position.lat, position.lng]}
                 zoom={13}
-                style={{height: '330px', width: '100%'}}
+                style={{height: height, width: '100%'}}
                 whenCreated={setMapInstance}
                 className={styles.customMapContainer}
             >

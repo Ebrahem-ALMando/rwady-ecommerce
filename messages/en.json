@@ -261,7 +261,20 @@
     "deleteAddressMessage": "Are you sure you want to delete this address?",
     "deleteAddressConfirm": "Delete",
     "deleteAddressCancel": "Cancel",
-    "noAddresses": "No addresses available"
+    "noAddresses": "No addresses available",
+    "phone": "Phone Number",
+    "phonePlaceholder": "Enter phone number",
+    "enterPhone": "Please enter phone number",
+    "invalidPhone": "Invalid phone number format",
+    "country": "Country",
+    "city": "City",
+    "selectCountry": "Select Country",
+    "selectCity": "Select City",
+    "loadingCities": "Loading cities...",
+    "addExtraDetails": "Add Extra Details",
+    "addMapLocation": "Add My Location on Map",
+    "searchCountry": "Search for country...",
+    "searchCity": "Search for city..."
 
   },
   "Buttons": {

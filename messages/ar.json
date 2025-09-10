@@ -264,7 +264,20 @@
     "deleteAddressMessage": "هل أنت متأكد من حذف هذا العنوان؟",
     "deleteAddressConfirm": "حذف",
     "deleteAddressCancel": "إلغاء",
-    "noAddresses": "لا يوجد عناوين متاحة"
+    "noAddresses": "لا يوجد عناوين متاحة",
+    "phone": "رقم الهاتف",
+    "phonePlaceholder": "أدخل رقم الهاتف",
+    "enterPhone": "يرجى إدخال رقم الهاتف",
+    "invalidPhone": "تنسيق رقم الهاتف غير صالح",
+    "country": "الدولة",
+    "city": "المحافظة",
+    "selectCountry": "اختر الدولة",
+    "selectCity": "اختر المحافظة",
+    "loadingCities": "جاري تحميل المحافظات...",
+    "addExtraDetails": "إضافة تفاصيل إضافية",
+    "addMapLocation": "إضافة موقعي على الخريطة",
+    "searchCountry": "البحث عن دولة...",
+    "searchCity": "البحث عن محافظة..."
 
 
   },

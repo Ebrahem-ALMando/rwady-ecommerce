@@ -1,0 +1,289 @@
+/* تحسينات إضافية لموديل العنوان */
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+    backdrop-filter: blur(4px);
+}
+
+.profileContainer {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 700px;
+    max-height: 600px;
+    overflow-y: auto;
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 24px 16px;
+    border-bottom: 1px solid #e1e5e9;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 16px 16px 0 0;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 0;
+}
+
+.closeIcon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+    color: #6c757d;
+}
+
+.closeIcon:hover {
+    background-color: #f8f9fa;
+    color: #495057;
+}
+
+.form {
+    padding: 24px;
+}
+
+.formGroup {
+    margin-bottom: 20px;
+}
+
+.inputLabel {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #2c3e50;
+    margin-bottom: 8px;
+    text-align: right;
+}
+
+.textInput {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e1e5e9;
+    border-radius: 8px;
+    font-size: 14px;
+    text-align: right;
+    transition: all 0.2s ease;
+    background: #fff;
+    box-sizing: border-box;
+}
+
+.textInput:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.textInput::placeholder {
+    color: #6c757d;
+    font-style: italic;
+}
+
+.locationGroup {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.selectWrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+/* تحسينات للـ Switch */
+.switchLabel {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 12px 0;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.switchLabel:hover {
+    background-color: #f8f9fa;
+}
+
+.switchInput {
+    display: none;
+}
+
+.switchSlider {
+    position: relative;
+    width: 48px;
+    height: 24px;
+    background-color: #ccc;
+    border-radius: 24px;
+    transition: background-color 0.3s ease;
+    margin-left: 12px;
+    flex-shrink: 0;
+}
+
+.switchSlider::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.switchInput:checked + .switchSlider {
+    background-color: #007bff;
+}
+
+.switchInput:checked + .switchSlider::before {
+    transform: translateX(24px);
+}
+
+.switchText {
+    font-size: 14px;
+    color: #2c3e50;
+    font-weight: 500;
+    text-align: right;
+    flex: 1;
+}
+
+/* تحسينات للأزرار */
+.buttonGroup {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid #e1e5e9;
+}
+
+.saveButton {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 100px;
+}
+
+.saveButton:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+.saveButton:active {
+    transform: translateY(0);
+}
+
+.cancelButton {
+    background: #f8f9fa;
+    color: #6c757d;
+    border: 2px solid #e1e5e9;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 100px;
+}
+
+.cancelButton:hover {
+    background: #e9ecef;
+    border-color: #c1c8cd;
+    color: #495057;
+}
+
+/* تحسينات للهواتف المحمولة */
+@media (max-width: 768px) {
+    .modalOverlay {
+        padding: 10px;
+    }
+    
+    .profileContainer {
+        max-height: 90vh;
+        border-radius: 12px;
+    }
+    
+    .header {
+        padding: 20px 20px 16px;
+    }
+    
+    .title {
+        font-size: 18px;
+    }
+    
+    .form {
+        padding: 20px;
+    }
+    
+    .locationGroup {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .buttonGroup {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .saveButton,
+    .cancelButton {
+        width: 100%;
+        padding: 14px 24px;
+    }
+}
+
+/* تحسينات للتمرير */
+.profileContainer::-webkit-scrollbar {
+    width: 6px;
+}
+
+.profileContainer::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.profileContainer::-webkit-scrollbar-thumb {
+    background: #c1c8cd;
+    border-radius: 3px;
+}
+
+.profileContainer::-webkit-scrollbar-thumb:hover {
+    background: #a8b2ba;
+}

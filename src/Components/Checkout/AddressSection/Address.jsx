@@ -183,7 +183,7 @@
                     </div>
                     <div className={styles.row}>
                         {CallIcon}
-                        <p className={styles.phone}>{phone ? `00${phone}` : t("noPhone")}</p>
+                        <p className={styles.phone}>{phone ? `+${phone}` : t("noPhone")}</p>
                     </div>
                 </div>
             </div>

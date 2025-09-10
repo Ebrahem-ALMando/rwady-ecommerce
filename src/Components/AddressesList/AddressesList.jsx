@@ -171,6 +171,8 @@ import ReloadWithError from "@/Components/Shared/ReloadWithError/ReloadWithError
 import CustomToast from "@/Components/Shared/CustomToast/CustomToast";
 import ConfirmDialog from "@/Components/AddressesList/AddressFormAction/ConfirmDialog/confirmDialog";
 import EmptyState from '../Shared/EmptyState/EmptyState';
+import { getCountries } from "@/api/services/general/Addresses/getCountries";
+import { getCities } from "@/api/services/general/Addresses/getCities";
 const AddressesList = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [selectedAddress, setSelectedAddress] = useState(null);
@@ -184,6 +186,12 @@ const AddressesList = () => {
     const { data:profileData } = useSWR("profileData", getProfile, {
         revalidateOnFocus: false,
     });
+    
+   
+    const { data: countriesData } = useSWR("countries", getCountries, {
+        revalidateOnFocus: false,
+    });
+    
     const fullName = profileData?.data?.name || "—";
     const phone = profileData?.data?.phone || "—";
 
@@ -315,7 +323,8 @@ const AddressesList = () => {
                 addressData={selectedAddress}
                 mutate={mutate}
                 onSubmit={handleSubmit}
-
+                countriesData={countriesData?.data || []}
+                phone={phone}
             />
             <ConfirmDialog
                 isOpen={isOpenDelete}
