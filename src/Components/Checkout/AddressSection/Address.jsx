@@ -111,7 +111,7 @@
     import { getProfile } from "@/api/services/auth/getProfile";
     import {useTranslation} from "next-i18next";
     import {useTranslations} from "next-intl";
-
+    import { useLocale } from "next-intl";
     const Address = ({
                          id,
                          isDefault,
@@ -126,10 +126,10 @@
                          t
                      }) => {
 
-
+        const lang = useLocale();
 
         const locitionName = addressData?.name || t("defaultLabel");
-        const fullAddress = addressData?.address || t("noAddress");
+        const fullAddress = addressData?.country?.name?.[lang] + ' - ' + addressData?.city?.name?.[lang] + ' - ' + addressData?.address || t("noAddress");
         const extra_address = addressData?.exstra_address || '';
         // const extra_address = addressData?.extra_address || t("noExtra_address");
 

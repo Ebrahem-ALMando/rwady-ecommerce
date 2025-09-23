@@ -362,7 +362,7 @@ const AddressesList = () => {
                             onSetDefault={() => handleSetDefaultAddress(address)}
                             headerType="form"
                             fullName={fullName}
-                            phone={phone}
+                            phone={address.phone || phone}
                             t={t}
                         />
                     ))

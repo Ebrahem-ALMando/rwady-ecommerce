@@ -15,7 +15,7 @@ import CustomToast from '@/Components/Shared/CustomToast/CustomToast';
 
 const Verify = () => {
     const t = useTranslations("verify");
-    const router = useRouter();
+    // const router = useRouter();
     const searchParams = useSearchParams();
     const lang = useLocale();
     const phone = searchParams.get('phone');
@@ -201,7 +201,8 @@ const Verify = () => {
                     // await syncCartWithServerOnLogin()
                     setTimeout(() => {
                         const redirectPath = userData.data?.name ? "/" : "/profile";
-                        router.push(redirectPath);  
+                        // router.push(redirectPath);  
+                        location.href = redirectPath;
                     }, 100);
 
                 } else {

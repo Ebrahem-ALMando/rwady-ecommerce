@@ -38,6 +38,40 @@
     color: white;
     cursor: pointer;
 }
+.openNewAddress{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2.5rem 1rem 1.5rem 1rem;
+    border: 2px dashed #e0e0e0;
+    border-radius: 1.25rem;
+    background: #fafbfc;
+    min-height: 200px;
+    margin: 1.5rem 0;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.mapPinHouseIconContainer{
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.mapPinHouseIcon{
+   animation: bounce 0.8s infinite alternate;
+}
+@keyframes bounce {
+    0% { transform: translateY(0);}
+    100% { transform: translateY(-20px);}
+}
+.noAddressesAvailable{
+    font-size: 1.15rem;
+    color: #6b7280;
+    margin-bottom: 1.2rem;
+    text-align: center;
+    font-weight: 500;
+}
 .navigationButtons {
     display: flex;
     justify-content: space-between;

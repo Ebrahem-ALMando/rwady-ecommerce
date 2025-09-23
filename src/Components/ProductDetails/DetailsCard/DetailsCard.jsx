@@ -30,7 +30,7 @@ const DetailsCard = ({ product,lang }) => {
   
     const initialQty = getItemQuantity(product.id) || 1;
     const [selectedQty, setSelectedQty] = useState(initialQty);
-
+    const [activeImages, setActiveImages] = useState([]);
     const handleShareProduct=()=>{
         if (navigator.share) {
             navigator.share({
@@ -83,6 +83,18 @@ const DetailsCard = ({ product,lang }) => {
     const finalPrice = getFinalPrice(product);
     const isShowPrice = getIsShowPrice(product);
     const isDiscountValid = finalPrice < product.price;   
+    const handleColorClick = (color) => {
+        const colorImages = product.media?.filter(m => m.type === "image" && m.product_color_id === color.id) || [];
+        const firstThree = colorImages.slice(0, 3);
+        const currentUrls = activeImages.map(img => img.url);
+        const newUrls = firstThree.map(img => img.url);
+
+        if (JSON.stringify(currentUrls) !== JSON.stringify(newUrls)) {
+            if (firstThree.length > 0) {
+                setActiveImages(firstThree);
+            }
+        }
+    };
     return (
         <div className={styles.detailsCard}>
 
@@ -170,7 +182,7 @@ const DetailsCard = ({ product,lang }) => {
 
 
 
-            {product.colors.length>0&&
+           {Array.isArray(product.colors) && product.colors.length > 0 && (    
                 <>
                     <p className={styles.textTitle}>{t('colors')}</p>
                     <div className={styles.color}>
@@ -180,11 +192,16 @@ const DetailsCard = ({ product,lang }) => {
                                 style={{backgroundColor: color.color}}
                                 className={styles.colorButton}
                                 aria-label={`${t('color')} ${color.color}`}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    e.preventDefault();
+                                    handleColorClick(color);
+                                }}
                             />
                         ))}
                     </div>
                 </>
-            }
+            )}
 
             <div className={styles.countDetails}>
                 <div className={styles.section} aria-label={t('remaining')}>

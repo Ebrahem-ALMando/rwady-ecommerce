@@ -3,12 +3,12 @@
 import {useLocale, useTranslations} from 'next-intl';
 import { toast } from 'react-hot-toast';
 import { useAuth } from '@/hooks/useAuth';
-import {useRouter} from "next/navigation";
+// import {useRouter} from "next/navigation";
 import CustomToast from '@/Components/Shared/CustomToast/CustomToast';
 
 export const useLogoutHandler = (mutate) => {
     const { logout } = useAuth();
-    const router = useRouter();
+    // const router = useRouter();
     const lang=useLocale()
     const t = useTranslations("verify");
 
@@ -25,7 +25,8 @@ export const useLogoutHandler = (mutate) => {
                 duration: 3000,
                 position: 'top-center',
             });
-            router.push(`/${lang}/sign-in`);
+            location.href = `/${lang}/sign-in`;
+            // router.push(`/${lang}/sign-in`);
         } catch (error) {
             toast.custom(() => (
                 <CustomToast

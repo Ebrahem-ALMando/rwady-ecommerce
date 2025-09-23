@@ -167,7 +167,7 @@ const LOCALES = ["ar", "en"];
 export async function generateStaticParams() {
   try {
 
-    const response = await getProducts("limit=10");
+    const response = await getProducts("limit=20");
     const products = response?.data || [];
 
     const params = [];
@@ -235,6 +235,7 @@ export async function generateMetadata({ params }) {
 // ----- Page -----
 const DynamicProductDetailsPage = async ({ params }) => {
   const { id, locale } = await params;
+  
   const t = await getTranslations({ locale, namespace: "Breadcrumb" });
 
   return (
@@ -256,7 +257,9 @@ export default DynamicProductDetailsPage;
 
 // ----- Data layer for the section -----
 export async function ProductDetailsData({ id, lang }) {
+
   const initialData = await getProductDetails(id);
+ 
   const data = initialData?.data || {};
   const initialError = Boolean(initialData?.error);
 

@@ -164,8 +164,22 @@ const OrderSummary = (props) => {
         return;
       }
       if (props.step === 1 ) { 
-        props.next(); 
-        return;
+        console.log(props.addressId);
+        if(props.addressId){
+          props.next(); 
+          return;
+        }
+        else{
+          toast.custom(
+            <CustomToast
+                type="warning"
+                title={t("validation.missingAddressTitle")}
+                message={t("validation.missingAddressMsg")}
+            />,
+            { position: 'top-center', duration: 2500 }
+          );
+          return;
+        }
       }
       const isValid = validateOrderData({
         addressId: props.addressId,

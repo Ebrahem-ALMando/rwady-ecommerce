@@ -95,7 +95,9 @@ const ProductCardSlider = ({ product, lang, setIsDraggingInsideCard }) => {
         const newUrls = firstThree.map(img => img.url);
 
         if (JSON.stringify(currentUrls) !== JSON.stringify(newUrls)) {
-            setActiveImages(firstThree);
+            if (firstThree.length > 0) {
+                setActiveImages(firstThree);
+            }
         }
     };
 
@@ -238,7 +240,7 @@ return (
                                             draggable={false}
                                             width={300}
                                             height={300}
-                                            unoptimized={true}
+                                            // unoptimized={true}
                                         
                                           
                                         />  
@@ -263,7 +265,7 @@ return (
                                         draggable={false}
                                         width={300}
                                         height={300}
-                                        unoptimized={true}                                      
+                                        // unoptimized={true}                                      
                                     />
                                 </motion.div>
                             </div>

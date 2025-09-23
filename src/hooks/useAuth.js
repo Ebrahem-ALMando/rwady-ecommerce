@@ -127,6 +127,7 @@ export const useAuth = () => {
             setUserId(null);
             setUserName(null);
             setIsAuthenticated(false);
+            
         }else {
             console.log("Logout Error")
         }

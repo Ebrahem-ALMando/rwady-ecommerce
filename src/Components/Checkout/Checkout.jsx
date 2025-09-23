@@ -34,6 +34,8 @@ import {useLocale, useTranslations} from "next-intl";
 import {getProfile} from "@/api/services/auth/getProfile";
 import ReloadWithError from "@/Components/Shared/ReloadWithError/ReloadWithError";
 import CustomToast from '@/Components/Shared/CustomToast/CustomToast';
+import { MapPinHouse } from "lucide-react";
+import { getCountries } from "@/api/services/general/Addresses/getCountries";
 
 const Checkout = () => {
     const [defaultAddress,setDefaultAddress]=useState({})
@@ -103,6 +105,9 @@ const Checkout = () => {
     const { data, error, isLoading, mutate } = useSWR("userAddresses",
         getAddressesList, {
         revalidateIfStale: false,
+        revalidateOnFocus: false,
+    });
+    const { data: countriesData } = useSWR("countries", getCountries, {
         revalidateOnFocus: false,
     });
     useEffect(() => {
@@ -192,6 +197,8 @@ const Checkout = () => {
                         mutate={mutate}
                         onSubmit={handleSubmit}
                         isDefault={true}
+                        countriesData={countriesData?.data || []}
+                        phone={phone}
                     />
                     {paymentState && (
                         <StateModal
@@ -226,7 +233,7 @@ const Checkout = () => {
                                         <h2 className={styles.titleSection}>{t("shippingAddressTitle")}</h2>
 
 
-                                        {defaultAddress ? (
+                                        {defaultAddress&&defaultAddress.id ? (
                                             <Address
                                                 onClick={() => setIsOpen(true)}
                                                 key={defaultAddress.id}
@@ -234,17 +241,38 @@ const Checkout = () => {
                                                 isDefault={defaultAddress.is_default}
                                                 addressData={defaultAddress}
                                                 fullName={fullName}
-                                                phone={phone}
-                                                t={tAddresses}
+                                                phone={defaultAddress.phone || phone}   
 
+                                                t={tAddresses}
+                                       
                                             />
                                         ) : (
-                                            <EmptyState
-                                                message={t("noAddressesAvailable")}
-                                                item={
-                                                    <NewAddressButton onClick={handleOpenNewAddress} t={t}/>
-                                                }
-                                            />
+                                           
+                                            <div
+                                                onClick={handleOpenNewAddress}
+                                                className={styles.openNewAddress}
+                                            >
+                                                <span 
+                                                className={styles.mapPinHouseIconContainer}
+                                                 >
+                                                  
+                                                    <MapPinHouse
+                                                        size={56}
+                                                        color="#a0aec0"
+                                                        strokeWidth={1.5}
+                                                        className={styles.mapPinHouseIcon}
+                                                     
+                                                    />
+                                                   
+                                                </span>
+                                                <div 
+                                                
+                                                className={styles.noAddressesAvailable}
+                                                >
+                                                    {t("noAddressesAvailable")}
+                                                </div>
+                                                <NewAddressButton onClick={handleOpenNewAddress} t={t}/>
+                                            </div>
                                         )}
                                     </>
                                 )}

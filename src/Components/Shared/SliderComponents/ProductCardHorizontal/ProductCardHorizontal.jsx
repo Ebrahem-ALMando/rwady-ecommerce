@@ -91,7 +91,9 @@ const ProductCardHorizontal = ({ product, lang, setIsDraggingInsideCard }) => {
         const newUrls = firstThree.map(img => img.url);
 
         if (JSON.stringify(currentUrls) !== JSON.stringify(newUrls)) {
-            setActiveImages(firstThree);
+            if (firstThree.length > 0) {
+                setActiveImages(firstThree);
+            }
         }
     };
 
@@ -212,7 +214,7 @@ const ProductCardHorizontal = ({ product, lang, setIsDraggingInsideCard }) => {
                                         draggable={false}
                                         width={280}
                                         height={240}
-                                        unoptimized={true}
+                                        // unoptimized={true}
                                     />
                                 </div>
                             ))}
@@ -227,7 +229,7 @@ const ProductCardHorizontal = ({ product, lang, setIsDraggingInsideCard }) => {
                             draggable={false}
                             width={280}
                             height={240}
-                            unoptimized={true}
+                            // unoptimized={true}
                         />
                     )}
 

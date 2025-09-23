@@ -5,7 +5,7 @@ import ApiConfig from "@/api/apiConfig";
  */
 export const getProductDetails = async (productId) => {
     const endPointKey = `user/products/${productId}`;
-
+  
     // await new Promise(resolve => setTimeout(resolve, 3500));
     const res = await fetchAPI(endPointKey, "GET", null, {
         next: {
@@ -13,6 +13,5 @@ export const getProductDetails = async (productId) => {
             tags: [endPointKey],
         },
     });
-
         return res ?? [];
 };
