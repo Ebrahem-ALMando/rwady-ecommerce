@@ -275,7 +275,7 @@ export async function ProductDetailsData({ id, lang }) {
     <section>
       {!data || Object.keys(data).length === 0 ? (
         <div style={{ width: "87%", margin: "3rem auto 1rem auto" }}>
-          <EmptyState initLink={`/${lang}/products`} message={productMessage} />
+          <EmptyState initLink={`products`} message={productMessage} />
         </div>
       ) : (
         <>
